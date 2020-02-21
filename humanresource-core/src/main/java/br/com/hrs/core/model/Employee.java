@@ -1,34 +1,33 @@
 package br.com.hrs.core.model;
 
-import java.util.Date;
+import br.com.hrs.core.exception.error.FIELD;
+import br.com.hrs.core.exception.error.Error;
+
 import java.util.Objects;
 
 public class Employee {
 
+	private enum STATUS{
+		ADMITTED,
+		PROMOTED,
+		FIRED
+	}
+
 	private Integer id;
-	private String firstName;
-	private String lastName;
+	private String name;
 	private String email;
-	private String phone;
-	private Date hireDate;
 	private Float salary;
-	private Float commissionPercent;
-	private Employee manager;
 	private Job job;
 	private Department department;
+	private STATUS status;
 
-	public Employee(Integer id, String firstName, String lastName, String email, String phone, Date hireDate, Float salary, Float commissionPercent, Employee manager, Job job, Department department) {
+	public Employee(Integer id, String email, Float salary, Job job, Department department) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.email = email;
-		this.phone = phone;
-		this.hireDate = hireDate;
 		this.salary = salary;
-		this.commissionPercent = commissionPercent;
-		this.manager = manager;
 		this.job = job;
 		this.department = department;
+		this.status = STATUS.ADMITTED;
 	}
 
 	public Integer getId() {
@@ -39,20 +38,12 @@ public class Employee {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -63,44 +54,12 @@ public class Employee {
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Date getHireDate() {
-		return hireDate;
-	}
-
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
-	}
-
 	public Float getSalary() {
 		return salary;
 	}
 
 	public void setSalary(Float salary) {
 		this.salary = salary;
-	}
-
-	public Float getCommissionPercent() {
-		return commissionPercent;
-	}
-
-	public void setCommissionPercent(Float commissionPercent) {
-		this.commissionPercent = commissionPercent;
-	}
-
-	public Employee getManager() {
-		return manager;
-	}
-
-	public void setManager(Employee manager) {
-		this.manager = manager;
 	}
 
 	public Job getJob() {
@@ -119,6 +78,34 @@ public class Employee {
 		this.department = department;
 	}
 
+	public STATUS getStatus() {
+		return status;
+	}
+
+	public void setStatus(STATUS status) {
+		this.status = status;
+	}
+
+	public void promotedTo(Job job, Department department){
+
+		if (Objects.isNull(job)){
+			Error.of("Job").when(FIELD.MANDATORY).trows();
+		}
+
+		if (Objects.isNull(department)){
+			Error.of("Department").when(FIELD.MANDATORY).trows();
+		}
+
+		setStatus(STATUS.PROMOTED);
+		setSalary(job.getMinSalary());
+		setDepartment(department);
+		setJob(job);
+	}
+
+	public void fired(){
+		this.status = STATUS.FIRED;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -130,5 +117,18 @@ public class Employee {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", salary=" + salary +
+				", job=" + job +
+				", department=" + department +
+				", status=" + status +
+				'}';
 	}
 }

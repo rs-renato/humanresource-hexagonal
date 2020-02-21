@@ -1,11 +1,10 @@
-package br.com.hrs.core.port.outbound.mock;
+package br.com.hrs.core.port.outbound.adapter.mock;
 
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.port.outbound.DepartmentRepository;
 
 import javax.inject.Named;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +14,8 @@ public class DepartmentMockRepository implements DepartmentRepository {
     private Map<Integer, Department> database = new HashMap<>();
 
     public DepartmentMockRepository() {
-        this.database.put(1, new Department(1, "IT", null, null));
-        this.database.put(2, new Department(2, "SP", null, null));
+        this.database.put(1, new Department(1, "IT", null));
+        this.database.put(2, new Department(2, "SP", null));
     }
 
     @Override

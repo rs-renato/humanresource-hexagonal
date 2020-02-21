@@ -1,11 +1,10 @@
-package br.com.hrs.core.port.outbound.mock;
+package br.com.hrs.core.port.outbound.adapter.mock;
 
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.port.outbound.JobRepository;
 
 import javax.inject.Named;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 

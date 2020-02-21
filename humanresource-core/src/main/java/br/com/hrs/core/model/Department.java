@@ -7,13 +7,11 @@ public class Department {
 	private Integer id;
 	private String name;
 	private Employee manager;
-	private Location location;
 
-	public Department(Integer id, String name, Employee manager, Location location) {
+	public Department(Integer id, String name, Employee manager) {
 		this.id = id;
 		this.name = name;
 		this.manager = manager;
-		this.location = location;
 	}
 
 	public Integer getId() {
@@ -40,14 +38,6 @@ public class Department {
 		this.manager = manager;
 	}
 
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -67,7 +57,6 @@ public class Department {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", manager=" + manager +
-				", location=" + location +
 				'}';
 	}
 }

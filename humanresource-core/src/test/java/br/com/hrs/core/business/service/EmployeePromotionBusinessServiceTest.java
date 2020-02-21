@@ -1,18 +1,20 @@
-package br.com.hrs.core.service;
+package br.com.hrs.core.business.service;
 
-import br.com.hrs.core.error.HrsMandatoryException;
+import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Date;
+@DisplayName("Employee Promotion Business Service Tests")
+public class EmployeePromotionBusinessServiceTest {
 
-@DisplayName("Employee Promotion Service Tests")
-public class EmployeePromotionServiceTest {
+    private Logger logger = LogManager.getLogger(EmployeePromotionService.class);
 
     private static Employee employee;
     private static Job job;
@@ -24,8 +26,8 @@ public class EmployeePromotionServiceTest {
     static void setUp(){
         service = new EmployeePromotionService();
         job = new Job("AR","Architect", 3_000f, 5_000f);
-        department = new Department(1, "IT", null, null);
-        employee = new Employee(1,"renato","silva","renato@gmail","1234467890",new Date(),1000f,0.5f, null, null, null);
+        department = new Department(1, "IT", null);
+        employee = new Employee(1,"renato@gmail",1000f, null, null);
     }
 
     @Test
@@ -35,8 +37,7 @@ public class EmployeePromotionServiceTest {
             service.promote(null, job, department);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Employee"),"Employee mandatory message wrong");
-
+        Assertions.assertTrue(exception.getMessage().contains("Employee"), String.format("Employee mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test
@@ -46,7 +47,7 @@ public class EmployeePromotionServiceTest {
             service.promote(employee, null, department);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Job"),"Job mandatory message wrong");
+        Assertions.assertTrue(exception.getMessage().contains("Job"), String.format("Job mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test
@@ -56,15 +57,15 @@ public class EmployeePromotionServiceTest {
             service.promote(employee, job, null);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Department"),"Department mandatory message wrong");
+        Assertions.assertTrue(exception.getMessage().contains("Department"), String.format("Department mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test
     @DisplayName("Promote Employee")
     void test04() {
         service.promote(employee, job, department);
-        Assertions.assertEquals(employee.getJob(), job, "Job is not equal for promoted Employee");
-        Assertions.assertEquals(employee.getDepartment(), department, "Department is not equal for promoted Employee");
-        Assertions.assertEquals(employee.getSalary(), job.getMinSalary(), "Salary is not equal for promoted Employee");
+        Assertions.assertEquals(employee.getJob(), job, "Job not equal for promoted Employee");
+        Assertions.assertEquals(employee.getDepartment(), department, "Department not equal for promoted Employee");
+        Assertions.assertEquals(employee.getSalary(), job.getMinSalary(), "Salary not equal for promoted Employee");
     }
 }

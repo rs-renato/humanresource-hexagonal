@@ -1,6 +1,8 @@
-package br.com.hrs.core.port.inbound.usecase;
+package br.com.hrs.core.port.inbound.adapter.usecase;
 
-import br.com.hrs.core.error.Validations;
+import br.com.hrs.core.business.service.EmployeePromotionService;
+import br.com.hrs.core.exception.error.FIELD;
+import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
@@ -8,7 +10,6 @@ import br.com.hrs.core.port.inbound.EmployeePromotion;
 import br.com.hrs.core.port.outbound.DepartmentRepository;
 import br.com.hrs.core.port.outbound.EmployeeRepository;
 import br.com.hrs.core.port.outbound.JobRepository;
-import br.com.hrs.core.service.EmployeePromotionService;
 
 import javax.inject.Named;
 import java.util.Objects;
@@ -37,40 +38,36 @@ public class EmployeeUseCase implements EmployeePromotion {
     public void promote(Integer employeeId, Integer jobId, Integer departmentId) {
 
         if (Objects.isNull(employeeId)) {
-            Validations.mandatory("Employee ID");
+            Error.of("Employee ID").when(FIELD.MANDATORY).trows();
         }
 
         if (Objects.isNull(jobId)) {
-            Validations.mandatory("Job ID");
+            Error.of("Job ID").when(FIELD.MANDATORY).trows();
         }
 
         if (Objects.isNull(departmentId)) {
-            Validations.mandatory("Department ID");
+            Error.of("Department ID").when(FIELD.MANDATORY).trows();
         }
 
         Employee employee = employeeRepository.get(employeeId);
 
         if (Objects.isNull(employee)) {
-            Validations.notFound("Employee");
+            Error.of("Employee").when(FIELD.NOT_FOUND).trows();
         }
 
         Job job = jobRepository.get(jobId);
 
         if (Objects.isNull(job)) {
-            Validations.notFound("Job");
+            Error.of("Job").when(FIELD.NOT_FOUND).trows();
         }
 
         Department department = departmentRepository.get(departmentId);
 
         if (Objects.isNull(department)) {
-            Validations.notFound("Department");
+            Error.of("Department").when(FIELD.NOT_FOUND).trows();
         }
 
-        employee.setDepartment(department);
-        employee.setJob(job);
-
         service.promote(employee, job, department);
-
         employeeRepository.save(employee);
     }
 }

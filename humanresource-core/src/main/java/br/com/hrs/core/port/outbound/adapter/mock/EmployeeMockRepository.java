@@ -1,4 +1,4 @@
-package br.com.hrs.core.port.outbound.mock;
+package br.com.hrs.core.port.outbound.adapter.mock;
 
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.port.outbound.EmployeeRepository;
@@ -15,8 +15,8 @@ public class EmployeeMockRepository implements EmployeeRepository {
     private Map<Integer, Employee> database = new HashMap<>();
 
     public EmployeeMockRepository() {
-        this.database.put(1, new Employee(1,"renato","silva","renato@gmail","1234467890",new Date(),1000f,0.5f, null, null, null));
-        this.database.put(2, new Employee(2,"camila","dias","camila@gmail","1234467890",new Date(),5000f,0.2f, null, null, null));
+        this.database.put(1, new Employee(1,"renato@gmail",1000f, null, null));
+        this.database.put(2, new Employee(2,"camila@gmail",5000f, null, null));
     }
 
     @Override

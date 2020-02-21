@@ -1,4 +1,4 @@
-package br.com.hrs.core.error;
+package br.com.hrs.core.exception;
 
 public class HrsMandatoryException extends HrsBusinessException {
 
