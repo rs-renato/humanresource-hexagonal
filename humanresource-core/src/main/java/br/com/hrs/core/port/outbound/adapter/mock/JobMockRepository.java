@@ -19,7 +19,7 @@ public class JobMockRepository implements JobRepository {
     }
 
     @Override
-    public Job get(Integer jobId) {
+    public Job get(String jobId) {
         logger.info("Fake database ->  Job get({}})", jobId);
         return this.database.get(jobId);
     }
@@ -37,8 +37,14 @@ public class JobMockRepository implements JobRepository {
     }
 
     @Override
-    public void delete(Integer jobId) {
+    public void delete(String jobId) {
         logger.info("Fake database ->  delete({}})", jobId);
         this.database.remove(jobId);
+    }
+
+    @Override
+    public boolean exists(String jobId) {
+        logger.info("Fake database ->  exists({}})", jobId);
+        return this.database.containsKey(jobId);
     }
 }

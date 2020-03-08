@@ -1,7 +1,7 @@
 package br.com.hrs.core.business.service;
 
-import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.exception.error.Error;
+import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;

@@ -1,16 +1,26 @@
 package br.com.hrs.core.model;
 
-import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.exception.error.Error;
+import br.com.hrs.core.exception.error.FIELD;
 
 import java.util.Objects;
 
 public class Employee {
 
-	private enum STATUS{
-		ADMITTED,
-		PROMOTED,
-		FIRED
+	public enum STATUS{
+		ADMITTED(1),
+		PROMOTED(2),
+		FIRED(3);
+
+		private int code;
+
+		STATUS(int code) {
+			this.code = code;
+		}
+
+		public int getCode() {
+			return code;
+		}
 	}
 
 	private Integer id;
@@ -89,11 +99,11 @@ public class Employee {
 	public void promotedTo(Job job, Department department){
 
 		if (Objects.isNull(job)){
-			Error.of("Job").when(FIELD.MANDATORY).trows();
+			Error.of("Job").when(FIELD.MANDATORY).on("promotion").trows();
 		}
 
 		if (Objects.isNull(department)){
-			Error.of("Department").when(FIELD.MANDATORY).trows();
+			Error.of("Department").when(FIELD.MANDATORY).on("promotion").trows();
 		}
 
 		setStatus(STATUS.PROMOTED);

@@ -23,19 +23,15 @@ public class Error {
         return this;
     }
 
+    public Error on(String reason) {
+        this.message = String.format("%s on %s", this.message, reason);
+        return this;
+    }
+
     public void trows() {
         try {
             this.field.throwsError(this.message);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
-            throw new HrsBusinessException(this.message);
-        }
-    }
-
-    public void because(String reason) {
-        this.message = String.format("%s. %s", this.message, reason);
-        try {
-            this.field.throwsError(this.message);
-        } catch (Exception e) {
             throw new HrsBusinessException(this.message);
         }
     }

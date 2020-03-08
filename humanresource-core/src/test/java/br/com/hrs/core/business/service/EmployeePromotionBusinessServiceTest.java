@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Employee Promotion Business Service Tests")
+@DisplayName("Business Services Tests - Employee Promotion")
 public class EmployeePromotionBusinessServiceTest {
 
     private Logger logger = LogManager.getLogger(EmployeePromotionService.class);
@@ -37,7 +37,7 @@ public class EmployeePromotionBusinessServiceTest {
             service.promote(null, job, department);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Employee"), String.format("Employee mandatory message wrong (%s)", exception.getMessage()));
+        Assertions.assertTrue(exception.getMessage().matches("Employee.*mandatory"), String.format("Employee mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class EmployeePromotionBusinessServiceTest {
             service.promote(employee, null, department);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Job"), String.format("Job mandatory message wrong (%s)", exception.getMessage()));
+        Assertions.assertTrue(exception.getMessage().matches("Job.*mandatory"), String.format("Job mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class EmployeePromotionBusinessServiceTest {
             service.promote(employee, job, null);
         });
 
-        Assertions.assertTrue(exception.getMessage().contains("Department"), String.format("Department mandatory message wrong (%s)", exception.getMessage()));
+        Assertions.assertTrue(exception.getMessage().matches("Department.*mandatory"), String.format("Department mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test

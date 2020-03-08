@@ -5,7 +5,6 @@ import br.com.hrs.core.port.outbound.EmployeeRepository;
 
 import javax.inject.Named;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
