@@ -26,14 +26,14 @@ public class JobRepositoryJdbcTest {
 
     @Test
     @DisplayName("Search for null job")
-    public void test01(){
+    public void test01() {
         Job job = jobRepository.get(null);
         Assertions.assertNull(job, "Job should be null");
     }
 
     @Test
     @DisplayName("Search for inexistent job")
-    public void test02(){
+    public void test02() {
         Job job = jobRepository.get("NO_EXISTENT_JOB");
         logger.info(job);
         Assertions.assertNull(job, "Job should be null");
@@ -41,7 +41,7 @@ public class JobRepositoryJdbcTest {
 
     @Test
     @DisplayName("Updates Job")
-    public void test03(){
+    public void test03() {
         Job job = jobRepository.get("HR_REP");
         logger.info(job);
         job.setTitle(job.getTitle() + " altered");
@@ -54,7 +54,7 @@ public class JobRepositoryJdbcTest {
 
     @Test
     @DisplayName("Saves Job")
-    public void test04(){
+    public void test04() {
         Job job = new Job("NEW_JOB", "new job", 1000f, 2000f);
         jobRepository.save(job);
 
@@ -65,7 +65,7 @@ public class JobRepositoryJdbcTest {
 
     @Test
     @DisplayName("List Jobs")
-    public void test05(){
+    public void test05() {
         Collection<Job> jobs = jobRepository.list();
         logger.info(jobs);
         Assertions.assertNotNull(jobs, "Jobs should be listed");
@@ -73,7 +73,7 @@ public class JobRepositoryJdbcTest {
 
     @Test
     @DisplayName("Deletes Jobs")
-    public void test06(){
+    public void test06() {
         Job job = jobRepository.get("NEW_JOB");
         logger.info(job);
         jobRepository.delete(job.getId());
@@ -83,21 +83,21 @@ public class JobRepositoryJdbcTest {
 
     @Test
     @DisplayName("Job exists")
-    public void test07(){
+    public void test07() {
         boolean exists = jobRepository.exists("HR_REP");
         Assertions.assertTrue(exists, "Job should be existent");
     }
 
     @Test
     @DisplayName("Job doesn't exists")
-    public void test08(){
+    public void test08() {
         boolean exists = jobRepository.exists("NO_EXISTENT_JOB");
         Assertions.assertFalse(exists, "Job should not be existent");
     }
 
     @Test
     @DisplayName("Search for job")
-    public void test(){
+    public void test() {
         Job job = jobRepository.get("HR_REP");
         logger.info(job);
         Assertions.assertNotNull(job, "Job should be null");

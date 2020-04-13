@@ -16,19 +16,19 @@ public class EmployeePromotionService {
 
     private Logger logger = LogManager.getLogger(EmployeePromotionService.class);
 
-    public void promote(Employee employee, Job job, Department department){
+    public void promote(Employee employee, Job job, Department department) {
 
         logger.info("Promoting employee '{}', to Job '{}' and Department '{}'", employee, job, department);
 
-        if (Objects.isNull(employee)){
+        if (Objects.isNull(employee)) {
             Error.of("Employee").when(FIELD.MANDATORY).trows();
         }
 
-        if (Objects.isNull(job)){
+        if (Objects.isNull(job)) {
             Error.of("Job").when(FIELD.MANDATORY).trows();
         }
 
-        if (Objects.isNull(department)){
+        if (Objects.isNull(department)) {
             Error.of("Department").when(FIELD.MANDATORY).trows();
         }
 

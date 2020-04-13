@@ -14,8 +14,8 @@ public class JobMockRepository implements JobRepository {
     private Map<String, Job> database = new HashMap<>();
 
     public JobMockRepository() {
-        this.database.put("AN", new Job("AN","Analyst", 1_000f, 3_000f));
-        this.database.put("AR", new Job("AR","Architect", 3_000f, 5_000f));
+        this.database.put("AN", new Job("AN", "Analyst", 1_000f, 3_000f));
+        this.database.put("AR", new Job("AR", "Architect", 3_000f, 5_000f));
     }
 
     @Override

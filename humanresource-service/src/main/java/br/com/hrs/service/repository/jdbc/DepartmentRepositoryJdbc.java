@@ -28,14 +28,14 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
     @Override
     public Department get(Integer departmentId) {
 
-        if(Objects.isNull(departmentId)){
+        if (Objects.isNull(departmentId)) {
             return null;
         }
 
         String sql = "select * from departments where department_id = ?";
         Object[] param = new Object[]{departmentId};
 
-        RowMapper<Department> rowMapper = (rs, rowNum) ->{
+        RowMapper<Department> rowMapper = (rs, rowNum) -> {
             String name = rs.getString(2);
             Integer managerID = rs.getInt(3);
             return new Department(departmentId, name, employeeRepository.get(managerID));
@@ -47,15 +47,15 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
     @Override
     @Transactional
     public void save(Department department) {
-        if(Objects.nonNull(department)){
+        if (Objects.nonNull(department)) {
 
             String sql = null;
             Object[] param = null;
 
-            if(Objects.nonNull(department.getId())){
+            if (Objects.nonNull(department.getId())) {
                 sql = "insert into departments values (?,?,?)";
                 param = new Object[]{department.getId(), department.getName(), department.getManager().getId()};
-            }else{
+            } else {
                 sql = "update departments set department_name = ?, manager_id = ? where department_id_id = ?";
                 param = new Object[]{department.getName(), department.getManager().getId(), department.getId()};
             }
@@ -66,7 +66,7 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
     @Override
     public Collection<Department> list() {
         String sql = "select * from departments";
-        RowMapper<Department> rowMapper = (rs, rowNum) ->{
+        RowMapper<Department> rowMapper = (rs, rowNum) -> {
             Integer departmentId = rs.getInt(1);
             String name = rs.getString(2);
             Integer managerID = rs.getInt(3);
@@ -79,7 +79,7 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
     @Override
     @Transactional
     public void delete(Integer departmentId) {
-        if(Objects.nonNull(departmentId)){
+        if (Objects.nonNull(departmentId)) {
             String sql = "delete from departments where department_id = ?";
             jdbcTemplate.update(sql, departmentId);
         }

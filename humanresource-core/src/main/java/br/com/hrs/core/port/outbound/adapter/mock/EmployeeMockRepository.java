@@ -14,8 +14,8 @@ public class EmployeeMockRepository implements EmployeeRepository {
     private Map<Integer, Employee> database = new HashMap<>();
 
     public EmployeeMockRepository() {
-        this.database.put(1, new Employee(1,"renato@gmail",1000f, null, null));
-        this.database.put(2, new Employee(2,"camila@gmail",5000f, null, null));
+        this.database.put(1, new Employee(1, "renato@gmail", 1000f, null, null));
+        this.database.put(2, new Employee(2, "camila@gmail", 5000f, null, null));
     }
 
     @Override

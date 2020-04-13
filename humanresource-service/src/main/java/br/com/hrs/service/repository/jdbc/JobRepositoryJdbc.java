@@ -25,14 +25,14 @@ public class JobRepositoryJdbc implements JobRepository {
     @Override
     public Job get(String jobId) {
 
-        if(Objects.isNull(jobId)){
+        if (Objects.isNull(jobId)) {
             return null;
         }
 
         String sql = "select * from jobs where job_id = ?";
         Object[] param = new Object[]{jobId};
 
-        RowMapper<Job> rowMapper = (rs, rowNum) ->{
+        RowMapper<Job> rowMapper = (rs, rowNum) -> {
             String id = rs.getString(1);
             String title = rs.getString(2);
             Float minSalary = rs.getFloat(3);
@@ -43,7 +43,7 @@ public class JobRepositoryJdbc implements JobRepository {
 
         try {
             return jdbcTemplate.queryForObject(sql, param, rowMapper);
-        }catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             logger.warn("Job Id '{}' not found", jobId);
             return null;
         }
@@ -52,17 +52,17 @@ public class JobRepositoryJdbc implements JobRepository {
     @Override
     @Transactional
     public void save(Job job) {
-        if(Objects.nonNull(job)){
+        if (Objects.nonNull(job)) {
 
             String sql = null;
             Object[] param = null;
 
             boolean exists = exists(job.getId());
 
-            if(!exists){
+            if (!exists) {
                 sql = "insert into jobs values (?,?,?,?)";
                 param = new Object[]{job.getId(), job.getTitle(), job.getMinSalary(), job.getMaxSalary()};
-            }else if (exists(job.getId())){
+            } else if (exists(job.getId())) {
                 sql = "update jobs set job_title = ?, min_salary = ?, max_salary = ? where job_id = ?";
                 param = new Object[]{job.getTitle(), job.getMinSalary(), job.getMaxSalary(), job.getId()};
             }
@@ -75,7 +75,7 @@ public class JobRepositoryJdbc implements JobRepository {
     public Collection<Job> list() {
         String sql = "select * from jobs";
 
-        RowMapper<Job> rowMapper = (rs, rowNum) ->{
+        RowMapper<Job> rowMapper = (rs, rowNum) -> {
             String id = rs.getString(1);
             String title = rs.getString(2);
             Float minSalary = rs.getFloat(3);
@@ -90,7 +90,7 @@ public class JobRepositoryJdbc implements JobRepository {
     @Override
     @Transactional
     public void delete(String jobId) {
-        if(Objects.nonNull(jobId)){
+        if (Objects.nonNull(jobId)) {
             String sql = "delete from jobs where job_id = ?";
             jdbcTemplate.update(sql, jobId);
         }

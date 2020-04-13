@@ -9,7 +9,7 @@ public class Error {
     private String message;
     private FIELD field;
 
-    private Error(String message){
+    private Error(String message) {
         this.message = message;
     }
 

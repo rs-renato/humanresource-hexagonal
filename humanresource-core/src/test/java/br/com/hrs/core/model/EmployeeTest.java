@@ -14,18 +14,18 @@ public class EmployeeTest {
     private static Department department;
 
     @BeforeAll
-    static void setUp(){
-        job = new Job("AR","Architect", 3_000f, 5_000f);
+    static void setUp() {
+        job = new Job("AR", "Architect", 3_000f, 5_000f);
         department = new Department(1, "IT", null);
-        employee = new Employee(1,"renato@gmail",1000f, null, null);
+        employee = new Employee(1, "renato@gmail", 1000f, null, null);
     }
 
     @Test
     @DisplayName("Employee promotion sets job as null but its mandatory")
-    public void test01(){
+    public void test01() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsMandatoryException.class,()-> {
-           employee.promotedTo(null, department);
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
+            employee.promotedTo(null, department);
         });
 
         Assertions.assertTrue(exception.getMessage().matches("Job.*mandatory.*promotion"), String.format("Job mandatory message wrong (%s)", exception.getMessage()));
@@ -33,9 +33,9 @@ public class EmployeeTest {
 
     @Test
     @DisplayName("Employee promotion sets department as null but its mandatory")
-    public void test02(){
+    public void test02() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsMandatoryException.class,()-> {
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             employee.promotedTo(job, null);
         });
 
@@ -44,7 +44,7 @@ public class EmployeeTest {
 
     @Test
     @DisplayName("Promote Employee")
-    public void test03(){
+    public void test03() {
         employee.promotedTo(job, department);
         Assertions.assertEquals(job, employee.getJob(), "Job is not equals on promotion");
         Assertions.assertEquals(department, employee.getDepartment(), "Department is not equals on promotion");

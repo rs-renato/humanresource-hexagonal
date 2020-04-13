@@ -28,17 +28,17 @@ public class EmployeeUseCaseTest {
 
     @Test
     @DisplayName("Return null employee when passed null")
-    public void test01(){
+    public void test01() {
 
         Employee employee = employeePromotion.get(null);
-        Assertions.assertNull(employee,"Employee shoul be null");
+        Assertions.assertNull(employee, "Employee shoul be null");
     }
 
     @Test
     @DisplayName("Promotes with null employee id but its mandatory")
-    public void test02(){
+    public void test02() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsMandatoryException.class,()-> {
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             employeePromotion.promote(null, jobId, departmentId);
         });
 
@@ -47,9 +47,9 @@ public class EmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with null job id but its mandatory")
-    public void test03(){
+    public void test03() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsMandatoryException.class,()-> {
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             employeePromotion.promote(employeeId, null, departmentId);
         });
 
@@ -58,9 +58,9 @@ public class EmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with null department id but its mandatory")
-    public void test04(){
+    public void test04() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsMandatoryException.class,()-> {
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             employeePromotion.promote(employeeId, jobId, null);
         });
 
@@ -69,9 +69,9 @@ public class EmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with employee id but its not found")
-    public void test05(){
+    public void test05() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsNotFoundException.class,()-> {
+        RuntimeException exception = Assertions.assertThrows(HrsNotFoundException.class, () -> {
             employeePromotion.promote(-1, jobId, departmentId);
         });
 
@@ -80,9 +80,9 @@ public class EmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with job id but its not found")
-    public void test06(){
+    public void test06() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsNotFoundException.class,()-> {
+        RuntimeException exception = Assertions.assertThrows(HrsNotFoundException.class, () -> {
             employeePromotion.promote(employeeId, "NONE", departmentId);
         });
 
@@ -91,9 +91,9 @@ public class EmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with department id but its not found")
-    public void test07(){
+    public void test07() {
 
-        RuntimeException exception =  Assertions.assertThrows(HrsNotFoundException.class,()-> {
+        RuntimeException exception = Assertions.assertThrows(HrsNotFoundException.class, () -> {
             employeePromotion.promote(employeeId, jobId, -1);
         });
 
@@ -102,7 +102,7 @@ public class EmployeeUseCaseTest {
 
     @Test
     @DisplayName("Should promote employee ")
-    public void test08(){
+    public void test08() {
 
         employeePromotion.promote(employeeId, jobId, departmentId);
 

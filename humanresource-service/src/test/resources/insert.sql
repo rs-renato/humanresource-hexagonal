@@ -1,4 +1,3 @@
-
 INSERT INTO jobs
 VALUES (
 'AD_PRES',
@@ -396,160 +395,160 @@ INSERT INTO departments
 VALUES (
 10,
 'Administration',
-100	);
+100);
 
 INSERT INTO departments
 VALUES (
 20,
 'Marketing',
-101	);
+101);
 
 INSERT INTO departments
 VALUES (
 30,
 'Purchasing',
-114	);
+114);
 
 INSERT INTO departments
 VALUES (
 40,
 'Human Resources',
-103	);
+103);
 
 INSERT INTO departments
 VALUES (
 50,
 'Shipping',
-121	);
+121);
 
 INSERT INTO departments
 VALUES (
 60,
 'IT',
-103	);
+103);
 
 INSERT INTO departments
 VALUES (
 70,
 'Public Relations',
-104	);
+104);
 
 INSERT INTO departments
 VALUES (
 80,
 'Sales',
-105	);
+105);
 
 INSERT INTO departments
 VALUES (
 90,
 'Executive',
-100	);
+100);
 
 INSERT INTO departments
 VALUES (
 100,
 'Finance',
-108	);
+108);
 
 INSERT INTO departments
 VALUES (
 110,
 'Accounting',
-105	);
+105);
 
 INSERT INTO departments
 VALUES (
 120,
 'Treasury',
-115	);
+115);
 
 INSERT INTO departments
 VALUES (
 130,
 'Corporate Tax',
-116	);
+116);
 
 INSERT INTO departments
 VALUES (
 140,
 'Control And Credit',
-117	);
+117);
 
 INSERT INTO departments
 VALUES (
 150,
 'Shareholder Services',
-118	);
+118);
 
 INSERT INTO departments
 VALUES (
 160,
 'Benefits',
-119	);
+119);
 
 INSERT INTO departments
 VALUES (
 170,
 'Manufacturing',
-111	);
+111);
 
 INSERT INTO departments
 VALUES (
 180,
 'Construction',
-112	);
+112);
 
 INSERT INTO departments
 VALUES (
 190,
 'Contracting',
-113	);
+113);
 
 INSERT INTO departments
 VALUES (
 200,
 'Operations',
-111	);
+111);
 
 INSERT INTO departments
 VALUES (
 210,
 'IT Support',
-100	);
+100);
 
 INSERT INTO departments
 VALUES (
 220,
 'NOC',
-118	);
+118);
 
 INSERT INTO departments
 VALUES (
 230,
 'IT Helpdesk',
-115	);
+115);
 
 INSERT INTO departments
 VALUES (
 240,
 'Government Sales',
-112	);
+112);
 
 INSERT INTO departments
 VALUES (
 250,
 'Retail Sales',
-114	);
+114);
 
 INSERT INTO departments
 VALUES (
 260,
 'Recruiting',
-118	);
+118);
 
 INSERT INTO departments
 VALUES (
 270,
 'Payroll',
-119	);
+119);

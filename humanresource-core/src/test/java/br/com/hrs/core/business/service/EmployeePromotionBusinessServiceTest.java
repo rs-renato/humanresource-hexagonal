@@ -23,17 +23,17 @@ public class EmployeePromotionBusinessServiceTest {
     private static EmployeePromotionService service;
 
     @BeforeAll
-    static void setUp(){
+    static void setUp() {
         service = new EmployeePromotionService();
-        job = new Job("AR","Architect", 3_000f, 5_000f);
+        job = new Job("AR", "Architect", 3_000f, 5_000f);
         department = new Department(1, "IT", null);
-        employee = new Employee(1,"renato@gmail",1000f, null, null);
+        employee = new Employee(1, "renato@gmail", 1000f, null, null);
     }
 
     @Test
     @DisplayName("Employee set as null but its mandatory")
-    void test01(){
-        RuntimeException exception =  Assertions.assertThrows(HrsMandatoryException.class,()-> {
+    void test01() {
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             service.promote(null, job, department);
         });
 
@@ -42,8 +42,8 @@ public class EmployeePromotionBusinessServiceTest {
 
     @Test
     @DisplayName("Job set as null but its mandatory")
-    void test02(){
-        RuntimeException exception =  Assertions.assertThrows(HrsMandatoryException.class,()-> {
+    void test02() {
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             service.promote(employee, null, department);
         });
 
@@ -52,8 +52,8 @@ public class EmployeePromotionBusinessServiceTest {
 
     @Test
     @DisplayName("Department set as null but its mandatory")
-    void test03(){
-        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class,()-> {
+    void test03() {
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             service.promote(employee, job, null);
         });
 

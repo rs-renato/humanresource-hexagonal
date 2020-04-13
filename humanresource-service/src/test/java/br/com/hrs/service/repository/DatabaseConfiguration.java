@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 public class DatabaseConfiguration {
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .addScripts("create.sql", "insert.sql")
                 .setType(EmbeddedDatabaseType.HSQL)
@@ -25,12 +25,12 @@ public class DatabaseConfiguration {
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
+    public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource());
     }
 
     @Bean
-    public DataSourceTransactionManager transactionManager(){
+    public DataSourceTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
 }
