@@ -12,6 +12,7 @@
     <modules>
         <module>humanresource-core</module>
         <module>humanresource-service</module>
+        <module>humanresource-rest</module>
     </modules>
 
     <build>
