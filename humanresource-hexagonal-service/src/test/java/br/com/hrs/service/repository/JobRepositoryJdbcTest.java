@@ -19,6 +19,9 @@ import java.util.Collection;
 @ExtendWith(SpringExtension.class)
 public class JobRepositoryJdbcTest {
 
+    public static final String JOB_ID = "HR_REP";
+    public static final String NEW_JOB_ID = "NEW_JOB";
+
     Logger logger = LogManager.getLogger(JobRepositoryJdbcTest.class);
 
     @Inject
@@ -27,14 +30,14 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Search for null job")
     public void test01() {
-        Job job = jobRepository.get(null);
+        Job job = jobRepository.find(null);
         Assertions.assertNull(job, "Job should be null");
     }
 
     @Test
     @DisplayName("Search for inexistent job")
     public void test02() {
-        Job job = jobRepository.get("NO_EXISTENT_JOB");
+        Job job = jobRepository.find("NO_EXISTENT_JOB");
         logger.info(job);
         Assertions.assertNull(job, "Job should be null");
     }
@@ -42,31 +45,37 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Updates Job")
     public void test03() {
-        Job job = jobRepository.get("HR_REP");
+        Job job = jobRepository.find(JOB_ID);
         logger.info(job);
         job.setTitle(job.getTitle() + " altered");
-        jobRepository.save(job);
+        job.setMinSalary(job.getMinSalary() + 1);
+        job.setMaxSalary(job.getMaxSalary() + 1);
 
-        job = jobRepository.get("HR_REP");
+        jobRepository.update(job);
 
-        Assertions.assertTrue(job.getTitle().contains("altered"), "Job should be altered");
+        Job jobSaved  = jobRepository.find(JOB_ID);
+
+        Assertions.assertEquals(jobSaved.getTitle(), job.getTitle(), "Job title should be altered");
+        Assertions.assertEquals(jobSaved.getMinSalary(), job.getMinSalary(), "Job min salary should be altered");
+        Assertions.assertEquals(jobSaved.getMaxSalary(), job.getMaxSalary(), "Job max salary should be altered");
     }
 
     @Test
     @DisplayName("Saves Job")
     public void test04() {
-        Job job = new Job("NEW_JOB", "new job", 1000f, 2000f);
+        Job job = new Job(NEW_JOB_ID, "new job", 1000f, 2000f);
         jobRepository.save(job);
 
-        job = jobRepository.get("NEW_JOB");
+        job = jobRepository.find(NEW_JOB_ID);
 
+        Assertions.assertNotNull(job, "Job should be saved");
         Assertions.assertTrue(job.getTitle().contains("new"), "Job should be saved");
     }
 
     @Test
     @DisplayName("List Jobs")
     public void test05() {
-        Collection<Job> jobs = jobRepository.list();
+        Collection<Job> jobs = jobRepository.findAll();
         logger.info(jobs);
         Assertions.assertNotNull(jobs, "Jobs should be listed");
     }
@@ -74,7 +83,7 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Deletes Jobs")
     public void test06() {
-        Job job = jobRepository.get("NEW_JOB");
+        Job job = jobRepository.find(NEW_JOB_ID);
         logger.info(job);
         jobRepository.delete(job.getId());
         boolean exists = jobRepository.exists(job.getId());
@@ -84,7 +93,7 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Job exists")
     public void test07() {
-        boolean exists = jobRepository.exists("HR_REP");
+        boolean exists = jobRepository.exists(JOB_ID);
         Assertions.assertTrue(exists, "Job should be existent");
     }
 
@@ -98,7 +107,7 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Search for job")
     public void test() {
-        Job job = jobRepository.get("HR_REP");
+        Job job = jobRepository.find(JOB_ID);
         logger.info(job);
         Assertions.assertNotNull(job, "Job should be null");
     }

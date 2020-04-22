@@ -2,6 +2,7 @@ package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.service.repository.jdbc.rowmapper.JobRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,7 +24,7 @@ public class JobRepositoryJdbc implements JobRepository {
     }
 
     @Override
-    public Job get(String jobId) {
+    public Job find(String jobId) {
 
         if (Objects.isNull(jobId)) {
             return null;
@@ -32,17 +33,8 @@ public class JobRepositoryJdbc implements JobRepository {
         String sql = "select * from jobs where job_id = ?";
         Object[] param = new Object[]{jobId};
 
-        RowMapper<Job> rowMapper = (rs, rowNum) -> {
-            String id = rs.getString(1);
-            String title = rs.getString(2);
-            Float minSalary = rs.getFloat(3);
-            Float maxSalary = rs.getFloat(4);
-
-            return new Job(id, title, minSalary, maxSalary);
-        };
-
         try {
-            return jdbcTemplate.queryForObject(sql, param, rowMapper);
+            return jdbcTemplate.queryForObject(sql, param, new JobRowMapper());
         } catch (EmptyResultDataAccessException e) {
             logger.warn("Job Id '{}' not found", jobId);
             return null;
@@ -51,40 +43,34 @@ public class JobRepositoryJdbc implements JobRepository {
 
     @Override
     @Transactional
-    public void save(Job job) {
+    public String save(Job job) {
         if (Objects.nonNull(job)) {
 
-            String sql = null;
-            Object[] param = null;
+            String sql = "insert into jobs values (?,?,?,?)";
+            Object[] param = new Object[]{job.getId(), job.getTitle(), job.getMinSalary(), job.getMaxSalary()};
 
-            boolean exists = exists(job.getId());
+            jdbcTemplate.update(sql, param);
 
-            if (!exists) {
-                sql = "insert into jobs values (?,?,?,?)";
-                param = new Object[]{job.getId(), job.getTitle(), job.getMinSalary(), job.getMaxSalary()};
-            } else if (exists(job.getId())) {
-                sql = "update jobs set job_title = ?, min_salary = ?, max_salary = ? where job_id = ?";
-                param = new Object[]{job.getTitle(), job.getMinSalary(), job.getMaxSalary(), job.getId()};
-            }
+            return job.getId();
+        }
+
+        return null;
+    }
+
+    @Override
+    public void update(Job job) {
+        if (Objects.nonNull(job)) {
+            String sql = "update jobs set job_title = ?, min_salary = ?, max_salary = ? where job_id = ?";
+            Object[] param = new Object[]{job.getTitle(), job.getMinSalary(), job.getMaxSalary(), job.getId()};
 
             jdbcTemplate.update(sql, param);
         }
     }
 
     @Override
-    public Collection<Job> list() {
+    public Collection<Job> findAll() {
         String sql = "select * from jobs";
-
-        RowMapper<Job> rowMapper = (rs, rowNum) -> {
-            String id = rs.getString(1);
-            String title = rs.getString(2);
-            Float minSalary = rs.getFloat(3);
-            Float maxSalary = rs.getFloat(4);
-
-            return new Job(id, title, minSalary, maxSalary);
-        };
-
-        return jdbcTemplate.query(sql, rowMapper);
+        return jdbcTemplate.query(sql, new JobRowMapper());
     }
 
     @Override

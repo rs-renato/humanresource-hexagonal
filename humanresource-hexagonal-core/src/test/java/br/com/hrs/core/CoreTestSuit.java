@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(JUnitPlatform.class)
 @SelectPackages({
         // business test (services)
-        "br.com.hrs.core.business.service"
+        "br.com.hrs.core.service"
 })
 public class CoreTestSuit {
 

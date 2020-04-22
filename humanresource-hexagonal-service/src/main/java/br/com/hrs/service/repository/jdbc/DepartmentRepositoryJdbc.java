@@ -2,13 +2,19 @@ package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.EmployeeRepository;
+import br.com.hrs.core.repository.LocationRepository;
+import br.com.hrs.service.repository.jdbc.rowmapper.DepartmentRowMapper;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.sql.PreparedStatement;
 import java.util.Collection;
 import java.util.Objects;
 
@@ -16,17 +22,14 @@ import java.util.Objects;
 public class DepartmentRepositoryJdbc implements DepartmentRepository {
 
     private JdbcTemplate jdbcTemplate;
-    private EmployeeRepositoryJdbc employeeRepository;
 
     @Inject
-    @Lazy
-    public DepartmentRepositoryJdbc(EmployeeRepositoryJdbc employeeRepository, JdbcTemplate jdbcTemplate) {
-        this.employeeRepository = employeeRepository;
+    public DepartmentRepositoryJdbc(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public Department get(Integer departmentId) {
+    public Department find(Integer departmentId) {
 
         if (Objects.isNull(departmentId)) {
             return null;
@@ -35,49 +38,53 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
         String sql = "select * from departments where department_id = ?";
         Object[] param = new Object[]{departmentId};
 
-        RowMapper<Department> rowMapper = (rs, rowNum) -> {
-            String name = rs.getString(2);
-            Integer managerID = rs.getInt(3);
-            return new Department(departmentId, name, employeeRepository.get(managerID));
-        };
-
-        return jdbcTemplate.queryForObject(sql, param, rowMapper);
+        return jdbcTemplate.queryForObject(sql, param, new DepartmentRowMapper());
     }
 
     @Override
-    @Transactional
-    public void save(Department department) {
+    @Transactional(rollbackFor = Exception.class)
+    public Integer save(Department department) {
         if (Objects.nonNull(department)) {
 
-            String sql = null;
-            Object[] param = null;
+            String sql = "insert into departments values (?,?,?)";
 
-            if (Objects.nonNull(department.getId())) {
-                sql = "insert into departments values (?,?,?)";
-                param = new Object[]{department.getId(), department.getName(), department.getManager().getId()};
-            } else {
-                sql = "update departments set department_name = ?, manager_id = ? where department_id_id = ?";
-                param = new Object[]{department.getName(), department.getManager().getId(), department.getId()};
-            }
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+
+            jdbcTemplate.update(connection -> {
+                PreparedStatement stmt = connection.prepareStatement(sql, new String[]{"department_id"});
+                stmt.setString(1, department.getName());
+                stmt.setInt(2, department.getManager().getId());
+                stmt.setInt(3, department.getLocation().getId());
+                return stmt;
+            }, keyHolder);
+
+            return keyHolder.getKey().intValue();
+        }
+
+        return null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void update(Department department) {
+
+        if (Objects.nonNull(department)) {
+
+            String sql = "update departments set department_name = ?, manager_id = ? where department_id_id = ?";
+            Object[] param = new Object[]{department.getName(), department.getManager().getId(), department.getId()};
+
             jdbcTemplate.update(sql, param);
         }
     }
 
     @Override
-    public Collection<Department> list() {
+    public Collection<Department> findAll() {
         String sql = "select * from departments";
-        RowMapper<Department> rowMapper = (rs, rowNum) -> {
-            Integer departmentId = rs.getInt(1);
-            String name = rs.getString(2);
-            Integer managerID = rs.getInt(3);
-            return new Department(departmentId, name, employeeRepository.get(managerID));
-        };
-
-        return jdbcTemplate.query(sql, rowMapper);
+        return jdbcTemplate.query(sql, new DepartmentRowMapper());
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void delete(Integer departmentId) {
         if (Objects.nonNull(departmentId)) {
             String sql = "delete from departments where department_id = ?";

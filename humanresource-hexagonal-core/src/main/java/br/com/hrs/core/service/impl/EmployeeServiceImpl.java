@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee get(Integer employee) {
-        return employeeRepository.get(employee);
+        return employeeRepository.find(employee);
     }
 
     @Override
@@ -52,30 +52,29 @@ public class EmployeeServiceImpl implements EmployeeService {
             Error.of("Department ID").when(FIELD.MANDATORY).trows();
         }
 
-        Employee employee = employeeRepository.get(employeeId);
+        Employee employee = employeeRepository.find(employeeId);
 
         if (Objects.isNull(employee)) {
             Error.of("Employee").when(FIELD.NOT_FOUND).trows();
         }
 
-        Job job = jobRepository.get(jobId);
+        Job job = jobRepository.find(jobId);
 
         if (Objects.isNull(job)) {
             Error.of("Job").when(FIELD.NOT_FOUND).trows();
         }
 
-        Department department = departmentRepository.get(departmentId);
+        Department department = departmentRepository.find(departmentId);
 
         if (Objects.isNull(department)) {
             Error.of("Department").when(FIELD.NOT_FOUND).trows();
         }
 
-        employee.setStatus(Employee.STATUS.PROMOTED);
         employee.setSalary(job.getMinSalary());
         employee.setDepartment(department);
         employee.setJob(job);
 
-        employeeRepository.save(employee);
+        employeeRepository.update(employee);
 
         logger.info("Employee '{}' promoted!", employeeId);
     }

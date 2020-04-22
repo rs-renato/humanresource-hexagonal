@@ -19,17 +19,22 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
     }
 
     @Override
-    public Employee get(Integer employeeId) {
+    public Employee find(Integer employeeId) {
         return null;
     }
 
     @Override
-    public void save(Employee employee) {
+    public Integer save(Employee employee) {
+        return null;
+    }
+
+    @Override
+    public void update(Employee employee) {
 
     }
 
     @Override
-    public Collection<Employee> list() {
+    public Collection<Employee> findAll() {
         return null;
     }
 

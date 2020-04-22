@@ -1,120 +1,201 @@
 package br.com.hrs.core.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Employee {
 
-    private Integer id;
-    private String name;
-    private String email;
-    private Float salary;
-    private Job job;
-    private Department department;
-    private STATUS status;
-    public Employee(Integer id, String email, Float salary, Job job, Department department) {
-        this.id = id;
-        this.email = email;
-        this.salary = salary;
-        this.job = job;
-        this.department = department;
-        this.status = STATUS.ADMITTED;
-    }
+	private Integer id;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String phone;
+	private Date hireDate;
+	private Float salary;
+	private Float commissionPercent;
+	private Employee manager;
+	private Job job;
+	private Department department;
 
-    public Integer getId() {
-        return id;
-    }
+	Employee(){
+	}
+	
+	public Employee(Integer id, String firstName, String lastName, String email, String phone, Date hireDate, Float salary, Float commissionPercent, Employee manager, Job job, Department department) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.hireDate = hireDate;
+		this.salary = salary;
+		this.commissionPercent = commissionPercent;
+		this.manager = manager;
+		this.job = job;
+		this.department = department;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public Float getSalary() {
-        return salary;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public void setSalary(Float salary) {
-        this.salary = salary;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public Job getJob() {
-        return job;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setJob(Job job) {
-        this.job = job;
-    }
+	public String getPhone() {
+		return phone;
+	}
 
-    public Department getDepartment() {
-        return department;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
+	public Date getHireDate() {
+		return hireDate;
+	}
 
-    public STATUS getStatus() {
-        return status;
-    }
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
 
-    public void setStatus(STATUS status) {
-        this.status = status;
-    }
+	public Float getSalary() {
+		return salary;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Employee employee = (Employee) o;
-        return Objects.equals(id, employee.id);
-    }
+	public void setSalary(Float salary) {
+		this.salary = salary;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+	public Float getCommissionPercent() {
+		return commissionPercent;
+	}
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", salary=" + salary +
-                ", job=" + job +
-                ", department=" + department +
-                ", status=" + status +
-                '}';
-    }
+	public void setCommissionPercent(Float commissionPercent) {
+		this.commissionPercent = commissionPercent;
+	}
 
-    public enum STATUS {
-        ADMITTED(1),
-        PROMOTED(2),
-        FIRED(3);
+	public Employee getManager() {
+		return manager;
+	}
 
-        private int code;
+	public void setManager(Employee manager) {
+		this.manager = manager;
+	}
 
-        STATUS(int code) {
-            this.code = code;
-        }
+	public Job getJob() {
+		return job;
+	}
 
-        public int getCode() {
-            return code;
-        }
-    }
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Employee employee = (Employee) o;
+		return Objects.equals(id, employee.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	
+	public static class Builder{
+
+		private Employee employee = new Employee();
+
+		public Builder id(Integer id) {
+			this.employee.setId(id);
+			return this;
+		}
+
+		public Builder firstName(String firstName) {
+			this.employee.setFirstName(firstName);
+			return this;
+		}
+
+		public Builder lastName(String lastName) {
+			this.employee.setLastName(lastName);
+			return this;
+		}
+
+		public Builder email(String email) {
+			this.employee.setEmail(email);
+			return this;
+		}
+
+		public Builder phone(String phone) {
+			this.employee.setPhone(phone);
+			return this;
+		}
+
+		public Builder hireDate(Date hireDate) {
+			this.employee.setHireDate(hireDate);
+			return this;
+		}
+
+		public Builder salary(Float salary) {
+			this.employee.setSalary(salary);
+			return this;
+		}
+
+		public Builder commissionPercent(Float commissionPercent) {
+			this.employee.setCommissionPercent(commissionPercent);
+			return this;
+		}
+
+		public Builder manager(Employee manager) {
+			this.employee.setManager(manager);
+			return this;
+		}
+
+		public Builder job(Job job) {
+			this.employee.setJob(job);
+			return this;
+		}
+
+		public Builder department(Department department) {
+			this.employee.setDepartment(department);
+			return this;
+		}
+
+		public Employee build(){
+			return this.employee;
+		}
+	}
 }

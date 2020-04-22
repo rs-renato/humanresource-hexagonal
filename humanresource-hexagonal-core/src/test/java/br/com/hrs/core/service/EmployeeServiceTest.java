@@ -1,10 +1,9 @@
-package br.com.hrs.core.business.service;
+package br.com.hrs.core.service;
 
 import br.com.hrs.core.DevEnvironmentConfiguration;
 import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.model.Employee;
-import br.com.hrs.core.service.EmployeeService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,9 +21,9 @@ public class EmployeeServiceTest {
     @Inject
     private EmployeeService employeeService;
 
-    private Integer employeeId = 1;
-    private String jobId = "AN";
-    private Integer departmentId = 1;
+    private Integer employeeId = 100;
+    private String jobId = "AD_PRES";
+    private Integer departmentId = 10;
 
     @Test
     @DisplayName("Return null employee when passed null")
@@ -111,6 +110,5 @@ public class EmployeeServiceTest {
         Assertions.assertEquals(employeeId, employee.getId());
         Assertions.assertEquals(jobId, employee.getJob().getId());
         Assertions.assertEquals(departmentId, employee.getDepartment().getId());
-        Assertions.assertEquals(Employee.STATUS.PROMOTED, employee.getStatus());
     }
 }

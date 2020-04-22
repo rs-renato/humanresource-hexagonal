@@ -13,6 +13,12 @@ ALTER TABLE regions
         PRIMARY KEY (region_id)
 ;
 
+CREATE
+SEQUENCE regions_seq
+ START
+WITH     5
+ INCREMENT BY   1;
+
 CREATE TABLE countries
 (
     country_id   CHAR(2)

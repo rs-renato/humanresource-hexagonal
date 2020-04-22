@@ -10,11 +10,13 @@ public interface JobRepository {
 
     Logger logger = LogManager.getLogger(JobRepository.class);
 
-    Job get(String jobId);
+    Job find(String jobId);
 
-    void save(Job job);
+    String save(Job job);
 
-    Collection<Job> list();
+    void update(Job job);
+
+    Collection<Job> findAll();
 
     void delete(String jobId);
 

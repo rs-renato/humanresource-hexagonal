@@ -10,11 +10,13 @@ public interface EmployeeRepository {
 
     Logger logger = LogManager.getLogger(EmployeeRepository.class);
 
-    Employee get(Integer employeeId);
+    Employee find(Integer employeeId);
 
-    void save(Employee employee);
+    Integer save(Employee employee);
 
-    Collection<Employee> list();
+    void update(Employee employee);
+
+    Collection<Employee> findAll();
 
     void delete(Integer employeeId);
 }

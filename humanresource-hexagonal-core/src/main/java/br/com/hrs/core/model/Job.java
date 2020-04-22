@@ -4,70 +4,92 @@ import java.util.Objects;
 
 public class Job {
 
-    private String id;
-    private String title;
-    private Float minSalary;
-    private Float maxSalary;
+	private String id;
+	private String title;
+	private Float minSalary;
+	private Float maxSalary;
 
-    public Job(String id, String title, Float minSalary, Float maxSalary) {
-        this.id = id;
-        this.title = title;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
-    }
+	Job(){
+	}
 
-    public String getId() {
-        return id;
-    }
+	public Job(String id, String title, Float minSalary, Float maxSalary) {
+		this.id = id;
+		this.title = title;
+		this.minSalary = minSalary;
+		this.maxSalary = maxSalary;
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public String getTitle() {
-        return title;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public Float getMinSalary() {
-        return minSalary;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setMinSalary(Float minSalary) {
-        this.minSalary = minSalary;
-    }
+	public Float getMinSalary() {
+		return minSalary;
+	}
 
-    public Float getMaxSalary() {
-        return maxSalary;
-    }
+	public void setMinSalary(Float minSalary) {
+		this.minSalary = minSalary;
+	}
 
-    public void setMaxSalary(Float maxSalary) {
-        this.maxSalary = maxSalary;
-    }
+	public Float getMaxSalary() {
+		return maxSalary;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Job job = (Job) o;
-        return Objects.equals(id, job.id);
-    }
+	public void setMaxSalary(Float maxSalary) {
+		this.maxSalary = maxSalary;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Job job = (Job) o;
+		return Objects.equals(id, id);
+	}
 
-    @Override
-    public String toString() {
-        return "Job{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", minSalary=" + minSalary +
-                ", maxSalary=" + maxSalary +
-                '}';
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	public static final class Builder{
+
+		Job job = new Job();
+
+		public Builder id(String id){
+			this.job.setId(id);
+			return this;
+		}
+
+		public Builder title(String title){
+			this.job.setTitle(title);
+			return this;
+		}
+
+		public Builder minSalary(Float minSalary){
+			this.job.setMinSalary(minSalary);
+			return this;
+		}
+
+		public Builder maxSalay(Float maxSalary){
+			this.job.setMaxSalary(maxSalary);
+			return this;
+		}
+
+		public Job build(){
+			return this.job;
+		}
+	}
 }

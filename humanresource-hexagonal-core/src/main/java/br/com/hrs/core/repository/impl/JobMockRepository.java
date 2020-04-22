@@ -14,25 +14,48 @@ public class JobMockRepository implements JobRepository {
     private Map<String, Job> database = new HashMap<>();
 
     public JobMockRepository() {
-        this.database.put("AN", new Job("AN", "Analyst", 1_000f, 3_000f));
-        this.database.put("AR", new Job("AR", "Architect", 3_000f, 5_000f));
+
+        Job job01 = new Job.Builder()
+                        .id("AD_PRES")
+                        .title("President")
+                        .minSalary(20080f)
+                        .maxSalay(40000f)
+                     .build();
+
+        Job job02 = new Job.Builder()
+                .id("AD_VP")
+                .title("Administration Vice President")
+                .minSalary(15000f)
+                .maxSalay(30000f)
+                .build();
+
+
+        this.database.put(job01.getId(), job01);
+        this.database.put(job02.getId(), job02);
     }
 
     @Override
-    public Job get(String jobId) {
-        logger.info("Fake database ->  Job get({}})", jobId);
+    public Job find(String jobId) {
+        logger.info("Fake database -> find({}})", jobId);
         return this.database.get(jobId);
     }
 
     @Override
-    public void save(Job job) {
+    public String save(Job job) {
         logger.info("Fake database ->  save({}})", job);
+        this.database.put(job.getId(), job);
+        return job.getId();
+    }
+
+    @Override
+    public void update(Job job) {
+        logger.info("Fake database ->  update({}})", job);
         this.database.put(job.getId(), job);
     }
 
     @Override
-    public Collection<Job> list() {
-        logger.info("Fake database ->  Collection<Job> list()");
+    public Collection<Job> findAll() {
+        logger.info("Fake database ->  Collection<Job> findAll()");
         return this.database.values();
     }
 

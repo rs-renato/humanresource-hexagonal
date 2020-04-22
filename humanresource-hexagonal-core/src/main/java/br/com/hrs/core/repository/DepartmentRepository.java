@@ -10,11 +10,13 @@ public interface DepartmentRepository {
 
     Logger logger = LogManager.getLogger(DepartmentRepository.class);
 
-    Department get(Integer employeeId);
+    Department find(Integer departmentId);
 
-    void save(Department employee);
+    Integer save(Department department);
 
-    Collection<Department> list();
+    void update(Department department);
 
-    void delete(Integer employeeId);
+    Collection<Department> findAll();
+
+    void delete(Integer departmentId);
 }
