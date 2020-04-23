@@ -1,6 +1,5 @@
 package br.com.hrs.core.repository;
 
-import br.com.hrs.core.model.Job;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

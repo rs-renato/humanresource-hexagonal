@@ -9,7 +9,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.sql.Date;
 import java.sql.PreparedStatement;
