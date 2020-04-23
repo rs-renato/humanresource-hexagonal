@@ -71,9 +71,9 @@ public class EmployeeMockRepository implements EmployeeRepository {
     }
 
     @Override
-    public void update(Employee employee) {
+    public boolean update(Employee employee) {
         logger.info("Fake database ->  update({}})", employee);
-        this.database.put(employee.getId(), employee);
+        return this.database.put(employee.getId(), employee) != null;
     }
 
     @Override
@@ -83,8 +83,8 @@ public class EmployeeMockRepository implements EmployeeRepository {
     }
 
     @Override
-    public void delete(Integer employeeId) {
+    public boolean delete(Integer employeeId) {
         logger.info("Fake database ->  delete({}})", employeeId);
-        this.database.remove(employeeId);
+        return this.database.remove(employeeId) != null;
     }
 }

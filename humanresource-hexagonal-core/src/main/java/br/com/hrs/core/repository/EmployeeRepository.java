@@ -14,9 +14,9 @@ public interface EmployeeRepository {
 
     Integer save(Employee employee);
 
-    void update(Employee employee);
+    boolean update(Employee employee);
 
     Collection<Employee> findAll();
 
-    void delete(Integer employeeId);
+    boolean delete(Integer employeeId);
 }

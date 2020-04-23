@@ -49,9 +49,9 @@ public class DepartmentMockRepository implements DepartmentRepository {
     }
 
     @Override
-    public void update(Department department) {
+    public boolean update(Department department) {
         logger.info("Fake database ->  update({}})", department);
-        this.database.put(department.getId(), department);
+        return this.database.put(department.getId(), department) != null;
     }
 
     @Override
@@ -61,8 +61,8 @@ public class DepartmentMockRepository implements DepartmentRepository {
     }
 
     @Override
-    public void delete(Integer departmentId) {
+    public boolean delete(Integer departmentId) {
         logger.info("Fake database ->  delete({}})", departmentId);
-        this.database.remove(departmentId);
+        return this.database.remove(departmentId) != null;
     }
 }

@@ -48,9 +48,9 @@ public class JobMockRepository implements JobRepository {
     }
 
     @Override
-    public void update(Job job) {
+    public boolean update(Job job) {
         logger.info("Fake database ->  update({}})", job);
-        this.database.put(job.getId(), job);
+        return this.database.put(job.getId(), job) != null;
     }
 
     @Override
@@ -60,9 +60,9 @@ public class JobMockRepository implements JobRepository {
     }
 
     @Override
-    public void delete(String jobId) {
+    public boolean delete(String jobId) {
         logger.info("Fake database ->  delete({}})", jobId);
-        this.database.remove(jobId);
+        return this.database.remove(jobId) != null;
     }
 
     @Override

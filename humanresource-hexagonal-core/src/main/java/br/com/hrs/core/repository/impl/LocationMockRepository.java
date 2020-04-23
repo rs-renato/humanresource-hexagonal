@@ -51,9 +51,9 @@ public class LocationMockRepository implements LocationRepository {
     }
 
     @Override
-    public void update(Location location) {
+    public boolean update(Location location) {
         logger.info("Fake database ->  update({}})", location);
-        this.database.put(location.getId(), location);
+        return this.database.put(location.getId(), location) != null;
     }
 
     @Override
@@ -63,8 +63,8 @@ public class LocationMockRepository implements LocationRepository {
     }
 
     @Override
-    public void delete(Integer locationId) {
+    public boolean delete(Integer locationId) {
         logger.info("Fake database ->  delete({}})", locationId);
-        this.database.remove(locationId);
+        return this.database.remove(locationId) != null;
     }
 }

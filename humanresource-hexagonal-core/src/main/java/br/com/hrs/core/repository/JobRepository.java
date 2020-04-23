@@ -14,11 +14,11 @@ public interface JobRepository {
 
     String save(Job job);
 
-    void update(Job job);
+    boolean update(Job job);
 
     Collection<Job> findAll();
 
-    void delete(String jobId);
+    boolean delete(String jobId);
 
     boolean exists(String jobId);
 }

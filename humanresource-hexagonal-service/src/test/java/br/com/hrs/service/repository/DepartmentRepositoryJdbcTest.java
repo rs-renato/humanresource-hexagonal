@@ -32,14 +32,14 @@ public class DepartmentRepositoryJdbcTest {
     private DepartmentRepository departmentRepository;
 
     @Test
-    @DisplayName("Finds for null department")
+    @DisplayName("Finds for null Department")
     public void test01() {
         Department department = departmentRepository.find(null);
         Assertions.assertNull(department, "Department should be null");
     }
 
     @Test
-    @DisplayName("Finds for inexistent department")
+    @DisplayName("Finds for inexistent Department")
     public void test02() {
         Department department = departmentRepository.find(-1);
         logger.info(department);
@@ -53,10 +53,11 @@ public class DepartmentRepositoryJdbcTest {
         logger.info(department);
         department.setName(department.getName() + " altered");
         department.setManager(new Employee.Builder().id(MANAGER_ID).build());
-        departmentRepository.update(department);
+        boolean updated = departmentRepository.update(department);
 
         department = departmentRepository.find(DEPARTMENT_ID);
 
+        Assertions.assertTrue(updated, "Department should be updated");
         Assertions.assertTrue(department.getName().contains("altered"), "Department should be altered");
     }
 
@@ -83,7 +84,7 @@ public class DepartmentRepositoryJdbcTest {
     }
 
     @Test
-    @DisplayName("Finds for department")
+    @DisplayName("Finds for Department")
     public void test06() {
         Department department = departmentRepository.find(DEPARTMENT_ID);
         logger.info(department);
@@ -91,10 +92,18 @@ public class DepartmentRepositoryJdbcTest {
     }
 
     @Test
-    @DisplayName("Deletes Departments")
+    @DisplayName("Deletes Department")
     public void test07() {
-        departmentRepository.delete(DEPARTMENT_ID);
+        boolean deleted = departmentRepository.delete(DEPARTMENT_ID);
         Department department = departmentRepository.find(DEPARTMENT_ID);
-        Assertions.assertNull(department, "Department should be deleted");
+        Assertions.assertTrue(deleted, "Department should be deleted");
+        Assertions.assertNull(department, "Department still existing");
+    }
+
+    @Test
+    @DisplayName("Deletes inexistend Department")
+    public void test08() {
+        boolean deleted = departmentRepository.delete(-1);
+        Assertions.assertFalse(deleted, "Department should not be deleted");
     }
 }

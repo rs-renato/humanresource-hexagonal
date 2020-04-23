@@ -14,9 +14,9 @@ public interface DepartmentRepository {
 
     Integer save(Department department);
 
-    void update(Department department);
+    boolean update(Department department);
 
     Collection<Department> findAll();
 
-    void delete(Integer departmentId);
+    boolean delete(Integer departmentId);
 }

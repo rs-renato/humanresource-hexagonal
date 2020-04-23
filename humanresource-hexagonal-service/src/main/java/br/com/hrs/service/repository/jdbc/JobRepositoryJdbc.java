@@ -30,7 +30,7 @@ public class JobRepositoryJdbc implements JobRepository {
             return null;
         }
 
-        String sql = "select * from jobs where job_id = ?";
+        String sql = "SELECT * FROM JOBS WHERE JOB_ID = ?";
         Object[] param = new Object[]{jobId};
 
         try {
@@ -42,11 +42,11 @@ public class JobRepositoryJdbc implements JobRepository {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public String save(Job job) {
         if (Objects.nonNull(job)) {
 
-            String sql = "insert into jobs values (?,?,?,?)";
+            String sql = "INSERT INTO JOBS VALUES (?,?,?,?)";
             Object[] param = new Object[]{job.getId(), job.getTitle(), job.getMinSalary(), job.getMaxSalary()};
 
             jdbcTemplate.update(sql, param);
@@ -58,32 +58,37 @@ public class JobRepositoryJdbc implements JobRepository {
     }
 
     @Override
-    public void update(Job job) {
+    @Transactional(rollbackFor = Exception.class)
+    public boolean update(Job job) {
         if (Objects.nonNull(job)) {
-            String sql = "update jobs set job_title = ?, min_salary = ?, max_salary = ? where job_id = ?";
+            String sql = "UPDATE JOBS SET JOB_TITLE = ?, MIN_SALARY = ?, MAX_SALARY = ? WHERE JOB_ID = ?";
             Object[] param = new Object[]{job.getTitle(), job.getMinSalary(), job.getMaxSalary(), job.getId()};
 
-            jdbcTemplate.update(sql, param);
+            return jdbcTemplate.update(sql, param) > 0;
         }
+
+        return false;
     }
 
     @Override
     public Collection<Job> findAll() {
-        String sql = "select * from jobs";
+        String sql = "SELECT * FROM JOBS";
         return jdbcTemplate.query(sql, new JobRowMapper());
     }
 
     @Override
-    @Transactional
-    public void delete(String jobId) {
+    @Transactional(rollbackFor = Exception.class)
+    public boolean delete(String jobId) {
         if (Objects.nonNull(jobId)) {
-            String sql = "delete from jobs where job_id = ?";
-            jdbcTemplate.update(sql, jobId);
+            String sql = "DELETE FROM JOBS WHERE JOB_ID = ?";
+            return jdbcTemplate.update(sql, jobId) > 0;
         }
+
+        return false;
     }
 
     @Override
     public boolean exists(String jobId) {
-        return jdbcTemplate.queryForObject("select count(*) from jobs where job_id = ?", new Object[]{jobId}, Integer.class) > 0;
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM JOBS WHERE JOB_ID = ?", new Object[]{jobId}, Integer.class) > 0;
     }
 }

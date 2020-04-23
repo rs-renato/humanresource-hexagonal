@@ -14,9 +14,9 @@ public interface LocationRepository {
 
     Integer save(Location location);
 
-    void update(Location Location);
+    boolean update(Location Location);
 
     Collection<Location> findAll();
 
-    void delete(Integer locationId);
+    boolean delete(Integer locationId);
 }
