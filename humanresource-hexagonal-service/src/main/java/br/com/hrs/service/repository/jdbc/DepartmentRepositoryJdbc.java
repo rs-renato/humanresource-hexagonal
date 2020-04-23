@@ -1,7 +1,7 @@
 package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Department;
-import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.jdbc.rowmapper.DepartmentRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,11 +16,10 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class DepartmentRepositoryJdbc implements DepartmentRepository {
+public class DepartmentRepositoryJdbc extends Repository<Department, Integer> {
 
     private JdbcTemplate jdbcTemplate;
 
-    @Inject
     public DepartmentRepositoryJdbc(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -105,5 +104,10 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean exists(Integer departmentId) {
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?", new Object[]{departmentId}, Integer.class) > 0;
     }
 }

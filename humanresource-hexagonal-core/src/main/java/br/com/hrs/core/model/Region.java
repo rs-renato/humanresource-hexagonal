@@ -59,6 +59,15 @@ public class Region {
 		return Objects.hash(id);
 	}
 
+	@Override
+	public String toString() {
+		return "Region{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", countries=" + countries +
+				'}';
+	}
+
 	public static class Builder {
 
 		private Region region = new Region();

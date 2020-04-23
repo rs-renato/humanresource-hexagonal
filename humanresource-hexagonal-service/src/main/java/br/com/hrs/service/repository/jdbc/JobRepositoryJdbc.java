@@ -1,7 +1,7 @@
 package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.jdbc.rowmapper.JobRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,11 +13,10 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class JobRepositoryJdbc implements JobRepository {
+public class JobRepositoryJdbc extends Repository<Job, String> {
 
     private JdbcTemplate jdbcTemplate;
 
-    @Inject
     public JobRepositoryJdbc(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

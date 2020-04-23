@@ -5,9 +5,7 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.DepartmentRepository;
-import br.com.hrs.core.repository.EmployeeRepository;
-import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.core.repository.Repository;
 import br.com.hrs.core.service.EmployeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,11 +18,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     private Logger logger = LogManager.getLogger(EmployeeServiceImpl.class);
 
-    private EmployeeRepository employeeRepository;
-    private JobRepository jobRepository;
-    private DepartmentRepository departmentRepository;
+    private Repository<Employee, Integer> employeeRepository;
+    private Repository<Job, String> jobRepository;
+    private Repository<Department, Integer> departmentRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, JobRepository jobRepository, DepartmentRepository departmentRepository) {
+    public EmployeeServiceImpl(Repository<Employee, Integer> employeeRepository, Repository<Job, String> jobRepository, Repository<Department, Integer> departmentRepository) {
         this.employeeRepository = employeeRepository;
         this.jobRepository = jobRepository;
         this.departmentRepository = departmentRepository;

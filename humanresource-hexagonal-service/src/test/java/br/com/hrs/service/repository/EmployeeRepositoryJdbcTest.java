@@ -3,7 +3,7 @@ package br.com.hrs.service.repository;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.EmployeeRepository;
+import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.DatabaseConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,7 +28,7 @@ public class EmployeeRepositoryJdbcTest {
     Logger logger = LogManager.getLogger(EmployeeRepositoryJdbcTest.class);
 
     @Inject
-    private EmployeeRepository employeeRepository;
+    private Repository<Employee, Integer> employeeRepository;
 
     @Test
     @DisplayName("Finds for null Employee")
@@ -88,7 +88,7 @@ public class EmployeeRepositoryJdbcTest {
     }
 
     @Test
-    @DisplayName("List Employees")
+    @DisplayName("Finds all Employees")
     public void test05() {
         Collection<Employee> employees = employeeRepository.findAll();
         logger.info(employees);
@@ -105,8 +105,22 @@ public class EmployeeRepositoryJdbcTest {
     }
 
     @Test
-    @DisplayName("Deletes Employee")
+    @DisplayName("Employee exists")
     public void test07() {
+        boolean exists = employeeRepository.exists(EMPLOYEE_ID);
+        Assertions.assertTrue(exists, "Employee should be existent");
+    }
+
+    @Test
+    @DisplayName("Employee doesn't exists")
+    public void test08() {
+        boolean exists = employeeRepository.exists(-1);
+        Assertions.assertFalse(exists, "Employee should not be existent");
+    }
+
+    @Test
+    @DisplayName("Deletes Employee")
+    public void test09() {
         boolean deleted = employeeRepository.delete(EMPLOYEE_ID);
         Employee employee = employeeRepository.find(EMPLOYEE_ID);
         Assertions.assertTrue(deleted, "Employee should be deleted");
@@ -115,7 +129,7 @@ public class EmployeeRepositoryJdbcTest {
 
     @Test
     @DisplayName("Deletes inexistend Employee")
-    public void test08() {
+    public void test10() {
         boolean deleted = employeeRepository.delete(-1);
         Assertions.assertFalse(deleted, "Employee should not be deleted");
     }

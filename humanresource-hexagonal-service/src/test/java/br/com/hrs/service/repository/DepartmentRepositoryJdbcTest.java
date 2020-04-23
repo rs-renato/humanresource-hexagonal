@@ -3,7 +3,7 @@ package br.com.hrs.service.repository;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.DatabaseConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,7 +29,7 @@ public class DepartmentRepositoryJdbcTest {
     Logger logger = LogManager.getLogger(DepartmentRepositoryJdbcTest.class);
 
     @Inject
-    private DepartmentRepository departmentRepository;
+    private Repository<Department, Integer> departmentRepository;
 
     @Test
     @DisplayName("Finds for null Department")
@@ -76,7 +76,7 @@ public class DepartmentRepositoryJdbcTest {
     }
 
     @Test
-    @DisplayName("List Departments")
+    @DisplayName("Finds all Departments")
     public void test05() {
         Collection<Department> departments = departmentRepository.findAll();
         logger.info(departments);
@@ -93,8 +93,22 @@ public class DepartmentRepositoryJdbcTest {
     }
 
     @Test
-    @DisplayName("Deletes Department")
+    @DisplayName("Department exists")
     public void test07() {
+        boolean exists = departmentRepository.exists(DEPARTMENT_ID);
+        Assertions.assertTrue(exists, "Department should be existent");
+    }
+
+    @Test
+    @DisplayName("Department doesn't exists")
+    public void test08() {
+        boolean exists = departmentRepository.exists(-1);
+        Assertions.assertFalse(exists, "Department should not be existent");
+    }
+
+    @Test
+    @DisplayName("Deletes Department")
+    public void test09() {
         boolean deleted = departmentRepository.delete(DEPARTMENT_ID);
         Department department = departmentRepository.find(DEPARTMENT_ID);
         Assertions.assertTrue(deleted, "Department should be deleted");
@@ -103,7 +117,7 @@ public class DepartmentRepositoryJdbcTest {
 
     @Test
     @DisplayName("Deletes inexistend Department")
-    public void test08() {
+    public void test10() {
         boolean deleted = departmentRepository.delete(-1);
         Assertions.assertFalse(deleted, "Department should not be deleted");
     }

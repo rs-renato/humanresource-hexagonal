@@ -1,7 +1,7 @@
 package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Employee;
-import br.com.hrs.core.repository.EmployeeRepository;
+import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.jdbc.rowmapper.EmployeeRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,11 +17,10 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class EmployeeRepositoryJdbc implements EmployeeRepository {
+public class EmployeeRepositoryJdbc extends Repository<Employee, Integer> {
 
     private JdbcTemplate jdbcTemplate;
 
-    @Inject
     public EmployeeRepositoryJdbc(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
@@ -114,5 +113,10 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean exists(Integer employeeId) {
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM EMPLOYEES WHERE EMPLOYEE_ID = ?", new Object[]{employeeId}, Integer.class) > 0;
     }
 }

@@ -138,7 +138,24 @@ public class Employee {
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Employee{" +
+				"id=" + id +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", email='" + email + '\'' +
+				", phone='" + phone + '\'' +
+				", hireDate=" + hireDate +
+				", salary=" + salary +
+				", commissionPercent=" + commissionPercent +
+				", manager=" + manager +
+				", job=" + job +
+				", department=" + department +
+				'}';
+	}
+
 	public static class Builder{
 
 		private Employee employee = new Employee();

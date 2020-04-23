@@ -64,6 +64,16 @@ public class Department {
 	}
 
 	@Override
+	public String toString() {
+		return "Department{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", manager=" + manager +
+				", location=" + location +
+				'}';
+	}
+
+	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}

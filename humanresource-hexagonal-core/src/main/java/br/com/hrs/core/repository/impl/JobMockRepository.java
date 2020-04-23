@@ -1,7 +1,7 @@
 package br.com.hrs.core.repository.impl;
 
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Named;
 import java.util.Collection;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Named
-public class JobMockRepository implements JobRepository {
+public class JobMockRepository extends Repository<Job, String> {
 
     private Map<String, Job> database = new HashMap<>();
 

@@ -3,7 +3,7 @@ package br.com.hrs.core.repository.impl;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Named;
 import java.util.Collection;
@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Named
-public class DepartmentMockRepository implements DepartmentRepository {
+public class DepartmentMockRepository extends Repository<Department, Integer> {
 
     private Map<Integer, Department> database = new HashMap<>();
 
@@ -64,5 +64,11 @@ public class DepartmentMockRepository implements DepartmentRepository {
     public boolean delete(Integer departmentId) {
         logger.info("Fake database ->  delete({}})", departmentId);
         return this.database.remove(departmentId) != null;
+    }
+
+    @Override
+    public boolean exists(Integer departmentId) {
+        logger.info("Fake database ->  exists({}})", departmentId);
+        return this.database.containsKey(departmentId);
     }
 }

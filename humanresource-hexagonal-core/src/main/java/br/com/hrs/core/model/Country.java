@@ -58,6 +58,15 @@ public class Country{
 		return Objects.hash(id);
 	}
 
+	@Override
+	public String toString() {
+		return "Country{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", region=" + region +
+				'}';
+	}
+
 	public static final class Builder{
 
 		Country country = new Country();

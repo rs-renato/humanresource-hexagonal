@@ -89,6 +89,18 @@ public class Location {
 		return Objects.hash(id);
 	}
 
+	@Override
+	public String toString() {
+		return "Location{" +
+				"id=" + id +
+				", address='" + address + '\'' +
+				", postalCode='" + postalCode + '\'' +
+				", city='" + city + '\'' +
+				", state='" + state + '\'' +
+				", country=" + country +
+				'}';
+	}
+
 	public static class Builder {
 
 		private Location location = new Location();

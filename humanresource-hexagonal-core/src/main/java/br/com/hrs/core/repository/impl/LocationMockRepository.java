@@ -2,13 +2,13 @@ package br.com.hrs.core.repository.impl;
 
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.LocationRepository;
+import br.com.hrs.core.repository.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LocationMockRepository implements LocationRepository {
+public class LocationMockRepository extends Repository<Location, Integer> {
 
     private Map<Integer, Location> database = new HashMap<>();
 
@@ -65,5 +65,11 @@ public class LocationMockRepository implements LocationRepository {
     public boolean delete(Integer locationId) {
         logger.info("Fake database ->  delete({}})", locationId);
         return this.database.remove(locationId) != null;
+    }
+
+    @Override
+    public boolean exists(Integer locationId) {
+        logger.info("Fake database ->  exists({}})", locationId);
+        return this.database.containsKey(locationId);
     }
 }

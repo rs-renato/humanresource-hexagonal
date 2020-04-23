@@ -68,6 +68,16 @@ public class Job {
 		return Objects.hash(id);
 	}
 
+	@Override
+	public String toString() {
+		return "Job{" +
+				"id='" + id + '\'' +
+				", title='" + title + '\'' +
+				", minSalary=" + minSalary +
+				", maxSalary=" + maxSalary +
+				'}';
+	}
+
 	public static final class Builder{
 
 		Job job = new Job();
