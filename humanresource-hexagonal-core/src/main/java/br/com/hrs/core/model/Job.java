@@ -12,6 +12,10 @@ public class Job {
 	Job(){
 	}
 
+	public Job(String title, Float minSalary, Float maxSalary) {
+		this(null, title, minSalary, maxSalary);
+	}
+
 	public Job(String id, String title, Float minSalary, Float maxSalary) {
 		this.id = id;
 		this.title = title;

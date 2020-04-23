@@ -11,6 +11,10 @@ public class Country{
 	Country() {
 	}
 
+	public Country(String name, Region region) {
+		this(null, name, region);
+	}
+
 	public Country(String id, String name, Region region) {
 		this.id = id;
 		this.name = name;

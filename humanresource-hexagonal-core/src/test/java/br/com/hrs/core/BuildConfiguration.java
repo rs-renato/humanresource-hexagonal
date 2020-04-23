@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
         "br.com.hrs.core.repository.impl",
         "br.com.hrs.core.service.impl",
 })
-public class DevEnvironmentConfiguration {
+public class BuildConfiguration {
     // Development Build : Unit Test  -> Core <-  Mocks
 }

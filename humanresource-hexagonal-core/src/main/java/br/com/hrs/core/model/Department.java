@@ -12,6 +12,10 @@ public class Department {
 	Department() {
 	}
 
+	public Department(String name, Employee manager, Location location) {
+		this(null, name, manager, location);
+	}
+
 	public Department(Integer id, String name, Employee manager, Location location) {
 		this.id = id;
 		this.name = name;

@@ -1,6 +1,6 @@
 package br.com.hrs.core.service;
 
-import br.com.hrs.core.DevEnvironmentConfiguration;
+import br.com.hrs.core.BuildConfiguration;
 import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.model.Employee;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
-@ContextConfiguration(classes = DevEnvironmentConfiguration.class)
+@ContextConfiguration(classes = BuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
 @DisplayName("Adapter Tests - Promote Employee")
 public class EmployeeServiceTest {

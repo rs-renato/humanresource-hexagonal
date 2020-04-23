@@ -19,7 +19,11 @@ public class Employee {
 
 	Employee(){
 	}
-	
+
+	public Employee(String firstName, String lastName, String email, String phone, Date hireDate, Float salary, Float commissionPercent, Employee manager, Job job, Department department) {
+		this(null, firstName,lastName, email, phone, hireDate, salary, commissionPercent, manager, job, department);
+	}
+
 	public Employee(Integer id, String firstName, String lastName, String email, String phone, Date hireDate, Float salary, Float commissionPercent, Employee manager, Job job, Department department) {
 		this.id = id;
 		this.firstName = firstName;

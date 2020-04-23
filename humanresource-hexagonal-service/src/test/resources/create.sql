@@ -68,7 +68,7 @@ WITH     3300
 
 CREATE TABLE departments
 (
-    department_id   NUMERIC(4) NOT NULL,
+    department_id   INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     department_name VARCHAR(30)
         CONSTRAINT dept_name_nn NOT NULL,
     manager_id      NUMERIC(6),
@@ -88,12 +88,12 @@ ALTER TABLE departments
             REFERENCES locations (location_id)
 ;
 
-CREATE
+/*CREATE
 SEQUENCE departments_seq
  START
 WITH     280
  INCREMENT BY   10
- MAXVALUE       9990;
+ MAXVALUE       9990;*/
 
 CREATE TABLE jobs
 (
@@ -128,7 +128,7 @@ CREATE TABLE employees
     salary         NUMERIC(8, 2),
     commission_pct NUMERIC(2, 2),
     manager_id     NUMERIC(6),
-    department_id  NUMERIC(4),
+    department_id  INT,
     CONSTRAINT emp_salary_min
         CHECK (salary > 0),
     CONSTRAINT emp_email_uk
@@ -178,7 +178,7 @@ CREATE TABLE job_history
         CONSTRAINT jhist_end_date_nn NOT NULL,
     job_id        VARCHAR(10)
         CONSTRAINT jhist_job_nn NOT NULL,
-    department_id NUMERIC(4),
+    department_id INT,
     CONSTRAINT jhist_date_interval
         CHECK (end_date > start_date)
 );

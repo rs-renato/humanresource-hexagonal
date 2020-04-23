@@ -12,6 +12,10 @@ public class Region {
 	Region(){
 	}
 
+	public Region(String name, List<Country> countries) {
+		this(null, name, countries);
+	}
+
 	public Region(Integer id, String name, List<Country> countries) {
 		this.id = id;
 		this.name = name;

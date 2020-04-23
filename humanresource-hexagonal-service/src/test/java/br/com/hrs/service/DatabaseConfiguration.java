@@ -1,4 +1,4 @@
-package br.com.hrs.service.repository;
+package br.com.hrs.service;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

@@ -15,6 +15,10 @@ public class Location {
 
 	}
 
+	public Location(String address, String postalCode, String city, String state, Country country) {
+		this(null, address, postalCode, city, state, country);
+	}
+
 	public Location(Integer id, String address, String postalCode, String city, String state, Country country) {
 		this.id = id;
 		this.address = address;

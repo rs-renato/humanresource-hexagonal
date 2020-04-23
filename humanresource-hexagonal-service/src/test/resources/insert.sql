@@ -332,165 +332,165 @@ ALTER TABLE DEPARTMENTS
 /*ALTER TABLE departments
   DISABLE CONSTRAINT dept_mgr_fk;*/
 
-INSERT INTO departments
-VALUES ( 10
-       , 'Administration'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Administration'
        , 200
        , 1700);
 
-INSERT INTO departments
-VALUES ( 20
-       , 'Marketing'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Marketing'
        , 201
        , 1800);
 
-INSERT INTO departments
-VALUES ( 30
-       , 'Purchasing'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Purchasing'
        , 114
        , 1700);
 
-INSERT INTO departments
-VALUES ( 40
-       , 'Human Resources'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Human Resources'
        , 203
        , 2400);
 
-INSERT INTO departments
-VALUES ( 50
-       , 'Shipping'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Shipping'
        , 121
        , 1500);
 
-INSERT INTO departments
-VALUES ( 60
-       , 'IT'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'IT'
        , 103
        , 1400);
 
-INSERT INTO departments
-VALUES ( 70
-       , 'Public Relations'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Public Relations'
        , 204
        , 2700);
 
-INSERT INTO departments
-VALUES ( 80
-       , 'Sales'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Sales'
        , 145
        , 2500);
 
-INSERT INTO departments
-VALUES ( 90
-       , 'Executive'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Executive'
        , 100
        , 1700);
 
-INSERT INTO departments
-VALUES ( 100
-       , 'Finance'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Finance'
        , 108
        , 1700);
 
-INSERT INTO departments
-VALUES ( 110
-       , 'Accounting'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Accounting'
        , 205
        , 1700);
 
-INSERT INTO departments
-VALUES ( 120
-       , 'Treasury'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Treasury'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 130
-       , 'Corporate Tax'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Corporate Tax'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 140
-       , 'Control And Credit'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Control And Credit'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 150
-       , 'Shareholder Services'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Shareholder Services'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 160
-       , 'Benefits'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Benefits'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 170
-       , 'Manufacturing'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Manufacturing'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 180
-       , 'Construction'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Construction'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 190
-       , 'Contracting'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Contracting'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 200
-       , 'Operations'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Operations'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 210
-       , 'IT Support'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'IT Support'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 220
-       , 'NOC'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'NOC'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 230
-       , 'IT Helpdesk'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'IT Helpdesk'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 240
-       , 'Government Sales'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Government Sales'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 250
-       , 'Retail Sales'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Retail Sales'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 260
-       , 'Recruiting'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Recruiting'
        , NULL
        , 1700);
 
-INSERT INTO departments
-VALUES ( 270
-       , 'Payroll'
+INSERT INTO departments (department_name, manager_id, location_id)
+VALUES ( 
+       'Payroll'
        , NULL
        , 1700);
 
@@ -616,7 +616,7 @@ VALUES ( 100
        , 24000
        , NULL
        , 100
-       , 90);
+       , 9);
 
 INSERT INTO employees
 VALUES ( 101
@@ -629,7 +629,7 @@ VALUES ( 101
        , 17000
        , NULL
        , 100
-       , 90);
+       , 9);
 
 INSERT INTO employees
 VALUES ( 102
@@ -642,7 +642,7 @@ VALUES ( 102
        , 17000
        , NULL
        , 100
-       , 90);
+       , 9);
 
 INSERT INTO employees
 VALUES ( 103
@@ -655,7 +655,7 @@ VALUES ( 103
        , 9000
        , NULL
        , 102
-       , 60);
+        , 6);
 
 INSERT INTO employees
 VALUES ( 104
@@ -668,7 +668,7 @@ VALUES ( 104
        , 6000
        , NULL
        , 103
-       , 60);
+        , 6);
 
 INSERT INTO employees
 VALUES ( 105
@@ -681,7 +681,7 @@ VALUES ( 105
        , 4800
        , NULL
        , 103
-       , 60);
+        , 6);
 
 INSERT INTO employees
 VALUES ( 106
@@ -694,7 +694,7 @@ VALUES ( 106
        , 4800
        , NULL
        , 103
-       , 60);
+        , 6);
 
 INSERT INTO employees
 VALUES ( 107
@@ -707,7 +707,7 @@ VALUES ( 107
        , 4200
        , NULL
        , 103
-       , 60);
+        , 6);
 
 INSERT INTO employees
 VALUES ( 108
@@ -720,7 +720,7 @@ VALUES ( 108
        , 12008
        , NULL
        , 101
-       , 100);
+        , 10);
 
 INSERT INTO employees
 VALUES ( 109
@@ -733,7 +733,7 @@ VALUES ( 109
        , 9000
        , NULL
        , 108
-       , 100);
+        , 10);
 
 INSERT INTO employees
 VALUES ( 110
@@ -746,7 +746,7 @@ VALUES ( 110
        , 8200
        , NULL
        , 108
-       , 100);
+        , 10);
 
 INSERT INTO employees
 VALUES ( 111
@@ -759,7 +759,7 @@ VALUES ( 111
        , 7700
        , NULL
        , 108
-       , 100);
+        , 10);
 
 INSERT INTO employees
 VALUES ( 112
@@ -772,7 +772,7 @@ VALUES ( 112
        , 7800
        , NULL
        , 108
-       , 100);
+        , 10);
 
 INSERT INTO employees
 VALUES ( 113
@@ -785,7 +785,7 @@ VALUES ( 113
        , 6900
        , NULL
        , 108
-       , 100);
+        , 10);
 
 INSERT INTO employees
 VALUES ( 114
@@ -798,7 +798,7 @@ VALUES ( 114
        , 11000
        , NULL
        , 100
-       , 30);
+        , 3);
 
 INSERT INTO employees
 VALUES ( 115
@@ -811,7 +811,7 @@ VALUES ( 115
        , 3100
        , NULL
        , 114
-       , 30);
+        , 3);
 
 INSERT INTO employees
 VALUES ( 116
@@ -824,7 +824,7 @@ VALUES ( 116
        , 2900
        , NULL
        , 114
-       , 30);
+        , 3);
 
 INSERT INTO employees
 VALUES ( 117
@@ -837,7 +837,7 @@ VALUES ( 117
        , 2800
        , NULL
        , 114
-       , 30);
+        , 3);
 
 INSERT INTO employees
 VALUES ( 118
@@ -850,7 +850,7 @@ VALUES ( 118
        , 2600
        , NULL
        , 114
-       , 30);
+        , 3);
 
 INSERT INTO employees
 VALUES ( 119
@@ -863,7 +863,7 @@ VALUES ( 119
        , 2500
        , NULL
        , 114
-       , 30);
+        , 3);
 
 INSERT INTO employees
 VALUES ( 120
@@ -876,7 +876,7 @@ VALUES ( 120
        , 8000
        , NULL
        , 100
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 121
@@ -889,7 +889,7 @@ VALUES ( 121
        , 8200
        , NULL
        , 100
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 122
@@ -902,7 +902,7 @@ VALUES ( 122
        , 7900
        , NULL
        , 100
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 123
@@ -915,7 +915,7 @@ VALUES ( 123
        , 6500
        , NULL
        , 100
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 124
@@ -928,7 +928,7 @@ VALUES ( 124
        , 5800
        , NULL
        , 100
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 125
@@ -941,7 +941,7 @@ VALUES ( 125
        , 3200
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 126
@@ -954,7 +954,7 @@ VALUES ( 126
        , 2700
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 127
@@ -967,7 +967,7 @@ VALUES ( 127
        , 2400
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 128
@@ -980,7 +980,7 @@ VALUES ( 128
        , 2200
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 129
@@ -993,7 +993,7 @@ VALUES ( 129
        , 3300
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 130
@@ -1006,7 +1006,7 @@ VALUES ( 130
        , 2800
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 131
@@ -1019,7 +1019,7 @@ VALUES ( 131
        , 2500
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 132
@@ -1032,7 +1032,7 @@ VALUES ( 132
        , 2100
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 133
@@ -1045,7 +1045,7 @@ VALUES ( 133
        , 3300
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 134
@@ -1058,7 +1058,7 @@ VALUES ( 134
        , 2900
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 135
@@ -1071,7 +1071,7 @@ VALUES ( 135
        , 2400
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 136
@@ -1084,7 +1084,7 @@ VALUES ( 136
        , 2200
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 137
@@ -1097,7 +1097,7 @@ VALUES ( 137
        , 3600
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 138
@@ -1110,7 +1110,7 @@ VALUES ( 138
        , 3200
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 139
@@ -1123,7 +1123,7 @@ VALUES ( 139
        , 2700
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 140
@@ -1136,7 +1136,7 @@ VALUES ( 140
        , 2500
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 141
@@ -1149,7 +1149,7 @@ VALUES ( 141
        , 3500
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 142
@@ -1162,7 +1162,7 @@ VALUES ( 142
        , 3100
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 143
@@ -1175,7 +1175,7 @@ VALUES ( 143
        , 2600
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 144
@@ -1188,7 +1188,7 @@ VALUES ( 144
        , 2500
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 145
@@ -1201,7 +1201,7 @@ VALUES ( 145
        , 14000
        , .4
        , 100
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 146
@@ -1214,7 +1214,7 @@ VALUES ( 146
        , 13500
        , .3
        , 100
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 147
@@ -1227,7 +1227,7 @@ VALUES ( 147
        , 12000
        , .3
        , 100
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 148
@@ -1240,7 +1240,7 @@ VALUES ( 148
        , 11000
        , .3
        , 100
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 149
@@ -1253,7 +1253,7 @@ VALUES ( 149
        , 10500
        , .2
        , 100
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 150
@@ -1266,7 +1266,7 @@ VALUES ( 150
        , 10000
        , .3
        , 145
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 151
@@ -1279,7 +1279,7 @@ VALUES ( 151
        , 9500
        , .25
        , 145
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 152
@@ -1292,7 +1292,7 @@ VALUES ( 152
        , 9000
        , .25
        , 145
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 153
@@ -1305,7 +1305,7 @@ VALUES ( 153
        , 8000
        , .2
        , 145
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 154
@@ -1318,7 +1318,7 @@ VALUES ( 154
        , 7500
        , .2
        , 145
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 155
@@ -1331,7 +1331,7 @@ VALUES ( 155
        , 7000
        , .15
        , 145
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 156
@@ -1344,7 +1344,7 @@ VALUES ( 156
        , 10000
        , .35
        , 146
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 157
@@ -1357,7 +1357,7 @@ VALUES ( 157
        , 9500
        , .35
        , 146
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 158
@@ -1370,7 +1370,7 @@ VALUES ( 158
        , 9000
        , .35
        , 146
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 159
@@ -1383,7 +1383,7 @@ VALUES ( 159
        , 8000
        , .3
        , 146
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 160
@@ -1396,7 +1396,7 @@ VALUES ( 160
        , 7500
        , .3
        , 146
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 161
@@ -1409,7 +1409,7 @@ VALUES ( 161
        , 7000
        , .25
        , 146
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 162
@@ -1422,7 +1422,7 @@ VALUES ( 162
        , 10500
        , .25
        , 147
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 163
@@ -1435,7 +1435,7 @@ VALUES ( 163
        , 9500
        , .15
        , 147
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 164
@@ -1448,7 +1448,7 @@ VALUES ( 164
        , 7200
        , .10
        , 147
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 165
@@ -1461,7 +1461,7 @@ VALUES ( 165
        , 6800
        , .1
        , 147
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 166
@@ -1474,7 +1474,7 @@ VALUES ( 166
        , 6400
        , .10
        , 147
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 167
@@ -1487,7 +1487,7 @@ VALUES ( 167
        , 6200
        , .10
        , 147
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 168
@@ -1500,7 +1500,7 @@ VALUES ( 168
        , 11500
        , .25
        , 148
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 169
@@ -1513,7 +1513,7 @@ VALUES ( 169
        , 10000
        , .20
        , 148
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 170
@@ -1526,7 +1526,7 @@ VALUES ( 170
        , 9600
        , .20
        , 148
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 171
@@ -1539,7 +1539,7 @@ VALUES ( 171
        , 7400
        , .15
        , 148
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 172
@@ -1552,7 +1552,7 @@ VALUES ( 172
        , 7300
        , .15
        , 148
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 173
@@ -1565,7 +1565,7 @@ VALUES ( 173
        , 6100
        , .10
        , 148
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 174
@@ -1578,7 +1578,7 @@ VALUES ( 174
        , 11000
        , .30
        , 149
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 175
@@ -1591,7 +1591,7 @@ VALUES ( 175
        , 8800
        , .25
        , 149
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 176
@@ -1604,7 +1604,7 @@ VALUES ( 176
        , 8600
        , .20
        , 149
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 177
@@ -1617,7 +1617,7 @@ VALUES ( 177
        , 8400
        , .20
        , 149
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 178
@@ -1643,7 +1643,7 @@ VALUES ( 179
        , 6200
        , .10
        , 149
-       , 80);
+       , 8);
 
 INSERT INTO employees
 VALUES ( 180
@@ -1656,7 +1656,7 @@ VALUES ( 180
        , 3200
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 181
@@ -1669,7 +1669,7 @@ VALUES ( 181
        , 3100
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 182
@@ -1682,7 +1682,7 @@ VALUES ( 182
        , 2500
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 183
@@ -1695,7 +1695,7 @@ VALUES ( 183
        , 2800
        , NULL
        , 120
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 184
@@ -1708,7 +1708,7 @@ VALUES ( 184
        , 4200
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 185
@@ -1721,7 +1721,7 @@ VALUES ( 185
        , 4100
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 186
@@ -1734,7 +1734,7 @@ VALUES ( 186
        , 3400
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 187
@@ -1747,7 +1747,7 @@ VALUES ( 187
        , 3000
        , NULL
        , 121
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 188
@@ -1760,7 +1760,7 @@ VALUES ( 188
        , 3800
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 189
@@ -1773,7 +1773,7 @@ VALUES ( 189
        , 3600
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 190
@@ -1786,7 +1786,7 @@ VALUES ( 190
        , 2900
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 191
@@ -1799,7 +1799,7 @@ VALUES ( 191
        , 2500
        , NULL
        , 122
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 192
@@ -1812,7 +1812,7 @@ VALUES ( 192
        , 4000
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 193
@@ -1825,7 +1825,7 @@ VALUES ( 193
        , 3900
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 194
@@ -1838,7 +1838,7 @@ VALUES ( 194
        , 3200
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 195
@@ -1851,7 +1851,7 @@ VALUES ( 195
        , 2800
        , NULL
        , 123
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 196
@@ -1864,7 +1864,7 @@ VALUES ( 196
        , 3100
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 197
@@ -1877,7 +1877,7 @@ VALUES ( 197
        , 3000
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 198
@@ -1890,7 +1890,7 @@ VALUES ( 198
        , 2600
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 199
@@ -1903,7 +1903,7 @@ VALUES ( 199
        , 2600
        , NULL
        , 124
-       , 50);
+        , 5);
 
 INSERT INTO employees
 VALUES ( 200
@@ -1929,7 +1929,7 @@ VALUES ( 201
        , 13000
        , NULL
        , 100
-       , 20);
+        , 2);
 
 INSERT INTO employees
 VALUES ( 202
@@ -1942,7 +1942,7 @@ VALUES ( 202
        , 6000
        , NULL
        , 201
-       , 20);
+        , 2);
 
 INSERT INTO employees
 VALUES ( 203
@@ -1955,7 +1955,7 @@ VALUES ( 203
        , 6500
        , NULL
        , 101
-       , 40);
+        , 4);
 
 INSERT INTO employees
 VALUES ( 204
@@ -1968,7 +1968,7 @@ VALUES ( 204
        , 10000
        , NULL
        , 101
-       , 70);
+        , 7);
 
 INSERT INTO employees
 VALUES ( 205
@@ -1981,7 +1981,7 @@ VALUES ( 205
        , 12008
        , NULL
        , 101
-       , 110);
+        , 11);
 
 INSERT INTO employees
 VALUES ( 206
@@ -1994,7 +1994,7 @@ VALUES ( 206
        , 8300
        , NULL
        , 205
-       , 110);
+        , 11);
 
 
 INSERT INTO job_history
@@ -2002,70 +2002,70 @@ VALUES ( 102
        , DATE('13.01.2001')
        , DATE('24.07.2006')
        , 'IT_PROG'
-       , 60);
+        , 6);
 
 INSERT INTO job_history
 VALUES ( 101
        , DATE('21.09.1997')
        , DATE('27.10.2001')
        , 'AC_ACCOUNT'
-       , 110);
+        , 11);
 
 INSERT INTO job_history
 VALUES ( 101
        , DATE('28.10.2001')
        , DATE('15.03.2005')
        , 'AC_MGR'
-       , 110);
+        , 11);
 
 INSERT INTO job_history
 VALUES ( 201
        , DATE('17.02.2004')
        , DATE('19.12.2007')
        , 'MK_REP'
-       , 20);
+        , 2);
 
 INSERT INTO job_history
 VALUES ( 114
        , DATE('24.03.2006')
        , DATE('31.12.2007')
        , 'ST_CLERK'
-       , 50);
+        , 5);
 
 INSERT INTO job_history
 VALUES ( 122
        , DATE('01.01.2007')
        , DATE('31.12.2007')
        , 'ST_CLERK'
-       , 50);
+        , 5);
 
 INSERT INTO job_history
 VALUES ( 200
        , DATE('17.09.1995')
        , DATE('17.06.2001')
        , 'AD_ASST'
-       , 90);
+       , 9);
 
 INSERT INTO job_history
 VALUES ( 176
        , DATE('24.03.2006')
        , DATE('31.12.2006')
        , 'SA_REP'
-       , 80);
+       , 8);
 
 INSERT INTO job_history
 VALUES ( 176
        , DATE('01.01.2007')
        , DATE('31.12.2007')
        , 'SA_MAN'
-       , 80);
+       , 8);
 
 INSERT INTO job_history
 VALUES ( 200
        , DATE('01.07.2002')
        , DATE('31.12.2006')
        , 'AC_ACCOUNT'
-       , 90);
+       , 9);
 
 /*ALTER TABLE departments
   ENABLE CONSTRAINT dept_mgr_fk;*/

@@ -2,12 +2,9 @@ package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.repository.DepartmentRepository;
-import br.com.hrs.core.repository.EmployeeRepository;
-import br.com.hrs.core.repository.LocationRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.DepartmentRowMapper;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,30 +35,39 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
         String sql = "select * from departments where department_id = ?";
         Object[] param = new Object[]{departmentId};
 
-        return jdbcTemplate.queryForObject(sql, param, new DepartmentRowMapper());
+        try {
+            return jdbcTemplate.queryForObject(sql, param, new DepartmentRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            logger.warn("Department Id '{}' not found", departmentId);
+            return null;
+        }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Integer save(Department department) {
+
+        Integer savedId = null;
+
         if (Objects.nonNull(department)) {
 
-            String sql = "insert into departments values (?,?,?)";
+            String sql = "insert into departments (department_name, manager_id, location_id) values (?,?,?)";
 
             KeyHolder keyHolder = new GeneratedKeyHolder();
 
             jdbcTemplate.update(connection -> {
-                PreparedStatement stmt = connection.prepareStatement(sql, new String[]{"department_id"});
+                PreparedStatement stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, department.getName());
                 stmt.setInt(2, department.getManager().getId());
                 stmt.setInt(3, department.getLocation().getId());
                 return stmt;
             }, keyHolder);
 
-            return keyHolder.getKey().intValue();
+            savedId = keyHolder.getKey().intValue();
+            logger.debug("Returned saved ID {}", savedId);
         }
 
-        return null;
+        return savedId;
     }
 
     @Override
@@ -70,7 +76,7 @@ public class DepartmentRepositoryJdbc implements DepartmentRepository {
 
         if (Objects.nonNull(department)) {
 
-            String sql = "update departments set department_name = ?, manager_id = ? where department_id_id = ?";
+            String sql = "update departments set department_name = ?, manager_id = ? where department_id = ?";
             Object[] param = new Object[]{department.getName(), department.getManager().getId(), department.getId()};
 
             jdbcTemplate.update(sql, param);

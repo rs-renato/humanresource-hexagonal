@@ -1,7 +1,10 @@
-/*package br.com.hrs.service.repository;
+package br.com.hrs.service.repository;
 
 import br.com.hrs.core.model.Department;
+import br.com.hrs.core.model.Employee;
+import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.service.DatabaseConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +22,9 @@ import java.util.Collection;
 @ExtendWith(SpringExtension.class)
 public class DepartmentRepositoryJdbcTest {
 
-    private Integer DEPARTMENT_ID = 10;
+    private Integer DEPARTMENT_ID = 12;
+    private Integer MANAGER_ID = 100;
+    private Integer LOCATION_ID = 1500;
 
     Logger logger = LogManager.getLogger(DepartmentRepositoryJdbcTest.class);
 
@@ -27,14 +32,14 @@ public class DepartmentRepositoryJdbcTest {
     private DepartmentRepository departmentRepository;
 
     @Test
-    @DisplayName("Search for null department")
+    @DisplayName("Finds for null department")
     public void test01() {
         Department department = departmentRepository.find(null);
         Assertions.assertNull(department, "Department should be null");
     }
 
     @Test
-    @DisplayName("Search for inexistent department")
+    @DisplayName("Finds for inexistent department")
     public void test02() {
         Department department = departmentRepository.find(-1);
         logger.info(department);
@@ -47,6 +52,7 @@ public class DepartmentRepositoryJdbcTest {
         Department department = departmentRepository.find(DEPARTMENT_ID);
         logger.info(department);
         department.setName(department.getName() + " altered");
+        department.setManager(new Employee.Builder().id(MANAGER_ID).build());
         departmentRepository.update(department);
 
         department = departmentRepository.find(DEPARTMENT_ID);
@@ -57,12 +63,14 @@ public class DepartmentRepositoryJdbcTest {
     @Test
     @DisplayName("Saves Department")
     public void test04() {
-        Department department = new Department("NEW_DEPARTMENT", "new department", 1000f, 2000f);
-        departmentRepository.save(department);
+        Department department = new Department("new department", new Employee.Builder().id(MANAGER_ID).build(), new Location.Builder().id(LOCATION_ID).build());
+        Integer savedId = departmentRepository.save(department);
 
-        department = departmentRepository.find("NEW_DEPARTMENT");
+        department = departmentRepository.find(savedId);
 
-        Assertions.assertTrue(department.getTitle().contains("new"), "Department should be saved");
+        Assertions.assertNotNull(savedId, "Department should be saved and return");
+        Assertions.assertNotNull(department, "Department should be saved");
+        Assertions.assertTrue(savedId.equals(department.getId()), "Department saved needs to match saved id");
     }
 
     @Test
@@ -71,37 +79,22 @@ public class DepartmentRepositoryJdbcTest {
         Collection<Department> departments = departmentRepository.findAll();
         logger.info(departments);
         Assertions.assertNotNull(departments, "Departments should be listed");
+        Assertions.assertTrue(departments.size() >= 27, "Departments should be listed at all");
+    }
+
+    @Test
+    @DisplayName("Finds for department")
+    public void test06() {
+        Department department = departmentRepository.find(DEPARTMENT_ID);
+        logger.info(department);
+        Assertions.assertNotNull(department, "Department should not be null");
     }
 
     @Test
     @DisplayName("Deletes Departments")
-    public void test06() {
-        Department department = departmentRepository.find("NEW_DEPARTMENT");
-        logger.info(department);
-        departmentRepository.delete(department.getId());
-        boolean exists = departmentRepository.exists(department.getId());
-        Assertions.assertFalse(exists, "Department should be deleted");
-    }
-
-    @Test
-    @DisplayName("Department exists")
     public void test07() {
-        boolean exists = departmentRepository.exists("HR_REP");
-        Assertions.assertTrue(exists, "Department should be existent");
+        departmentRepository.delete(DEPARTMENT_ID);
+        Department department = departmentRepository.find(DEPARTMENT_ID);
+        Assertions.assertNull(department, "Department should be deleted");
     }
-
-    @Test
-    @DisplayName("Department doesn't exists")
-    public void test08() {
-        boolean exists = departmentRepository.exists("NO_EXISTENT_DEPARTMENT");
-        Assertions.assertFalse(exists, "Department should not be existent");
-    }
-
-    @Test
-    @DisplayName("Search for department")
-    public void test() {
-        Department department = departmentRepository.find("HR_REP");
-        logger.info(department);
-        Assertions.assertNotNull(department, "Department should be null");
-    }
-}*/
+}
