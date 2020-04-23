@@ -13,12 +13,6 @@ ALTER TABLE regions
         PRIMARY KEY (region_id)
 ;
 
-/*CREATE
-SEQUENCE regions_seq
- START
-WITH     5
- INCREMENT BY   1;*/
-
 CREATE TABLE countries
 (
     country_id   CHAR(2)
@@ -37,7 +31,7 @@ ALTER TABLE countries
 
 CREATE TABLE locations
 (
-    location_id    NUMERIC(4) NOT NULL,
+    location_id   INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     street_address VARCHAR(40),
     postal_code    VARCHAR(12),
     city           VARCHAR(30)
@@ -59,20 +53,13 @@ ALTER TABLE locations
             REFERENCES countries (country_id)
 ;
 
-CREATE
-SEQUENCE locations_seq
- START
-WITH     3300
- INCREMENT BY   100
- MAXVALUE       9900;
-
 CREATE TABLE departments
 (
     department_id   INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     department_name VARCHAR(30)
         CONSTRAINT dept_name_nn NOT NULL,
     manager_id      INT,
-    location_id     NUMERIC(4)
+    location_id    INT
 );
 
 CREATE UNIQUE INDEX dept_id_pk
@@ -87,13 +74,6 @@ ALTER TABLE departments
         FOREIGN KEY (location_id)
             REFERENCES locations (location_id)
 ;
-
-/*CREATE
-SEQUENCE departments_seq
- START
-WITH     280
- INCREMENT BY   10
- MAXVALUE       9990;*/
 
 CREATE TABLE jobs
 (
@@ -159,14 +139,6 @@ ALTER TABLE departments
     ADD CONSTRAINT dept_mgr_fk
         FOREIGN KEY (manager_id)
             REFERENCES employees (employee_id);
-
-
-/*CREATE
-SEQUENCE employees_seq
- START
-WITH     207
- INCREMENT BY   1;*/
-
 
 CREATE TABLE job_history
 (

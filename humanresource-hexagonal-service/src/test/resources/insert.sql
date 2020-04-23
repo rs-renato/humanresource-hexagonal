@@ -137,185 +137,185 @@ VALUES ( 'BE'
        , 1);
 
 
-INSERT INTO locations
-VALUES ( 1000
-       , '1297 Via Cola di Rie'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '1297 Via Cola di Rie'
        , '00989'
        , 'Roma'
        , NULL
        , 'IT');
 
-INSERT INTO locations
-VALUES ( 1100
-       , '93091 Calle della Testa'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '93091 Calle della Testa'
        , '10934'
        , 'Venice'
        , NULL
        , 'IT');
 
-INSERT INTO locations
-VALUES ( 1200
-       , '2017 Shinjuku.ku'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '2017 Shinjuku.ku'
        , '1689'
        , 'Tokyo'
        , 'Tokyo Prefecture'
        , 'JP');
 
-INSERT INTO locations
-VALUES ( 1300
-       , '9450 Kamiya-cho'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '9450 Kamiya-cho'
        , '6823'
        , 'Hiroshima'
        , NULL
        , 'JP');
 
-INSERT INTO locations
-VALUES ( 1400
-       , '2014 Jabberwocky Rd'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '2014 Jabberwocky Rd'
        , '26192'
        , 'Southlake'
        , 'Texas'
        , 'US');
 
-INSERT INTO locations
-VALUES ( 1500
-       , '2011 Interiors Blvd'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '2011 Interiors Blvd'
        , '99236'
        , 'South San Francisco'
        , 'California'
        , 'US');
 
-INSERT INTO locations
-VALUES ( 1600
-       , '2007 Zagora St'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '2007 Zagora St'
        , '50090'
        , 'South Brunswick'
        , 'New Jersey'
        , 'US');
 
-INSERT INTO locations
-VALUES ( 1700
-       , '2004 Charade Rd'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '2004 Charade Rd'
        , '98199'
        , 'Seattle'
        , 'Washington'
        , 'US');
 
-INSERT INTO locations
-VALUES ( 1800
-       , '147 Spadina Ave'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '147 Spadina Ave'
        , 'M5V 2L7'
        , 'Toronto'
        , 'Ontario'
        , 'CA');
 
-INSERT INTO locations
-VALUES ( 1900
-       , '6092 Boxwood St'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '6092 Boxwood St'
        , 'YSW 9T2'
        , 'Whitehorse'
        , 'Yukon'
        , 'CA');
 
-INSERT INTO locations
-VALUES ( 2000
-       , '40-5-12 Laogianggen'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '40-5-12 Laogianggen'
        , '190518'
        , 'Beijing'
        , NULL
        , 'CN');
 
-INSERT INTO locations
-VALUES ( 2100
-       , '1298 Vileparle (E)'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '1298 Vileparle (E)'
        , '490231'
        , 'Bombay'
        , 'Maharashtra'
        , 'IN');
 
-INSERT INTO locations
-VALUES ( 2200
-       , '12-98 Victoria Street'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '12-98 Victoria Street'
        , '2901'
        , 'Sydney'
        , 'New South Wales'
        , 'AU');
 
-INSERT INTO locations
-VALUES ( 2300
-       , '198 Clementi North'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '198 Clementi North'
        , '540198'
        , 'Singapore'
        , NULL
        , 'SG');
 
-INSERT INTO locations
-VALUES ( 2400
-       , '8204 Arthur St'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '8204 Arthur St'
        , NULL
        , 'London'
        , NULL
        , 'UK');
 
-INSERT INTO locations
-VALUES ( 2500
-       , 'Magdalen Centre, The Oxford Science Park'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        'Magdalen Centre, The Oxford Science Park'
        , 'OX9 9ZB'
        , 'Oxford'
        , 'Oxford'
        , 'UK');
 
-INSERT INTO locations
-VALUES ( 2600
-       , '9702 Chester Road'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '9702 Chester Road'
        , '09629850293'
        , 'Stretford'
        , 'Manchester'
        , 'UK');
 
-INSERT INTO locations
-VALUES ( 2700
-       , 'Schwanthalerstr. 7031'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        'Schwanthalerstr. 7031'
        , '80925'
        , 'Munich'
        , 'Bavaria'
        , 'DE');
 
-INSERT INTO locations
-VALUES ( 2800
-       , 'Rua Frei Caneca 1360 '
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        'Rua Frei Caneca 1360 '
        , '01307-002'
        , 'Sao Paulo'
        , 'Sao Paulo'
        , 'BR');
 
-INSERT INTO locations
-VALUES ( 2900
-       , '20 Rue des Corps-Saints'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        '20 Rue des Corps-Saints'
        , '1730'
        , 'Geneva'
        , 'Geneve'
        , 'CH');
 
-INSERT INTO locations
-VALUES ( 3000
-       , 'Murtenstrasse 921'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        'Murtenstrasse 921'
        , '3095'
        , 'Bern'
        , 'BE'
        , 'CH');
 
-INSERT INTO locations
-VALUES ( 3100
-       , 'Pieter Breughelstraat 837'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        'Pieter Breughelstraat 837'
        , '3029SK'
        , 'Utrecht'
        , 'Utrecht'
        , 'NL');
 
-INSERT INTO locations
-VALUES ( 3200
-       , 'Mariano Escobedo 9991'
+INSERT INTO LOCATIONS (STREET_ADDRESS,POSTAL_CODE,CITY,STATE_PROVINCE,COUNTRY_ID)
+VALUES (
+        'Mariano Escobedo 9991'
        , '11932'
        , 'Mexico City'
        , 'Distrito Federal,'
@@ -332,163 +332,163 @@ INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Administration'
        , 100
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Marketing'
        , 1
-       , 1800);
+       ,9);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Purchasing'
        , 14
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Human Resources'
        , 103
-       , 2400);
+       , 15);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Shipping'
        , 21
-       , 1500);
+       , 6);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'IT'
        , 3
-       , 1400);
+       , 5);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Public Relations'
        , 4
-       , 2700);
+       , 18);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Sales'
        , 45
-       , 2500);
+       , 16);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Executive'
        , 1
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Finance'
        , 8
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Accounting'
        , 5
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Treasury'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Corporate Tax'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Control And Credit'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Shareholder Services'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Benefits'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Manufacturing'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Construction'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Contracting'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Operations'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'IT Support'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'NOC'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'IT Helpdesk'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Government Sales'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Retail Sales'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Recruiting'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Payroll'
        , NULL
-       , 1700);
+       ,8);
 
 INSERT INTO jobs
 VALUES ( 'AD_PRES'

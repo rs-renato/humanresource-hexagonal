@@ -24,7 +24,7 @@ public class DepartmentRepositoryJdbcTest {
 
     private Integer DEPARTMENT_ID = 12;
     private Integer MANAGER_ID = 100;
-    private Integer LOCATION_ID = 1500;
+    private Integer LOCATION_ID = 15;
 
     Logger logger = LogManager.getLogger(DepartmentRepositoryJdbcTest.class);
 
