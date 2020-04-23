@@ -1,18 +1,14 @@
-INSERT INTO regions
-VALUES ( 1
-       , 'Europe');
+INSERT INTO regions (REGION_NAME)
+VALUES ('Europe');
 
-INSERT INTO regions
-VALUES ( 2
-       , 'Americas');
+INSERT INTO regions (REGION_NAME)
+VALUES ('Americas');
 
-INSERT INTO regions
-VALUES ( 3
-       , 'Asia');
+INSERT INTO regions (REGION_NAME)
+VALUES ('Asia');
 
-INSERT INTO regions
-VALUES ( 4
-       , 'Middle East and Africa');
+INSERT INTO regions (REGION_NAME)
+VALUES ('Middle East and Africa');
 
 
 INSERT INTO countries

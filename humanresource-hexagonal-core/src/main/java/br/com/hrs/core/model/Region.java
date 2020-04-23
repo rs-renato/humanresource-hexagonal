@@ -12,6 +12,10 @@ public class Region {
 	Region(){
 	}
 
+	public Region(String name) {
+		this(name, null);
+	}
+
 	public Region(String name, List<Country> countries) {
 		this(null, name, countries);
 	}

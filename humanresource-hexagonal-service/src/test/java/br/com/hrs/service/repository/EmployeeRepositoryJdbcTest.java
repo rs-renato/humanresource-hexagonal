@@ -93,7 +93,7 @@ public class EmployeeRepositoryJdbcTest {
         Collection<Employee> employees = employeeRepository.findAll();
         logger.info(employees);
         Assertions.assertNotNull(employees, "Employees should be listed");
-        Assertions.assertTrue(employees.size() >= 27, "Employees should be listed at all");
+        Assertions.assertTrue(employees.size() >= 107, "Employees should be listed at all");
     }
 
     @Test

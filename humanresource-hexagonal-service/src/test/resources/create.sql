@@ -1,6 +1,6 @@
 CREATE TABLE regions
 (
-    region_id   NUMERIC
+    region_id INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
         CONSTRAINT region_id_nn NOT NULL,
     region_name VARCHAR(25)
 );
@@ -13,18 +13,18 @@ ALTER TABLE regions
         PRIMARY KEY (region_id)
 ;
 
-CREATE
+/*CREATE
 SEQUENCE regions_seq
  START
 WITH     5
- INCREMENT BY   1;
+ INCREMENT BY   1;*/
 
 CREATE TABLE countries
 (
     country_id   CHAR(2)
         CONSTRAINT country_id_nn NOT NULL,
     country_name VARCHAR(40),
-    region_id    NUMERIC,
+    region_id INT,
     CONSTRAINT country_c_id_pk
         PRIMARY KEY (country_id)
 );

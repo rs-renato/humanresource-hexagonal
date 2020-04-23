@@ -80,7 +80,7 @@ public class CountryRepositoryJdbcTest {
         Collection<Country> countrys = countryRepository.findAll();
         logger.info(countrys);
         Assertions.assertNotNull(countrys, "Countrys should be listed");
-        Assertions.assertTrue(countrys.size() >= 19, "Countrys should be listed at all");
+        Assertions.assertTrue(countrys.size() >= 25, "Countrys should be listed at all");
 
     }
 
