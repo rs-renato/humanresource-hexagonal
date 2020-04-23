@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.util.Collection;
 
-@DisplayName("Database Service - Job")
+@DisplayName("Repository - Job")
 @ContextConfiguration(classes = DatabaseConfiguration.class)
 @ExtendWith(SpringExtension.class)
 public class JobRepositoryJdbcTest {

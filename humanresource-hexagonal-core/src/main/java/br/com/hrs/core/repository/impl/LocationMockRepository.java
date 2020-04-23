@@ -1,7 +1,6 @@
 package br.com.hrs.core.repository.impl;
 
 import br.com.hrs.core.model.Country;
-import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.LocationRepository;
 

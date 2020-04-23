@@ -71,7 +71,7 @@ CREATE TABLE departments
     department_id   INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     department_name VARCHAR(30)
         CONSTRAINT dept_name_nn NOT NULL,
-    manager_id      NUMERIC(6),
+    manager_id      INT,
     location_id     NUMERIC(4)
 );
 
@@ -114,20 +114,20 @@ ALTER TABLE jobs
 
 CREATE TABLE employees
 (
-    employee_id    NUMERIC(6) NOT NULL,
+    employee_id   INT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     first_name     VARCHAR(20),
     last_name      VARCHAR(25)
         CONSTRAINT emp_last_name_nn NOT NULL,
     email          VARCHAR(25)
         CONSTRAINT emp_email_nn NOT NULL,
-    phone_NUMERIC  VARCHAR(20),
+    phone_number  VARCHAR(20),
     hire_date      DATE
         CONSTRAINT emp_hire_date_nn NOT NULL,
     job_id         VARCHAR(10)
         CONSTRAINT emp_job_nn NOT NULL,
     salary         NUMERIC(8, 2),
     commission_pct NUMERIC(2, 2),
-    manager_id     NUMERIC(6),
+    manager_id     INT,
     department_id  INT,
     CONSTRAINT emp_salary_min
         CHECK (salary > 0),
@@ -161,16 +161,16 @@ ALTER TABLE departments
             REFERENCES employees (employee_id);
 
 
-CREATE
+/*CREATE
 SEQUENCE employees_seq
  START
 WITH     207
- INCREMENT BY   1;
+ INCREMENT BY   1;*/
 
 
 CREATE TABLE job_history
 (
-    employee_id   NUMERIC(6) NOT NULL
+    employee_id   INT NOT NULL
         CONSTRAINT jhist_employee_nn NOT NULL,
     start_date    DATE
         CONSTRAINT jhist_start_date_nn NOT NULL,

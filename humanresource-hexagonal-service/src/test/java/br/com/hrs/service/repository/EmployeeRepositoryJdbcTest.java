@@ -1,8 +1,8 @@
 package br.com.hrs.service.repository;
 
+import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
-import br.com.hrs.core.model.Employee;
-import br.com.hrs.core.model.Location;
+import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.EmployeeRepository;
 import br.com.hrs.service.DatabaseConfiguration;
 import org.apache.logging.log4j.LogManager;
@@ -16,8 +16,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Date;
 
-@DisplayName("Database Service - Employee")
+@DisplayName("Repository - Employee")
 @ContextConfiguration(classes = DatabaseConfiguration.class)
 @ExtendWith(SpringExtension.class)
 public class EmployeeRepositoryJdbcTest {
@@ -48,13 +49,42 @@ public class EmployeeRepositoryJdbcTest {
     @DisplayName("Updates Employee")
     public void test03() {
 
+        Employee employee = employeeRepository.find(EMPLOYEE_ID);
+        logger.info(employee);
+        employee.setFirstName(employee.getFirstName() + " altered");
+        employee.setManager(new Employee.Builder().id(1).build());
+        boolean updated = employeeRepository.update(employee);
 
+        employee = employeeRepository.find(EMPLOYEE_ID);
+
+        Assertions.assertTrue(updated, "Employee should be updated");
+        Assertions.assertTrue(employee.getFirstName().contains("altered"), "Employee should be altered");
     }
 
     @Test
     @DisplayName("Saves Employee")
     public void test04() {
 
+        Employee employee = new Employee.Builder()
+                .firstName("renato")
+                .lastName("rodrigues")
+                .email("renato.rsilva")
+                .phone("515.123.4567")
+                .hireDate(new Date())
+                .job(new Job.Builder().id("AD_PRES").build())
+                .salary(24000f)
+                .commissionPercent(.1f)
+                .manager(new Employee.Builder().id(1).build())
+                .department(new Department.Builder().id(1).build())
+                .build();
+
+        Integer savedId = employeeRepository.save(employee);
+
+        employee = employeeRepository.find(savedId);
+
+        Assertions.assertNotNull(savedId, "Employee should be saved and return");
+        Assertions.assertNotNull(employee, "Employee should be saved");
+        Assertions.assertTrue(savedId.equals(employee.getId()), "Employee saved needs to match saved id");
     }
 
     @Test

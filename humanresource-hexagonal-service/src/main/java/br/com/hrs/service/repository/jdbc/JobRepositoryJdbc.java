@@ -5,7 +5,6 @@ import br.com.hrs.core.repository.JobRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.JobRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;

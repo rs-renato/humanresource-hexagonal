@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.util.Collection;
 
-@DisplayName("Database Service - Department")
+@DisplayName("Repository - Department")
 @ContextConfiguration(classes = DatabaseConfiguration.class)
 @ExtendWith(SpringExtension.class)
 public class DepartmentRepositoryJdbcTest {
@@ -59,6 +59,7 @@ public class DepartmentRepositoryJdbcTest {
 
         Assertions.assertTrue(updated, "Department should be updated");
         Assertions.assertTrue(department.getName().contains("altered"), "Department should be altered");
+        Assertions.assertTrue(MANAGER_ID == department.getManager().getId(), "Department manager should be altered");
     }
 
     @Test

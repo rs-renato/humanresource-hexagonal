@@ -1,7 +1,6 @@
 package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Employee;
-import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.repository.EmployeeRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.EmployeeRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -90,7 +89,7 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
 
             String sql = "UPDATE EMPLOYEES SET FIRST_NAME = ?, LAST_NAME = ?, EMAIL = ?, PHONE_NUMBER = ?, HIRE_DATE = ?, JOB_ID = ?, SALARY = ?, COMMISSION_PCT = ?, MANAGER_ID = ?, DEPARTMENT_ID = ? WHERE EMPLOYEE_ID = ?";
 
-            Object[] param = new Object[]{employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), employee.getHireDate(), employee.getJob().getId(), employee.getSalary(), employee.getCommissionPercent(), employee.getManager().getId(), employee.getDepartment().getId()};
+            Object[] param = new Object[]{employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), employee.getHireDate(), employee.getJob().getId(), employee.getSalary(), employee.getCommissionPercent(), employee.getManager().getId(), employee.getDepartment().getId(), employee.getId()};
 
             return jdbcTemplate.update(sql, param) > 0;
         }

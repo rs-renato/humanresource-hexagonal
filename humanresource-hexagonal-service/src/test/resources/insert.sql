@@ -332,163 +332,163 @@ ALTER TABLE DEPARTMENTS
 /*ALTER TABLE departments
   DISABLE CONSTRAINT dept_mgr_fk;*/
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Administration'
-       , 200
-       , 1700);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'Marketing'
-       , 201
-       , 1800);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'Purchasing'
-       , 114
-       , 1700);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'Human Resources'
-       , 203
-       , 2400);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'Shipping'
-       , 121
-       , 1500);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'IT'
-       , 103
-       , 1400);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'Public Relations'
-       , 204
-       , 2700);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'Sales'
-       , 145
-       , 2500);
-
-INSERT INTO departments (department_name, manager_id, location_id)
-VALUES ( 
-       'Executive'
        , 100
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'Marketing'
+       , 1
+       , 1800);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'Purchasing'
+       , 14
+       , 1700);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'Human Resources'
+       , 103
+       , 2400);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'Shipping'
+       , 21
+       , 1500);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'IT'
+       , 3
+       , 1400);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'Public Relations'
+       , 4
+       , 2700);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'Sales'
+       , 45
+       , 2500);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
+VALUES ( 
+       'Executive'
+       , 1
+       , 1700);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Finance'
-       , 108
+       , 8
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Accounting'
-       , 205
+       , 5
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Treasury'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Corporate Tax'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Control And Credit'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Shareholder Services'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Benefits'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Manufacturing'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Construction'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Contracting'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Operations'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'IT Support'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'NOC'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'IT Helpdesk'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Government Sales'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Retail Sales'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Recruiting'
        , NULL
        , 1700);
 
-INSERT INTO departments (department_name, manager_id, location_id)
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID)
 VALUES ( 
        'Payroll'
        , NULL
@@ -605,9 +605,9 @@ VALUES ( 'PR_REP'
        , 4500
        , 10500);
 
-INSERT INTO employees
-VALUES ( 100
-       , 'Steven'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Steven'
        , 'King'
        , 'SKING'
        , '515.123.4567'
@@ -615,12 +615,12 @@ VALUES ( 100
        , 'AD_PRES'
        , 24000
        , NULL
-       , 100
+       , 1
        , 9);
 
-INSERT INTO employees
-VALUES ( 101
-       , 'Neena'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Neena'
        , 'Kochhar'
        , 'NKOCHHAR'
        , '515.123.4568'
@@ -628,12 +628,12 @@ VALUES ( 101
        , 'AD_VP'
        , 17000
        , NULL
-       , 100
+       , 1
        , 9);
 
-INSERT INTO employees
-VALUES ( 102
-       , 'Lex'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Lex'
        , 'De Haan'
        , 'LDEHAAN'
        , '515.123.4569'
@@ -641,12 +641,12 @@ VALUES ( 102
        , 'AD_VP'
        , 17000
        , NULL
-       , 100
+       , 1
        , 9);
 
-INSERT INTO employees
-VALUES ( 103
-       , 'Alexander'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Alexander'
        , 'Hunold'
        , 'AHUNOLD'
        , '590.423.4567'
@@ -654,12 +654,12 @@ VALUES ( 103
        , 'IT_PROG'
        , 9000
        , NULL
-       , 102
+       , 2
         , 6);
 
-INSERT INTO employees
-VALUES ( 104
-       , 'Bruce'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Bruce'
        , 'Ernst'
        , 'BERNST'
        , '590.423.4568'
@@ -667,12 +667,12 @@ VALUES ( 104
        , 'IT_PROG'
        , 6000
        , NULL
-       , 103
+       , 3
         , 6);
 
-INSERT INTO employees
-VALUES ( 105
-       , 'David'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'David'
        , 'Austin'
        , 'DAUSTIN'
        , '590.423.4569'
@@ -680,12 +680,12 @@ VALUES ( 105
        , 'IT_PROG'
        , 4800
        , NULL
-       , 103
+       , 3
         , 6);
 
-INSERT INTO employees
-VALUES ( 106
-       , 'Valli'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Valli'
        , 'Pataballa'
        , 'VPATABAL'
        , '590.423.4560'
@@ -693,12 +693,12 @@ VALUES ( 106
        , 'IT_PROG'
        , 4800
        , NULL
-       , 103
+       , 3
         , 6);
 
-INSERT INTO employees
-VALUES ( 107
-       , 'Diana'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Diana'
        , 'Lorentz'
        , 'DLORENTZ'
        , '590.423.5567'
@@ -706,25 +706,25 @@ VALUES ( 107
        , 'IT_PROG'
        , 4200
        , NULL
-       , 103
+       , 3
         , 6);
 
-INSERT INTO employees
-VALUES ( 108
-       , 'Nancy'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Nancy'
        , 'Greenberg'
        , 'NGREENBE'
        , '515.124.4569'
        , DATE('17.08.2002')
        , 'FI_MGR'
-       , 12008
+       , 2008
        , NULL
-       , 101
+       , 1
         , 10);
 
-INSERT INTO employees
-VALUES ( 109
-       , 'Daniel'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Daniel'
        , 'Faviet'
        , 'DFAVIET'
        , '515.124.4169'
@@ -732,12 +732,12 @@ VALUES ( 109
        , 'FI_ACCOUNT'
        , 9000
        , NULL
-       , 108
+       , 8
         , 10);
 
-INSERT INTO employees
-VALUES ( 110
-       , 'John'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'John'
        , 'Chen'
        , 'JCHEN'
        , '515.124.4269'
@@ -745,12 +745,12 @@ VALUES ( 110
        , 'FI_ACCOUNT'
        , 8200
        , NULL
-       , 108
+       , 8
         , 10);
 
-INSERT INTO employees
-VALUES ( 111
-       , 'Ismael'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Ismael'
        , 'Sciarra'
        , 'ISCIARRA'
        , '515.124.4369'
@@ -758,12 +758,12 @@ VALUES ( 111
        , 'FI_ACCOUNT'
        , 7700
        , NULL
-       , 108
+       , 8
         , 10);
 
-INSERT INTO employees
-VALUES ( 112
-       , 'Jose Manuel'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Jose Manuel'
        , 'Urman'
        , 'JMURMAN'
        , '515.124.4469'
@@ -771,12 +771,12 @@ VALUES ( 112
        , 'FI_ACCOUNT'
        , 7800
        , NULL
-       , 108
+       , 8
         , 10);
 
-INSERT INTO employees
-VALUES ( 113
-       , 'Luis'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Luis'
        , 'Popp'
        , 'LPOPP'
        , '515.124.4567'
@@ -784,12 +784,12 @@ VALUES ( 113
        , 'FI_ACCOUNT'
        , 6900
        , NULL
-       , 108
+       , 8
         , 10);
 
-INSERT INTO employees
-VALUES ( 114
-       , 'Den'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Den'
        , 'Raphaely'
        , 'DRAPHEAL'
        , '515.127.4561'
@@ -797,12 +797,12 @@ VALUES ( 114
        , 'PU_MAN'
        , 11000
        , NULL
-       , 100
+       , 1
         , 3);
 
-INSERT INTO employees
-VALUES ( 115
-       , 'Alexander'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Alexander'
        , 'Khoo'
        , 'AKHOO'
        , '515.127.4562'
@@ -810,12 +810,12 @@ VALUES ( 115
        , 'PU_CLERK'
        , 3100
        , NULL
-       , 114
+       , 14
         , 3);
 
-INSERT INTO employees
-VALUES ( 116
-       , 'Shelli'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Shelli'
        , 'Baida'
        , 'SBAIDA'
        , '515.127.4563'
@@ -823,12 +823,12 @@ VALUES ( 116
        , 'PU_CLERK'
        , 2900
        , NULL
-       , 114
+       , 14
         , 3);
 
-INSERT INTO employees
-VALUES ( 117
-       , 'Sigal'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Sigal'
        , 'Tobias'
        , 'STOBIAS'
        , '515.127.4564'
@@ -836,12 +836,12 @@ VALUES ( 117
        , 'PU_CLERK'
        , 2800
        , NULL
-       , 114
+       , 14
         , 3);
 
-INSERT INTO employees
-VALUES ( 118
-       , 'Guy'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Guy'
        , 'Himuro'
        , 'GHIMURO'
        , '515.127.4565'
@@ -849,12 +849,12 @@ VALUES ( 118
        , 'PU_CLERK'
        , 2600
        , NULL
-       , 114
+       , 14
         , 3);
 
-INSERT INTO employees
-VALUES ( 119
-       , 'Karen'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Karen'
        , 'Colmenares'
        , 'KCOLMENA'
        , '515.127.4566'
@@ -862,12 +862,12 @@ VALUES ( 119
        , 'PU_CLERK'
        , 2500
        , NULL
-       , 114
+       , 14
         , 3);
 
-INSERT INTO employees
-VALUES ( 120
-       , 'Matthew'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Matthew'
        , 'Weiss'
        , 'MWEISS'
        , '650.123.1234'
@@ -875,12 +875,12 @@ VALUES ( 120
        , 'ST_MAN'
        , 8000
        , NULL
-       , 100
+       , 1
         , 5);
 
-INSERT INTO employees
-VALUES ( 121
-       , 'Adam'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Adam'
        , 'Fripp'
        , 'AFRIPP'
        , '650.123.2234'
@@ -888,12 +888,12 @@ VALUES ( 121
        , 'ST_MAN'
        , 8200
        , NULL
-       , 100
+       , 1
         , 5);
 
-INSERT INTO employees
-VALUES ( 122
-       , 'Payam'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Payam'
        , 'Kaufling'
        , 'PKAUFLIN'
        , '650.123.3234'
@@ -901,12 +901,12 @@ VALUES ( 122
        , 'ST_MAN'
        , 7900
        , NULL
-       , 100
+       , 1
         , 5);
 
-INSERT INTO employees
-VALUES ( 123
-       , 'Shanta'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Shanta'
        , 'Vollman'
        , 'SVOLLMAN'
        , '650.123.4234'
@@ -914,12 +914,12 @@ VALUES ( 123
        , 'ST_MAN'
        , 6500
        , NULL
-       , 100
+       , 1
         , 5);
 
-INSERT INTO employees
-VALUES ( 124
-       , 'Kevin'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Kevin'
        , 'Mourgos'
        , 'KMOURGOS'
        , '650.123.5234'
@@ -927,12 +927,12 @@ VALUES ( 124
        , 'ST_MAN'
        , 5800
        , NULL
-       , 100
+       , 1
         , 5);
 
-INSERT INTO employees
-VALUES ( 125
-       , 'Julia'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Julia'
        , 'Nayer'
        , 'JNAYER'
        , '650.124.1214'
@@ -940,12 +940,12 @@ VALUES ( 125
        , 'ST_CLERK'
        , 3200
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 126
-       , 'Irene'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Irene'
        , 'Mikkilineni'
        , 'IMIKKILI'
        , '650.124.1224'
@@ -953,12 +953,12 @@ VALUES ( 126
        , 'ST_CLERK'
        , 2700
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 127
-       , 'James'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'James'
        , 'Landry'
        , 'JLANDRY'
        , '650.124.1334'
@@ -966,12 +966,12 @@ VALUES ( 127
        , 'ST_CLERK'
        , 2400
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 128
-       , 'Steven'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Steven'
        , 'Markle'
        , 'SMARKLE'
        , '650.124.1434'
@@ -979,12 +979,12 @@ VALUES ( 128
        , 'ST_CLERK'
        , 2200
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 129
-       , 'Laura'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Laura'
        , 'Bissot'
        , 'LBISSOT'
        , '650.124.5234'
@@ -992,12 +992,12 @@ VALUES ( 129
        , 'ST_CLERK'
        , 3300
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 130
-       , 'Mozhe'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Mozhe'
        , 'Atkinson'
        , 'MATKINSO'
        , '650.124.6234'
@@ -1005,12 +1005,12 @@ VALUES ( 130
        , 'ST_CLERK'
        , 2800
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 131
-       , 'James'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'James'
        , 'Marlow'
        , 'JAMRLOW'
        , '650.124.7234'
@@ -1018,12 +1018,12 @@ VALUES ( 131
        , 'ST_CLERK'
        , 2500
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 132
-       , 'TJ'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'TJ'
        , 'Olson'
        , 'TJOLSON'
        , '650.124.8234'
@@ -1031,12 +1031,12 @@ VALUES ( 132
        , 'ST_CLERK'
        , 2100
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 133
-       , 'Jason'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Jason'
        , 'Mallin'
        , 'JMALLIN'
        , '650.127.1934'
@@ -1044,12 +1044,12 @@ VALUES ( 133
        , 'ST_CLERK'
        , 3300
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 134
-       , 'Michael'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Michael'
        , 'Rogers'
        , 'MROGERS'
        , '650.127.1834'
@@ -1057,12 +1057,12 @@ VALUES ( 134
        , 'ST_CLERK'
        , 2900
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 135
-       , 'Ki'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Ki'
        , 'Gee'
        , 'KGEE'
        , '650.127.1734'
@@ -1070,12 +1070,12 @@ VALUES ( 135
        , 'ST_CLERK'
        , 2400
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 136
-       , 'Hazel'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Hazel'
        , 'Philtanker'
        , 'HPHILTAN'
        , '650.127.1634'
@@ -1083,12 +1083,12 @@ VALUES ( 136
        , 'ST_CLERK'
        , 2200
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 137
-       , 'Renske'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Renske'
        , 'Ladwig'
        , 'RLADWIG'
        , '650.121.1234'
@@ -1096,12 +1096,12 @@ VALUES ( 137
        , 'ST_CLERK'
        , 3600
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 138
-       , 'Stephen'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Stephen'
        , 'Stiles'
        , 'SSTILES'
        , '650.121.2034'
@@ -1109,12 +1109,12 @@ VALUES ( 138
        , 'ST_CLERK'
        , 3200
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 139
-       , 'John'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'John'
        , 'Seo'
        , 'JSEO'
        , '650.121.2019'
@@ -1122,12 +1122,12 @@ VALUES ( 139
        , 'ST_CLERK'
        , 2700
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 140
-       , 'Joshua'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Joshua'
        , 'Patel'
        , 'JPATEL'
        , '650.121.1834'
@@ -1135,12 +1135,12 @@ VALUES ( 140
        , 'ST_CLERK'
        , 2500
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 141
-       , 'Trenna'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Trenna'
        , 'Rajs'
        , 'TRAJS'
        , '650.121.8009'
@@ -1148,12 +1148,12 @@ VALUES ( 141
        , 'ST_CLERK'
        , 3500
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 142
-       , 'Curtis'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Curtis'
        , 'Davies'
        , 'CDAVIES'
        , '650.121.2994'
@@ -1161,12 +1161,12 @@ VALUES ( 142
        , 'ST_CLERK'
        , 3100
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 143
-       , 'Randall'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Randall'
        , 'Matos'
        , 'RMATOS'
        , '650.121.2874'
@@ -1174,12 +1174,12 @@ VALUES ( 143
        , 'ST_CLERK'
        , 2600
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 144
-       , 'Peter'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Peter'
        , 'Vargas'
        , 'PVARGAS'
        , '650.121.2004'
@@ -1187,12 +1187,12 @@ VALUES ( 144
        , 'ST_CLERK'
        , 2500
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 145
-       , 'John'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'John'
        , 'Russell'
        , 'JRUSSEL'
        , '011.44.1344.429268'
@@ -1200,12 +1200,12 @@ VALUES ( 145
        , 'SA_MAN'
        , 14000
        , .4
-       , 100
+       , 1
        , 8);
 
-INSERT INTO employees
-VALUES ( 146
-       , 'Karen'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Karen'
        , 'Partners'
        , 'KPARTNER'
        , '011.44.1344.467268'
@@ -1213,12 +1213,12 @@ VALUES ( 146
        , 'SA_MAN'
        , 13500
        , .3
-       , 100
+       , 1
        , 8);
 
-INSERT INTO employees
-VALUES ( 147
-       , 'Alberto'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Alberto'
        , 'Errazuriz'
        , 'AERRAZUR'
        , '011.44.1344.429278'
@@ -1226,12 +1226,12 @@ VALUES ( 147
        , 'SA_MAN'
        , 12000
        , .3
-       , 100
+       , 1
        , 8);
 
-INSERT INTO employees
-VALUES ( 148
-       , 'Gerald'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Gerald'
        , 'Cambrault'
        , 'GCAMBRAU'
        , '011.44.1344.619268'
@@ -1239,12 +1239,12 @@ VALUES ( 148
        , 'SA_MAN'
        , 11000
        , .3
-       , 100
+       , 1
        , 8);
 
-INSERT INTO employees
-VALUES ( 149
-       , 'Eleni'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Eleni'
        , 'Zlotkey'
        , 'EZLOTKEY'
        , '011.44.1344.429018'
@@ -1252,12 +1252,12 @@ VALUES ( 149
        , 'SA_MAN'
        , 10500
        , .2
-       , 100
+       , 1
        , 8);
 
-INSERT INTO employees
-VALUES ( 150
-       , 'Peter'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Peter'
        , 'Tucker'
        , 'PTUCKER'
        , '011.44.1344.129268'
@@ -1265,12 +1265,12 @@ VALUES ( 150
        , 'SA_REP'
        , 10000
        , .3
-       , 145
+       , 45
        , 8);
 
-INSERT INTO employees
-VALUES ( 151
-       , 'David'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'David'
        , 'Bernstein'
        , 'DBERNSTE'
        , '011.44.1344.345268'
@@ -1278,12 +1278,12 @@ VALUES ( 151
        , 'SA_REP'
        , 9500
        , .25
-       , 145
+       , 45
        , 8);
 
-INSERT INTO employees
-VALUES ( 152
-       , 'Peter'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Peter'
        , 'Hall'
        , 'PHALL'
        , '011.44.1344.478968'
@@ -1291,12 +1291,12 @@ VALUES ( 152
        , 'SA_REP'
        , 9000
        , .25
-       , 145
+       , 45
        , 8);
 
-INSERT INTO employees
-VALUES ( 153
-       , 'Christopher'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Christopher'
        , 'Olsen'
        , 'COLSEN'
        , '011.44.1344.498718'
@@ -1304,12 +1304,12 @@ VALUES ( 153
        , 'SA_REP'
        , 8000
        , .2
-       , 145
+       , 45
        , 8);
 
-INSERT INTO employees
-VALUES ( 154
-       , 'Nanette'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Nanette'
        , 'Cambrault'
        , 'NCAMBRAU'
        , '011.44.1344.987668'
@@ -1317,12 +1317,12 @@ VALUES ( 154
        , 'SA_REP'
        , 7500
        , .2
-       , 145
+       , 45
        , 8);
 
-INSERT INTO employees
-VALUES ( 155
-       , 'Oliver'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Oliver'
        , 'Tuvault'
        , 'OTUVAULT'
        , '011.44.1344.486508'
@@ -1330,12 +1330,12 @@ VALUES ( 155
        , 'SA_REP'
        , 7000
        , .15
-       , 145
+       , 45
        , 8);
 
-INSERT INTO employees
-VALUES ( 156
-       , 'Janette'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Janette'
        , 'King'
        , 'JKING'
        , '011.44.1345.429268'
@@ -1343,12 +1343,12 @@ VALUES ( 156
        , 'SA_REP'
        , 10000
        , .35
-       , 146
+       , 46
        , 8);
 
-INSERT INTO employees
-VALUES ( 157
-       , 'Patrick'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Patrick'
        , 'Sully'
        , 'PSULLY'
        , '011.44.1345.929268'
@@ -1356,12 +1356,12 @@ VALUES ( 157
        , 'SA_REP'
        , 9500
        , .35
-       , 146
+       , 46
        , 8);
 
-INSERT INTO employees
-VALUES ( 158
-       , 'Allan'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Allan'
        , 'McEwen'
        , 'AMCEWEN'
        , '011.44.1345.829268'
@@ -1369,12 +1369,12 @@ VALUES ( 158
        , 'SA_REP'
        , 9000
        , .35
-       , 146
+       , 46
        , 8);
 
-INSERT INTO employees
-VALUES ( 159
-       , 'Lindsey'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Lindsey'
        , 'Smith'
        , 'LSMITH'
        , '011.44.1345.729268'
@@ -1382,12 +1382,12 @@ VALUES ( 159
        , 'SA_REP'
        , 8000
        , .3
-       , 146
+       , 46
        , 8);
 
-INSERT INTO employees
-VALUES ( 160
-       , 'Louise'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Louise'
        , 'Doran'
        , 'LDORAN'
        , '011.44.1345.629268'
@@ -1395,12 +1395,12 @@ VALUES ( 160
        , 'SA_REP'
        , 7500
        , .3
-       , 146
+       , 46
        , 8);
 
-INSERT INTO employees
-VALUES ( 161
-       , 'Sarath'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Sarath'
        , 'Sewall'
        , 'SSEWALL'
        , '011.44.1345.529268'
@@ -1408,12 +1408,12 @@ VALUES ( 161
        , 'SA_REP'
        , 7000
        , .25
-       , 146
+       , 46
        , 8);
 
-INSERT INTO employees
-VALUES ( 162
-       , 'Clara'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Clara'
        , 'Vishney'
        , 'CVISHNEY'
        , '011.44.1346.129268'
@@ -1421,12 +1421,12 @@ VALUES ( 162
        , 'SA_REP'
        , 10500
        , .25
-       , 147
+       , 47
        , 8);
 
-INSERT INTO employees
-VALUES ( 163
-       , 'Danielle'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Danielle'
        , 'Greene'
        , 'DGREENE'
        , '011.44.1346.229268'
@@ -1434,12 +1434,12 @@ VALUES ( 163
        , 'SA_REP'
        , 9500
        , .15
-       , 147
+       , 47
        , 8);
 
-INSERT INTO employees
-VALUES ( 164
-       , 'Mattea'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Mattea'
        , 'Marvins'
        , 'MMARVINS'
        , '011.44.1346.329268'
@@ -1447,12 +1447,12 @@ VALUES ( 164
        , 'SA_REP'
        , 7200
        , .10
-       , 147
+       , 47
        , 8);
 
-INSERT INTO employees
-VALUES ( 165
-       , 'David'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'David'
        , 'Lee'
        , 'DLEE'
        , '011.44.1346.529268'
@@ -1460,12 +1460,12 @@ VALUES ( 165
        , 'SA_REP'
        , 6800
        , .1
-       , 147
+       , 47
        , 8);
 
-INSERT INTO employees
-VALUES ( 166
-       , 'Sundar'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Sundar'
        , 'Ande'
        , 'SANDE'
        , '011.44.1346.629268'
@@ -1473,12 +1473,12 @@ VALUES ( 166
        , 'SA_REP'
        , 6400
        , .10
-       , 147
+       , 47
        , 8);
 
-INSERT INTO employees
-VALUES ( 167
-       , 'Amit'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Amit'
        , 'Banda'
        , 'ABANDA'
        , '011.44.1346.729268'
@@ -1486,12 +1486,12 @@ VALUES ( 167
        , 'SA_REP'
        , 6200
        , .10
-       , 147
+       , 47
        , 8);
 
-INSERT INTO employees
-VALUES ( 168
-       , 'Lisa'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Lisa'
        , 'Ozer'
        , 'LOZER'
        , '011.44.1343.929268'
@@ -1499,12 +1499,12 @@ VALUES ( 168
        , 'SA_REP'
        , 11500
        , .25
-       , 148
+       , 48
        , 8);
 
-INSERT INTO employees
-VALUES ( 169
-       , 'Harrison'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Harrison'
        , 'Bloom'
        , 'HBLOOM'
        , '011.44.1343.829268'
@@ -1512,12 +1512,12 @@ VALUES ( 169
        , 'SA_REP'
        , 10000
        , .20
-       , 148
+       , 48
        , 8);
 
-INSERT INTO employees
-VALUES ( 170
-       , 'Tayler'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Tayler'
        , 'Fox'
        , 'TFOX'
        , '011.44.1343.729268'
@@ -1525,12 +1525,12 @@ VALUES ( 170
        , 'SA_REP'
        , 9600
        , .20
-       , 148
+       , 48
        , 8);
 
-INSERT INTO employees
-VALUES ( 171
-       , 'William'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'William'
        , 'Smith'
        , 'WSMITH'
        , '011.44.1343.629268'
@@ -1538,12 +1538,12 @@ VALUES ( 171
        , 'SA_REP'
        , 7400
        , .15
-       , 148
+       , 48
        , 8);
 
-INSERT INTO employees
-VALUES ( 172
-       , 'Elizabeth'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Elizabeth'
        , 'Bates'
        , 'EBATES'
        , '011.44.1343.529268'
@@ -1551,12 +1551,12 @@ VALUES ( 172
        , 'SA_REP'
        , 7300
        , .15
-       , 148
+       , 48
        , 8);
 
-INSERT INTO employees
-VALUES ( 173
-       , 'Sundita'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Sundita'
        , 'Kumar'
        , 'SKUMAR'
        , '011.44.1343.329268'
@@ -1564,12 +1564,12 @@ VALUES ( 173
        , 'SA_REP'
        , 6100
        , .10
-       , 148
+       , 48
        , 8);
 
-INSERT INTO employees
-VALUES ( 174
-       , 'Ellen'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Ellen'
        , 'Abel'
        , 'EABEL'
        , '011.44.1644.429267'
@@ -1577,12 +1577,12 @@ VALUES ( 174
        , 'SA_REP'
        , 11000
        , .30
-       , 149
+       , 49
        , 8);
 
-INSERT INTO employees
-VALUES ( 175
-       , 'Alyssa'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Alyssa'
        , 'Hutton'
        , 'AHUTTON'
        , '011.44.1644.429266'
@@ -1590,12 +1590,12 @@ VALUES ( 175
        , 'SA_REP'
        , 8800
        , .25
-       , 149
+       , 49
        , 8);
 
-INSERT INTO employees
-VALUES ( 176
-       , 'Jonathon'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Jonathon'
        , 'Taylor'
        , 'JTAYLOR'
        , '011.44.1644.429265'
@@ -1603,12 +1603,12 @@ VALUES ( 176
        , 'SA_REP'
        , 8600
        , .20
-       , 149
+       , 49
        , 8);
 
-INSERT INTO employees
-VALUES ( 177
-       , 'Jack'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Jack'
        , 'Livingston'
        , 'JLIVINGS'
        , '011.44.1644.429264'
@@ -1616,12 +1616,12 @@ VALUES ( 177
        , 'SA_REP'
        , 8400
        , .20
-       , 149
+       , 49
        , 8);
 
-INSERT INTO employees
-VALUES ( 178
-       , 'Kimberely'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Kimberely'
        , 'Grant'
        , 'KGRANT'
        , '011.44.1644.429263'
@@ -1629,12 +1629,12 @@ VALUES ( 178
        , 'SA_REP'
        , 7000
        , .15
-       , 149
+       , 49
        , NULL);
 
-INSERT INTO employees
-VALUES ( 179
-       , 'Charles'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Charles'
        , 'Johnson'
        , 'CJOHNSON'
        , '011.44.1644.429262'
@@ -1642,12 +1642,12 @@ VALUES ( 179
        , 'SA_REP'
        , 6200
        , .10
-       , 149
+       , 49
        , 8);
 
-INSERT INTO employees
-VALUES ( 180
-       , 'Winston'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Winston'
        , 'Taylor'
        , 'WTAYLOR'
        , '650.507.9876'
@@ -1655,12 +1655,12 @@ VALUES ( 180
        , 'SH_CLERK'
        , 3200
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 181
-       , 'Jean'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Jean'
        , 'Fleaur'
        , 'JFLEAUR'
        , '650.507.9877'
@@ -1668,12 +1668,12 @@ VALUES ( 181
        , 'SH_CLERK'
        , 3100
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 182
-       , 'Martha'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Martha'
        , 'Sullivan'
        , 'MSULLIVA'
        , '650.507.9878'
@@ -1681,12 +1681,12 @@ VALUES ( 182
        , 'SH_CLERK'
        , 2500
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 183
-       , 'Girard'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Girard'
        , 'Geoni'
        , 'GGEONI'
        , '650.507.9879'
@@ -1694,12 +1694,12 @@ VALUES ( 183
        , 'SH_CLERK'
        , 2800
        , NULL
-       , 120
+       , 20
         , 5);
 
-INSERT INTO employees
-VALUES ( 184
-       , 'Nandita'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Nandita'
        , 'Sarchand'
        , 'NSARCHAN'
        , '650.509.1876'
@@ -1707,12 +1707,12 @@ VALUES ( 184
        , 'SH_CLERK'
        , 4200
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 185
-       , 'Alexis'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Alexis'
        , 'Bull'
        , 'ABULL'
        , '650.509.2876'
@@ -1720,12 +1720,12 @@ VALUES ( 185
        , 'SH_CLERK'
        , 4100
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 186
-       , 'Julia'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Julia'
        , 'Dellinger'
        , 'JDELLING'
        , '650.509.3876'
@@ -1733,12 +1733,12 @@ VALUES ( 186
        , 'SH_CLERK'
        , 3400
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 187
-       , 'Anthony'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Anthony'
        , 'Cabrio'
        , 'ACABRIO'
        , '650.509.4876'
@@ -1746,12 +1746,12 @@ VALUES ( 187
        , 'SH_CLERK'
        , 3000
        , NULL
-       , 121
+       , 21
         , 5);
 
-INSERT INTO employees
-VALUES ( 188
-       , 'Kelly'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Kelly'
        , 'Chung'
        , 'KCHUNG'
        , '650.505.1876'
@@ -1759,12 +1759,12 @@ VALUES ( 188
        , 'SH_CLERK'
        , 3800
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 189
-       , 'Jennifer'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Jennifer'
        , 'Dilly'
        , 'JDILLY'
        , '650.505.2876'
@@ -1772,12 +1772,12 @@ VALUES ( 189
        , 'SH_CLERK'
        , 3600
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 190
-       , 'Timothy'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Timothy'
        , 'Gates'
        , 'TGATES'
        , '650.505.3876'
@@ -1785,12 +1785,12 @@ VALUES ( 190
        , 'SH_CLERK'
        , 2900
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 191
-       , 'Randall'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Randall'
        , 'Perkins'
        , 'RPERKINS'
        , '650.505.4876'
@@ -1798,12 +1798,12 @@ VALUES ( 191
        , 'SH_CLERK'
        , 2500
        , NULL
-       , 122
+       , 22
         , 5);
 
-INSERT INTO employees
-VALUES ( 192
-       , 'Sarah'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Sarah'
        , 'Bell'
        , 'SBELL'
        , '650.501.1876'
@@ -1811,12 +1811,12 @@ VALUES ( 192
        , 'SH_CLERK'
        , 4000
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 193
-       , 'Britney'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Britney'
        , 'Everett'
        , 'BEVERETT'
        , '650.501.2876'
@@ -1824,12 +1824,12 @@ VALUES ( 193
        , 'SH_CLERK'
        , 3900
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 194
-       , 'Samuel'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Samuel'
        , 'McCain'
        , 'SMCCAIN'
        , '650.501.3876'
@@ -1837,12 +1837,12 @@ VALUES ( 194
        , 'SH_CLERK'
        , 3200
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 195
-       , 'Vance'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Vance'
        , 'Jones'
        , 'VJONES'
        , '650.501.4876'
@@ -1850,12 +1850,12 @@ VALUES ( 195
        , 'SH_CLERK'
        , 2800
        , NULL
-       , 123
+       , 23
         , 5);
 
-INSERT INTO employees
-VALUES ( 196
-       , 'Alana'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Alana'
        , 'Walsh'
        , 'AWALSH'
        , '650.507.9811'
@@ -1863,12 +1863,12 @@ VALUES ( 196
        , 'SH_CLERK'
        , 3100
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 197
-       , 'Kevin'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Kevin'
        , 'Feeney'
        , 'KFEENEY'
        , '650.507.9822'
@@ -1876,12 +1876,12 @@ VALUES ( 197
        , 'SH_CLERK'
        , 3000
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 198
-       , 'Donald'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Donald'
        , 'OConnell'
        , 'DOCONNEL'
        , '650.507.9833'
@@ -1889,12 +1889,12 @@ VALUES ( 198
        , 'SH_CLERK'
        , 2600
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 199
-       , 'Douglas'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Douglas'
        , 'Grant'
        , 'DGRANT'
        , '650.507.9844'
@@ -1902,12 +1902,12 @@ VALUES ( 199
        , 'SH_CLERK'
        , 2600
        , NULL
-       , 124
+       , 24
         , 5);
 
-INSERT INTO employees
-VALUES ( 200
-       , 'Jennifer'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Jennifer'
        , 'Whalen'
        , 'JWHALEN'
        , '515.123.4444'
@@ -1915,12 +1915,12 @@ VALUES ( 200
        , 'AD_ASST'
        , 4400
        , NULL
-       , 101
+       , 1
        , 10);
 
-INSERT INTO employees
-VALUES ( 201
-       , 'Michael'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Michael'
        , 'Hartstein'
        , 'MHARTSTE'
        , '515.123.5555'
@@ -1928,12 +1928,12 @@ VALUES ( 201
        , 'MK_MAN'
        , 13000
        , NULL
-       , 100
+       , 1
         , 2);
 
-INSERT INTO employees
-VALUES ( 202
-       , 'Pat'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Pat'
        , 'Fay'
        , 'PFAY'
        , '603.123.6666'
@@ -1941,12 +1941,12 @@ VALUES ( 202
        , 'MK_REP'
        , 6000
        , NULL
-       , 201
+       , 1
         , 2);
 
-INSERT INTO employees
-VALUES ( 203
-       , 'Susan'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Susan'
        , 'Mavris'
        , 'SMAVRIS'
        , '515.123.7777'
@@ -1954,12 +1954,12 @@ VALUES ( 203
        , 'HR_REP'
        , 6500
        , NULL
-       , 101
+       , 1
         , 4);
 
-INSERT INTO employees
-VALUES ( 204
-       , 'Hermann'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Hermann'
        , 'Baer'
        , 'HBAER'
        , '515.123.8888'
@@ -1967,12 +1967,12 @@ VALUES ( 204
        , 'PR_REP'
        , 10000
        , NULL
-       , 101
+       , 1
         , 7);
 
-INSERT INTO employees
-VALUES ( 205
-       , 'Shelley'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'Shelley'
        , 'Higgins'
        , 'SHIGGINS'
        , '515.123.8080'
@@ -1980,12 +1980,12 @@ VALUES ( 205
        , 'AC_MGR'
        , 12008
        , NULL
-       , 101
+       , 1
         , 11);
 
-INSERT INTO employees
-VALUES ( 206
-       , 'William'
+iNSERT INTO EMPLOYEES (FIRST_NAME, LAST_NAME, EMAIL, PHONE_NUMBER, HIRE_DATE, JOB_ID, SALARY, COMMISSION_PCT, MANAGER_ID, DEPARTMENT_ID)
+VALUES ( 
+       'William'
        , 'Gietz'
        , 'WGIETZ'
        , '515.123.8181'
@@ -1993,7 +1993,7 @@ VALUES ( 206
        , 'AC_ACCOUNT'
        , 8300
        , NULL
-       , 205
+       , 105
         , 11);
 
 
@@ -2019,49 +2019,49 @@ VALUES ( 101
         , 11);
 
 INSERT INTO job_history
-VALUES ( 201
+VALUES ( 101
        , DATE('17.02.2004')
        , DATE('19.12.2007')
        , 'MK_REP'
         , 2);
 
 INSERT INTO job_history
-VALUES ( 114
+VALUES ( 14
        , DATE('24.03.2006')
        , DATE('31.12.2007')
        , 'ST_CLERK'
         , 5);
 
 INSERT INTO job_history
-VALUES ( 122
+VALUES ( 22
        , DATE('01.01.2007')
        , DATE('31.12.2007')
        , 'ST_CLERK'
         , 5);
 
 INSERT INTO job_history
-VALUES ( 200
+VALUES ( 100
        , DATE('17.09.1995')
        , DATE('17.06.2001')
        , 'AD_ASST'
        , 9);
 
 INSERT INTO job_history
-VALUES ( 176
+VALUES ( 76
        , DATE('24.03.2006')
        , DATE('31.12.2006')
        , 'SA_REP'
        , 8);
 
 INSERT INTO job_history
-VALUES ( 176
+VALUES ( 76
        , DATE('01.01.2007')
        , DATE('31.12.2007')
        , 'SA_MAN'
        , 8);
 
 INSERT INTO job_history
-VALUES ( 200
+VALUES ( 100
        , DATE('01.07.2002')
        , DATE('31.12.2006')
        , 'AC_ACCOUNT'
