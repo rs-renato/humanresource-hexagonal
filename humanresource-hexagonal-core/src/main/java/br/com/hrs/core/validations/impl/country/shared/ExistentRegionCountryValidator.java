@@ -1,4 +1,4 @@
-package br.com.hrs.core.validations.country.shared;
+package br.com.hrs.core.validations.impl.country.shared;
 
 import br.com.hrs.core.exception.HrsBusinessException;
 import br.com.hrs.core.model.Country;
