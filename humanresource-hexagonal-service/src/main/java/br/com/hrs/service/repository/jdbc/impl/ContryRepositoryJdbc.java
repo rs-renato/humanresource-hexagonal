@@ -1,4 +1,4 @@
-package br.com.hrs.service.repository.jdbc;
+package br.com.hrs.service.repository.jdbc.impl;
 
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.Repository;
@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class ContryRepositoryJdbc extends Repository<Country, String> {
+public class ContryRepositoryJdbc implements Repository<Country, String> {
 
     private JdbcTemplate jdbcTemplate;
 

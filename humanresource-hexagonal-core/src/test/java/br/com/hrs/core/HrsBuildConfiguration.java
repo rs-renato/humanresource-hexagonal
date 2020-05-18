@@ -11,6 +11,6 @@ import org.springframework.context.annotation.Configuration;
         "br.com.hrs.core.usecase.impl",
         "br.com.hrs.core.validations.impl",
 })
-public class BuildConfiguration {
+public class HrsBuildConfiguration {
     // Development Build : Unit Test  -> Core <-  Mocks
 }

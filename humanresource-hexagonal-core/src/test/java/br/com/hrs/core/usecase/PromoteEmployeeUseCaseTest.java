@@ -1,6 +1,6 @@
-package br.com.hrs.core.service;
+package br.com.hrs.core.usecase;
 
-import br.com.hrs.core.BuildConfiguration;
+import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.usecase.impl.employee.PromoteEmployeeUseCase;
@@ -13,10 +13,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
-@ContextConfiguration(classes = BuildConfiguration.class)
+@ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
-@DisplayName("Adapter Tests - Promote Employee")
-public class EmployeeServiceTest {
+@DisplayName("Adapter Tests - Promote Employee Use Case")
+public class PromoteEmployeeUseCaseTest {
 
     @Inject
     private PromoteEmployeeUseCase promoteEmployeeUseCase;

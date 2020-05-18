@@ -1,14 +1,14 @@
 package br.com.hrs.core.repository.impl;
 
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Named;
 
 @Named
-public class JobMockRepository extends Repository<Job, String> {
+public class JobMockRepository extends MockRepository<Job, String> {
 
-    public JobMockRepository() {
+    @Override
+    public void loadMockDatabase() {
 
         Job job01 = new Job.Builder()
                         .id("AD_PRES")

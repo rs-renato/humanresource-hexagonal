@@ -1,4 +1,4 @@
-package br.com.hrs.service.repository.jdbc;
+package br.com.hrs.service.repository.jdbc.impl;
 
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.repository.Repository;
@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class EmployeeRepositoryJdbc extends Repository<Employee, Integer> {
+public class EmployeeRepositoryJdbc implements Repository<Employee, Integer> {
 
     private JdbcTemplate jdbcTemplate;
 

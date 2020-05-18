@@ -2,11 +2,14 @@ package br.com.hrs.core.repository.impl;
 
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.Repository;
 
-public class LocationMockRepository extends Repository<Location, Integer> {
+import javax.inject.Named;
 
-    public LocationMockRepository() {
+@Named
+public class LocationMockRepository extends MockRepository<Location, Integer> {
+
+    @Override
+    public void loadMockDatabase() {
 
         Location location01 = new Location.Builder()
                                 .id(1400)

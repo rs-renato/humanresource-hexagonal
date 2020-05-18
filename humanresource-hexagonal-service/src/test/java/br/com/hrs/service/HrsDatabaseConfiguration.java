@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 @Configuration
-@ComponentScan("br.com.hrs.service.repository")
+@ComponentScan("br.com.hrs.service.repository.jdbc.impl")
 @EnableTransactionManagement
-public class DatabaseConfiguration {
+public class HrsDatabaseConfiguration {
 
     @Bean
     public DataSource dataSource() {

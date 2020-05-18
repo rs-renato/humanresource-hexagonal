@@ -2,14 +2,14 @@ package br.com.hrs.core.repository.impl;
 
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
-import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Named;
 
 @Named
-public class CountryMockRepository extends Repository<Country, String> {
+public class CountryMockRepository extends MockRepository<Country, String> {
 
-    public CountryMockRepository() {
+    @Override
+    public void loadMockDatabase() {
 
         Country country01 = new Country.Builder()
                 .id("IT")

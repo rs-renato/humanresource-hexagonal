@@ -1,4 +1,4 @@
-package br.com.hrs.service.repository.jdbc;
+package br.com.hrs.service.repository.jdbc.impl;
 
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.Repository;
@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class RegionRepositoryJdbc extends Repository<Region, Integer> {
+public class RegionRepositoryJdbc implements Repository<Region, Integer> {
 
     private JdbcTemplate jdbcTemplate;
 

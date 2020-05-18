@@ -1,10 +1,10 @@
-package br.com.hrs.service.repository;
+package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.Repository;
-import br.com.hrs.service.DatabaseConfiguration;
+import br.com.hrs.service.HrsDatabaseConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @DisplayName("Repository - Employee")
-@ContextConfiguration(classes = DatabaseConfiguration.class)
+@ContextConfiguration(classes = HrsDatabaseConfiguration.class)
 @ExtendWith(SpringExtension.class)
 public class EmployeeRepositoryJdbcTest {
 
@@ -28,19 +28,19 @@ public class EmployeeRepositoryJdbcTest {
     Logger logger = LogManager.getLogger(EmployeeRepositoryJdbcTest.class);
 
     @Inject
-    private Repository<Employee, Integer> employeeRepository;
+    private Repository<Employee, Integer> employeeRepositoryJdbc;
 
     @Test
     @DisplayName("Finds for null Employee")
     public void test01() {
-        Employee employee = employeeRepository.find(null);
+        Employee employee = employeeRepositoryJdbc.find(null);
         Assertions.assertNull(employee, "Employee should be null");
     }
 
     @Test
     @DisplayName("Finds for inexistent Employee")
     public void test02() {
-        Employee employee = employeeRepository.find(-1);
+        Employee employee = employeeRepositoryJdbc.find(-1);
         logger.info(employee);
         Assertions.assertNull(employee, "Employee should be null");
     }
@@ -49,13 +49,13 @@ public class EmployeeRepositoryJdbcTest {
     @DisplayName("Updates Employee")
     public void test03() {
 
-        Employee employee = employeeRepository.find(EMPLOYEE_ID);
+        Employee employee = employeeRepositoryJdbc.find(EMPLOYEE_ID);
         logger.info(employee);
         employee.setFirstName(employee.getFirstName() + " altered");
         employee.setManager(new Employee.Builder().id(1).build());
-        boolean updated = employeeRepository.update(employee);
+        boolean updated = employeeRepositoryJdbc.update(employee);
 
-        employee = employeeRepository.find(EMPLOYEE_ID);
+        employee = employeeRepositoryJdbc.find(EMPLOYEE_ID);
 
         Assertions.assertTrue(updated, "Employee should be updated");
         Assertions.assertTrue(employee.getFirstName().contains("altered"), "Employee should be altered");
@@ -78,9 +78,9 @@ public class EmployeeRepositoryJdbcTest {
                 .department(new Department.Builder().id(1).build())
                 .build();
 
-        Integer savedId = employeeRepository.save(employee);
+        Integer savedId = employeeRepositoryJdbc.save(employee);
 
-        employee = employeeRepository.find(savedId);
+        employee = employeeRepositoryJdbc.find(savedId);
 
         Assertions.assertNotNull(savedId, "Employee should be saved and return");
         Assertions.assertNotNull(employee, "Employee should be saved");
@@ -90,7 +90,7 @@ public class EmployeeRepositoryJdbcTest {
     @Test
     @DisplayName("Finds all Employees")
     public void test05() {
-        Collection<Employee> employees = employeeRepository.findAll();
+        Collection<Employee> employees = employeeRepositoryJdbc.findAll();
         logger.info(employees);
         Assertions.assertNotNull(employees, "Employees should be listed");
         Assertions.assertTrue(employees.size() >= 107, "Employees should be listed at all");
@@ -99,7 +99,7 @@ public class EmployeeRepositoryJdbcTest {
     @Test
     @DisplayName("Finds for Employee")
     public void test06() {
-        Employee employee = employeeRepository.find(EMPLOYEE_ID);
+        Employee employee = employeeRepositoryJdbc.find(EMPLOYEE_ID);
         logger.info(employee);
         Assertions.assertNotNull(employee, "Employee should not be null");
     }
@@ -107,22 +107,22 @@ public class EmployeeRepositoryJdbcTest {
     @Test
     @DisplayName("Employee exists")
     public void test07() {
-        boolean exists = employeeRepository.exists(EMPLOYEE_ID);
+        boolean exists = employeeRepositoryJdbc.exists(EMPLOYEE_ID);
         Assertions.assertTrue(exists, "Employee should be existent");
     }
 
     @Test
     @DisplayName("Employee doesn't exists")
     public void test08() {
-        boolean exists = employeeRepository.exists(-1);
+        boolean exists = employeeRepositoryJdbc.exists(-1);
         Assertions.assertFalse(exists, "Employee should not be existent");
     }
 
     @Test
     @DisplayName("Deletes Employee")
     public void test09() {
-        boolean deleted = employeeRepository.delete(EMPLOYEE_ID);
-        Employee employee = employeeRepository.find(EMPLOYEE_ID);
+        boolean deleted = employeeRepositoryJdbc.delete(EMPLOYEE_ID);
+        Employee employee = employeeRepositoryJdbc.find(EMPLOYEE_ID);
         Assertions.assertTrue(deleted, "Employee should be deleted");
         Assertions.assertNull(employee, "Employee still existing");
     }
@@ -130,7 +130,7 @@ public class EmployeeRepositoryJdbcTest {
     @Test
     @DisplayName("Deletes inexistend Employee")
     public void test10() {
-        boolean deleted = employeeRepository.delete(-1);
+        boolean deleted = employeeRepositoryJdbc.delete(-1);
         Assertions.assertFalse(deleted, "Employee should not be deleted");
     }
 }

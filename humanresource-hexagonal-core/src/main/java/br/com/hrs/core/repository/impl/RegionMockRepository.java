@@ -1,14 +1,14 @@
 package br.com.hrs.core.repository.impl;
 
 import br.com.hrs.core.model.Region;
-import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Named;
 
 @Named
-public class RegionMockRepository extends Repository<Region, Integer> {
+public class RegionMockRepository extends MockRepository<Region, Integer> {
 
-    public RegionMockRepository() {
+    @Override
+    public void loadMockDatabase() {
 
         Region region01 = new Region.Builder()
                             .id(1)

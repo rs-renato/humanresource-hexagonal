@@ -1,4 +1,4 @@
-package br.com.hrs.service;
+package br.com.hrs.core;
 
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.platform.suite.api.SelectPackages;
@@ -6,9 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
 @SelectPackages({
-        // business test (services)
-        "br.com.hrs.service.repository"
+        "br.com.hrs.core.usecase"
 })
-public class ServiceTestSuit {
+public class HrsCoreTestSuit {
 
 }

@@ -1,9 +1,9 @@
-package br.com.hrs.service.repository;
+package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.Repository;
-import br.com.hrs.service.DatabaseConfiguration;
+import br.com.hrs.service.HrsDatabaseConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 @DisplayName("Repository - Location")
-@ContextConfiguration(classes = DatabaseConfiguration.class)
+@ContextConfiguration(classes = HrsDatabaseConfiguration.class)
 @ExtendWith(SpringExtension.class)
 public class LocationRepositoryJdbcTest {
 
@@ -27,19 +27,19 @@ public class LocationRepositoryJdbcTest {
     Logger logger = LogManager.getLogger(LocationRepositoryJdbcTest.class);
 
     @Inject
-    private Repository<Location, Integer> locationRepository;
+    private Repository<Location, Integer> locationRepositoryJdbc;
 
     @Test
     @DisplayName("Finds for null Location")
     public void test01() {
-        Location location = locationRepository.find(null);
+        Location location = locationRepositoryJdbc.find(null);
         Assertions.assertNull(location, "Location should be null");
     }
 
     @Test
     @DisplayName("Finds for inexistent Location")
     public void test02() {
-        Location location = locationRepository.find(-1);
+        Location location = locationRepositoryJdbc.find(-1);
         logger.info(location);
         Assertions.assertNull(location, "Location should be null");
     }
@@ -47,16 +47,16 @@ public class LocationRepositoryJdbcTest {
     @Test
     @DisplayName("Updates Location")
     public void test03() {
-        Location location = locationRepository.find(LOCATION_ID);
+        Location location = locationRepositoryJdbc.find(LOCATION_ID);
         logger.info(location);
         location.setAddress(location.getAddress() + " altered");
         location.setState(location.getState() + " altered");
         location.setCity(location.getCity() + " altered");
         location.setPostalCode(location.getPostalCode() + "altered");
 
-        boolean updated = locationRepository.update(location);
+        boolean updated = locationRepositoryJdbc.update(location);
 
-        Location locationSaved  = locationRepository.find(LOCATION_ID);
+        Location locationSaved  = locationRepositoryJdbc.find(LOCATION_ID);
 
         Assertions.assertTrue(updated, "Location should be updated");
         Assertions.assertEquals(locationSaved.getAddress(), location.getAddress(), "Location address should be altered");
@@ -69,9 +69,9 @@ public class LocationRepositoryJdbcTest {
     @DisplayName("Saves Location")
     public void test04() {
         Location location = new Location("address", "postalCode", "city", "state", new Country.Builder().id("BR").build());
-        Integer savedId = locationRepository.save(location);
+        Integer savedId = locationRepositoryJdbc.save(location);
 
-        location = locationRepository.find(savedId);
+        location = locationRepositoryJdbc.find(savedId);
 
         Assertions.assertNotNull(savedId, "Location should be saved and return its id");
         Assertions.assertNotNull(location, "Location should be saved");
@@ -86,7 +86,7 @@ public class LocationRepositoryJdbcTest {
     @Test
     @DisplayName("Finds all Locations")
     public void test05() {
-        Collection<Location> locations = locationRepository.findAll();
+        Collection<Location> locations = locationRepositoryJdbc.findAll();
         logger.info(locations);
         Assertions.assertNotNull(locations, "Locations should be listed");
         Assertions.assertTrue(locations.size() >= 4, "Locations should be listed at all");
@@ -96,7 +96,7 @@ public class LocationRepositoryJdbcTest {
     @Test
     @DisplayName("Finds for Location")
     public void test06() {
-        Location location = locationRepository.find(LOCATION_ID);
+        Location location = locationRepositoryJdbc.find(LOCATION_ID);
         logger.info(location);
         Assertions.assertNotNull(location, "Location should not be null");
     }
@@ -104,10 +104,10 @@ public class LocationRepositoryJdbcTest {
     @Test
     @DisplayName("Deletes Location")
     public void test07() {
-        Location location = locationRepository.find(NEW_LOCATION_ID);
+        Location location = locationRepositoryJdbc.find(NEW_LOCATION_ID);
         logger.info(location);
-        boolean deleted = locationRepository.delete(location.getId());
-        boolean exists = locationRepository.exists(location.getId());
+        boolean deleted = locationRepositoryJdbc.delete(location.getId());
+        boolean exists = locationRepositoryJdbc.exists(location.getId());
         Assertions.assertTrue(deleted, "Location should be deleted");
         Assertions.assertFalse(exists, "Location still existing");
     }
@@ -115,21 +115,21 @@ public class LocationRepositoryJdbcTest {
     @Test
     @DisplayName("Deletes inexistent Location")
     public void test08() {
-        boolean deleted = locationRepository.delete(-1);
+        boolean deleted = locationRepositoryJdbc.delete(-1);
         Assertions.assertFalse(deleted, "Location should not be deleted");
     }
 
     @Test
     @DisplayName("Location exists")
     public void test09() {
-        boolean exists = locationRepository.exists(LOCATION_ID);
+        boolean exists = locationRepositoryJdbc.exists(LOCATION_ID);
         Assertions.assertTrue(exists, "Location should be existent");
     }
 
     @Test
     @DisplayName("Location doesn't exists")
     public void test10() {
-        boolean exists = locationRepository.exists(-1);
+        boolean exists = locationRepositoryJdbc.exists(-1);
         Assertions.assertFalse(exists, "Location should not be existent");
     }
 }

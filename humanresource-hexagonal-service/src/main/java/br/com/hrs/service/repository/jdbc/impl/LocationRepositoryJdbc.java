@@ -1,4 +1,4 @@
-package br.com.hrs.service.repository.jdbc;
+package br.com.hrs.service.repository.jdbc.impl;
 
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.Repository;
@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class LocationRepositoryJdbc extends Repository<Location, Integer> {
+public class LocationRepositoryJdbc implements Repository<Location, Integer> {
 
     private JdbcTemplate jdbcTemplate;
 

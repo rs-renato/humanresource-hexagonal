@@ -3,14 +3,14 @@ package br.com.hrs.core.repository.impl;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Named;
 
 @Named
-public class DepartmentMockRepository extends Repository<Department, Integer> {
+public class DepartmentMockRepository extends MockRepository<Department, Integer> {
 
-    public DepartmentMockRepository() {
+    @Override
+    public void loadMockDatabase() {
 
         Department dep01 = new Department.Builder()
                 .id(10)
