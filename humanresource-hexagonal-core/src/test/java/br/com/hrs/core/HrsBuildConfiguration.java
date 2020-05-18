@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan({
         "br.com.hrs.core.repository.impl",
         "br.com.hrs.core.usecase.impl",
-        "br.com.hrs.core.validations.impl",
+        "br.com.hrs.core.validator.impl",
 })
 public class HrsBuildConfiguration {
     // Development Build : Unit Test  -> Core <-  Mocks

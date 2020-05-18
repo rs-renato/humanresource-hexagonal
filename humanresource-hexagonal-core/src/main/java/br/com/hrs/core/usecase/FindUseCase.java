@@ -10,7 +10,7 @@ import java.util.Collection;
 
 public abstract class FindUseCase <E extends EntityKey<ID>, ID> {
 
-	private static Logger logger = LogManager.getLogger(FindUseCase.class);
+	static Logger logger = LogManager.getLogger(FindUseCase.class);
 
 	protected Repository<E, ID> repository;
 

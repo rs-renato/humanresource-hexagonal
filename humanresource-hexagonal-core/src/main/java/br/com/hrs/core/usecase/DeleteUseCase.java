@@ -2,7 +2,7 @@ package br.com.hrs.core.usecase;
 
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
-import br.com.hrs.core.validations.DeleteValidator;
+import br.com.hrs.core.validator.DeleteValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 public abstract class DeleteUseCase<E extends EntityKey<ID>, ID>{
 
-    private static Logger logger = LogManager.getLogger(DeleteUseCase.class);
+    static Logger logger = LogManager.getLogger(DeleteUseCase.class);
 
     protected Repository<E, ID> repository;
     protected List<DeleteValidator> validators;

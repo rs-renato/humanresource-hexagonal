@@ -1,9 +1,9 @@
-package br.com.hrs.core.validations.impl.country.save;
+package br.com.hrs.core.validator.impl.country.save;
 
 import br.com.hrs.core.exception.HrsBusinessException;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.Repository;
-import br.com.hrs.core.validations.SaveValidator;
+import br.com.hrs.core.validator.SaveValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
