@@ -10,6 +10,7 @@ import br.com.hrs.core.service.EmployeeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Objects;
 
@@ -22,6 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private Repository<Job, String> jobRepository;
     private Repository<Department, Integer> departmentRepository;
 
+    @Inject
     public EmployeeServiceImpl(Repository<Employee, Integer> employeeRepository, Repository<Job, String> jobRepository, Repository<Department, Integer> departmentRepository) {
         this.employeeRepository = employeeRepository;
         this.jobRepository = jobRepository;
