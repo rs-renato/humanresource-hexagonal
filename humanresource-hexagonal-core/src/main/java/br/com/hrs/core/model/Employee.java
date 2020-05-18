@@ -3,7 +3,7 @@ package br.com.hrs.core.model;
 import java.util.Date;
 import java.util.Objects;
 
-public class Employee {
+public class Employee implements EntityKey<Integer>{
 
 	private Integer id;
 	private String firstName;
@@ -38,6 +38,7 @@ public class Employee {
 		this.department = department;
 	}
 
+	@Override
 	public Integer getId() {
 		return id;
 	}

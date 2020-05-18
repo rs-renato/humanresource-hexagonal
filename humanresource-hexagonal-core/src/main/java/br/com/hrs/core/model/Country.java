@@ -2,7 +2,7 @@ package br.com.hrs.core.model;
 
 import java.util.Objects;
 
-public class Country{
+public class Country implements EntityKey<String> {
 
 	private String id;
 	private String name;
@@ -21,6 +21,7 @@ public class Country{
 		this.region = region;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}

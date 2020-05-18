@@ -2,7 +2,7 @@ package br.com.hrs.core.model;
 
 import java.util.Objects;
 
-public class Job {
+public class Job implements EntityKey<String>{
 
 	private String id;
 	private String title;
@@ -23,6 +23,7 @@ public class Job {
 		this.maxSalary = maxSalary;
 	}
 
+	@Override
 	public String getId() {
 		return id;
 	}

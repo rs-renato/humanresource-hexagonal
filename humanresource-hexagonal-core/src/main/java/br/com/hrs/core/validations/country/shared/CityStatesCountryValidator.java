@@ -1,19 +1,18 @@
 package br.com.hrs.core.validations.country.shared;
 
-import java.util.Arrays;
-import java.util.List;
-
 import br.com.hrs.core.exception.HrsBusinessException;
 import br.com.hrs.core.model.Country;
-import br.com.hrs.core.validations.country.SaveCountryValidator;
-import br.com.hrs.core.validations.country.UpdateCountryValidator;
+import br.com.hrs.core.validations.SaveValidator;
+import br.com.hrs.core.validations.UpdateValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Named;
+import java.util.Arrays;
+import java.util.List;
 
 @Named
-public class CityStatesCountryValidator implements SaveCountryValidator, UpdateCountryValidator {
+public class CityStatesCountryValidator implements SaveValidator<Country>, UpdateValidator<Country> {
 
 	private static Logger logger = LogManager.getLogger(CityStatesCountryValidator.class);
 	

@@ -8,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan({
         "br.com.hrs.core.repository.impl",
-        "br.com.hrs.core.service.impl",
+        "br.com.hrs.core.usecase.impl",
+        "br.com.hrs.core.validations",
 })
 public class BuildConfiguration {
     // Development Build : Unit Test  -> Core <-  Mocks

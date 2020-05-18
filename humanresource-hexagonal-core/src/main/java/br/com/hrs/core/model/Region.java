@@ -3,7 +3,7 @@ package br.com.hrs.core.model;
 import java.util.List;
 import java.util.Objects;
 
-public class Region {
+public class Region implements EntityKey<Integer>{
 
 	private Integer id;
 	private String name;
@@ -26,6 +26,7 @@ public class Region {
 		this.countries = countries;
 	}
 
+	@Override
 	public Integer getId() {
 		return id;
 	}

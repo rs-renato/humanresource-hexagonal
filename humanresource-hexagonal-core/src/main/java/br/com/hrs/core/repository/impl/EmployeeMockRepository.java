@@ -8,14 +8,9 @@ import br.com.hrs.core.repository.Repository;
 import javax.inject.Named;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Named
 public class EmployeeMockRepository extends Repository<Employee, Integer> {
-
-    private Map<Integer, Employee> database = new HashMap<>();
 
     public EmployeeMockRepository() {
 
@@ -55,42 +50,5 @@ public class EmployeeMockRepository extends Repository<Employee, Integer> {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public Employee find(Integer employeeId) {
-        logger.info("Fake database ->  find({}})", employeeId);
-        return this.database.get(employeeId);
-    }
-
-    @Override
-    public Integer save(Employee employee) {
-        logger.info("Fake database ->  save({}})", employee);
-        this.database.put(employee.getId(), employee);
-        return employee.getId();
-    }
-
-    @Override
-    public boolean update(Employee employee) {
-        logger.info("Fake database ->  update({}})", employee);
-        return this.database.put(employee.getId(), employee) != null;
-    }
-
-    @Override
-    public Collection<Employee> findAll() {
-        logger.info("Fake database ->  Collection<Employee> findAll()");
-        return this.database.values();
-    }
-
-    @Override
-    public boolean delete(Integer employeeId) {
-        logger.info("Fake database ->  delete({}})", employeeId);
-        return this.database.remove(employeeId) != null;
-    }
-
-    @Override
-    public boolean exists(Integer employeeId) {
-        logger.info("Fake database ->  exists({}})", employeeId);
-        return this.database.containsKey(employeeId);
     }
 }

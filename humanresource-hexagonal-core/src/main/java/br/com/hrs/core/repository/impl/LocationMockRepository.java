@@ -4,13 +4,7 @@ import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.Repository;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 public class LocationMockRepository extends Repository<Location, Integer> {
-
-    private Map<Integer, Location> database = new HashMap<>();
 
     public LocationMockRepository() {
 
@@ -34,42 +28,5 @@ public class LocationMockRepository extends Repository<Location, Integer> {
 
         database.put(location01.getId(), location01);
         database.put(location02.getId(), location02);
-    }
-
-    @Override
-    public Location find(Integer locationId) {
-        logger.info("Fake database ->  Location get({}})", locationId);
-        return this.database.get(locationId);
-    }
-
-    @Override
-    public Integer save(Location location) {
-        logger.info("Fake database ->  save({}})", location);
-        this.database.put(location.getId(), location);
-        return location.getId();
-    }
-
-    @Override
-    public boolean update(Location location) {
-        logger.info("Fake database ->  update({}})", location);
-        return this.database.put(location.getId(), location) != null;
-    }
-
-    @Override
-    public Collection<Location> findAll() {
-        logger.info("Fake database ->  Collection<Location> list()");
-        return this.database.values();
-    }
-
-    @Override
-    public boolean delete(Integer locationId) {
-        logger.info("Fake database ->  delete({}})", locationId);
-        return this.database.remove(locationId) != null;
-    }
-
-    @Override
-    public boolean exists(Integer locationId) {
-        logger.info("Fake database ->  exists({}})", locationId);
-        return this.database.containsKey(locationId);
     }
 }

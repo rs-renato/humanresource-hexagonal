@@ -6,14 +6,9 @@ import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Named;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 @Named
 public class DepartmentMockRepository extends Repository<Department, Integer> {
-
-    private Map<Integer, Department> database = new HashMap<>();
 
     public DepartmentMockRepository() {
 
@@ -33,42 +28,5 @@ public class DepartmentMockRepository extends Repository<Department, Integer> {
 
         this.database.put(dep01.getId(), dep01);
         this.database.put(dep02.getId(), dep02);
-    }
-
-    @Override
-    public Department find(Integer departmentId) {
-        logger.info("Fake database -> find({}})", departmentId);
-        return this.database.get(departmentId);
-    }
-
-    @Override
-    public Integer save(Department department) {
-        logger.info("Fake database ->  save({}})", department);
-        this.database.put(department.getId(), department);
-        return department.getId();
-    }
-
-    @Override
-    public boolean update(Department department) {
-        logger.info("Fake database ->  update({}})", department);
-        return this.database.put(department.getId(), department) != null;
-    }
-
-    @Override
-    public Collection<Department> findAll() {
-        logger.info("Fake database ->  Collection<Department> findAll()");
-        return this.database.values();
-    }
-
-    @Override
-    public boolean delete(Integer departmentId) {
-        logger.info("Fake database ->  delete({}})", departmentId);
-        return this.database.remove(departmentId) != null;
-    }
-
-    @Override
-    public boolean exists(Integer departmentId) {
-        logger.info("Fake database ->  exists({}})", departmentId);
-        return this.database.containsKey(departmentId);
     }
 }

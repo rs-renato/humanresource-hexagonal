@@ -1,12 +1,12 @@
-package br.com.hrs.core.service.impl;
+package br.com.hrs.core.usecase.impl.employee;
 
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.Repository;
-import br.com.hrs.core.service.EmployeeService;
+import br.com.hrs.core.usecase.FindUseCase;
+import br.com.hrs.core.usecase.UpdateUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,27 +15,23 @@ import javax.inject.Named;
 import java.util.Objects;
 
 @Named
-public class EmployeeServiceImpl implements EmployeeService {
+public class PromoteEmployeeUseCase {
 
-    private Logger logger = LogManager.getLogger(EmployeeServiceImpl.class);
+    private Logger logger = LogManager.getLogger(PromoteEmployeeUseCase.class);
 
-    private Repository<Employee, Integer> employeeRepository;
-    private Repository<Job, String> jobRepository;
-    private Repository<Department, Integer> departmentRepository;
+    private UpdateUseCase<Employee, Integer> employeeUpdateUseCase;
+    private FindUseCase<Employee, Integer> employeeFindUseCase;
+    private FindUseCase<Job, String> jobFindUseCase;
+    private FindUseCase<Department, Integer> departmentFindUseCase;
 
     @Inject
-    public EmployeeServiceImpl(Repository<Employee, Integer> employeeRepository, Repository<Job, String> jobRepository, Repository<Department, Integer> departmentRepository) {
-        this.employeeRepository = employeeRepository;
-        this.jobRepository = jobRepository;
-        this.departmentRepository = departmentRepository;
+    public PromoteEmployeeUseCase(UpdateUseCase<Employee, Integer> employeeUpdateUseCase, FindUseCase<Employee, Integer> employeeFindUseCase, FindUseCase<Job, String> jobFindUseCase, FindUseCase<Department, Integer> departmentFindUseCase ) {
+        this.employeeUpdateUseCase = employeeUpdateUseCase;
+        this.employeeFindUseCase = employeeFindUseCase;
+        this.jobFindUseCase = jobFindUseCase;
+        this.departmentFindUseCase = departmentFindUseCase;
     }
 
-    @Override
-    public Employee get(Integer employee) {
-        return employeeRepository.find(employee);
-    }
-
-    @Override
     public void promote(Integer employeeId, String jobId, Integer departmentId) {
 
         logger.info("Promoting employee '{}', to job '{} from department '{}", employeeId, jobId, departmentId);
@@ -52,19 +48,19 @@ public class EmployeeServiceImpl implements EmployeeService {
             Error.of("Department ID").when(FIELD.MANDATORY).trows();
         }
 
-        Employee employee = employeeRepository.find(employeeId);
+        Employee employee = employeeFindUseCase.find(employeeId);
 
         if (Objects.isNull(employee)) {
             Error.of("Employee").when(FIELD.NOT_FOUND).trows();
         }
 
-        Job job = jobRepository.find(jobId);
+        Job job = jobFindUseCase.find(jobId);
 
         if (Objects.isNull(job)) {
             Error.of("Job").when(FIELD.NOT_FOUND).trows();
         }
 
-        Department department = departmentRepository.find(departmentId);
+        Department department = departmentFindUseCase.find(departmentId);
 
         if (Objects.isNull(department)) {
             Error.of("Department").when(FIELD.NOT_FOUND).trows();
@@ -74,7 +70,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setDepartment(department);
         employee.setJob(job);
 
-        employeeRepository.update(employee);
+        employeeUpdateUseCase.update(employee);
 
         logger.info("Employee '{}' promoted!", employeeId);
     }

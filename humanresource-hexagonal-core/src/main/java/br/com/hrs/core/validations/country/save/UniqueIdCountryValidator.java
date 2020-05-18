@@ -3,7 +3,7 @@ package br.com.hrs.core.validations.country.save;
 import br.com.hrs.core.exception.HrsBusinessException;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.Repository;
-import br.com.hrs.core.validations.country.SaveCountryValidator;
+import br.com.hrs.core.validations.SaveValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-public class UniqueIdCountryValidator implements SaveCountryValidator {
+public class UniqueIdCountryValidator implements SaveValidator<Country> {
 
 	private static Logger logger = LogManager.getLogger(UniqueIdCountryValidator.class);
 

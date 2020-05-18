@@ -2,7 +2,7 @@ package br.com.hrs.core.model;
 
 import java.util.Objects;
 
-public class Department {
+public class Department implements EntityKey<Integer>{
 
 	private Integer id;
 	private String name;
@@ -23,6 +23,7 @@ public class Department {
 		this.location = location;
 	}
 
+	@Override
 	public Integer getId() {
 		return id;
 	}
