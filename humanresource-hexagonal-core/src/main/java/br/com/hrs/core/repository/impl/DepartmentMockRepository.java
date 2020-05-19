@@ -13,14 +13,14 @@ public class DepartmentMockRepository extends MockRepository<Department, Integer
     public void loadMockDatabase() {
 
         Department dep01 = new Department.Builder()
-                .id(10)
+                .id(1)
                 .name("Administration")
                 .manager(new Employee.Builder().id(200).build())
                 .location(new Location.Builder().id(1700).build())
                 .build();
 
         Department dep02 = new Department.Builder()
-                .id(20)
+                .id(2)
                 .name("Marketing")
                 .manager(new Employee.Builder().id(201).build())
                 .location(new Location.Builder().id(1800).build())

@@ -1,5 +1,6 @@
 package br.com.hrs.service.repository.jdbc;
 
+import br.com.hrs.core.model.Location;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.HrsDatabaseConfiguration;
@@ -50,11 +51,11 @@ public class RegionRepositoryJdbcTest {
         logger.info(region);
         region.setName(region.getName() + " altered");
 
-        boolean updated = regionRepositoryJdbc.update(region);
+        regionRepositoryJdbc.update(region);
 
         Region regionSaved  = regionRepositoryJdbc.find(REGION_ID);
 
-        Assertions.assertTrue(updated, "Region should be updated");
+        
         Assertions.assertEquals(regionSaved.getName(), region.getName(), "Region name should be altered");
     }
 
@@ -62,14 +63,10 @@ public class RegionRepositoryJdbcTest {
     @DisplayName("Saves Region")
     public void test04() {
         Region region = new Region("new region");
-        Integer savedId = regionRepositoryJdbc.save(region);
-
-        region = regionRepositoryJdbc.find(savedId);
-
-        Assertions.assertNotNull(savedId, "Region should be saved and return its id");
-        Assertions.assertNotNull(region, "Region should be saved");
-        Assertions.assertTrue(region.getName().contains("new"), "Region should be saved");
-        Assertions.assertTrue(savedId.equals(region.getId()), "Region saved needs to match saved id");
+        Region regionSaved= regionRepositoryJdbc.save(region);
+        Assertions.assertNotNull(regionSaved, "Region saved should not be null");
+        Region regionFound = regionRepositoryJdbc.find(regionSaved.getId());
+        Assertions.assertEquals(regionSaved, regionFound, String.format("Region should be equals"));
     }
 
     @Test

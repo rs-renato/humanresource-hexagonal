@@ -22,15 +22,15 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
         return this.database.get(id);
     }
 
-    public ID save(E entity) {
+    public E save(E entity) {
         logger.info("Fake database ->  save({}})", entity);
         this.database.put(entity.getId(), entity);
-        return entity.getId();
+        return entity;
     }
 
-    public boolean update(E entity) {
+    public void update(E entity) {
         logger.info("Fake database ->  update({}})", entity);
-        return this.database.put(entity.getId(), entity) != null;
+        this.database.put(entity.getId(), entity);
     }
 
     public Collection<E> findAll() {
@@ -40,7 +40,8 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
 
     public boolean delete(ID id) {
         logger.info("Fake database ->  delete({}})", id);
-        return this.database.remove(id) != null;
+        this.database.remove(id);
+        return true;
     }
 
     public boolean exists(ID id) {

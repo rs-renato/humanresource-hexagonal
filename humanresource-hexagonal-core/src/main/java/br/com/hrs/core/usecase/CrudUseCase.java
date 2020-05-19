@@ -10,7 +10,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.*;
 
 public abstract class CrudUseCase<E extends EntityKey<ID>, ID>{
@@ -27,44 +26,41 @@ public abstract class CrudUseCase<E extends EntityKey<ID>, ID>{
     }
 
     public boolean exists(ID id) {
-        logger.debug("Calling exists on country repository");
+        logger.debug("Calling exists in repository");
         return this.repository.exists(id);
     }
 
     public E find(ID id) {
-        logger.debug("Calling findOne on country repository");
+        logger.debug("Calling find in repository");
         return this.repository.find(id);
     }
 
     public Collection<E> findAll() {
-        logger.debug("Calling findAll on country repository");
+        logger.debug("Calling findAll in repository");
         return this.repository.findAll();
     }
 
-    public ID save(E entity) {
-        logger.debug("Processing {} validations to save entity {}", validators.size(), entity);
+    public E save(E entity) {
         this.validators.stream()
                 .filter(validator -> validator instanceof SaveValidator)
                 .forEach(validator -> validator.validate(entity));
-        logger.debug("Calling save on entity repository");
+        logger.debug("Calling save on repository");
         return this.repository.save(entity);
     }
 
-    public boolean update(E entity) {
-        logger.debug("Processing {} validations to update entity id {}", validators.size(), entity.getId());
+    public void update(E entity) {
         this.validators.stream()
                 .filter(validator -> validator instanceof UpdateValidator)
                 .forEach(validator -> validator.validate(entity));
-        logger.debug("Calling save on entity repository");
-        return this.repository.update(entity);
+        logger.debug("Calling save on repository");
+        this.repository.update(entity);
     }
 
     public boolean delete(ID id) {
-        logger.debug("Processing {} validations to delete country id {}", validators.size(), id);
         this.validators.stream()
                 .filter(validator -> validator instanceof DeleteValidator)
                 .forEach(validator -> validator.validate(id));
-        logger.debug("Calling delete on country repository");
+        logger.debug("Calling delete on repository");
         return this.repository.delete(id);
     }
 }

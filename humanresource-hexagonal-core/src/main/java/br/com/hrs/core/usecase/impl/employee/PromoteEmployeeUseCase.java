@@ -5,8 +5,7 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.usecase.FindUseCase;
-import br.com.hrs.core.usecase.UpdateUseCase;
+import br.com.hrs.core.usecase.CrudUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,17 +18,15 @@ public class PromoteEmployeeUseCase {
 
     private Logger logger = LogManager.getLogger(PromoteEmployeeUseCase.class);
 
-    private UpdateUseCase<Employee, Integer> employeeUpdateUseCase;
-    private FindUseCase<Employee, Integer> employeeFindUseCase;
-    private FindUseCase<Job, String> jobFindUseCase;
-    private FindUseCase<Department, Integer> departmentFindUseCase;
+    private CrudUseCase<Employee, Integer> employeeCrudUseCase;
+    private CrudUseCase<Job, String> jobCrudUseCase;
+    private CrudUseCase<Department, Integer> departmentCrudUseCase;
 
     @Inject
-    public PromoteEmployeeUseCase(UpdateUseCase<Employee, Integer> employeeUpdateUseCase, FindUseCase<Employee, Integer> employeeFindUseCase, FindUseCase<Job, String> jobFindUseCase, FindUseCase<Department, Integer> departmentFindUseCase ) {
-        this.employeeUpdateUseCase = employeeUpdateUseCase;
-        this.employeeFindUseCase = employeeFindUseCase;
-        this.jobFindUseCase = jobFindUseCase;
-        this.departmentFindUseCase = departmentFindUseCase;
+    public PromoteEmployeeUseCase(CrudUseCase<Employee, Integer> employeeCrudUseCase, CrudUseCase<Job, String> jobCrudUseCase, CrudUseCase<Department, Integer> departmentCrudUseCase) {
+        this.employeeCrudUseCase = employeeCrudUseCase;
+        this.jobCrudUseCase = jobCrudUseCase;
+        this.departmentCrudUseCase = departmentCrudUseCase;
     }
 
     public void promote(Integer employeeId, String jobId, Integer departmentId) {
@@ -48,19 +45,19 @@ public class PromoteEmployeeUseCase {
             Error.of("Department ID").when(FIELD.MANDATORY).trows();
         }
 
-        Employee employee = employeeFindUseCase.find(employeeId);
+        Employee employee = employeeCrudUseCase.find(employeeId);
 
         if (Objects.isNull(employee)) {
             Error.of("Employee").when(FIELD.NOT_FOUND).trows();
         }
 
-        Job job = jobFindUseCase.find(jobId);
+        Job job = jobCrudUseCase.find(jobId);
 
         if (Objects.isNull(job)) {
             Error.of("Job").when(FIELD.NOT_FOUND).trows();
         }
 
-        Department department = departmentFindUseCase.find(departmentId);
+        Department department = departmentCrudUseCase.find(departmentId);
 
         if (Objects.isNull(department)) {
             Error.of("Department").when(FIELD.NOT_FOUND).trows();
@@ -70,7 +67,7 @@ public class PromoteEmployeeUseCase {
         employee.setDepartment(department);
         employee.setJob(job);
 
-        employeeUpdateUseCase.update(employee);
+        employeeCrudUseCase.update(employee);
 
         logger.info("Employee '{}' promoted!", employeeId);
     }

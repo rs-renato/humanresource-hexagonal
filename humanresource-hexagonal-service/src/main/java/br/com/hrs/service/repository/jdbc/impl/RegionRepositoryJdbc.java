@@ -43,7 +43,7 @@ public class RegionRepositoryJdbc implements Repository<Region, Integer> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer save(Region region) {
+    public Region save(Region region) {
 
         Integer savedId = null;
 
@@ -64,24 +64,24 @@ public class RegionRepositoryJdbc implements Repository<Region, Integer> {
 
             savedId = keyHolder.getKey().intValue();
             logger.debug("Returned saved ID {}", savedId);
+            region.setId(savedId);
+            return region;
         }
 
-        return savedId;
+        return null;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(Region region) {
+    public void update(Region region) {
 
         if (Objects.nonNull(region)) {
 
             String sql = "UPDATE REGIONS SET REGION_NAME = ? WHERE REGION_ID = ?";
             Object[] param = new Object[]{region.getName(), region.getId()};
 
-            return jdbcTemplate.update(sql, param) > 0;
+            jdbcTemplate.update(sql, param);
         }
-
-        return false;
     }
 
     @Override

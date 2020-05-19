@@ -40,7 +40,7 @@ public class ContryRepositoryJdbc implements Repository<Country, String> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String save(Country country) {
+    public Country save(Country country) {
 
         String savedId = null;
 
@@ -56,22 +56,20 @@ public class ContryRepositoryJdbc implements Repository<Country, String> {
             logger.debug("Returned saved ID {}", savedId);
         }
 
-        return savedId;
+        return country;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(Country country) {
+    public void update(Country country) {
 
         if (Objects.nonNull(country)) {
 
             String sql = "UPDATE COUNTRIES SET COUNTRY_NAME = ?, REGION_ID = ? WHERE COUNTRY_ID = ?";
             Object[] param = new Object[]{country.getName(), country.getRegion().getId(), country.getId()};
 
-            return jdbcTemplate.update(sql, param) > 0;
+            jdbcTemplate.update(sql, param);
         }
-
-        return false;
     }
 
     @Override

@@ -53,11 +53,10 @@ public class DepartmentRepositoryJdbcTest {
         logger.info(department);
         department.setName(department.getName() + " altered");
         department.setManager(new Employee.Builder().id(MANAGER_ID).build());
-        boolean updated = departmentRepositoryJdbc.update(department);
+        departmentRepositoryJdbc.update(department);
 
         department = departmentRepositoryJdbc.find(DEPARTMENT_ID);
 
-        Assertions.assertTrue(updated, "Department should be updated");
         Assertions.assertTrue(department.getName().contains("altered"), "Department should be altered");
         Assertions.assertTrue(MANAGER_ID == department.getManager().getId(), "Department manager should be altered");
     }
@@ -66,13 +65,10 @@ public class DepartmentRepositoryJdbcTest {
     @DisplayName("Saves Department")
     public void test04() {
         Department department = new Department("new department", new Employee.Builder().id(MANAGER_ID).build(), new Location.Builder().id(LOCATION_ID).build());
-        Integer savedId = departmentRepositoryJdbc.save(department);
-
-        department = departmentRepositoryJdbc.find(savedId);
-
-        Assertions.assertNotNull(savedId, "Department should be saved and return");
-        Assertions.assertNotNull(department, "Department should be saved");
-        Assertions.assertTrue(savedId.equals(department.getId()), "Department saved needs to match saved id");
+        Department departmentSaved = departmentRepositoryJdbc.save(department);
+        Assertions.assertNotNull(departmentSaved, String.format("Department saved should not be null"));
+        Department departmentFound = departmentRepositoryJdbc.find(departmentSaved.getId());
+        Assertions.assertEquals(departmentSaved, departmentFound, String.format("Department should be equals"));
     }
 
     @Test

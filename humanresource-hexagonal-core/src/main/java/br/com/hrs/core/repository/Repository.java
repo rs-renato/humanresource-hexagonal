@@ -12,9 +12,9 @@ import java.util.Collection;
  
     E find(ID id);
     
-    ID save(E entity);
+    E save(E entity);
     
-    boolean update(E entity);
+    void update(E entity);
     
     Collection<E> findAll();
 

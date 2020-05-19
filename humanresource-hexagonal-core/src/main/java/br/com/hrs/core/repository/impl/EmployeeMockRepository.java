@@ -25,13 +25,13 @@ public class EmployeeMockRepository extends MockRepository<Employee, Integer> {
                         .hireDate(new SimpleDateFormat("dd.MM.yyyy").parse("17.06.2003"))
                         .job(new Job.Builder().id("AD_PRES").build())
                         .salary(24000f)
-                        .commissionPercent(null)
-                        .manager(new Employee.Builder().id(100).build())
+                        .commissionPercent(.1f)
+                        .manager(new Employee.Builder().id(101).build())
                         .department(new Department.Builder().id(90).build())
                         .build();
 
                 Employee employee02 = new Employee.Builder()
-                        .id(100)
+                        .id(101)
                         .firstName("Neena")
                         .lastName("Kochhar")
                         .email("NKOCHHAR")
@@ -39,8 +39,8 @@ public class EmployeeMockRepository extends MockRepository<Employee, Integer> {
                         .hireDate(new SimpleDateFormat("dd.MM.yyyy").parse("21.09.2005"))
                         .job(new Job.Builder().id("AD_VP").build())
                         .salary(17000f)
-                        .commissionPercent(null)
-                        .manager(new Employee.Builder().id(100).build())
+                        .commissionPercent(.2f)
+                        .manager(new Employee.Builder().id(101).build())
                         .department(new Department.Builder().id(90).build())
                         .build();
 

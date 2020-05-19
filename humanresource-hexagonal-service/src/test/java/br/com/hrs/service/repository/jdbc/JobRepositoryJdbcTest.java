@@ -52,11 +52,10 @@ public class JobRepositoryJdbcTest {
         job.setMinSalary(job.getMinSalary() + 1);
         job.setMaxSalary(job.getMaxSalary() + 1);
 
-        boolean updated = jobRepositoryJdbc.update(job);
+        jobRepositoryJdbc.update(job);
 
         Job jobSaved  = jobRepositoryJdbc.find(JOB_ID);
 
-        Assertions.assertTrue(updated, "Job should be updated");
         Assertions.assertEquals(jobSaved.getTitle(), job.getTitle(), "Job title should be altered");
         Assertions.assertEquals(jobSaved.getTitle(), job.getTitle(), "Job title should be altered");
         Assertions.assertEquals(jobSaved.getMinSalary(), job.getMinSalary(), "Job min salary should be altered");

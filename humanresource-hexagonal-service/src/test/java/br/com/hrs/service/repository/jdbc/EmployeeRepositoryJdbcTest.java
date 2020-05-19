@@ -53,11 +53,10 @@ public class EmployeeRepositoryJdbcTest {
         logger.info(employee);
         employee.setFirstName(employee.getFirstName() + " altered");
         employee.setManager(new Employee.Builder().id(1).build());
-        boolean updated = employeeRepositoryJdbc.update(employee);
+        employeeRepositoryJdbc.update(employee);
 
         employee = employeeRepositoryJdbc.find(EMPLOYEE_ID);
 
-        Assertions.assertTrue(updated, "Employee should be updated");
         Assertions.assertTrue(employee.getFirstName().contains("altered"), "Employee should be altered");
     }
 
@@ -78,13 +77,10 @@ public class EmployeeRepositoryJdbcTest {
                 .department(new Department.Builder().id(1).build())
                 .build();
 
-        Integer savedId = employeeRepositoryJdbc.save(employee);
-
-        employee = employeeRepositoryJdbc.find(savedId);
-
-        Assertions.assertNotNull(savedId, "Employee should be saved and return");
-        Assertions.assertNotNull(employee, "Employee should be saved");
-        Assertions.assertTrue(savedId.equals(employee.getId()), "Employee saved needs to match saved id");
+        Employee employeeSaved= employeeRepositoryJdbc.save(employee);
+        Assertions.assertNotNull(employeeSaved, "Employee saved should not be null");
+        Employee employeeFound = employeeRepositoryJdbc.find(employeeSaved.getId());
+        Assertions.assertEquals(employeeSaved, employeeFound, String.format("Employee should be equals"));
     }
 
     @Test

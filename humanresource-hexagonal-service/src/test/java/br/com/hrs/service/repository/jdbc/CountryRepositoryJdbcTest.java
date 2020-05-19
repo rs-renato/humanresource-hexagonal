@@ -53,11 +53,10 @@ public class CountryRepositoryJdbcTest {
         country.setName(country.getName() + " altered");
         country.setRegion(new Region.Builder().id(REGION_ID).build());
 
-        boolean updated = contryRepositoryJdbc.update(country);
+        contryRepositoryJdbc.update(country);
 
         Country countrySaved  = contryRepositoryJdbc.find(COUNTRY_ID);
 
-        Assertions.assertTrue(updated, "Country should be updated");
         Assertions.assertEquals(countrySaved.getName(), country.getName(), "Country name should be altered");
         Assertions.assertEquals(countrySaved.getRegion().getId(), country.getRegion().getId(), "Country region id should be altered");
     }

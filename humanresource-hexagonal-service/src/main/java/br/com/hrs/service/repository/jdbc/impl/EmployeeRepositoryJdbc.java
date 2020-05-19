@@ -44,7 +44,7 @@ public class EmployeeRepositoryJdbc implements Repository<Employee, Integer> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer save(Employee employee) {
+    public Employee save(Employee employee) {
 
         Integer savedId = null;
 
@@ -74,14 +74,17 @@ public class EmployeeRepositoryJdbc implements Repository<Employee, Integer> {
 
             savedId = keyHolder.getKey().intValue();
             logger.debug("Returned saved ID {}", savedId);
+
+            employee.setId(savedId);
+            return employee;
         }
 
-        return savedId;
+        return null;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(Employee employee) {
+    public void update(Employee employee) {
 
         if (Objects.nonNull(employee)) {
 
@@ -89,10 +92,8 @@ public class EmployeeRepositoryJdbc implements Repository<Employee, Integer> {
 
             Object[] param = new Object[]{employee.getFirstName(), employee.getLastName(), employee.getEmail(), employee.getPhone(), employee.getHireDate(), employee.getJob().getId(), employee.getSalary(), employee.getCommissionPercent(), employee.getManager().getId(), employee.getDepartment().getId(), employee.getId()};
 
-            return jdbcTemplate.update(sql, param) > 0;
+            jdbcTemplate.update(sql, param);
         }
-
-        return false;
     }
 
     @Override

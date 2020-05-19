@@ -1,6 +1,7 @@
 package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Country;
+import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.HrsDatabaseConfiguration;
@@ -54,11 +55,10 @@ public class LocationRepositoryJdbcTest {
         location.setCity(location.getCity() + " altered");
         location.setPostalCode(location.getPostalCode() + "altered");
 
-        boolean updated = locationRepositoryJdbc.update(location);
+        locationRepositoryJdbc.update(location);
 
         Location locationSaved  = locationRepositoryJdbc.find(LOCATION_ID);
 
-        Assertions.assertTrue(updated, "Location should be updated");
         Assertions.assertEquals(locationSaved.getAddress(), location.getAddress(), "Location address should be altered");
         Assertions.assertEquals(locationSaved.getState(), location.getState(), "Location state should be altered");
         Assertions.assertEquals(locationSaved.getCity(), location.getCity(), "Location city should be altered");
@@ -69,18 +69,10 @@ public class LocationRepositoryJdbcTest {
     @DisplayName("Saves Location")
     public void test04() {
         Location location = new Location("address", "postalCode", "city", "state", new Country.Builder().id("BR").build());
-        Integer savedId = locationRepositoryJdbc.save(location);
-
-        location = locationRepositoryJdbc.find(savedId);
-
-        Assertions.assertNotNull(savedId, "Location should be saved and return its id");
-        Assertions.assertNotNull(location, "Location should be saved");
-        Assertions.assertTrue(location.getAddress().equals("address"), "Location address should be saved");
-        Assertions.assertTrue(location.getPostalCode().equals("postalCode"), "Location postalCode should be saved");
-        Assertions.assertTrue(location.getCity().equals("city"), "Location city should be saved");
-        Assertions.assertTrue(location.getState().equals("state"), "Location state should be saved");
-        Assertions.assertTrue(location.getCountry().getId().equals("BR"), "Location country should be saved");
-        Assertions.assertTrue(savedId.equals(location.getId()), "Location saved needs to match saved id");
+        Location locationSaved= locationRepositoryJdbc.save(location);
+        Assertions.assertNotNull(locationSaved, "Location saved should not be null");
+        Location locationFound = locationRepositoryJdbc.find(locationSaved.getId());
+        Assertions.assertEquals(locationSaved, locationFound, String.format("Location should be equals"));
     }
 
     @Test

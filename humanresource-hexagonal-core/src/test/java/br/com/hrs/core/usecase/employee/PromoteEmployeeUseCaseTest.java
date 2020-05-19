@@ -1,8 +1,10 @@
-package br.com.hrs.core.usecase;
+package br.com.hrs.core.usecase.employee;
 
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.exception.HrsNotFoundException;
+import br.com.hrs.core.model.Employee;
+import br.com.hrs.core.usecase.CrudUseCase;
 import br.com.hrs.core.usecase.impl.employee.PromoteEmployeeUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -15,19 +17,22 @@ import javax.inject.Inject;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
-@DisplayName("Adapter Tests - Promote Employee Use Case")
+@DisplayName("Employee Promote Use Case")
 public class PromoteEmployeeUseCaseTest {
 
     @Inject
     private PromoteEmployeeUseCase promoteEmployeeUseCase;
 
-    private Integer employeeId = 100;
-    private String jobId = "AD_PRES";
-    private Integer departmentId = 10;
+    @Inject
+    private CrudUseCase<Employee, Integer> employeeCrudUseCase;
+
+    private Integer employeeId = 101;
+    private String jobId = "AD_VP";
+    private Integer departmentId = 2;
 
     @Test
     @DisplayName("Promotes with null employee id but its mandatory")
-    public void test02() {
+    public void test01() {
 
         RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             promoteEmployeeUseCase.promote(null, jobId, departmentId);
@@ -38,7 +43,7 @@ public class PromoteEmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with null job id but its mandatory")
-    public void test03() {
+    public void test02() {
 
         RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             promoteEmployeeUseCase.promote(employeeId, null, departmentId);
@@ -49,7 +54,7 @@ public class PromoteEmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with null department id but its mandatory")
-    public void test04() {
+    public void test03() {
 
         RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
             promoteEmployeeUseCase.promote(employeeId, jobId, null);
@@ -60,7 +65,7 @@ public class PromoteEmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with employee id but its not found")
-    public void test05() {
+    public void test04() {
 
         RuntimeException exception = Assertions.assertThrows(HrsNotFoundException.class, () -> {
             promoteEmployeeUseCase.promote(-1, jobId, departmentId);
@@ -71,7 +76,7 @@ public class PromoteEmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with job id but its not found")
-    public void test06() {
+    public void test05() {
 
         RuntimeException exception = Assertions.assertThrows(HrsNotFoundException.class, () -> {
             promoteEmployeeUseCase.promote(employeeId, "NONE", departmentId);
@@ -82,7 +87,7 @@ public class PromoteEmployeeUseCaseTest {
 
     @Test
     @DisplayName("Promotes with department id but its not found")
-    public void test07() {
+    public void test06() {
 
         RuntimeException exception = Assertions.assertThrows(HrsNotFoundException.class, () -> {
             promoteEmployeeUseCase.promote(employeeId, jobId, -1);
@@ -93,14 +98,13 @@ public class PromoteEmployeeUseCaseTest {
 
     @Test
     @DisplayName("Should promote employee ")
-    public void test08() {
-
+    public void test07() {
         promoteEmployeeUseCase.promote(employeeId, jobId, departmentId);
 
-//        Employee employee = promoteEmployeeUseCase.get(employeeId);
-//
-//        Assertions.assertEquals(employeeId, employee.getId());
-//        Assertions.assertEquals(jobId, employee.getJob().getId());
-//        Assertions.assertEquals(departmentId, employee.getDepartment().getId());
+        Employee employee = employeeCrudUseCase.find(employeeId);
+
+        Assertions.assertEquals(employeeId, employee.getId());
+        Assertions.assertEquals(jobId, employee.getJob().getId());
+        Assertions.assertEquals(departmentId, employee.getDepartment().getId());
     }
 }

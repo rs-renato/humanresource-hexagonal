@@ -40,7 +40,7 @@ public class JobRepositoryJdbc implements Repository<Job, String> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public String save(Job job) {
+    public Job save(Job job) {
         if (Objects.nonNull(job)) {
 
             String sql = "INSERT INTO JOBS VALUES (?,?,?,?)";
@@ -48,7 +48,7 @@ public class JobRepositoryJdbc implements Repository<Job, String> {
 
             jdbcTemplate.update(sql, param);
 
-            return job.getId();
+            return job;
         }
 
         return null;
@@ -56,15 +56,13 @@ public class JobRepositoryJdbc implements Repository<Job, String> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(Job job) {
+    public void update(Job job) {
         if (Objects.nonNull(job)) {
             String sql = "UPDATE JOBS SET JOB_TITLE = ?, MIN_SALARY = ?, MAX_SALARY = ? WHERE JOB_ID = ?";
             Object[] param = new Object[]{job.getTitle(), job.getMinSalary(), job.getMaxSalary(), job.getId()};
 
-            return jdbcTemplate.update(sql, param) > 0;
+            jdbcTemplate.update(sql, param);
         }
-
-        return false;
     }
 
     @Override

@@ -43,7 +43,7 @@ public class DepartmentRepositoryJdbc implements Repository<Department, Integer>
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer save(Department department) {
+    public Department save(Department department) {
 
         Integer savedId = null;
 
@@ -66,24 +66,26 @@ public class DepartmentRepositoryJdbc implements Repository<Department, Integer>
 
             savedId = keyHolder.getKey().intValue();
             logger.debug("Returned saved ID {}", savedId);
+
+            department.setId(savedId);
+
+            return department;
         }
 
-        return savedId;
+        return null;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(Department department) {
+    public void update(Department department) {
 
         if (Objects.nonNull(department)) {
 
             String sql = "UPDATE DEPARTMENTS SET DEPARTMENT_NAME = ?, MANAGER_ID = ? WHERE DEPARTMENT_ID = ?";
             Object[] param = new Object[]{department.getName(), department.getManager().getId(), department.getId()};
 
-            return jdbcTemplate.update(sql, param) > 0;
+            jdbcTemplate.update(sql, param);
         }
-
-        return false;
     }
 
     @Override

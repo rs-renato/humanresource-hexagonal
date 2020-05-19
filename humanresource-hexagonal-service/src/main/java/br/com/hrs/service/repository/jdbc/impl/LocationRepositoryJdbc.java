@@ -43,7 +43,7 @@ public class LocationRepositoryJdbc implements Repository<Location, Integer> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Integer save(Location location) {
+    public Location save(Location location) {
 
         Integer savedId = null;
 
@@ -68,24 +68,25 @@ public class LocationRepositoryJdbc implements Repository<Location, Integer> {
 
             savedId = keyHolder.getKey().intValue();
             logger.debug("Returned saved ID {}", savedId);
+
+            location.setId(savedId);
+            return location;
         }
 
-        return savedId;
+        return null;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean update(Location location) {
+    public void update(Location location) {
 
         if (Objects.nonNull(location)) {
 
             String sql = "UPDATE LOCATIONS SET STREET_ADDRESS = ?, POSTAL_CODE = ?, CITY = ?, STATE_PROVINCE = ?, COUNTRY_ID = ?  WHERE LOCATION_ID = ?";
             Object[] param = new Object[]{location.getAddress(), location.getPostalCode(), location.getCity(), location.getState(), location.getCountry().getId(), location.getId()};
 
-            return jdbcTemplate.update(sql, param) > 0;
+            jdbcTemplate.update(sql, param);
         }
-
-        return false;
     }
 
     @Override
