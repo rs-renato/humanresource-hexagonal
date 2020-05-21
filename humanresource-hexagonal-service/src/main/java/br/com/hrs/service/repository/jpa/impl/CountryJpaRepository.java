@@ -1,30 +1,31 @@
 package br.com.hrs.service.repository.jpa.impl;
 
+
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.Repository;
-import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.List;
 import java.util.Optional;
 
-//@Repository
-@Primary
+@Named
 public class CountryJpaRepository implements Repository<Country, String> {
 
 	private CountrySpringDataJpaRepository jpaRepository;
 
+	@Inject
 	public CountryJpaRepository(CountrySpringDataJpaRepository jpaRepository) {
 		this.jpaRepository = jpaRepository;
 	}
 
 	@Override
 	@Transactional(rollbackFor=Exception.class)
-	public boolean delete(String id) {
+	public void delete(String id) {
 		this.jpaRepository.deleteById(id);
 		this.jpaRepository.flush();
 		logger.debug("Deleted country by id {}.", id);
-		return true;
 	}
 
 	@Override
@@ -37,8 +38,9 @@ public class CountryJpaRepository implements Repository<Country, String> {
 	@Override
 	public Country find(String id) {
 		Optional<Country> country = this.jpaRepository.findById(id);
-		logger.debug("Finding country id {}. Found: {}", id, country.isPresent());
-		return country.orElseGet(null);
+		boolean isPresent =  country.isPresent();
+		logger.debug("Finding country id {}. Found: {}", id, isPresent);
+		return isPresent ? country.get() : null;
 	}
 
 	public List<Country> findByRegionId(Integer regionId) {

@@ -87,11 +87,10 @@ public class LocationCrudUseCaseTest {
     @DisplayName("Deletes an Location")
     public void test06() {
 
-        boolean deleted = locationCrudUseCase.delete(location.getId());
+        locationCrudUseCase.delete(location.getId());
 
         Location locationUpdated = locationCrudUseCase.find(location.getId());
 
-        Assertions.assertTrue(deleted, String.format("Location should be deleted"));
         Assertions.assertNull(locationUpdated, String.format("Location should be null"));
     }
 }

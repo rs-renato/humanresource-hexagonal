@@ -151,9 +151,9 @@ public class Employee implements EntityKey<Integer>{
 				", hireDate=" + hireDate +
 				", salary=" + salary +
 				", commissionPercent=" + commissionPercent +
-				", manager=" + manager +
-				", job=" + job +
-				", department=" + department +
+				", manager=" + (manager!= null ? manager.getId() : null) +
+				", job=" + (job!= null ? job.getId() : null) +
+				", department=" + (department!= null ? department.getId() : null) +
 				'}';
 	}
 

@@ -81,11 +81,10 @@ public class RegionCrudUseCaseTest {
     @DisplayName("Deletes an Region")
     public void test06() {
 
-        boolean deleted = regionCrudUseCase.delete(region.getId());
+        regionCrudUseCase.delete(region.getId());
 
         Region regionUpdated = regionCrudUseCase.find(region.getId());
 
-        Assertions.assertTrue(deleted, String.format("Region should be deleted"));
         Assertions.assertNull(regionUpdated, String.format("Region should be null"));
     }
 }

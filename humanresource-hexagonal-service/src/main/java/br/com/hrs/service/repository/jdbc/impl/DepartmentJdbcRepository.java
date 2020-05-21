@@ -15,11 +15,11 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class DepartmentRepositoryJdbc implements Repository<Department, Integer> {
+public class DepartmentJdbcRepository implements Repository<Department, Integer> {
 
     private JdbcTemplate jdbcTemplate;
 
-    public DepartmentRepositoryJdbc(JdbcTemplate jdbcTemplate) {
+    public DepartmentJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -96,15 +96,13 @@ public class DepartmentRepositoryJdbc implements Repository<Department, Integer>
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delete(Integer departmentId) {
+    public void delete(Integer departmentId) {
         if (Objects.nonNull(departmentId)) {
 
             String sql = "DELETE FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?";
 
-            return jdbcTemplate.update(sql, departmentId) > 0;
+            jdbcTemplate.update(sql, departmentId);
         }
-
-        return false;
     }
 
     @Override

@@ -2,7 +2,7 @@ package br.com.hrs.service.repository.jdbc;
 
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.Repository;
-import br.com.hrs.service.HrsDatabaseConfiguration;
+import br.com.hrs.service.repository.config.HrsJdbcConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -15,30 +15,30 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.util.Collection;
 
-@DisplayName("Repository - Job")
-@ContextConfiguration(classes = HrsDatabaseConfiguration.class)
+@DisplayName("Jdbc Repository - Job")
+@ContextConfiguration(classes = HrsJdbcConfiguration.class)
 @ExtendWith(SpringExtension.class)
-public class JobRepositoryJdbcTest {
+public class JobJdbcRepositoryTest {
 
     public static final String JOB_ID = "HR_REP";
     public static final String NEW_JOB_ID = "NEW_JOB";
 
-    Logger logger = LogManager.getLogger(JobRepositoryJdbcTest.class);
+    Logger logger = LogManager.getLogger(JobJdbcRepositoryTest.class);
 
     @Inject
-    private Repository<Job, String> jobRepositoryJdbc;
+    private Repository<Job, String> jobJdbcRepository;
 
     @Test
     @DisplayName("Finds for null Job")
     public void test01() {
-        Job job = jobRepositoryJdbc.find(null);
+        Job job = jobJdbcRepository.find(null);
         Assertions.assertNull(job, "Job should be null");
     }
 
     @Test
     @DisplayName("Finds for inexistent Job")
     public void test02() {
-        Job job = jobRepositoryJdbc.find("NO_EXISTENT_JOB");
+        Job job = jobJdbcRepository.find("NO_EXISTENT_JOB");
         logger.info(job);
         Assertions.assertNull(job, "Job should be null");
     }
@@ -46,15 +46,15 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Updates Job")
     public void test03() {
-        Job job = jobRepositoryJdbc.find(JOB_ID);
+        Job job = jobJdbcRepository.find(JOB_ID);
         logger.info(job);
         job.setTitle(job.getTitle() + " altered");
         job.setMinSalary(job.getMinSalary() + 1);
         job.setMaxSalary(job.getMaxSalary() + 1);
 
-        jobRepositoryJdbc.update(job);
+        jobJdbcRepository.update(job);
 
-        Job jobSaved  = jobRepositoryJdbc.find(JOB_ID);
+        Job jobSaved  = jobJdbcRepository.find(JOB_ID);
 
         Assertions.assertEquals(jobSaved.getTitle(), job.getTitle(), "Job title should be altered");
         Assertions.assertEquals(jobSaved.getTitle(), job.getTitle(), "Job title should be altered");
@@ -66,9 +66,9 @@ public class JobRepositoryJdbcTest {
     @DisplayName("Saves Job")
     public void test04() {
         Job job = new Job(NEW_JOB_ID, "new job", 1000f, 2000f);
-        jobRepositoryJdbc.save(job);
+        jobJdbcRepository.save(job);
 
-        job = jobRepositoryJdbc.find(NEW_JOB_ID);
+        job = jobJdbcRepository.find(NEW_JOB_ID);
 
         Assertions.assertNotNull(job, "Job should be saved");
         Assertions.assertTrue(job.getTitle().contains("new"), "Job should be saved");
@@ -77,7 +77,7 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Finds all Jobs")
     public void test05() {
-        Collection<Job> jobs = jobRepositoryJdbc.findAll();
+        Collection<Job> jobs = jobJdbcRepository.findAll();
         logger.info(jobs);
         Assertions.assertNotNull(jobs, "Jobs should be listed");
         Assertions.assertTrue(jobs.size() >= 19, "Jobs should be listed at all");
@@ -87,7 +87,7 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Finds for Job")
     public void test06() {
-        Job job = jobRepositoryJdbc.find(JOB_ID);
+        Job job = jobJdbcRepository.find(JOB_ID);
         logger.info(job);
         Assertions.assertNotNull(job, "Job should not be null");
     }
@@ -95,32 +95,24 @@ public class JobRepositoryJdbcTest {
     @Test
     @DisplayName("Deletes Job")
     public void test07() {
-        Job job = jobRepositoryJdbc.find(NEW_JOB_ID);
+        Job job = jobJdbcRepository.find(NEW_JOB_ID);
         logger.info(job);
-        boolean deleted = jobRepositoryJdbc.delete(job.getId());
-        boolean exists = jobRepositoryJdbc.exists(job.getId());
-        Assertions.assertTrue(deleted, "Job should be deleted");
+        jobJdbcRepository.delete(job.getId());
+        boolean exists = jobJdbcRepository.exists(job.getId());
         Assertions.assertFalse(exists, "Job still existing");
     }
 
     @Test
-    @DisplayName("Deletes inexistent Job")
-    public void test08() {
-        boolean deleted = jobRepositoryJdbc.delete("INEXISTEND_JOB");
-        Assertions.assertFalse(deleted, "Job should not be deleted");
-    }
-
-    @Test
     @DisplayName("Job exists")
-    public void test09() {
-        boolean exists = jobRepositoryJdbc.exists(JOB_ID);
+    public void test08() {
+        boolean exists = jobJdbcRepository.exists(JOB_ID);
         Assertions.assertTrue(exists, "Job should be existent");
     }
 
     @Test
     @DisplayName("Job doesn't exists")
-    public void test10() {
-        boolean exists = jobRepositoryJdbc.exists("NO_EXISTENT_JOB");
+    public void test09() {
+        boolean exists = jobJdbcRepository.exists("NO_EXISTENT_JOB");
         Assertions.assertFalse(exists, "Job should not be existent");
     }
 

@@ -69,8 +69,8 @@ public class Department implements EntityKey<Integer>{
 		return "Department{" +
 				"id=" + id +
 				", name='" + name + '\'' +
-				", manager=" + manager +
-				", location=" + location +
+				", manager=" + (manager!= null ? manager.getId() : null) +
+				", location=" + (location!= null ? location.getId() : null) +
 				'}';
 	}
 

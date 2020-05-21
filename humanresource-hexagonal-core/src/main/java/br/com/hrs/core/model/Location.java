@@ -12,7 +12,6 @@ public class Location implements EntityKey<Integer>{
 	private Country country;
 
 	Location(){
-
 	}
 
 	public Location(String address, String postalCode, String city, String state, Country country) {
@@ -98,7 +97,7 @@ public class Location implements EntityKey<Integer>{
 				", postalCode='" + postalCode + '\'' +
 				", city='" + city + '\'' +
 				", state='" + state + '\'' +
-				", country=" + country +
+				", country=" + (country != null ? country.getId() : null) +
 				'}';
 	}
 

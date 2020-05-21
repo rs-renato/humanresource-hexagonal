@@ -56,11 +56,11 @@ public abstract class CrudUseCase<E extends EntityKey<ID>, ID>{
         this.repository.update(entity);
     }
 
-    public boolean delete(ID id) {
+    public void delete(ID id) {
         this.validators.stream()
                 .filter(validator -> validator instanceof DeleteValidator)
                 .forEach(validator -> validator.validate(id));
         logger.debug("Calling delete on repository");
-        return this.repository.delete(id);
+        this.repository.delete(id);
     }
 }

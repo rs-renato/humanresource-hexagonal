@@ -85,11 +85,10 @@ public class DepartmentCrudUseCaseTest {
     @DisplayName("Deletes an Department")
     public void test06() {
 
-        boolean deleted = departmentCrudUseCase.delete(department.getId());
+        departmentCrudUseCase.delete(department.getId());
 
         Department departmentUpdated = departmentCrudUseCase.find(department.getId());
 
-        Assertions.assertTrue(deleted, String.format("Department should be deleted"));
         Assertions.assertNull(departmentUpdated, String.format("Department should be null"));
     }
 }

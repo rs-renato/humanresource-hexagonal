@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(JUnitPlatform.class)
 @SelectPackages({
         // Jdbc Repositories Test
-        "br.com.hrs.service.repository.jdbc"
+        "br.com.hrs.service.repository.jdbc",
 })
 public class HrsServiceTestSuit {
 

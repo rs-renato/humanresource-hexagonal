@@ -83,11 +83,10 @@ public class CountryCrudUseCaseTest {
     @DisplayName("Deletes an Country")
     public void test06() {
 
-        boolean deleted = countryCrudUseCase.delete(country.getId());
+        countryCrudUseCase.delete(country.getId());
 
         Country countryUpdated = countryCrudUseCase.find(country.getId());
 
-        Assertions.assertTrue(deleted, String.format("Country should be deleted"));
         Assertions.assertNull(countryUpdated, String.format("Country should be null"));
     }
 }

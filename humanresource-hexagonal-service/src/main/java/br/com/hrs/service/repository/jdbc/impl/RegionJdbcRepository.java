@@ -15,11 +15,11 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class RegionRepositoryJdbc implements Repository<Region, Integer> {
+public class RegionJdbcRepository implements Repository<Region, Integer> {
 
     private JdbcTemplate jdbcTemplate;
 
-    public RegionRepositoryJdbc(JdbcTemplate jdbcTemplate) {
+    public RegionJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -92,15 +92,13 @@ public class RegionRepositoryJdbc implements Repository<Region, Integer> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delete(Integer regionId) {
+    public void delete(Integer regionId) {
         if (Objects.nonNull(regionId)) {
 
             String sql = "DELETE FROM REGIONS WHERE REGION_ID = ?";
 
-            return jdbcTemplate.update(sql, regionId) > 0;
+            jdbcTemplate.update(sql, regionId);
         }
-
-        return false;
     }
 
     @Override

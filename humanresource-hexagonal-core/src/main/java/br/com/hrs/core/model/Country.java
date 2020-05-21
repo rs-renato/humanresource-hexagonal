@@ -64,7 +64,7 @@ public class Country implements EntityKey<String> {
 		return "Country{" +
 				"id='" + id + '\'' +
 				", name='" + name + '\'' +
-				", region=" + region +
+				", region=" + (region != null ? region.getId() : null) +
 				'}';
 	}
 

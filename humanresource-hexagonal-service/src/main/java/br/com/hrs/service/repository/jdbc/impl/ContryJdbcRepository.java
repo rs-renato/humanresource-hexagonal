@@ -12,11 +12,11 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class ContryRepositoryJdbc implements Repository<Country, String> {
+public class ContryJdbcRepository implements Repository<Country, String> {
 
     private JdbcTemplate jdbcTemplate;
 
-    public ContryRepositoryJdbc(JdbcTemplate jdbcTemplate) {
+    public ContryJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -80,15 +80,13 @@ public class ContryRepositoryJdbc implements Repository<Country, String> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delete(String countryId) {
+    public void delete(String countryId) {
         if (Objects.nonNull(countryId)) {
 
             String sql = "DELETE FROM COUNTRIES WHERE COUNTRY_ID = ?";
 
-            return jdbcTemplate.update(sql, countryId) > 0;
+            jdbcTemplate.update(sql, countryId);
         }
-
-        return false;
     }
 
     @Override

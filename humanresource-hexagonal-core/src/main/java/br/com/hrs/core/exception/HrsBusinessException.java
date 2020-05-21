@@ -1,6 +1,6 @@
 package br.com.hrs.core.exception;
 
-public class HrsBusinessException extends RuntimeException {
+public class HrsBusinessException extends HrsRuntimeException {
 
     public HrsBusinessException(String message) {
         super(message);

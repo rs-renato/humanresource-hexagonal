@@ -12,11 +12,11 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Named
-public class JobRepositoryJdbc implements Repository<Job, String> {
+public class JobJdbcRepository implements Repository<Job, String> {
 
     private JdbcTemplate jdbcTemplate;
 
-    public JobRepositoryJdbc(JdbcTemplate jdbcTemplate) {
+    public JobJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -73,13 +73,11 @@ public class JobRepositoryJdbc implements Repository<Job, String> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public boolean delete(String jobId) {
+    public void delete(String jobId) {
         if (Objects.nonNull(jobId)) {
             String sql = "DELETE FROM JOBS WHERE JOB_ID = ?";
-            return jdbcTemplate.update(sql, jobId) > 0;
+            jdbcTemplate.update(sql, jobId);
         }
-
-        return false;
     }
 
     @Override

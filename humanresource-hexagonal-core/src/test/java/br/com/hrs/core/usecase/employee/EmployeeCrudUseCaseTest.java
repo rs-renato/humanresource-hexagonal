@@ -94,11 +94,10 @@ public class EmployeeCrudUseCaseTest {
     @DisplayName("Deletes an Employee")
     public void test06() {
 
-        boolean deleted = employeeCrudUseCase.delete(employee.getId());
+        employeeCrudUseCase.delete(employee.getId());
 
         Employee employeeUpdated = employeeCrudUseCase.find(employee.getId());
 
-        Assertions.assertTrue(deleted, String.format("Employee should be deleted"));
         Assertions.assertNull(employeeUpdated, String.format("Employee should be null"));
     }
 }

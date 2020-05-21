@@ -18,7 +18,7 @@ import java.util.Collection;
     
     Collection<E> findAll();
 
-    boolean delete(ID id);
+    void delete(ID id);
     
     boolean exists(ID id);
 }

@@ -38,10 +38,9 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
         return this.database.values();
     }
 
-    public boolean delete(ID id) {
+    public void delete(ID id) {
         logger.info("Fake database ->  delete({}})", id);
         this.database.remove(id);
-        return true;
     }
 
     public boolean exists(ID id) {
