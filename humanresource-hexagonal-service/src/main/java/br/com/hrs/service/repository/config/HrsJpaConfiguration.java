@@ -26,8 +26,8 @@ import java.util.stream.Collectors;
 
 @Configuration
 @Import(HrsDataBaseConfiguration.class)
-@ComponentScan("br.com.hrs.service.repository.jpa.impl")
-@EnableJpaRepositories(basePackages ="br.com.hrs.service.repository.jpa.impl", enableDefaultTransactions = false)
+@ComponentScan("br.com.hrs.service.repository.jpa")
+@EnableJpaRepositories(basePackages ="br.com.hrs.service.repository.jpa.adapter", enableDefaultTransactions = false)
 public class HrsJpaConfiguration {
 
     @Bean

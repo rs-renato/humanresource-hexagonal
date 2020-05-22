@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+                    http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+                 version="2.0">
+
+    <description>Department JPA Mapping</description>
+    <package>br.com.hrs.core.model</package>
+    <entity class="br.com.hrs.core.model.Department" name="Department" cacheable="true">
+        <table name="DEPARTMENTS"/>
+        <attributes>
+            <id name="id">
+                <column name="DEPARTMENT_ID"/>
+                <generated-value strategy="IDENTITY"/>
+            </id>
+            <basic name="name">
+                <column name="DEPARTMENT_NAME"/>
+            </basic>
+            <many-to-one name="manager">
+                <join-column name="MANAGER_ID"/>
+            </many-to-one>
+            <many-to-one name="location" fetch="LAZY">
+                <join-column name="LOCATION_ID" nullable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

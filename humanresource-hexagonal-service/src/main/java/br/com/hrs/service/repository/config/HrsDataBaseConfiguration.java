@@ -16,6 +16,7 @@ public class HrsDataBaseConfiguration {
     public DataSource hrsDataSource() {
         return new EmbeddedDatabaseBuilder()
                 .addScripts("create.sql", "insert.sql")
+                .generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.DERBY)
                 .build();
     }

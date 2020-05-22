@@ -2,11 +2,12 @@ package br.com.hrs.service.repository.jpa;
 
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
+import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.config.HrsJpaConfiguration;
-import br.com.hrs.service.repository.jpa.impl.CountryJpaRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,21 +17,20 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.util.Collection;
 
-@DisplayName("Jpa Repository - Country")
+@Disabled
+@DisplayName("Jpa Repository - Location")
 @ContextConfiguration(classes = HrsJpaConfiguration.class)
 @ExtendWith(SpringExtension.class)
-public class CountryJpaRepositoryTest {
+public class LocationJpaRepositoryTest {
 
     public static final String COUNTRY_ID = "IT";
     public static final Integer REGION_ID = 3;
     public static final String NEW_COUNTRY_ID = "NW";
 
-    Logger logger = LogManager.getLogger(CountryJpaRepositoryTest.class);
+    Logger logger = LogManager.getLogger(LocationJpaRepositoryTest.class);
 
     @Inject
-//    private Repository<Country, String> countryJpaRepository;
-//    private CountryJpaRepository countryJpaRepository;
-    private CountryJpaRepository countryJpaRepository;
+    private Repository<Country, String> countryJpaRepository;
 
     @Test
     @DisplayName("Finds for inexistent Country")
@@ -88,17 +88,9 @@ public class CountryJpaRepositoryTest {
         Assertions.assertNotNull(country, "Country should not be null");
     }
 
-//    @Test
-//    @DisplayName("Finds for Region ID")
-//    public void test06() {
-//        List<Country> countries = countryJpaRepository.findByRegionId(REGION_ID);
-//        logger.info(countries);
-//        Assertions.assertNotNull(countries, "Country should not be null");
-//    }
-
     @Test
     @DisplayName("Deletes Country")
-    public void test07() {
+    public void test06() {
         Country country = countryJpaRepository.find(NEW_COUNTRY_ID);
         countryJpaRepository.delete(country.getId());
         boolean exists = countryJpaRepository.exists(country.getId());
@@ -107,14 +99,14 @@ public class CountryJpaRepositoryTest {
 
     @Test
     @DisplayName("Country exists")
-    public void test08() {
+    public void test07() {
         boolean exists = countryJpaRepository.exists(COUNTRY_ID);
         Assertions.assertTrue(exists, "Country should be existent");
     }
 
     @Test
     @DisplayName("Country doesn't exists")
-    public void test09() {
+    public void test08() {
         boolean exists = countryJpaRepository.exists("NO_EXISTENT_COUNTRY");
         Assertions.assertFalse(exists, "Country should not be existent");
     }

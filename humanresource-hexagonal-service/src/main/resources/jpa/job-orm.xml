@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+                    http://java.sun.com/xml/ns/persistence/orm_2_0.xsd"
+                 version="2.0">
+
+    <description>Job JPA Mapping</description>
+    <package>br.com.hrs.core.model</package>
+    <entity class="br.com.hrs.core.model.Job" name="Job" cacheable="true">
+        <table name="JOBS"/>
+        <attributes>
+            <id name="id">
+                <column name="JOB_ID"/>
+            </id>
+            <basic name="title">
+                <column name="JOB_TITLE"/>
+            </basic>
+            <basic name="minSalary">
+                <column name="MIN_SALARY"/>
+            </basic>
+            <basic name="maxSalary">
+                <column name="MAX_SALARY"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
