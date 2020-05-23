@@ -20,8 +20,8 @@ import java.util.Collection;
 @ExtendWith(SpringExtension.class)
 public class RegionJdbcRepositoryTest {
 
-    public static final Integer REGION_ID = 3;
-    public static final Integer NEW_REGION_ID = 5;
+    private static final Integer REGION_ID = 3;
+    private static final Integer NEW_REGION_ID = 5;
 
     Logger logger = LogManager.getLogger(RegionJdbcRepositoryTest.class);
 
@@ -65,7 +65,7 @@ public class RegionJdbcRepositoryTest {
         Region regionSaved= regionJdbcRepository.save(region);
         Assertions.assertNotNull(regionSaved, "Region saved should not be null");
         Region regionFound = regionJdbcRepository.find(regionSaved.getId());
-        Assertions.assertEquals(regionSaved, regionFound, String.format("Region should be equals"));
+        Assertions.assertEquals(regionSaved, regionFound,"Region should be equals");
     }
 
     @Test

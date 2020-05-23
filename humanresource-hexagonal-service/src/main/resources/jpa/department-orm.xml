@@ -20,7 +20,7 @@
             <many-to-one name="manager">
                 <join-column name="MANAGER_ID"/>
             </many-to-one>
-            <many-to-one name="location" fetch="LAZY">
+            <many-to-one name="location">
                 <join-column name="LOCATION_ID" nullable="false"/>
             </many-to-one>
         </attributes>

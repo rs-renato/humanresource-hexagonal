@@ -1,4 +1,4 @@
-package br.com.hrs.service.repository.jpa.custom;
+package br.com.hrs.service.repository.jpa.queries;
 
 import br.com.hrs.core.model.Country;
 

@@ -21,9 +21,9 @@ import java.util.Collection;
 @ExtendWith(SpringExtension.class)
 public class CountryJdbcRepositoryTest {
 
-    public static final String COUNTRY_ID = "IT";
-    public static final Integer REGION_ID = 3;
-    public static final String NEW_COUNTRY_ID = "NW";
+    private static final String COUNTRY_ID = "IT";
+    private static final Integer REGION_ID = 3;
+    private static final String NEW_COUNTRY_ID = "NW";
 
     Logger logger = LogManager.getLogger(CountryJdbcRepositoryTest.class);
 

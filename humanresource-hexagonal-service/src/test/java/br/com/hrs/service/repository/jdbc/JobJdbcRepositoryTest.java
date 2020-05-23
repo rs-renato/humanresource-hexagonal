@@ -20,8 +20,8 @@ import java.util.Collection;
 @ExtendWith(SpringExtension.class)
 public class JobJdbcRepositoryTest {
 
-    public static final String JOB_ID = "HR_REP";
-    public static final String NEW_JOB_ID = "NEW_JOB";
+    private static final String JOB_ID = "HR_REP";
+    private static final String NEW_JOB_ID = "NEW_JOB";
 
     Logger logger = LogManager.getLogger(JobJdbcRepositoryTest.class);
 

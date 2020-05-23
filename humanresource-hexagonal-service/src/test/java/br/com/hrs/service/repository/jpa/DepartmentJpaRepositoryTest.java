@@ -1,13 +1,13 @@
 package br.com.hrs.service.repository.jpa;
 
-import br.com.hrs.core.model.Country;
-import br.com.hrs.core.model.Region;
+import br.com.hrs.core.model.Department;
+import br.com.hrs.core.model.Employee;
+import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.config.HrsJpaConfiguration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,97 +17,102 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.util.Collection;
 
-@Disabled
 @DisplayName("Jpa Repository - Department")
 @ContextConfiguration(classes = HrsJpaConfiguration.class)
 @ExtendWith(SpringExtension.class)
 public class DepartmentJpaRepositoryTest {
 
-    public static final String COUNTRY_ID = "IT";
-    public static final Integer REGION_ID = 3;
-    public static final String NEW_COUNTRY_ID = "NW";
+    private static final int DEPARTMENT_ID = 1;
+    private static int DEPARTMENT_SAVED_ID;
+    private Employee manager = new Employee.Builder().id(2).build();
+    private Location location = new Location.Builder().id(2).build();
+
 
     Logger logger = LogManager.getLogger(DepartmentJpaRepositoryTest.class);
 
     @Inject
-    private Repository<Country, String> countryJpaRepository;
+    private Repository<Department, Integer> departmentJpaRepository;
 
     @Test
-    @DisplayName("Finds for inexistent Country")
+    @DisplayName("Finds for inexistent Department")
     public void test01() {
-        Country country = countryJpaRepository.find("NO_EXISTENT_COUNTRY");
-        logger.info(country);
-        Assertions.assertNull(country, "Country should be null");
+        Department department = departmentJpaRepository.find(-1);
+        logger.info(department);
+        Assertions.assertNull(department, "Department should be null");
     }
 
     @Test
-    @DisplayName("Updates Country")
+    @DisplayName("Updates Department")
     public void test02() {
-        Country country = countryJpaRepository.find(COUNTRY_ID);
-        logger.info(country);
-        country.setName(country.getName() + " altered");
-        country.setRegion(new Region.Builder().id(REGION_ID).build());
+        Department department = departmentJpaRepository.find(DEPARTMENT_ID);
+        logger.info(department);
+        department.setName(department.getName() + " altered");
+        Employee manager = new Employee.Builder().id(2).build();
+        department.setManager(manager);
 
-        countryJpaRepository.update(country);
+        departmentJpaRepository.update(department);
 
-        Country countriesaved  = countryJpaRepository.find(COUNTRY_ID);
+        Department departmentSaved  = departmentJpaRepository.find(DEPARTMENT_ID);
 
-        Assertions.assertEquals(countriesaved.getName(), country.getName(), "Country name should be altered");
-        Assertions.assertEquals(countriesaved.getRegion().getId(), country.getRegion().getId(), "Country region id should be altered");
+        Assertions.assertEquals(departmentSaved.getName(), department.getName(), "Department name should be altered");
+        Assertions.assertEquals(departmentSaved.getManager().getId(), manager.getId(), "Department manager should be altered");
     }
 
     @Test
-    @DisplayName("Saves Country")
+    @DisplayName("Saves Department")
     public void test03() {
 
-        Country country = new Country(NEW_COUNTRY_ID, "new country", new Region.Builder().id(REGION_ID).build());
-        countryJpaRepository.save(country);
+        Department department = new Department("new depertment", manager, location);
+        Department departmentSaved = departmentJpaRepository.save(department);
 
-        country = countryJpaRepository.find(NEW_COUNTRY_ID);
+        DEPARTMENT_SAVED_ID = departmentSaved.getId();
 
-        Assertions.assertNotNull(country, "Country should be saved");
-        Assertions.assertEquals(NEW_COUNTRY_ID, country.getId(), "Country id should equals");
-        Assertions.assertEquals(REGION_ID, country.getRegion().getId(), "Region id should equals");
+        department = departmentJpaRepository.find(departmentSaved.getId());
+
+        Assertions.assertNotNull(department, "Department should be saved");
+        Assertions.assertEquals(department, departmentSaved, "Department saved should be equals");
+        Assertions.assertEquals(manager, department.getManager(), "Department manager should be equals");
+        Assertions.assertEquals(location, department.getLocation(), "Region location should be equals");
     }
 
     @Test
-    @DisplayName("Finds all countries")
+    @DisplayName("Finds all departments")
     public void test04() {
-        Collection<Country> countries = countryJpaRepository.findAll();
-        logger.info(countries);
-        Assertions.assertNotNull(countries, "countries should be listed");
-        Assertions.assertTrue(countries.size() >= 25, "countries should be listed at all");
+        Collection<Department> departments = departmentJpaRepository.findAll();
+        logger.info(departments);
+        Assertions.assertNotNull(departments, "departments should be listed");
+        Assertions.assertTrue(departments.size() >= 25, "departments should be listed at all");
 
     }
 
     @Test
-    @DisplayName("Finds for Country")
+    @DisplayName("Finds for Department")
     public void test05() {
-        Country country = countryJpaRepository.find(COUNTRY_ID);
-        logger.info(country);
-        Assertions.assertNotNull(country, "Country should not be null");
+        Department department = departmentJpaRepository.find(DEPARTMENT_ID);
+        logger.info(department);
+        Assertions.assertNotNull(department, "Department should not be null");
     }
 
     @Test
-    @DisplayName("Deletes Country")
+    @DisplayName("Deletes Department")
     public void test06() {
-        Country country = countryJpaRepository.find(NEW_COUNTRY_ID);
-        countryJpaRepository.delete(country.getId());
-        boolean exists = countryJpaRepository.exists(country.getId());
-        Assertions.assertFalse(exists, "Country still existing");
+        Department department = departmentJpaRepository.find(DEPARTMENT_SAVED_ID);
+        departmentJpaRepository.delete(department.getId());
+        boolean exists = departmentJpaRepository.exists(department.getId());
+        Assertions.assertFalse(exists, "Department still existing");
     }
 
     @Test
-    @DisplayName("Country exists")
+    @DisplayName("Department exists")
     public void test07() {
-        boolean exists = countryJpaRepository.exists(COUNTRY_ID);
-        Assertions.assertTrue(exists, "Country should be existent");
+        boolean exists = departmentJpaRepository.exists(DEPARTMENT_ID);
+        Assertions.assertTrue(exists, "Department should be existent");
     }
 
     @Test
-    @DisplayName("Country doesn't exists")
+    @DisplayName("Department doesn't exists")
     public void test08() {
-        boolean exists = countryJpaRepository.exists("NO_EXISTENT_COUNTRY");
-        Assertions.assertFalse(exists, "Country should not be existent");
+        boolean exists = departmentJpaRepository.exists(DEPARTMENT_SAVED_ID);
+        Assertions.assertFalse(exists, "Department should not be existent");
     }
 }

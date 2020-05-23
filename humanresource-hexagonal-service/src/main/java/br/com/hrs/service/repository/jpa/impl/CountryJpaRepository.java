@@ -2,21 +2,21 @@ package br.com.hrs.service.repository.jpa.impl;
 
 
 import br.com.hrs.core.model.Country;
-import br.com.hrs.service.repository.jpa.SpringDataJpaRepositoryAbstractImpl;
-import br.com.hrs.service.repository.jpa.adapter.CountrySpringDataJpaRepositoryImpl;
-import br.com.hrs.service.repository.jpa.custom.CountryJpaRepositoryQueries;
+import br.com.hrs.service.repository.jpa.JpaRepositoryAbstractImpl;
+import br.com.hrs.service.repository.jpa.JpaRepositoryContainer;
+import br.com.hrs.service.repository.jpa.queries.CountryJpaRepositoryQueries;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 
 @Named
-public class CountryJpaRepository extends SpringDataJpaRepositoryAbstractImpl<Country, String> implements CountryJpaRepositoryQueries {
+public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, String> implements CountryJpaRepositoryQueries {
 
-	private CountrySpringDataJpaRepositoryImpl jpaRepository;
+	private JpaRepositoryContainer.CountrySpringDataJpaRepositoryImpl jpaRepository;
 
 	@Inject
-	public CountryJpaRepository(CountrySpringDataJpaRepositoryImpl jpaRepository) {
+	public CountryJpaRepository(JpaRepositoryContainer.CountrySpringDataJpaRepositoryImpl jpaRepository) {
 		super(jpaRepository);
 		this.jpaRepository = jpaRepository;
 	}

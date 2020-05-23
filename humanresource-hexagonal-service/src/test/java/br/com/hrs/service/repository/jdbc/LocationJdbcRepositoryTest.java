@@ -21,8 +21,8 @@ import java.util.Collection;
 @ExtendWith(SpringExtension.class)
 public class LocationJdbcRepositoryTest {
 
-    public static final Integer LOCATION_ID = 3;
-    public static final Integer NEW_LOCATION_ID = 24;
+    private static final Integer LOCATION_ID = 3;
+    private static final Integer NEW_LOCATION_ID = 24;
 
     Logger logger = LogManager.getLogger(LocationJdbcRepositoryTest.class);
 
@@ -71,7 +71,7 @@ public class LocationJdbcRepositoryTest {
         Location locationSaved= locationJdbcRepository.save(location);
         Assertions.assertNotNull(locationSaved, "Location saved should not be null");
         Location locationFound = locationJdbcRepository.find(locationSaved.getId());
-        Assertions.assertEquals(locationSaved, locationFound, String.format("Location should be equals"));
+        Assertions.assertEquals(locationSaved, locationFound, "Location should be equals");
     }
 
     @Test

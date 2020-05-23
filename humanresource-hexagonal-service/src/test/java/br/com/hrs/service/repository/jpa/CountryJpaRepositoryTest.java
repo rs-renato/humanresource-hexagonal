@@ -15,21 +15,21 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.List;
 
 @DisplayName("Jpa Repository - Country")
 @ContextConfiguration(classes = HrsJpaConfiguration.class)
 @ExtendWith(SpringExtension.class)
 public class CountryJpaRepositoryTest {
 
-    public static final String COUNTRY_ID = "IT";
-    public static final Integer REGION_ID = 3;
-    public static final String NEW_COUNTRY_ID = "NW";
+    private static final String COUNTRY_ID = "IT";
+    private static final Integer REGION_ID = 3;
+    private static final String NEW_COUNTRY_ID = "NW";
 
     Logger logger = LogManager.getLogger(CountryJpaRepositoryTest.class);
 
     @Inject
 //    private Repository<Country, String> countryJpaRepository;
-//    private CountryJpaRepository countryJpaRepository;
     private CountryJpaRepository countryJpaRepository;
 
     @Test
@@ -88,13 +88,13 @@ public class CountryJpaRepositoryTest {
         Assertions.assertNotNull(country, "Country should not be null");
     }
 
-//    @Test
-//    @DisplayName("Finds for Region ID")
-//    public void test06() {
-//        List<Country> countries = countryJpaRepository.findByRegionId(REGION_ID);
-//        logger.info(countries);
-//        Assertions.assertNotNull(countries, "Country should not be null");
-//    }
+    @Test
+    @DisplayName("Finds for Region ID")
+    public void test06() {
+        List<Country> countries = countryJpaRepository.findByRegionId(REGION_ID);
+        logger.info(countries);
+        Assertions.assertNotNull(countries, "Country should not be null");
+    }
 
     @Test
     @DisplayName("Deletes Country")

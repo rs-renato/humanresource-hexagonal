@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class SpringDataJpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> implements Repository<E, ID> {
+public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> implements Repository<E, ID> {
 
     protected JpaRepository<E, ID> jpaRepository;
 
-    public SpringDataJpaRepositoryAbstractImpl(JpaRepository<E, ID> jpaRepository) {
+    protected JpaRepositoryAbstractImpl(JpaRepository<E, ID> jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
 
@@ -33,30 +33,30 @@ public abstract class SpringDataJpaRepositoryAbstractImpl<E extends EntityKey<ID
 
     @Override
     public E find(ID id) {
-        Optional<E> E = this.jpaRepository.findById(id);
-        boolean isPresent =  E.isPresent();
-        logger.debug("Finding E id {}. Found: {}", id, isPresent);
-        return isPresent ? E.get() : null;
+        Optional<E> entity = this.jpaRepository.findById(id);
+        boolean isPresent =  entity.isPresent();
+        logger.debug("Finding entity id {}. Found: {}", id, isPresent);
+        return isPresent ? entity.get() : null;
     }
 
     @Override
     public List<E> findAll() {
-        List<E> es = this.jpaRepository.findAll();
-        logger.debug("Finding all es. Found: {}", es != null ? es.size() : 0);
-        return es;
+        List<E> entities = this.jpaRepository.findAll();
+        logger.debug("Finding all entities. Found: {}", entities != null ? entities.size() : 0);
+        return entities;
     }
 
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public void update(E E) {
-        save(E);
+    public void update(E entity) {
+        save(entity);
     }
 
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public E save(E E) {
-        E = this.jpaRepository.saveAndFlush(E);
-        logger.debug("Saving E. Saved: {}", E.getId());
-        return E;
+    public E save(E entity) {
+        entity = this.jpaRepository.saveAndFlush(entity);
+        logger.debug("Saving entity. Saved: {}", entity.getId());
+        return entity;
     }
 }
