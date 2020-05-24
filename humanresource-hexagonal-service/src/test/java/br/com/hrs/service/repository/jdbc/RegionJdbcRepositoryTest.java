@@ -1,5 +1,6 @@
 package br.com.hrs.service.repository.jdbc;
 
+import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.config.HrsJdbcConfiguration;
@@ -31,8 +32,11 @@ public class RegionJdbcRepositoryTest {
     @Test
     @DisplayName("Finds for null Region")
     public void test01() {
-        Region region = regionJdbcRepository.find(null);
-        Assertions.assertNull(region, "Region should be null");
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
+            regionJdbcRepository.find(null);
+        });
+
+        Assertions.assertTrue(exception.getMessage().matches("Region.*mandatory"), String.format("Region ID mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test

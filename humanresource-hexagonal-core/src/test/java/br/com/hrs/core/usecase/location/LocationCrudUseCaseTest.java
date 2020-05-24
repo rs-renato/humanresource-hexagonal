@@ -3,7 +3,6 @@ package br.com.hrs.core.usecase.location;
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.usecase.CrudUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +21,7 @@ import java.util.Collection;
 public class LocationCrudUseCaseTest {
 
     @Inject
-    private CrudUseCase<Location, Integer> locationCrudUseCase;
+    private LocationUseCase locationCrudUseCase;
 
     private static Location location;
 

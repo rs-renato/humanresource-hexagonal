@@ -2,7 +2,6 @@ package br.com.hrs.core.usecase.region;
 
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Region;
-import br.com.hrs.core.usecase.CrudUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +19,7 @@ import java.util.Collection;
 public class RegionCrudUseCaseTest {
 
     @Inject
-    private CrudUseCase<Region, Integer> regionCrudUseCase;
+    private RegionUseCase regionCrudUseCase;
 
     private static Region region;
 
@@ -28,7 +27,7 @@ public class RegionCrudUseCaseTest {
     public static void setUp() {
         region = new Region.Builder()
                 .id(1)
-                .name("Europe")
+                .name("New Region")
                 .build();
     }
 
@@ -67,7 +66,10 @@ public class RegionCrudUseCaseTest {
     @DisplayName("Updates an Region")
     public void test05() {
 
-        region.setName(region.getName() + "updated");
+        region = new Region.Builder()
+                .id(1)
+                .name("name updated")
+                .build();
 
         regionCrudUseCase.update(region);
 

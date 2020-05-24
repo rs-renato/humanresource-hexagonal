@@ -4,7 +4,6 @@ import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.usecase.CrudUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +21,7 @@ import java.util.Collection;
 public class DepartmentCrudUseCaseTest {
 
     @Inject
-    private CrudUseCase<Department, Integer> departmentCrudUseCase;
+    private DepartmentUseCase departmentCrudUseCase;
 
     private static Department department;
 
@@ -31,8 +30,8 @@ public class DepartmentCrudUseCaseTest {
         department =  new Department.Builder()
                 .id(1)
                 .name("Administration")
-                .manager(new Employee.Builder().id(200).build())
-                .location(new Location.Builder().id(1700).build())
+                .manager(new Employee.Builder().id(101).build())
+                .location(new Location.Builder().id(1500).build())
                 .build();
     }
 

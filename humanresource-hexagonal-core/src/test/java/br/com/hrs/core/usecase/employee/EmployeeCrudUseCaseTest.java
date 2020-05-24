@@ -4,7 +4,6 @@ import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.usecase.CrudUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +23,7 @@ import java.util.Collection;
 public class EmployeeCrudUseCaseTest {
 
     @Inject
-    private CrudUseCase<Employee, Integer> employeeCrudUseCase;
+    private EmployeeUseCase employeeCrudUseCase;
 
     private static Employee employee;
 

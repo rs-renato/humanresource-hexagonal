@@ -1,5 +1,7 @@
 package br.com.hrs.service.repository.jdbc.impl;
 
+import br.com.hrs.core.exception.error.Error;
+import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.jdbc.rowmapper.JobRowMapper;
@@ -15,25 +17,28 @@ import java.util.Objects;
 public class JobJdbcRepository implements Repository<Job, String> {
 
     private JdbcTemplate jdbcTemplate;
+    private final String REPOSITORY_NAME = getClass().getSimpleName();
 
     public JobJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public Job find(String jobId) {
+    public Job find(String id) {
 
-        if (Objects.isNull(jobId)) {
-            return null;
+        logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
+
+        if (Objects.isNull(id)) {
+            Error.of("Job ID").when(FIELD.MANDATORY).trows();
         }
 
         String sql = "SELECT * FROM JOBS WHERE JOB_ID = ?";
-        Object[] param = new Object[]{jobId};
+        Object[] param = new Object[]{id};
 
         try {
             return jdbcTemplate.queryForObject(sql, param, new JobRowMapper());
         } catch (EmptyResultDataAccessException e) {
-            logger.warn("Job Id '{}' not found", jobId);
+            logger.warn("Job Id '{}' not found", id);
             return null;
         }
     }
@@ -41,47 +46,67 @@ public class JobJdbcRepository implements Repository<Job, String> {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Job save(Job job) {
-        if (Objects.nonNull(job)) {
+        
+        logger.debug("{} ->  save({}})", REPOSITORY_NAME, job);
 
-            String sql = "INSERT INTO JOBS VALUES (?,?,?,?)";
-            Object[] param = new Object[]{job.getId(), job.getTitle(), job.getMinSalary(), job.getMaxSalary()};
-
-            jdbcTemplate.update(sql, param);
-
-            return job;
+        if (Objects.isNull(job)) {
+            Error.of("Job").when(FIELD.MANDATORY).trows();
         }
 
-        return null;
+        String sql = "INSERT INTO JOBS VALUES (?,?,?,?)";
+        Object[] param = new Object[]{job.getId(), job.getTitle(), job.getMinSalary(), job.getMaxSalary()};
+
+        jdbcTemplate.update(sql, param);
+
+        return job;
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(Job job) {
-        if (Objects.nonNull(job)) {
-            String sql = "UPDATE JOBS SET JOB_TITLE = ?, MIN_SALARY = ?, MAX_SALARY = ? WHERE JOB_ID = ?";
-            Object[] param = new Object[]{job.getTitle(), job.getMinSalary(), job.getMaxSalary(), job.getId()};
 
-            jdbcTemplate.update(sql, param);
+        logger.debug("{} ->  update({}})", REPOSITORY_NAME, job);
+
+        if (Objects.isNull(job)) {
+             Error.of("Job").when(FIELD.MANDATORY).trows();
         }
+        
+        String sql = "UPDATE JOBS SET JOB_TITLE = ?, MIN_SALARY = ?, MAX_SALARY = ? WHERE JOB_ID = ?";
+        Object[] param = new Object[]{job.getTitle(), job.getMinSalary(), job.getMaxSalary(), job.getId()};
+
+        jdbcTemplate.update(sql, param);
     }
 
     @Override
     public Collection<Job> findAll() {
+        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+
         String sql = "SELECT * FROM JOBS";
         return jdbcTemplate.query(sql, new JobRowMapper());
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(String jobId) {
-        if (Objects.nonNull(jobId)) {
-            String sql = "DELETE FROM JOBS WHERE JOB_ID = ?";
-            jdbcTemplate.update(sql, jobId);
+    public void delete(String id) {
+        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+
+        if (Objects.isNull(id)) {
+             Error.of("Job").when(FIELD.MANDATORY).trows();
         }
+        
+        String sql = "DELETE FROM JOBS WHERE JOB_ID = ?";
+        jdbcTemplate.update(sql, id);
+        
     }
 
     @Override
-    public boolean exists(String jobId) {
-        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM JOBS WHERE JOB_ID = ?", new Object[]{jobId}, Integer.class) > 0;
+    public boolean exists(String id) {
+        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+
+        if (Objects.isNull(id)) {
+             Error.of("Job ID").when(FIELD.MANDATORY).trows();
+        }
+        
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM JOBS WHERE JOB_ID = ?", new Object[]{id}, Integer.class) > 0;
     }
 }

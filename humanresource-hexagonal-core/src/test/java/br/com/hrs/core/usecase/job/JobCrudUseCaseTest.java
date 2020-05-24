@@ -2,7 +2,6 @@ package br.com.hrs.core.usecase.job;
 
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.usecase.CrudUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -20,7 +19,7 @@ import java.util.Collection;
 public class JobCrudUseCaseTest {
 
     @Inject
-    private CrudUseCase<Job, String> jobCrudUseCase;
+    private JobUseCase jobCrudUseCase;
 
     private static Job job;
 
@@ -29,8 +28,8 @@ public class JobCrudUseCaseTest {
         job =  new Job.Builder()
                 .id("AD_PRES")
                 .title("President")
-                .minSalary(20080f)
-                .maxSalay(40000f)
+                .minSalary(20_080f)
+                .maxSalay(30_000f)
                 .build();
     }
 
@@ -44,6 +43,14 @@ public class JobCrudUseCaseTest {
     @Test
     @DisplayName("Saves an Job")
     public void test02() {
+
+        job =  new Job.Builder()
+                .id("new JOB")
+                .title("Vice President")
+                .minSalary(15_080f)
+                .maxSalay(25_000f)
+                .build();
+
         Job jobSaved = jobCrudUseCase.save(job);
         Assertions.assertNotNull(jobSaved, String.format("Job saved should not be null"));
         Job jobFound = jobCrudUseCase.find(jobSaved.getId());
@@ -62,7 +69,7 @@ public class JobCrudUseCaseTest {
     public void test04() {
         Collection<Job> jobs = jobCrudUseCase.findAll();
         Assertions.assertNotNull(jobs, String.format("Jobs should not be null"));
-        Assertions.assertEquals(2, jobs.size(), String.format("Jobs size doesn't match"));
+        Assertions.assertEquals(3, jobs.size(), String.format("Jobs size doesn't match"));
     }
 
     @Test

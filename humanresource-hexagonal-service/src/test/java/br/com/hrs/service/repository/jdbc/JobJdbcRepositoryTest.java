@@ -1,5 +1,6 @@
 package br.com.hrs.service.repository.jdbc;
 
+import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.config.HrsJdbcConfiguration;
@@ -31,8 +32,12 @@ public class JobJdbcRepositoryTest {
     @Test
     @DisplayName("Finds for null Job")
     public void test01() {
-        Job job = jobJdbcRepository.find(null);
-        Assertions.assertNull(job, "Job should be null");
+
+        RuntimeException exception = Assertions.assertThrows(HrsMandatoryException.class, () -> {
+            jobJdbcRepository.find(null);
+        });
+
+        Assertions.assertTrue(exception.getMessage().matches("Job.*mandatory"), String.format("Job ID mandatory message wrong (%s)", exception.getMessage()));
     }
 
     @Test

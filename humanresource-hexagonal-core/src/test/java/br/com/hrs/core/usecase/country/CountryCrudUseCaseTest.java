@@ -3,7 +3,6 @@ package br.com.hrs.core.usecase.country;
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
-import br.com.hrs.core.usecase.CrudUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +20,7 @@ import java.util.Collection;
 public class CountryCrudUseCaseTest {
 
     @Inject
-    private CrudUseCase<Country, String> countryCrudUseCase;
+    private CountryUseCase countryCrudUseCase;
 
     private static Country country;
 
@@ -62,7 +61,7 @@ public class CountryCrudUseCaseTest {
     public void test04() {
         Collection<Country> countrys = countryCrudUseCase.findAll();
         Assertions.assertNotNull(countrys, String.format("Countrys should not be null"));
-        Assertions.assertEquals(3, countrys.size(), String.format("Countrys size doesn't match"));
+        Assertions.assertEquals(4, countrys.size(), String.format("Countrys size doesn't match"));
     }
 
     @Test

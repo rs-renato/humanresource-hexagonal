@@ -1,9 +1,9 @@
 package br.com.hrs.service.repository.jpa;
 
-import br.com.hrs.core.model.Country;
-import br.com.hrs.core.model.Region;
+import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.service.repository.config.HrsJpaConfiguration;
+import br.com.hrs.service.repository.jdbc.JobJdbcRepositoryTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -23,91 +23,99 @@ import java.util.Collection;
 @ExtendWith(SpringExtension.class)
 public class JobJpaRepositoryTest {
 
-    public static final String COUNTRY_ID = "IT";
-    public static final Integer REGION_ID = 3;
-    public static final String NEW_COUNTRY_ID = "NW";
+    private static final String JOB_ID = "HR_REP";
+    private static final String NEW_JOB_ID = "NEW_JOB";
 
-    Logger logger = LogManager.getLogger(JobJpaRepositoryTest.class);
+    Logger logger = LogManager.getLogger(JobJdbcRepositoryTest.class);
 
     @Inject
-    private Repository<Country, String> countryJpaRepository;
+    private Repository<Job, String> jobJpaRepository;
 
     @Test
-    @DisplayName("Finds for inexistent Country")
+    @DisplayName("Finds for null Job")
     public void test01() {
-        Country country = countryJpaRepository.find("NO_EXISTENT_COUNTRY");
-        logger.info(country);
-        Assertions.assertNull(country, "Country should be null");
+        Job job = jobJpaRepository.find(null);
+        Assertions.assertNull(job, "Job should be null");
     }
 
     @Test
-    @DisplayName("Updates Country")
+    @DisplayName("Finds for inexistent Job")
     public void test02() {
-        Country country = countryJpaRepository.find(COUNTRY_ID);
-        logger.info(country);
-        country.setName(country.getName() + " altered");
-        country.setRegion(new Region.Builder().id(REGION_ID).build());
-
-        countryJpaRepository.update(country);
-
-        Country countriesaved  = countryJpaRepository.find(COUNTRY_ID);
-
-        Assertions.assertEquals(countriesaved.getName(), country.getName(), "Country name should be altered");
-        Assertions.assertEquals(countriesaved.getRegion().getId(), country.getRegion().getId(), "Country region id should be altered");
+        Job job = jobJpaRepository.find("NO_EXISTENT_JOB");
+        logger.info(job);
+        Assertions.assertNull(job, "Job should be null");
     }
 
     @Test
-    @DisplayName("Saves Country")
+    @DisplayName("Updates Job")
     public void test03() {
+        Job job = jobJpaRepository.find(JOB_ID);
+        logger.info(job);
+        job.setTitle(job.getTitle() + " altered");
+        job.setMinSalary(job.getMinSalary() + 1);
+        job.setMaxSalary(job.getMaxSalary() + 1);
 
-        Country country = new Country(NEW_COUNTRY_ID, "new country", new Region.Builder().id(REGION_ID).build());
-        countryJpaRepository.save(country);
+        jobJpaRepository.update(job);
 
-        country = countryJpaRepository.find(NEW_COUNTRY_ID);
+        Job jobSaved  = jobJpaRepository.find(JOB_ID);
 
-        Assertions.assertNotNull(country, "Country should be saved");
-        Assertions.assertEquals(NEW_COUNTRY_ID, country.getId(), "Country id should equals");
-        Assertions.assertEquals(REGION_ID, country.getRegion().getId(), "Region id should equals");
+        Assertions.assertEquals(jobSaved.getTitle(), job.getTitle(), "Job title should be altered");
+        Assertions.assertEquals(jobSaved.getTitle(), job.getTitle(), "Job title should be altered");
+        Assertions.assertEquals(jobSaved.getMinSalary(), job.getMinSalary(), "Job min salary should be altered");
+        Assertions.assertEquals(jobSaved.getMaxSalary(), job.getMaxSalary(), "Job max salary should be altered");
     }
 
     @Test
-    @DisplayName("Finds all countries")
+    @DisplayName("Saves Job")
     public void test04() {
-        Collection<Country> countries = countryJpaRepository.findAll();
-        logger.info(countries);
-        Assertions.assertNotNull(countries, "countries should be listed");
-        Assertions.assertTrue(countries.size() >= 25, "countries should be listed at all");
+        Job job = new Job(NEW_JOB_ID, "new job", 1000f, 2000f);
+        jobJpaRepository.save(job);
 
+        job = jobJpaRepository.find(NEW_JOB_ID);
+
+        Assertions.assertNotNull(job, "Job should be saved");
+        Assertions.assertTrue(job.getTitle().contains("new"), "Job should be saved");
     }
 
     @Test
-    @DisplayName("Finds for Country")
+    @DisplayName("Finds all Jobs")
     public void test05() {
-        Country country = countryJpaRepository.find(COUNTRY_ID);
-        logger.info(country);
-        Assertions.assertNotNull(country, "Country should not be null");
+        Collection<Job> jobs = jobJpaRepository.findAll();
+        logger.info(jobs);
+        Assertions.assertNotNull(jobs, "Jobs should be listed");
+        Assertions.assertTrue(jobs.size() >= 19, "Jobs should be listed at all");
+
     }
 
     @Test
-    @DisplayName("Deletes Country")
+    @DisplayName("Finds for Job")
     public void test06() {
-        Country country = countryJpaRepository.find(NEW_COUNTRY_ID);
-        countryJpaRepository.delete(country.getId());
-        boolean exists = countryJpaRepository.exists(country.getId());
-        Assertions.assertFalse(exists, "Country still existing");
+        Job job = jobJpaRepository.find(JOB_ID);
+        logger.info(job);
+        Assertions.assertNotNull(job, "Job should not be null");
     }
 
     @Test
-    @DisplayName("Country exists")
+    @DisplayName("Deletes Job")
     public void test07() {
-        boolean exists = countryJpaRepository.exists(COUNTRY_ID);
-        Assertions.assertTrue(exists, "Country should be existent");
+        Job job = jobJpaRepository.find(NEW_JOB_ID);
+        logger.info(job);
+        jobJpaRepository.delete(job.getId());
+        boolean exists = jobJpaRepository.exists(job.getId());
+        Assertions.assertFalse(exists, "Job still existing");
     }
 
     @Test
-    @DisplayName("Country doesn't exists")
+    @DisplayName("Job exists")
     public void test08() {
-        boolean exists = countryJpaRepository.exists("NO_EXISTENT_COUNTRY");
-        Assertions.assertFalse(exists, "Country should not be existent");
+        boolean exists = jobJpaRepository.exists(JOB_ID);
+        Assertions.assertTrue(exists, "Job should be existent");
+    }
+
+    @Test
+    @DisplayName("Job doesn't exists")
+    public void test09() {
+        boolean exists = jobJpaRepository.exists("NO_EXISTENT_JOB");
+        Assertions.assertFalse(exists, "Job should not be existent");
     }
 }
