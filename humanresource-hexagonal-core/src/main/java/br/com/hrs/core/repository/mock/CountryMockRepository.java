@@ -9,10 +9,7 @@ import br.com.hrs.core.repository.Repository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Named
 public class CountryMockRepository extends MockRepository<Country, String> implements CountryRepository {
@@ -25,14 +22,15 @@ public class CountryMockRepository extends MockRepository<Country, String> imple
     }
 
     @Override
-    public List<Country> findByRegionId(Integer regionId) {
+    public Optional<List<Country>> findByRegionId(Integer regionId) {
         logger.debug("{}: Fake repository -> findByRegionId({}})", REPOSITORY_NAME,regionId);
 
         if (Objects.isNull(regionId)) {
             Error.of("ID").when(FIELD.MANDATORY).trows();
         }
 
-        return this.regionRepository.find(regionId).getCountries();
+        Optional<Region> region = this.regionRepository.findById(regionId);
+        return region.isPresent() ? Optional.of(region.get().getCountries()) : Optional.empty();
     }
 
     @Override

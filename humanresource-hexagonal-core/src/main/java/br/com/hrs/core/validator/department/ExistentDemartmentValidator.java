@@ -30,7 +30,7 @@ public class ExistentDemartmentValidator implements Validator<Department> {
             Error.of("Department").when(FIELD.MANDATORY).trows();
         }
 
-        if (!departmentRepository.exists(department.getId())) {
+        if (!departmentRepository.existsById(department.getId())) {
             throw new HrsNotFoundException("Department does not exist");
         }
     }

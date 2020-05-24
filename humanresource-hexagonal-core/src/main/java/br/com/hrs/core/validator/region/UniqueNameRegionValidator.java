@@ -38,7 +38,7 @@ public class UniqueNameRegionValidator implements SaveValidator<Region>, UpdateV
 			Error.of("Region Name").when(FIELD.MANDATORY).trows();
 		}
 
-		if (this.regionRepository.findByName(region.getName()) != null) {
+		if (this.regionRepository.findByName(region.getName()).isPresent()) {
 			throw new HrsBusinessException("Region name should be unique");
 		}
 	}

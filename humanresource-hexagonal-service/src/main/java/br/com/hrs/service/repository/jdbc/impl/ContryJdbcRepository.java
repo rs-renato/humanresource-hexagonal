@@ -3,7 +3,7 @@ package br.com.hrs.service.repository.jdbc.impl;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.CountryRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.CountryRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
-public class ContryJdbcRepository implements Repository<Country, String> {
+public class ContryJdbcRepository implements CountryRepository {
 
     private JdbcTemplate jdbcTemplate;
     private final String REPOSITORY_NAME = getClass().getSimpleName();
@@ -24,7 +26,7 @@ public class ContryJdbcRepository implements Repository<Country, String> {
     }
 
     @Override
-    public Country find(String id) {
+    public Optional<Country> findById(String id) {
 
         logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
 
@@ -36,10 +38,10 @@ public class ContryJdbcRepository implements Repository<Country, String> {
         Object[] param = new Object[]{id};
 
         try {
-            return jdbcTemplate.queryForObject(sql, param, new CountryRowMapper());
+            return Optional.of(jdbcTemplate.queryForObject(sql, param, new CountryRowMapper()));
         } catch (EmptyResultDataAccessException e) {
             logger.warn("Country Id '{}' not found", id);
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -92,7 +94,7 @@ public class ContryJdbcRepository implements Repository<Country, String> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(String id) {
+    public void deleteById(String id) {
         logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
@@ -106,7 +108,7 @@ public class ContryJdbcRepository implements Repository<Country, String> {
     }
 
     @Override
-    public boolean exists(String id) {
+    public boolean existsById(String id) {
 
         logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
 
@@ -115,5 +117,18 @@ public class ContryJdbcRepository implements Repository<Country, String> {
         }
 
         return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM COUNTRIES WHERE COUNTRY_ID = ?", new Object[]{id}, Integer.class) > 0;
+    }
+
+    @Override
+    public Optional<List<Country>> findByRegionId(Integer regionId) {
+
+        logger.debug("{} ->  findByRegionId({}})", REPOSITORY_NAME, regionId);
+
+        if (Objects.isNull(regionId)) {
+            Error.of("Region ID").when(FIELD.MANDATORY).trows();
+        }
+
+        String sql = "SELECT * FROM COUNTRIES WHERE REGION_ID = ?";
+        return Optional.of(jdbcTemplate.query(sql, new Object[]{regionId}, new CountryRowMapper()));
     }
 }

@@ -33,7 +33,7 @@ public class ExistentRegionCountryValidator implements SaveValidator<Country>, U
 		}
 
 		Region region = country.getRegion();
-		if (region == null || !regionRepository.exists(region.getId())) {
+		if (region == null || !regionRepository.existsById(region.getId())) {
 			throw new HrsNotFoundException("Region does not exist");
 		}
 	}

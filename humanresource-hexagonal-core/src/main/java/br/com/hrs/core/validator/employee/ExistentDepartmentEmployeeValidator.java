@@ -32,7 +32,7 @@ public class ExistentDepartmentEmployeeValidator implements SaveValidator<Employ
 			Error.of("Employee").when(FIELD.MANDATORY).trows();
 		}
 
-		if (!this.departmentRepository.exists(employee.getDepartment().getId())) {
+		if (!this.departmentRepository.existsById(employee.getDepartment().getId())) {
 			throw new HrsNotFoundException("Department does not exist");
 		}
 	}

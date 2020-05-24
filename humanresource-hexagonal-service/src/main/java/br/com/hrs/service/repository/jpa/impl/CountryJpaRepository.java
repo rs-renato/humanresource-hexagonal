@@ -4,17 +4,18 @@ package br.com.hrs.service.repository.jpa.impl;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
+import br.com.hrs.core.repository.CountryRepository;
 import br.com.hrs.service.repository.jpa.JpaRepositoryAbstractImpl;
 import br.com.hrs.service.repository.jpa.JpaRepositoryContainer;
-import br.com.hrs.service.repository.jpa.queries.CountryJpaRepositoryQueries;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
-public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, String> implements CountryJpaRepositoryQueries {
+public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, String> implements CountryRepository {
 
 	private JpaRepositoryContainer.CountrySpringDataJpaRepositoryImpl jpaRepository;
 
@@ -24,15 +25,13 @@ public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, Str
 		this.jpaRepository = jpaRepository;
 	}
 
-	public List<Country> findByRegionId(Integer regionId) {
+	public Optional<List<Country>> findByRegionId(Integer regionId) {
 		logger.debug("{} -> findByRegionId({}})", REPOSITORY_NAME,regionId);
 
 		if (Objects.isNull(regionId)) {
 			Error.of("Region ID").when(FIELD.MANDATORY).trows();
 		}
 
-		List<Country> countries = this.jpaRepository.findByRegionId(regionId);
-		logger.debug("Finding country by region id {}. Found: {}", regionId, countries != null ? countries.size() : 0);
-		return countries;
+		return this.jpaRepository.findByRegionId(regionId);
 	}
 }

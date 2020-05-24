@@ -10,10 +10,7 @@ import br.com.hrs.core.validator.employee.PromotionValidator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Named
 class EmployeeCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Employee, Integer> implements EmployeeUseCase {
@@ -51,21 +48,22 @@ class EmployeeCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Employee, Integer>
 
 		logger.info("Promoting employee '{}', to job '{} from department '{}", employeeId, jobId, departmentId);
 
-		Employee employee = this.employeeRepository.find(employeeId);
-		Job job = this.jobRepository.find(jobId);
-		Department department = this.departmentRepository.find(departmentId);
+		Optional<Employee> employeeOpt = this.employeeRepository.findById(employeeId);
+		Optional<Job> job = this.jobRepository.findById(jobId);
+		Optional<Department> department = this.departmentRepository.findById(departmentId);
 
 		this.validators.stream()
 				.filter(validator -> validator instanceof PromotionValidator)
 				.map(validator -> (PromotionValidator)validator)
-				.forEach(validator -> validator.validate(employee, job, department));
+				.forEach(validator -> validator.validate(employeeOpt, job, department));
 
-		employee.setSalary(job.getMinSalary());
-		employee.setDepartment(department);
-		employee.setJob(job);
 
-		employeeRepository.update(employee);
+		employeeOpt.get().setSalary(job.get().getMinSalary());
+		employeeOpt.get().setDepartment(department.get());
+		employeeOpt.get().setJob(job.get());
 
-		logger.info("Employee '{}' promoted!", employee);
+		employeeRepository.update(employeeOpt.get());
+
+		logger.info("Employee '{}' promoted!", employeeOpt);
 	}
 }

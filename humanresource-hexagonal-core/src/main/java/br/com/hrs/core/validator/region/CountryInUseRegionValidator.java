@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
 public class CountryInUseRegionValidator implements DeleteValidator<Region> {
@@ -35,8 +36,8 @@ public class CountryInUseRegionValidator implements DeleteValidator<Region> {
 			Error.of("Region").when(FIELD.MANDATORY).trows();
 		}
 
-		Region regionFound = this.regionRepository.find(region.getId());
-		List<Country> countries = regionFound.getCountries();
+		Optional<Region> regionFound = this.regionRepository.findById(region.getId());
+		List<Country> countries = regionFound.get().getCountries();
 		if(countries != null && !countries.isEmpty()) {
 			throw new HrsBusinessException("Region could not be deleted because it has associated countries");
 		}

@@ -12,6 +12,7 @@ import br.com.hrs.core.validator.UpdateValidator;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
 public class MinSalaryAllowedEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
@@ -31,8 +32,8 @@ public class MinSalaryAllowedEmployeeValidator implements SaveValidator<Employee
 			Error.of("Employee").when(FIELD.MANDATORY).trows();
 		}
 
-		Job job = this.jobRepository.find(employee.getJob().getId());
-		Float minSalary = job.getMinSalary();
+		Optional<Job> job = this.jobRepository.findById(employee.getJob().getId());
+		Float minSalary = job.get().getMinSalary();
 		if(employee.getSalary() < minSalary) {
 			throw new HrsBusinessException(String.format("The employee salary is invalid according to the job's min salary (%s)", minSalary));
 		}

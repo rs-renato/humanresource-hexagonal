@@ -33,7 +33,7 @@ public class UniqueIdJobValidator implements SaveValidator<Job> {
 			Error.of("Job").when(FIELD.MANDATORY).trows();
 		}
 
-		if (this.jobRepository.exists(job.getId())) {
+		if (this.jobRepository.existsById(job.getId())) {
 			throw new HrsBusinessException("Job id should be unique");
 		}
 	}

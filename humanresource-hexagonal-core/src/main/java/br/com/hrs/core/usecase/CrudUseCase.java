@@ -5,12 +5,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public interface CrudUseCase<E extends EntityKey<ID>, ID> {
 
     Logger logger = LogManager.getLogger(CrudUseCase.class);
 
-    E find(ID id);
+    Optional<E> findById(ID id);
 
     E save(E entity);
 
@@ -18,7 +19,7 @@ public interface CrudUseCase<E extends EntityKey<ID>, ID> {
 
     Collection<E> findAll();
 
-    void delete(ID id);
+    void deleteById(ID id);
 
-    boolean exists(ID id);
+    boolean existsById(ID id);
 }

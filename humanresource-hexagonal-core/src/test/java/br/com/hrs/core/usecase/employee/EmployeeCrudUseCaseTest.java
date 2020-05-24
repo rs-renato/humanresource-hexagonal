@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
@@ -47,7 +48,7 @@ public class EmployeeCrudUseCaseTest {
     @Test
     @DisplayName("Exists an Employees")
     public void test01() {
-        boolean exists = employeeCrudUseCase.exists(employee.getId());
+        boolean exists = employeeCrudUseCase.existsById(employee.getId());
         Assertions.assertTrue(exists, String.format("Employee should exist"));
     }
 
@@ -56,15 +57,15 @@ public class EmployeeCrudUseCaseTest {
     public void test02() {
         Employee employeeSaved = employeeCrudUseCase.save(employee);
         Assertions.assertNotNull(employeeSaved, String.format("Employee saved should not be null"));
-        Employee employeeFound = employeeCrudUseCase.find(employeeSaved.getId());
-        Assertions.assertEquals(employeeSaved, employeeFound, String.format("Employee should be equals"));
+        Optional<Employee> employeeOpt = employeeCrudUseCase.findById(employeeSaved.getId());
+        Assertions.assertEquals(employeeSaved, employeeOpt.get(), String.format("Employee should be equals"));
     }
 
     @Test
     @DisplayName("Finds an Employee")
     public void test03() {
-        Employee employeeFound = employeeCrudUseCase.find(employee.getId());
-        Assertions.assertNotNull(employeeFound, String.format("Employee should not be null"));
+        Optional<Employee> employeeOpt = employeeCrudUseCase.findById(employee.getId());
+        Assertions.assertTrue(employeeOpt.isPresent(), String.format("Employee should not be null"));
     }
 
     @Test
@@ -82,21 +83,21 @@ public class EmployeeCrudUseCaseTest {
         employee.setLastName(employee.getLastName() + "updated");
         employee.setFirstName(employee.getFirstName() + " updated");
 
-        Employee employeeUpdated = employeeCrudUseCase.find(employee.getId());
+        Optional<Employee> employeeOpt = employeeCrudUseCase.findById(employee.getId());
 
-        Assertions.assertNotNull(employeeUpdated, String.format("Employee should not be null"));
-        Assertions.assertEquals(employeeUpdated.getFirstName(), employee.getFirstName(), String.format("Employee firstname should be updated"));
-        Assertions.assertEquals(employeeUpdated.getLastName(), employee.getLastName(), String.format("Employee lastname should be updated"));
+        Assertions.assertTrue(employeeOpt.isPresent(), String.format("Employee should not be null"));
+        Assertions.assertEquals(employeeOpt.get().getFirstName(), employee.getFirstName(), String.format("Employee firstname should be updated"));
+        Assertions.assertEquals(employeeOpt.get().getLastName(), employee.getLastName(), String.format("Employee lastname should be updated"));
     }
 
     @Test
     @DisplayName("Deletes an Employee")
     public void test06() {
 
-        employeeCrudUseCase.delete(employee.getId());
+        employeeCrudUseCase.deleteById(employee.getId());
 
-        Employee employeeUpdated = employeeCrudUseCase.find(employee.getId());
+        Optional<Employee> employeeOpt = employeeCrudUseCase.findById(employee.getId());
 
-        Assertions.assertNull(employeeUpdated, String.format("Employee should be null"));
+        Assertions.assertFalse(employeeOpt.isPresent(), String.format("Employee should be null"));
     }
 }

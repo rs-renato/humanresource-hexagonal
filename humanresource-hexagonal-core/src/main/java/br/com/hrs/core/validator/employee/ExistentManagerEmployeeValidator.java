@@ -30,7 +30,7 @@ public class ExistentManagerEmployeeValidator implements SaveValidator<Employee>
 			Error.of("Employee").when(FIELD.MANDATORY).trows();
 		}
 
-		if(!this.employeeRepository.exists(manager.getId())){
+		if(!this.employeeRepository.existsById(manager.getId())){
 			throw new HrsNotFoundException("Manager does not exist");
 		}
 	}

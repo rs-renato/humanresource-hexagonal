@@ -13,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
@@ -36,7 +37,7 @@ public class CountryCrudUseCaseTest {
     @Test
     @DisplayName("Exists an Countrys")
     public void test01() {
-        boolean exists = countryCrudUseCase.exists(country.getId());
+        boolean exists = countryCrudUseCase.existsById(country.getId());
         Assertions.assertTrue(exists, String.format("Country should exist"));
     }
 
@@ -45,23 +46,23 @@ public class CountryCrudUseCaseTest {
     public void test02() {
         country.setId("NEW");
         countryCrudUseCase.save(country);
-        Country countrySaved = countryCrudUseCase.find(country.getId());
-        Assertions.assertEquals(country, countrySaved, String.format("Country should be equals"));
+        Optional<Country> countryOpt = countryCrudUseCase.findById(country.getId());
+        Assertions.assertEquals(country, countryOpt.get(), String.format("Country should be equals"));
     }
 
     @Test
     @DisplayName("Finds an Country")
     public void test03() {
-        Country countryFound = countryCrudUseCase.find(country.getId());
-        Assertions.assertNotNull(countryFound, String.format("Country should not be null"));
+        Optional<Country> countryOpt = countryCrudUseCase.findById(CountryCrudUseCaseTest.country.getId());
+        Assertions.assertTrue(countryOpt.isPresent(), String.format("Country should not be null"));
     }
 
     @Test
     @DisplayName("Finds all Countrys")
     public void test04() {
-        Collection<Country> countrys = countryCrudUseCase.findAll();
-        Assertions.assertNotNull(countrys, String.format("Countrys should not be null"));
-        Assertions.assertEquals(4, countrys.size(), String.format("Countrys size doesn't match"));
+        Collection<Country> countries = countryCrudUseCase.findAll();
+        Assertions.assertNotNull(countries, String.format("Countrys should not be null"));
+        Assertions.assertEquals(4, countries.size(), String.format("Countrys size doesn't match"));
     }
 
     @Test
@@ -72,20 +73,20 @@ public class CountryCrudUseCaseTest {
 
         countryCrudUseCase.update(country);
 
-        Country countryUpdated = countryCrudUseCase.find(country.getId());
+        Optional<Country> countryOpt = countryCrudUseCase.findById(country.getId());
 
-        Assertions.assertNotNull(countryUpdated, String.format("Country should not be null"));
-        Assertions.assertEquals(countryUpdated.getName(), country.getName(), String.format("Country name should be updated"));
+        Assertions.assertTrue(countryOpt.isPresent(), String.format("Country should not be null"));
+        Assertions.assertEquals(countryOpt.get().getName(), country.getName(), String.format("Country name should be updated"));
     }
 
     @Test
     @DisplayName("Deletes an Country")
     public void test06() {
 
-        countryCrudUseCase.delete(country.getId());
+        countryCrudUseCase.deleteById(country.getId());
 
-        Country countryUpdated = countryCrudUseCase.find(country.getId());
+        Optional<Country> countryOpt = countryCrudUseCase.findById(country.getId());
 
-        Assertions.assertNull(countryUpdated, String.format("Country should be null"));
+        Assertions.assertFalse(countryOpt.isPresent(), String.format("Country should be null"));
     }
 }

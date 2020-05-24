@@ -4,8 +4,9 @@ import br.com.hrs.core.model.Country;
 import br.com.hrs.core.usecase.CrudUseCase;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CountryUseCase extends CrudUseCase<Country, String> {
 
-    List<Country> findByRegionId(Integer regionId);
+    Optional<List<Country>> findByRegionId(Integer regionId);
 }

@@ -3,7 +3,7 @@ package br.com.hrs.service.repository.jdbc.impl;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Region;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.RegionRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.RegionRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,9 +15,10 @@ import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
-public class RegionJdbcRepository implements Repository<Region, Integer> {
+public class RegionJdbcRepository implements RegionRepository {
 
     private JdbcTemplate jdbcTemplate;
     private final String REPOSITORY_NAME = getClass().getSimpleName();
@@ -27,7 +28,7 @@ public class RegionJdbcRepository implements Repository<Region, Integer> {
     }
 
     @Override
-    public Region find(Integer id) {
+    public Optional<Region> findById(Integer id) {
         logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
@@ -35,13 +36,12 @@ public class RegionJdbcRepository implements Repository<Region, Integer> {
         }
 
         String sql = "SELECT * FROM REGIONS WHERE REGION_ID = ?";
-        Object[] param = new Object[]{id};
 
         try {
-            return jdbcTemplate.queryForObject(sql, param, new RegionRowMapper());
+            return Optional.of(jdbcTemplate.queryForObject(sql, new Object[]{id}, new RegionRowMapper()));
         } catch (EmptyResultDataAccessException e) {
             logger.warn("Region Id '{}' not found", id);
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -101,7 +101,7 @@ public class RegionJdbcRepository implements Repository<Region, Integer> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
@@ -114,12 +114,31 @@ public class RegionJdbcRepository implements Repository<Region, Integer> {
     }
 
     @Override
-    public boolean exists(Integer id) {
+    public boolean existsById(Integer id) {
         logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
             Error.of("Region ID").when(FIELD.MANDATORY).trows();
         }
         return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM REGIONS WHERE REGION_ID = ?", new Object[]{id}, Integer.class) > 0;
+    }
+
+    @Override
+    public Optional<Region> findByName(String name) {
+
+        logger.debug("{} ->  findByName({}})", REPOSITORY_NAME, name);
+
+        if (Objects.isNull(name)) {
+            Error.of("Region Name").when(FIELD.MANDATORY).trows();
+        }
+
+        String sql = "SELECT * FROM REGIONS WHERE REGION_NAME = ?";
+
+        try {
+            return Optional.of(jdbcTemplate.queryForObject(sql, new Object[]{name}, new RegionRowMapper()));
+        } catch (EmptyResultDataAccessException e) {
+            logger.warn("Region Name '{}' not found", name);
+            return Optional.empty();
+        }
     }
 }

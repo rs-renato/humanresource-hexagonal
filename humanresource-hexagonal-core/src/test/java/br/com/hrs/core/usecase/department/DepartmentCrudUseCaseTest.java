@@ -14,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
@@ -38,7 +39,7 @@ public class DepartmentCrudUseCaseTest {
     @Test
     @DisplayName("Exists an Departments")
     public void test01() {
-        boolean exists = departmentCrudUseCase.exists(department.getId());
+        boolean exists = departmentCrudUseCase.existsById(department.getId());
         Assertions.assertTrue(exists, String.format("Department should exist"));
     }
 
@@ -47,15 +48,15 @@ public class DepartmentCrudUseCaseTest {
     public void test02() {
         Department departmentSaved = departmentCrudUseCase.save(department);
         Assertions.assertNotNull(departmentSaved, String.format("Department saved should not be null"));
-        Department departmentFound = departmentCrudUseCase.find(departmentSaved.getId());
-        Assertions.assertEquals(departmentSaved, departmentFound, String.format("Department should be equals"));
+        Optional<Department> departmentOpt = departmentCrudUseCase.findById(departmentSaved.getId());
+        Assertions.assertEquals(departmentSaved, departmentOpt.get(), String.format("Department should be equals"));
     }
 
     @Test
     @DisplayName("Finds an Department")
     public void test03() {
-        Department departmentFound = departmentCrudUseCase.find(department.getId());
-        Assertions.assertNotNull(departmentFound, String.format("Department should not be null"));
+        Optional<Department> departmentOpt = departmentCrudUseCase.findById(department.getId());
+        Assertions.assertTrue(departmentOpt.isPresent(), String.format("Department should not be null"));
     }
 
     @Test
@@ -74,20 +75,20 @@ public class DepartmentCrudUseCaseTest {
 
         departmentCrudUseCase.update(department);
 
-        Department departmentUpdated = departmentCrudUseCase.find(department.getId());
+        Optional<Department> departmentOpt = departmentCrudUseCase.findById(department.getId());
 
-        Assertions.assertNotNull(departmentUpdated, String.format("Department should not be null"));
-        Assertions.assertEquals(departmentUpdated.getName(), department.getName(), String.format("Department name should be updated"));
+        Assertions.assertTrue(departmentOpt.isPresent(), String.format("Department should not be null"));
+        Assertions.assertEquals(departmentOpt.get().getName(), department.getName(), String.format("Department name should be updated"));
     }
 
     @Test
     @DisplayName("Deletes an Department")
     public void test06() {
 
-        departmentCrudUseCase.delete(department.getId());
+        departmentCrudUseCase.deleteById(department.getId());
 
-        Department departmentUpdated = departmentCrudUseCase.find(department.getId());
+        Optional<Department> departmentOpt = departmentCrudUseCase.findById(department.getId());
 
-        Assertions.assertNull(departmentUpdated, String.format("Department should be null"));
+        Assertions.assertFalse(departmentOpt.isPresent(), String.format("Department should be null"));
     }
 }

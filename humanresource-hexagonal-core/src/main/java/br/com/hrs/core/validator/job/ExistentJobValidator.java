@@ -29,7 +29,7 @@ public class ExistentJobValidator implements Validator<Job> {
             Error.of("Job").when(FIELD.MANDATORY).trows();
         }
 
-        if (!this.jobRepository.exists(job.getId())) {
+        if (!this.jobRepository.existsById(job.getId())) {
             throw new HrsNotFoundException("Job id doenst exists");
         }
     }

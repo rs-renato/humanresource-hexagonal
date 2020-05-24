@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> implements CrudUseCase<E, ID>{
 
@@ -19,14 +20,14 @@ public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> imple
     protected abstract List<Validator<E>> getValidators();
     protected abstract Repository<E, ID> getRepository();
 
-    public boolean exists(ID id) {
+    public boolean existsById(ID id) {
         logger.debug("Calling exists in repository");
-        return getRepository().exists(id);
+        return getRepository().existsById(id);
     }
 
-    public E find(ID id) {
+    public Optional<E> findById(ID id) {
         logger.debug("Calling find in repository");
-        return getRepository().find(id);
+        return getRepository().findById(id);
     }
 
     public Collection<E> findAll() {
@@ -50,12 +51,12 @@ public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> imple
         getRepository().update(entity);
     }
 
-    public void delete(ID id) {
-       E entity = getRepository().find(id);
+    public void deleteById(ID id) {
+       Optional<E> entity = getRepository().findById(id);
        getValidators().stream()
                 .filter(validator -> validator instanceof DeleteValidator)
-                .forEach(validator -> validator.validate(entity));
+                .forEach(validator -> validator.validate(entity.get()));
         logger.debug("Calling delete on repository");
-        getRepository().delete(id);
+        getRepository().deleteById(id);
     }
 }

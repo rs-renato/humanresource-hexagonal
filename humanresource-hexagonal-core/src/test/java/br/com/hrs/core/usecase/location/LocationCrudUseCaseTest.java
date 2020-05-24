@@ -14,6 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.text.ParseException;
 import java.util.Collection;
+import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
@@ -40,7 +41,7 @@ public class LocationCrudUseCaseTest {
     @Test
     @DisplayName("Exists an Locations")
     public void test01() {
-        boolean exists = locationCrudUseCase.exists(location.getId());
+        boolean exists = locationCrudUseCase.existsById(location.getId());
         Assertions.assertTrue(exists, String.format("Location should exist"));
     }
 
@@ -49,15 +50,15 @@ public class LocationCrudUseCaseTest {
     public void test02() {
         Location locationSaved = locationCrudUseCase.save(location);
         Assertions.assertNotNull(locationSaved, String.format("Location saved should not be null"));
-        Location locationFound = locationCrudUseCase.find(locationSaved.getId());
-        Assertions.assertEquals(locationSaved, locationFound, String.format("Location should be equals"));
+        Optional<Location> locationOpt = locationCrudUseCase.findById(locationSaved.getId());
+        Assertions.assertEquals(locationSaved, locationOpt.get(), String.format("Location should be equals"));
     }
 
     @Test
     @DisplayName("Finds an Location")
     public void test03() {
-        Location locationFound = locationCrudUseCase.find(location.getId());
-        Assertions.assertNotNull(locationFound, String.format("Location should not be null"));
+        Optional<Location> locationOpt = locationCrudUseCase.findById(location.getId());
+        Assertions.assertTrue(locationOpt.isPresent(), String.format("Location should not be null"));
     }
 
     @Test
@@ -76,20 +77,20 @@ public class LocationCrudUseCaseTest {
 
         locationCrudUseCase.update(location);
 
-        Location locationUpdated = locationCrudUseCase.find(location.getId());
+        Optional<Location> locationOpt = locationCrudUseCase.findById(location.getId());
 
-        Assertions.assertNotNull(locationUpdated, String.format("Location should not be null"));
-        Assertions.assertEquals(locationUpdated.getState(), location.getState(), String.format("Location state should be updated"));
+        Assertions.assertTrue(locationOpt.isPresent(), String.format("Location should not be null"));
+        Assertions.assertEquals(locationOpt.get().getState(), location.getState(), String.format("Location state should be updated"));
     }
 
     @Test
     @DisplayName("Deletes an Location")
     public void test06() {
 
-        locationCrudUseCase.delete(location.getId());
+        locationCrudUseCase.deleteById(location.getId());
 
-        Location locationUpdated = locationCrudUseCase.find(location.getId());
+        Optional<Location> locationOpt = locationCrudUseCase.findById(location.getId());
 
-        Assertions.assertNull(locationUpdated, String.format("Location should be null"));
+        Assertions.assertFalse(locationOpt.isPresent(), String.format("Location should be null"));
     }
 }

@@ -24,7 +24,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
     }
 
     @Override
-    public E find(ID id) {
+    public Optional<E> findById(ID id) {
         logger.debug("{} -> find({}})", REPOSITORY_NAME,id);
 
         if (Objects.isNull(id)) {
@@ -34,7 +34,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
         Optional<E> entity = this.jpaRepository.findById(id);
         boolean isPresent =  entity.isPresent();
         logger.debug("{} id {} found: {}",ENTITY_NAME, id, isPresent);
-        return isPresent ? entity.get() : null;
+        return isPresent ? entity : Optional.empty();
     }
 
     @Override
@@ -72,7 +72,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
 
     @Override
     @Transactional(rollbackFor=Exception.class)
-    public void delete(ID id) {
+    public void deleteById(ID id) {
         logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
@@ -85,7 +85,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
     }
 
     @Override
-    public boolean exists(ID id) {
+    public boolean existsById(ID id) {
         logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {

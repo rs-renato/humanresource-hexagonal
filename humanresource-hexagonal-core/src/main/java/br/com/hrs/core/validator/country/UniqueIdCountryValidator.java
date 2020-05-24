@@ -30,7 +30,7 @@ public class UniqueIdCountryValidator implements SaveValidator<Country> {
 			Error.of("Country").when(FIELD.MANDATORY).trows();
 		}
 
-		if (this.countryRepository.exists(country.getId())) {
+		if (this.countryRepository.existsById(country.getId())) {
 			throw new HrsBusinessException("Country id should be unique");
 		}
 	}

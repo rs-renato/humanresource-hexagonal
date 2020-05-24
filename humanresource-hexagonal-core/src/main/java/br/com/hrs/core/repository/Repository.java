@@ -5,12 +5,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
+import java.util.Optional;
 
- public interface Repository<E extends EntityKey<ID>, ID> {
+public interface Repository<E extends EntityKey<ID>, ID> {
 
     Logger logger = LogManager.getLogger(Repository.class);
  
-    E find(ID id);
+    Optional<E> findById(ID id);
     
     E save(E entity);
     
@@ -18,7 +19,7 @@ import java.util.Collection;
     
     Collection<E> findAll();
 
-    void delete(ID id);
+    void deleteById(ID id);
     
-    boolean exists(ID id);
+    boolean existsById(ID id);
 }

@@ -3,7 +3,7 @@ package br.com.hrs.service.repository.jdbc.impl;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.LocationRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.LocationRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,9 +15,10 @@ import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
-public class LocationJdbcRepository implements Repository<Location, Integer> {
+public class LocationJdbcRepository implements LocationRepository {
 
     private JdbcTemplate jdbcTemplate;
     private final String REPOSITORY_NAME = getClass().getSimpleName();
@@ -27,7 +28,7 @@ public class LocationJdbcRepository implements Repository<Location, Integer> {
     }
 
     @Override
-    public Location find(Integer id) {
+    public Optional<Location> findById(Integer id) {
 
         logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
 
@@ -39,10 +40,10 @@ public class LocationJdbcRepository implements Repository<Location, Integer> {
         Object[] param = new Object[]{id};
 
         try {
-            return jdbcTemplate.queryForObject(sql, param, new LocationRowMapper());
+            return Optional.of(jdbcTemplate.queryForObject(sql, param, new LocationRowMapper()));
         } catch (EmptyResultDataAccessException e) {
             logger.warn("Location Id '{}' not found", id);
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -108,7 +109,7 @@ public class LocationJdbcRepository implements Repository<Location, Integer> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
@@ -122,7 +123,7 @@ public class LocationJdbcRepository implements Repository<Location, Integer> {
     }
 
     @Override
-    public boolean exists(Integer id) {
+    public boolean existsById(Integer id) {
         logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {

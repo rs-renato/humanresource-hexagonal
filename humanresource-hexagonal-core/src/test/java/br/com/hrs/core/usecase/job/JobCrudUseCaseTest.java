@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
@@ -36,7 +37,7 @@ public class JobCrudUseCaseTest {
     @Test
     @DisplayName("Exists an Jobs")
     public void test01() {
-        boolean exists = jobCrudUseCase.exists(job.getId());
+        boolean exists = jobCrudUseCase.existsById(job.getId());
         Assertions.assertTrue(exists, String.format("Job should exist"));
     }
 
@@ -53,15 +54,15 @@ public class JobCrudUseCaseTest {
 
         Job jobSaved = jobCrudUseCase.save(job);
         Assertions.assertNotNull(jobSaved, String.format("Job saved should not be null"));
-        Job jobFound = jobCrudUseCase.find(jobSaved.getId());
-        Assertions.assertEquals(jobSaved, jobFound, String.format("Job should be equals"));
+        Optional<Job> jobOpt = jobCrudUseCase.findById(jobSaved.getId());
+        Assertions.assertEquals(jobSaved, jobOpt.get(), String.format("Job should be equals"));
     }
 
     @Test
     @DisplayName("Finds an Job")
     public void test03() {
-        Job jobFound = jobCrudUseCase.find(job.getId());
-        Assertions.assertNotNull(jobFound, String.format("Job should not be null"));
+        Optional<Job> jobOpt = jobCrudUseCase.findById(job.getId());
+        Assertions.assertTrue(jobOpt.isPresent(), String.format("Job should not be null"));
     }
 
     @Test
@@ -80,20 +81,20 @@ public class JobCrudUseCaseTest {
 
         jobCrudUseCase.update(job);
 
-        Job jobUpdated = jobCrudUseCase.find(job.getId());
+        Optional<Job> jobOpt = jobCrudUseCase.findById(job.getId());
 
-        Assertions.assertNotNull(jobUpdated, String.format("Job should not be null"));
-        Assertions.assertEquals(jobUpdated.getTitle(), job.getTitle(), String.format("Job tittle should be updated"));
+        Assertions.assertTrue(jobOpt.isPresent(), String.format("Job should not be null"));
+        Assertions.assertEquals(jobOpt.get().getTitle(), job.getTitle(), String.format("Job tittle should be updated"));
     }
 
     @Test
     @DisplayName("Deletes an Job")
     public void test06() {
 
-        jobCrudUseCase.delete(job.getId());
+        jobCrudUseCase.deleteById(job.getId());
 
-        Job jobUpdated = jobCrudUseCase.find(job.getId());
+        Optional<Job> jobOpt = jobCrudUseCase.findById(job.getId());
 
-        Assertions.assertNull(jobUpdated, String.format("Job should be null"));
+        Assertions.assertFalse(jobOpt.isPresent(), String.format("Job should be null"));
     }
 }

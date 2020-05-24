@@ -31,7 +31,7 @@ public class ExistentJobEmployeeValidator implements SaveValidator<Employee>, Up
 			Error.of("Employee").when(FIELD.MANDATORY).trows();
 		}
 
-		if (!this.jobRepository.exists(employee.getJob().getId())) {
+		if (!this.jobRepository.existsById(employee.getJob().getId())) {
 			throw new HrsNotFoundException("Job does not exist");
 		}
 	}

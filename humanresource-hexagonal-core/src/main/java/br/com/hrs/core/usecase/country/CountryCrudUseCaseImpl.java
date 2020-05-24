@@ -7,10 +7,7 @@ import br.com.hrs.core.validator.Validator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Named
 class CountryCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Country, String> implements CountryUseCase {
@@ -35,7 +32,7 @@ class CountryCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Country, String> im
 	}
 
 	@Override
-	public List<Country> findByRegionId(Integer regionId){
+	public Optional<List<Country>> findByRegionId(Integer regionId){
 		return getRepository().findByRegionId(regionId);
 	}
 }

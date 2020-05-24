@@ -33,7 +33,7 @@ public class ExistentLocationDepartmentValidator implements SaveValidator<Depart
 		}
 
 		Location location = department.getLocation();
-		if (location == null || !departmentRepository.exists(location.getId())) {
+		if (location == null || !departmentRepository.existsById(location.getId())) {
 			throw new HrsNotFoundException("Location does not exist");
 		}
 	}

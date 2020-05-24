@@ -1,13 +1,14 @@
 package br.com.hrs.core.repository.mock;
 
 import br.com.hrs.core.model.Job;
+import br.com.hrs.core.repository.JobRepository;
 
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.Collection;
 
 @Named
-public class JobMockRepository extends MockRepository<Job, String> {
+public class JobMockRepository extends MockRepository<Job, String> implements JobRepository {
 
     @Override
     public Collection<Job> buildCollection() {

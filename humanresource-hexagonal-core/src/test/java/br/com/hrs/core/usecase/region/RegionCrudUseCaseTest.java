@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
@@ -34,24 +35,24 @@ public class RegionCrudUseCaseTest {
     @Test
     @DisplayName("Exists an Regions")
     public void test01() {
-        boolean exists = regionCrudUseCase.exists(region.getId());
+        boolean exists = regionCrudUseCase.existsById(region.getId());
         Assertions.assertTrue(exists, String.format("Region should exist"));
     }
 
     @Test
     @DisplayName("Saves an Region")
     public void test02() {
+        Region region = new Region("new region");
         Region regionSaved = regionCrudUseCase.save(region);
         Assertions.assertNotNull(regionSaved, String.format("Region saved should not be null"));
-        Region regionFound = regionCrudUseCase.find(regionSaved.getId());
-        Assertions.assertEquals(regionSaved, regionFound, String.format("Region should be equals"));
+        Assertions.assertEquals(region.getName(), regionSaved.getName(), String.format("Region should be equals"));
     }
 
     @Test
     @DisplayName("Finds an Region")
     public void test03() {
-        Region regionFound = regionCrudUseCase.find(region.getId());
-        Assertions.assertNotNull(regionFound, String.format("Region should not be null"));
+        Optional<Region> regionFound = regionCrudUseCase.findById(region.getId());
+        Assertions.assertTrue(regionFound.isPresent(), String.format("Region should not be null"));
     }
 
     @Test
@@ -59,7 +60,7 @@ public class RegionCrudUseCaseTest {
     public void test04() {
         Collection<Region> regions = regionCrudUseCase.findAll();
         Assertions.assertNotNull(regions, String.format("Regions should not be null"));
-        Assertions.assertEquals(2, regions.size(), String.format("Regions size doesn't match"));
+        Assertions.assertEquals(3, regions.size(), String.format("Regions size doesn't match"));
     }
 
     @Test
@@ -73,20 +74,20 @@ public class RegionCrudUseCaseTest {
 
         regionCrudUseCase.update(region);
 
-        Region regionUpdated = regionCrudUseCase.find(region.getId());
+        Optional<Region> regionOpt = regionCrudUseCase.findById(region.getId());
 
-        Assertions.assertNotNull(regionUpdated, String.format("Region should not be null"));
-        Assertions.assertEquals(regionUpdated.getName(), region.getName(), String.format("Region name should be updated"));
+        Assertions.assertTrue(regionOpt.isPresent(), String.format("Region should not be null"));
+        Assertions.assertEquals(regionOpt.get().getName(), region.getName(), String.format("Region name should be updated"));
     }
 
     @Test
     @DisplayName("Deletes an Region")
     public void test06() {
 
-        regionCrudUseCase.delete(region.getId());
+        regionCrudUseCase.deleteById(region.getId());
 
-        Region regionUpdated = regionCrudUseCase.find(region.getId());
+        Optional<Region> regionOpt = regionCrudUseCase.findById(region.getId());
 
-        Assertions.assertNull(regionUpdated, String.format("Region should be null"));
+        Assertions.assertFalse(regionOpt.isPresent(), String.format("Region should be null"));
     }
 }

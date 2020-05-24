@@ -3,6 +3,7 @@ package br.com.hrs.core.repository.mock;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
+import br.com.hrs.core.repository.EmployeeRepository;
 
 import javax.inject.Named;
 import java.text.ParseException;
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @Named
-public class EmployeeMockRepository extends MockRepository<Employee, Integer> {
+public class EmployeeMockRepository extends MockRepository<Employee, Integer> implements EmployeeRepository {
 
     @Override
     public Collection<Employee> buildCollection() {

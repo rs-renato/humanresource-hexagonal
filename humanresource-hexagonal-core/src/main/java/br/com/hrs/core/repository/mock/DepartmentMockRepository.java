@@ -3,13 +3,14 @@ package br.com.hrs.core.repository.mock;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Location;
+import br.com.hrs.core.repository.DepartmentRepository;
 
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.Collection;
 
 @Named
-public class DepartmentMockRepository extends MockRepository<Department, Integer> {
+public class DepartmentMockRepository extends MockRepository<Department, Integer> implements DepartmentRepository {
 
     @Override
     public Collection<Department> buildCollection() {

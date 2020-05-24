@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
+import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
 @ExtendWith(SpringExtension.class)
@@ -99,10 +100,10 @@ public class PromoteEmployeeUseCaseTest {
     public void test07() {
         employeeUseCase.promote(employeeId, jobId, departmentId);
 
-        Employee employee = employeeCrudUseCase.find(employeeId);
+        Optional<Employee> employeeOpt = employeeCrudUseCase.findById(employeeId);
 
-        Assertions.assertEquals(employeeId, employee.getId());
-        Assertions.assertEquals(jobId, employee.getJob().getId());
-        Assertions.assertEquals(departmentId, employee.getDepartment().getId());
+        Assertions.assertEquals(employeeId, employeeOpt.get().getId());
+        Assertions.assertEquals(jobId, employeeOpt.get().getJob().getId());
+        Assertions.assertEquals(departmentId, employeeOpt.get().getDepartment().getId());
     }
 }

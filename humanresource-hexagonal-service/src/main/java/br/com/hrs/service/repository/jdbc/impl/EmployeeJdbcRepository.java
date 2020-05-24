@@ -3,7 +3,7 @@ package br.com.hrs.service.repository.jdbc.impl;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Employee;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.EmployeeRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.EmployeeRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,9 +16,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
-public class EmployeeJdbcRepository implements Repository<Employee, Integer> {
+public class EmployeeJdbcRepository implements EmployeeRepository {
 
     private JdbcTemplate jdbcTemplate;
     private final String REPOSITORY_NAME = getClass().getSimpleName();
@@ -28,7 +29,7 @@ public class EmployeeJdbcRepository implements Repository<Employee, Integer> {
     }
 
     @Override
-    public Employee find(Integer id) {
+    public Optional<Employee> findById(Integer id) {
 
         logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
 
@@ -40,10 +41,10 @@ public class EmployeeJdbcRepository implements Repository<Employee, Integer> {
         Object[] param = new Object[]{id};
 
         try {
-            return jdbcTemplate.queryForObject(sql, param, new EmployeeRowMapper());
+            return Optional.of(jdbcTemplate.queryForObject(sql, param, new EmployeeRowMapper()));
         } catch (EmptyResultDataAccessException e) {
             logger.warn("Employee Id '{}' not found", id);
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -113,7 +114,7 @@ public class EmployeeJdbcRepository implements Repository<Employee, Integer> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(Integer id) {
+    public void deleteById(Integer id) {
         logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
@@ -127,7 +128,7 @@ public class EmployeeJdbcRepository implements Repository<Employee, Integer> {
     }
 
     @Override
-    public boolean exists(Integer id) {
+    public boolean existsById(Integer id) {
         logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {

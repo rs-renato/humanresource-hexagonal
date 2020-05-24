@@ -36,7 +36,7 @@ public class ExistentCountryLocationValidator implements SaveValidator<Location>
 		}
 
 		Country country = location.getCountry();
-		if (country == null || !countryRepository.exists(country.getId())) {
+		if (country == null || !countryRepository.existsById(country.getId())) {
 			throw new HrsNotFoundException("Country does not exist");
 		}
 	}

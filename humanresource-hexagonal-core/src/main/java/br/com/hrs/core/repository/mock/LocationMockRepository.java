@@ -2,13 +2,14 @@ package br.com.hrs.core.repository.mock;
 
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
+import br.com.hrs.core.repository.LocationRepository;
 
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.Collection;
 
 @Named
-public class LocationMockRepository extends MockRepository<Location, Integer> {
+public class LocationMockRepository extends MockRepository<Location, Integer> implements LocationRepository {
 
     @Override
     public Collection<Location> buildCollection() {

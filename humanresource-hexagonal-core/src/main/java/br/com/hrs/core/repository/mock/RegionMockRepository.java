@@ -16,19 +16,20 @@ import java.util.Optional;
 public class RegionMockRepository extends MockRepository<Region, Integer> implements RegionRepository {
 
     @Override
-    public Region findByName(String regionName) {
+    public Optional<Region> findByName(String name) {
 
-        logger.debug("{}: Fake repository -> findByName({}})", REPOSITORY_NAME, regionName);
+        logger.debug("{}: Fake repository -> findByName({}})", REPOSITORY_NAME, name);
 
-        if (Objects.isNull(regionName)) {
+        if (Objects.isNull(name)) {
             Error.of("Region Name").when(FIELD.MANDATORY).trows();
         }
 
-        Optional<Region> region = findAll().stream()
-                .filter(reg -> reg.getName().equals(regionName))
+        Optional<Region> region =
+         findAll().stream()
+                .filter(reg -> reg.getName().equals(name))
                 .findFirst();
 
-        return region.isPresent() ? region.get() : null;
+        return region;
     }
 
     @Override

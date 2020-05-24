@@ -12,6 +12,7 @@ import br.com.hrs.core.validator.UpdateValidator;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
 public class MaxSalaryAllowedEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
@@ -31,8 +32,9 @@ public class MaxSalaryAllowedEmployeeValidator implements SaveValidator<Employee
 			Error.of("Employee").when(FIELD.MANDATORY).trows();
 		}
 
-		Job job = this.jobRepository.find(employee.getJob().getId());
-		Float maxSalary = job.getMaxSalary();
+		Optional<Job> job = this.jobRepository.findById(employee.getJob().getId());
+
+		Float maxSalary = job.get().getMaxSalary();
 		if(employee.getSalary() > maxSalary) {
 			throw new HrsBusinessException(String.format("The employee salary is invalid according to the job's max salary (%s)", maxSalary));
 		}

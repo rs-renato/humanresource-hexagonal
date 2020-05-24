@@ -3,7 +3,7 @@ package br.com.hrs.service.repository.jdbc.impl;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.JobRepository;
 import br.com.hrs.service.repository.jdbc.rowmapper.JobRowMapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,9 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Named;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 @Named
-public class JobJdbcRepository implements Repository<Job, String> {
+public class JobJdbcRepository implements JobRepository {
 
     private JdbcTemplate jdbcTemplate;
     private final String REPOSITORY_NAME = getClass().getSimpleName();
@@ -24,7 +25,7 @@ public class JobJdbcRepository implements Repository<Job, String> {
     }
 
     @Override
-    public Job find(String id) {
+    public Optional<Job> findById(String id) {
 
         logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
 
@@ -36,10 +37,10 @@ public class JobJdbcRepository implements Repository<Job, String> {
         Object[] param = new Object[]{id};
 
         try {
-            return jdbcTemplate.queryForObject(sql, param, new JobRowMapper());
+            return Optional.of(jdbcTemplate.queryForObject(sql, param, new JobRowMapper()));
         } catch (EmptyResultDataAccessException e) {
             logger.warn("Job Id '{}' not found", id);
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -87,7 +88,7 @@ public class JobJdbcRepository implements Repository<Job, String> {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void delete(String id) {
+    public void deleteById(String id) {
         logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
@@ -100,7 +101,7 @@ public class JobJdbcRepository implements Repository<Job, String> {
     }
 
     @Override
-    public boolean exists(String id) {
+    public boolean existsById(String id) {
         logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
