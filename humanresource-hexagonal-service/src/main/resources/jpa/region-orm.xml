@@ -17,7 +17,7 @@
             <basic name="name">
                 <column name="REGION_NAME"/>
             </basic>
-            <one-to-many name="countries" fetch="LAZY" target-entity="br.com.hrs.core.model.Country" mapped-by="region">
+            <one-to-many name="countries" fetch="LAZY" orphan-removal="true" target-entity="br.com.hrs.core.model.Country" mapped-by="region">
                 <cascade>
                     <cascade-all/>
                 </cascade>

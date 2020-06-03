@@ -18,6 +18,9 @@ public class JpaRepositoryContainer {
     public interface DepartmentSpringDataJpaRepositoryImpl extends JpaRepository<Department, Integer>{ }
 
     @Named
+    public interface EmployeeSpringDataJpaRepositoryImpl extends JpaRepository<Employee, Integer>{ }
+
+    @Named
     public interface JobSpringDataJpaRepositoryImpl extends JpaRepository<Job, String> { }
 
     @Named

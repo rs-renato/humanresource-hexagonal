@@ -73,7 +73,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
     @Override
     @Transactional(rollbackFor=Exception.class)
     public void deleteById(ID id) {
-        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+        logger.debug("{} ->  deleteById({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
             Error.of(String.format("%s ID", ENTITY_NAME)).when(FIELD.MANDATORY).trows();
@@ -81,19 +81,19 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
         
         this.jpaRepository.deleteById(id);
         this.jpaRepository.flush();
-        logger.debug("Deleted E by id {}.", id);
+        logger.debug("Deleted {} by id {}.", ENTITY_NAME, id);
     }
 
     @Override
     public boolean existsById(ID id) {
-        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+        logger.debug("{} ->  existsById({}})", REPOSITORY_NAME, id);
 
         if (Objects.isNull(id)) {
             Error.of(String.format("%s ID", ENTITY_NAME)).when(FIELD.MANDATORY).trows();
         }
         
         boolean exists = this.jpaRepository.existsById(id);
-        logger.debug("Verifying existence of E id {}. Exists: {}", id, exists);
+        logger.debug("Verifying existence of {} id {}. Exists: {}", ENTITY_NAME, id, exists);
         return exists;
     }
 
