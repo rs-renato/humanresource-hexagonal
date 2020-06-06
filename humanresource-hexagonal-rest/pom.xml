@@ -15,8 +15,16 @@
         <!-- Service -->
         <dependency>
             <groupId>br.com.hrs</groupId>
-            <artifactId>humanresource-hexagonal-service</artifactId>
+            <artifactId>humanresource-hexagonal-persitence</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <!-- derby -->
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+            <version>10.13.1.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Spring Boot -->

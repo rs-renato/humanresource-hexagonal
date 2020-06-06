@@ -20,7 +20,7 @@
 
     <modules>
         <module>humanresource-hexagonal-core</module>
-        <module>humanresource-hexagonal-service</module>
+        <module>humanresource-hexagonal-persistence</module>
         <module>humanresource-hexagonal-rest</module>
     </modules>
 
