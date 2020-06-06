@@ -20,7 +20,7 @@ public class HrsJdbcConfiguration {
     }
 
     @Bean
-    public DataSourceTransactionManager transactionManager(DataSource hrsDataSource) {
+    public DataSourceTransactionManager dataSourceTransactionManager(DataSource hrsDataSource) {
         return new DataSourceTransactionManager(hrsDataSource);
     }
 }

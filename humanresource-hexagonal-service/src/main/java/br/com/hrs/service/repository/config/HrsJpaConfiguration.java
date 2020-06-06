@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Configuration
 @Import(HrsDataBaseConfiguration.class)
 @ComponentScan("br.com.hrs.service.repository.jpa")
-@EnableJpaRepositories(basePackages ="br.com.hrs.service.repository.jpa", considerNestedRepositories = true, enableDefaultTransactions = false)
+@EnableJpaRepositories(basePackages ="br.com.hrs.service.repository.jpa", considerNestedRepositories = true, enableDefaultTransactions = false, transactionManagerRef = "jpaTransactionManager")
 public class HrsJpaConfiguration {
 
     @Bean
@@ -41,19 +41,20 @@ public class HrsJpaConfiguration {
 
     @Bean
     public EntityManagerFactory entityManagerFactory(DataSource hrsDataSource, JpaVendorAdapter jpaVendorAdapter) {
+
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(hrsDataSource);
         factoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         factoryBean.setJpaProperties(hibernateJpaProperties());
 //        factoryBean.setPackagesToScan("br.com.hrs.service.repository.jpa.entity");
         factoryBean.setSharedCacheMode(SharedCacheMode.ENABLE_SELECTIVE);
-        factoryBean.setMappingResources(getResourceNames("classpath:jpa/*-orm.xml"));
+        factoryBean.setMappingResources(getJpaResourceNames());
         factoryBean.afterPropertiesSet();
         return factoryBean.getObject();
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory hrsEntityManagerFactory) {
+    public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory hrsEntityManagerFactory) {
         return new JpaTransactionManager(hrsEntityManagerFactory);
     }
 
@@ -84,14 +85,18 @@ public class HrsJpaConfiguration {
         return properties;
     }
 
-    private String[] getResourceNames(String path) {
+    private String[] getJpaResourceNames() {
         try {
+            String relativeFolder = "jpa";
+
+            String path = "classpath:" + relativeFolder+ "/*-orm.xml";
+
             PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
             Resource[] resources = resolver.getResources(path);
             return Arrays.stream(resources)
                     .map(resource -> {
                             try{
-                                return resource.getFile().getParentFile().getName() + "/" + resource.getFilename();
+                                return relativeFolder + "/" + resource.getFilename();
                             }catch (Exception e){
                                 e.printStackTrace();
                                 return null;

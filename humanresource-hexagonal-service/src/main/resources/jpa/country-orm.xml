@@ -16,7 +16,7 @@
             <basic name="name">
                 <column name="COUNTRY_NAME"/>
             </basic>
-            <many-to-one name="region" target-entity="br.com.hrs.core.model.Region" fetch="EAGER">
+            <many-to-one name="region" target-entity="br.com.hrs.core.model.Region" fetch="LAZY">
                 <join-column name="REGION_ID" nullable="false"/>
             </many-to-one>
         </attributes>
