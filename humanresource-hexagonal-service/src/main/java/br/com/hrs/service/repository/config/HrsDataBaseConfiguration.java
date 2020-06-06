@@ -15,7 +15,8 @@ public class HrsDataBaseConfiguration {
     @Bean
     public DataSource hrsDataSource() {
         return new EmbeddedDatabaseBuilder()
-                .addScripts("create.sql", "insert.sql")
+                .addScript("database/create.sql")
+                .addScript("database/insert.sql")
                 .generateUniqueName(true)
                 .setType(EmbeddedDatabaseType.DERBY)
                 .build();
