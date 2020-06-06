@@ -1,7 +1,7 @@
 package br.com.hrs.core.usecase.region;
 
 import br.com.hrs.core.model.Region;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.RegionRepository;
 import br.com.hrs.core.usecase.CrudAbstractUseCaseImpl;
 import br.com.hrs.core.validator.Validator;
 
@@ -15,17 +15,17 @@ import java.util.List;
 @Named
 class RegionCrudUseCase extends CrudAbstractUseCaseImpl<Region, Integer> implements RegionUseCase {
 
-	private Repository<Region,Integer> regionRepository;
+	private RegionRepository regionRepository;
 	private List<Validator<Region>> validators;
 
 	@Inject
-	public RegionCrudUseCase(Repository<Region,Integer> regionRepository, Validator<Region>... validators) {
+	public RegionCrudUseCase(RegionRepository regionRepository, Validator<Region>... validators) {
 		this.regionRepository = regionRepository;
 		this.validators = validators != null ? new LinkedList<>(Arrays.asList(validators)) : new ArrayList<>();
 	}
 
 	@Override
-	protected Repository<Region,Integer> getRepository() {
+	protected RegionRepository getRepository() {
 		return this.regionRepository;
 	}
 

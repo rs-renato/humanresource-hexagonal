@@ -1,7 +1,7 @@
 package br.com.hrs.core.usecase.location;
 
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.LocationRepository;
 import br.com.hrs.core.usecase.CrudAbstractUseCaseImpl;
 import br.com.hrs.core.validator.Validator;
 
@@ -15,17 +15,17 @@ import java.util.List;
 @Named
 class LocationCrudUseCase extends CrudAbstractUseCaseImpl<Location, Integer> implements LocationUseCase {
 
-	private Repository<Location,Integer> locationRepository;
+	private LocationRepository locationRepository;
 	private List<Validator<Location>> validators;
 
 	@Inject
-	public LocationCrudUseCase(Repository<Location,Integer> locationRepository, Validator<Location>... validators) {
+	public LocationCrudUseCase(LocationRepository locationRepository, Validator<Location>... validators) {
 		this.locationRepository = locationRepository;
 		this.validators = validators != null ? new LinkedList<>(Arrays.asList(validators)) : new ArrayList<>();
 	}
 
 	@Override
-	protected Repository<Location,Integer> getRepository() {
+	protected LocationRepository getRepository() {
 		return this.locationRepository;
 	}
 

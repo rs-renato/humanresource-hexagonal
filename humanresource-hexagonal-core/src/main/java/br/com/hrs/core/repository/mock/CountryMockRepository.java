@@ -5,7 +5,7 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.CountryRepository;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.RegionRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,10 +14,10 @@ import java.util.*;
 @Named
 public class CountryMockRepository extends MockRepository<Country, String> implements CountryRepository {
 
-    private Repository<Region, Integer> regionRepository;
+    private RegionRepository regionRepository;
 
     @Inject
-    public CountryMockRepository(Repository<Region, Integer> regionRepository) {
+    public CountryMockRepository(RegionRepository regionRepository) {
         this.regionRepository = regionRepository;
     }
 

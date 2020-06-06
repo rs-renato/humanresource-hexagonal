@@ -1,7 +1,7 @@
 package br.com.hrs.core.usecase.department;
 
 import br.com.hrs.core.model.Department;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.DepartmentRepository;
 import br.com.hrs.core.usecase.CrudAbstractUseCaseImpl;
 import br.com.hrs.core.validator.Validator;
 
@@ -15,17 +15,17 @@ import java.util.List;
 @Named
 class DepartmentCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Department, Integer> implements DepartmentUseCase {
 
-	private Repository<Department,Integer> departmentRepository;
+	private DepartmentRepository departmentRepository;
 	private List<Validator<Department>> validators;
 
 	@Inject
-	public DepartmentCrudUseCaseImpl(Repository<Department,Integer> departmentRepository, Validator<Department>... validators) {
+	public DepartmentCrudUseCaseImpl(DepartmentRepository departmentRepository, Validator<Department>... validators) {
 		this.departmentRepository = departmentRepository;
 		this.validators = validators != null ? new LinkedList<>(Arrays.asList(validators)) : new ArrayList<>();
 	}
 
 	@Override
-	protected Repository<Department,Integer> getRepository() {
+	protected DepartmentRepository getRepository() {
 		return this.departmentRepository;
 	}
 

@@ -3,7 +3,9 @@ package br.com.hrs.core.usecase.employee;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.EmployeeRepository;
+import br.com.hrs.core.repository.JobRepository;
 import br.com.hrs.core.usecase.CrudAbstractUseCaseImpl;
 import br.com.hrs.core.validator.Validator;
 import br.com.hrs.core.validator.employee.PromotionValidator;
@@ -15,15 +17,15 @@ import java.util.*;
 @Named
 class EmployeeCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Employee, Integer> implements EmployeeUseCase {
 
-	private Repository<Employee,Integer> employeeRepository;
-	private Repository<Job,String> jobRepository;
-	private Repository<Department,Integer> departmentRepository;
+	private EmployeeRepository employeeRepository;
+	private JobRepository jobRepository;
+	private DepartmentRepository departmentRepository;
 	private List<Validator<Employee>> validators;
 
 	@Inject
-	public EmployeeCrudUseCaseImpl(Repository<Employee,Integer> employeeRepository,
-								   Repository<Job,String> jobRepository,
-								   Repository<Department,Integer> departmentRepository,
+	public EmployeeCrudUseCaseImpl(EmployeeRepository employeeRepository,
+								   JobRepository jobRepository,
+								   DepartmentRepository departmentRepository,
 								   Validator<Employee>... validators) {
 
 		this.employeeRepository = employeeRepository;
@@ -34,7 +36,7 @@ class EmployeeCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Employee, Integer>
 	}
 
 	@Override
-	protected Repository<Employee,Integer> getRepository() {
+	protected EmployeeRepository getRepository() {
 		return this.employeeRepository;
 	}
 
