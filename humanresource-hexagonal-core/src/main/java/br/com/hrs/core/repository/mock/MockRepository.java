@@ -56,9 +56,9 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
         this.database.put(entity.getId(), entity);
     }
 
-    public Collection<E> findAll() {
+    public List<E> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
-        return this.database.values();
+        return new ArrayList(this.database.values());
     }
 
     public void deleteById(ID id) {

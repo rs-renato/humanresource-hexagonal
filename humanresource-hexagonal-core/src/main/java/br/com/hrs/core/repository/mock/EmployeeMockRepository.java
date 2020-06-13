@@ -9,13 +9,13 @@ import javax.inject.Named;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 @Named
 public class EmployeeMockRepository extends MockRepository<Employee, Integer> implements EmployeeRepository {
 
     @Override
-    public Collection<Employee> buildCollection() {
+    public List<Employee> buildCollection() {
 
         try {
 

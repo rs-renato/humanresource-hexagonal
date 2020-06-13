@@ -7,13 +7,13 @@ import br.com.hrs.core.repository.DepartmentRepository;
 
 import javax.inject.Named;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 @Named
 public class DepartmentMockRepository extends MockRepository<Department, Integer> implements DepartmentRepository {
 
     @Override
-    public Collection<Department> buildCollection() {
+    public List<Department> buildCollection() {
 
         Department dep01 = new Department.Builder()
                 .id(1)

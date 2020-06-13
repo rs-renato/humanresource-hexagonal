@@ -8,7 +8,7 @@ public class Country implements EntityKey<String> {
 	private String name;
 	private Region region;
 
-	Country() {
+	public Country() {
 	}
 
 	public Country(String name, Region region) {

@@ -13,13 +13,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Named
-class DepartmentCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Department, Integer> implements DepartmentUseCase {
+class DepartmentCrudUseCase extends CrudAbstractUseCaseImpl<Department, Integer> implements DepartmentUseCase {
 
 	private DepartmentRepository departmentRepository;
 	private List<Validator<Department>> validators;
 
 	@Inject
-	public DepartmentCrudUseCaseImpl(DepartmentRepository departmentRepository, Validator<Department>... validators) {
+	public DepartmentCrudUseCase(DepartmentRepository departmentRepository, Validator<Department>... validators) {
 		this.departmentRepository = departmentRepository;
 		this.validators = validators != null ? new LinkedList<>(Arrays.asList(validators)) : new ArrayList<>();
 	}

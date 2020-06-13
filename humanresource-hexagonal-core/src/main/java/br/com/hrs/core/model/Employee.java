@@ -17,7 +17,7 @@ public class Employee implements EntityKey<Integer>{
 	private Job job;
 	private Department department;
 
-	Employee(){
+	public Employee(){
 	}
 
 	public Employee(String firstName, String lastName, String email, String phone, Date hireDate, Float salary, Float commissionPercent, Employee manager, Job job, Department department) {

@@ -15,7 +15,7 @@ import javax.inject.Named;
 import java.util.*;
 
 @Named
-class EmployeeCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Employee, Integer> implements EmployeeUseCase {
+class EmployeeCrudUseCase extends CrudAbstractUseCaseImpl<Employee, Integer> implements EmployeeUseCase {
 
 	private EmployeeRepository employeeRepository;
 	private JobRepository jobRepository;
@@ -23,10 +23,10 @@ class EmployeeCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Employee, Integer>
 	private List<Validator<Employee>> validators;
 
 	@Inject
-	public EmployeeCrudUseCaseImpl(EmployeeRepository employeeRepository,
-								   JobRepository jobRepository,
-								   DepartmentRepository departmentRepository,
-								   Validator<Employee>... validators) {
+	public EmployeeCrudUseCase(EmployeeRepository employeeRepository,
+							   JobRepository jobRepository,
+							   DepartmentRepository departmentRepository,
+							   Validator<Employee>... validators) {
 
 		this.employeeRepository = employeeRepository;
 		this.jobRepository = jobRepository;

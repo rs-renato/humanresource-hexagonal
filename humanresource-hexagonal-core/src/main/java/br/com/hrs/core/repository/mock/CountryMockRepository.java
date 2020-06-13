@@ -9,7 +9,10 @@ import br.com.hrs.core.repository.RegionRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Named
 public class CountryMockRepository extends MockRepository<Country, String> implements CountryRepository {
@@ -34,7 +37,7 @@ public class CountryMockRepository extends MockRepository<Country, String> imple
     }
 
     @Override
-    public Collection<Country> buildCollection() {
+    public List<Country> buildCollection() {
 
         Country country01 = new Country.Builder()
                 .id("IT")

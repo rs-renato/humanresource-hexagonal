@@ -9,7 +9,6 @@ import br.com.hrs.core.validator.Validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +29,7 @@ public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> imple
         return getRepository().findById(id);
     }
 
-    public Collection<E> findAll() {
+    public List<E> findAll() {
         logger.debug("Calling findAll in repository");
         return getRepository().findAll();
     }

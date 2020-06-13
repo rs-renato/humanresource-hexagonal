@@ -9,7 +9,7 @@ public class Region implements EntityKey<Integer>{
 	private String name;
 	private List<Country> countries;
 
-	Region(){
+	public Region(){
 	}
 
 	public Region(String name) {

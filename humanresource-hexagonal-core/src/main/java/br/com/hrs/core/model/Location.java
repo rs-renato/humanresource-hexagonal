@@ -11,7 +11,7 @@ public class Location implements EntityKey<Integer>{
 	private String state;
 	private Country country;
 
-	Location(){
+	public Location(){
 	}
 
 	public Location(String address, String postalCode, String city, String state, Country country) {

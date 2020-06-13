@@ -9,7 +9,7 @@ public class Job implements EntityKey<String>{
 	private Float minSalary;
 	private Float maxSalary;
 
-	Job(){
+	public Job(){
 	}
 
 	public Job(String title, Float minSalary, Float maxSalary) {

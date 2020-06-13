@@ -8,7 +8,7 @@ import br.com.hrs.core.repository.RegionRepository;
 
 import javax.inject.Named;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -33,7 +33,7 @@ public class RegionMockRepository extends MockRepository<Region, Integer> implem
     }
 
     @Override
-    public Collection<Region> buildCollection() {
+    public List<Region> buildCollection() {
 
         Country country01 = new Country.Builder()
                 .id("IT")

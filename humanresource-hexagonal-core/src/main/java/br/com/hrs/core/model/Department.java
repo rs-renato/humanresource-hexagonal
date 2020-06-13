@@ -9,7 +9,7 @@ public class Department implements EntityKey<Integer>{
 	private Employee manager;
 	private Location location;
 
-	Department() {
+	public Department() {
 	}
 
 	public Department(String name, Employee manager, Location location) {

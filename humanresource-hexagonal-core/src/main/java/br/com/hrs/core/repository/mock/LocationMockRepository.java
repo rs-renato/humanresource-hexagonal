@@ -6,13 +6,13 @@ import br.com.hrs.core.repository.LocationRepository;
 
 import javax.inject.Named;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 
 @Named
 public class LocationMockRepository extends MockRepository<Location, Integer> implements LocationRepository {
 
     @Override
-    public Collection<Location> buildCollection() {
+    public List<Location> buildCollection() {
 
         Location location01 = new Location.Builder()
                                 .id(1400)

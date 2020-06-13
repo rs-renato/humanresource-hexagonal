@@ -10,13 +10,13 @@ import javax.inject.Named;
 import java.util.*;
 
 @Named
-class CountryCrudUseCaseImpl extends CrudAbstractUseCaseImpl<Country, String> implements CountryUseCase {
+class CountryCrudUseCase extends CrudAbstractUseCaseImpl<Country, String> implements CountryUseCase {
 
 	private CountryRepository countryRepository;
 	private List<Validator<Country>> validators;
 
 	@Inject
-	public CountryCrudUseCaseImpl(CountryRepository countryRepository, Validator<Country>... validators) {
+	public CountryCrudUseCase(CountryRepository countryRepository, Validator<Country>... validators) {
 		this.countryRepository = countryRepository;
 		this.validators = validators != null ? new LinkedList<>(Arrays.asList(validators)) : new ArrayList<>();
 	}
