@@ -3,7 +3,6 @@ package br.com.hrs.api.support;
 import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
 import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoBuilder;
 import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoCategoria;
-import br.gov.go.sefaz.javaee.service.rest.support.ResponseEntitySupport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;

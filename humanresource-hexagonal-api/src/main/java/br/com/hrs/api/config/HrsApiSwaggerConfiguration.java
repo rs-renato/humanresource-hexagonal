@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -28,7 +31,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
 @EnableSwagger2
-public class HrsApiSwaggerConfiguration {
+public class HrsApiSwaggerConfiguration implements WebMvcConfigurer {
 
 	public static final String HEALTH_IGNORING_PATHS 				= "/health/**";
 	public static final String[] SWAGGER_IGNORING_PATHS 			= new String[]{ "/swagger-resources/**","/swagger-ui.html", "/v2/api-docs","/webjars/**"};
@@ -112,5 +115,16 @@ public class HrsApiSwaggerConfiguration {
 										hrsApiPropertiesSupport.getProperty("hrs.api.docs.license"), 
 										hrsApiPropertiesSupport.getProperty("hrs.api.docs.licenseUrl"),
 										Collections.emptyList());
+	}
+
+	@Override
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		// Finds swagger resources in the classpath
+		registry.addResourceHandler(HrsApiSwaggerConfiguration.SWAGGER_UI_RESOURCE_HANDLER)
+				.addResourceLocations(HrsApiSwaggerConfiguration.SWAGGER_UI_RESOURCE_LOCATION);
+
+		// Finds webjars resources in the classpath
+		registry.addResourceHandler(HrsApiSwaggerConfiguration.SWAGGER_WEBJARS_RESOURCE_HANDLER)
+				.addResourceLocations(HrsApiSwaggerConfiguration.SWAGGER_WEBJARS_RESOURCE_LOCATION);
 	}
 }
