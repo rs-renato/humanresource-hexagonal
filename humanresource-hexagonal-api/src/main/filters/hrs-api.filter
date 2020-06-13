@@ -1,0 +1,11 @@
+#Propriedades gerais para ambiente 'local'
+logs.graylog.facility.local = wllocalsefaz
+
+#Propriedades gerais para ambiente 'desenv'
+logs.graylog.facility.desenv = wldessefaz
+
+#Propriedades gerais para ambiente 'homolog'
+logs.graylog.facility.homolog = wlhomsefaz
+
+#Propriedades gerais para ambiente 'prod'
+logs.graylog.facility.prod = wlprodsefaz
