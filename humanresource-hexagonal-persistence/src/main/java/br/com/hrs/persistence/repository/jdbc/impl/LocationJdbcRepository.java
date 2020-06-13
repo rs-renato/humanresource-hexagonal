@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -100,7 +101,7 @@ public class LocationJdbcRepository implements LocationRepository {
     }
 
     @Override
-    public Collection<Location> findAll() {
+    public List<Location> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
 
         String sql = "SELECT * FROM LOCATIONS";

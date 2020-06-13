@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -92,7 +93,7 @@ public class RegionJdbcRepository implements RegionRepository {
     }
 
     @Override
-    public Collection<Region> findAll() {
+    public List<Region> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
 
         String sql = "SELECT * FROM REGIONS";

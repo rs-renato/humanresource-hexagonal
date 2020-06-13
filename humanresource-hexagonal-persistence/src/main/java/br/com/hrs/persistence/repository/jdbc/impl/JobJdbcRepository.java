@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -79,7 +80,7 @@ public class JobJdbcRepository implements JobRepository {
     }
 
     @Override
-    public Collection<Job> findAll() {
+    public List<Job> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
 
         String sql = "SELECT * FROM JOBS";

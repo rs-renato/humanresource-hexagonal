@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Named;
 import java.sql.PreparedStatement;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -97,7 +98,7 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
     }
 
     @Override
-    public Collection<Department> findAll() {
+    public List<Department> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
         String sql = "SELECT * FROM DEPARTMENTS";
         return jdbcTemplate.query(sql, new DepartmentRowMapper());

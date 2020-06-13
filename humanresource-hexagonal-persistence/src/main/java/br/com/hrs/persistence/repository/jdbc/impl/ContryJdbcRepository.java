@@ -85,7 +85,7 @@ public class ContryJdbcRepository implements CountryRepository {
     }
 
     @Override
-    public Collection<Country> findAll() {
+    public List<Country> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
 
         String sql = "SELECT * FROM COUNTRIES";

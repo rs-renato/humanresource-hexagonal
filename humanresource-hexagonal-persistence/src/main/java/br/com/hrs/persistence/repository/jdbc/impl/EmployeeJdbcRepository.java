@@ -15,6 +15,7 @@ import javax.inject.Named;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -106,7 +107,7 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
     }
 
     @Override
-    public Collection<Employee> findAll() {
+    public List<Employee> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
         String sql = "SELECT * FROM EMPLOYEES";
         return jdbcTemplate.query(sql, new EmployeeRowMapper());
