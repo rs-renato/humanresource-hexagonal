@@ -1,4 +1,4 @@
-package br.com.hrs.rest.controller;
+package br.com.hrs.boot.controller;
 
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.usecase.job.JobUseCase;
@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/job")
 public class JobController {
 
+    private JobUseCase jobUseCase;
+
     @Autowired
-    JobUseCase jobUseCase;
+    public JobController(JobUseCase jobUseCase) {
+        this.jobUseCase = jobUseCase;
+    }
 
     @GetMapping("/{id}")
     public Job findById(@PathVariable String id){

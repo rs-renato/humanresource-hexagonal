@@ -1,4 +1,4 @@
-package br.com.hrs.rest.config;
+package br.com.hrs.boot.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;

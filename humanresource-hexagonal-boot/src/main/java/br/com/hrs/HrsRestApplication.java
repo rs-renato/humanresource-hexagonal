@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
-@ComponentScan("br.com.hrs.rest")
+@ComponentScan("br.com.hrs.boot")
 public class HrsRestApplication {
 
     public static void main(String[] args) {
