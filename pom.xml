@@ -21,7 +21,8 @@
     <modules>
         <module>humanresource-hexagonal-core</module>
         <module>humanresource-hexagonal-persistence</module>
-        <module>humanresource-hexagonal-rest</module>
+        <module>humanresource-hexagonal-boot</module>
+        <module>humanresource-hexagonal-api</module>
     </modules>
 
     <build>
