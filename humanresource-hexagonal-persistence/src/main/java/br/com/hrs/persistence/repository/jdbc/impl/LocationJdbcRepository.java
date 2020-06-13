@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
 import java.sql.PreparedStatement;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
