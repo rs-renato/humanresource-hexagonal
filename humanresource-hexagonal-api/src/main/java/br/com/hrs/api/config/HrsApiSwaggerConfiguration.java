@@ -3,12 +3,14 @@ package br.com.hrs.api.config;
 import br.com.hrs.api.support.HrsApiPropertiesSupport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -30,6 +32,7 @@ import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
 @EnableSwagger2
+@Import(BeanValidatorPluginsConfiguration.class)
 public class HrsApiSwaggerConfiguration implements WebMvcConfigurer {
 
 	public static final String HEALTH_IGNORING_PATHS 				= "/health/**";
@@ -63,7 +66,7 @@ public class HrsApiSwaggerConfiguration implements WebMvcConfigurer {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
 				.apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
-				.paths(PathSelectors.regex("^(\\/v[0-9]{0,2}\\/.*)$"))
+				.paths(PathSelectors.regex("^(\\/api\\/v[0-9]{1,2}\\/.*)$"))
 				.build()
 					.apiInfo(apiInfo)
 					.useDefaultResponseMessages(false)

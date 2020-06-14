@@ -1,13 +1,11 @@
 package br.com.hrs.core.validator.location;
 
-import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
-import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
-import br.com.hrs.core.repository.Repository;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import br.com.hrs.core.validator.country.ExistentCountryValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,11 +18,11 @@ public class ExistentCountryLocationValidator implements SaveValidator<Location>
 
 	private static Logger logger = LogManager.getLogger(ExistentCountryLocationValidator.class);
 
-	private Repository<Country, String> countryRepository;
+	private ExistentCountryValidator existentCountryValidator;
 
 	@Inject
-	public ExistentCountryLocationValidator(Repository<Country, String> countryRepository) {
-		this.countryRepository = countryRepository;
+	public ExistentCountryLocationValidator(ExistentCountryValidator existentCountryValidator) {
+		this.existentCountryValidator = existentCountryValidator;
 	}
 
 	@Override
@@ -35,9 +33,6 @@ public class ExistentCountryLocationValidator implements SaveValidator<Location>
 			Error.of("Location").when(FIELD.MANDATORY).trows();
 		}
 
-		Country country = location.getCountry();
-		if (country == null || !countryRepository.existsById(country.getId())) {
-			throw new HrsNotFoundException("Country does not exist");
-		}
+		this.existentCountryValidator.validate(location.getCountry());
 	}
 }

@@ -5,7 +5,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.RegionRepository;
 import br.com.hrs.core.validator.DeleteValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,14 +17,14 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Named
-public class CountryInUseRegionValidator implements DeleteValidator<Region> {
+public class AssociatedCountriesRegionValidator implements DeleteValidator<Region> {
 
-	private static Logger logger = LogManager.getLogger(CountryInUseRegionValidator.class);
+	private static Logger logger = LogManager.getLogger(AssociatedCountriesRegionValidator.class);
 
-	private Repository<Region, Integer> regionRepository;
+	private RegionRepository regionRepository;
 
 	@Inject
-	public CountryInUseRegionValidator(Repository<Region, Integer> regionRepository) {
+	public AssociatedCountriesRegionValidator(RegionRepository regionRepository) {
 		this.regionRepository = regionRepository;
 	}
 	

@@ -2,9 +2,9 @@ package br.com.hrs.core.validator;
 
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
-import br.com.hrs.core.util.GenericTypeUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.core.GenericTypeResolver;
 
 import java.util.Optional;
 
@@ -14,7 +14,8 @@ public interface Validator<E> {
     default void validate(Optional<E> optional){
 
         if (!optional.isPresent()) {
-            Error.of(GenericTypeUtil.getGenericName(optional.getClass())).when(FIELD.MANDATORY).trows();
+            Class<E> clazz = (Class<E>) GenericTypeResolver.resolveTypeArgument(getClass(), Validator.class);
+            Error.of(clazz.getSimpleName()).when(FIELD.NOT_FOUND).trows();
         }
 
         validate(optional.get());

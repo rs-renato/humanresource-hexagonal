@@ -1,6 +1,6 @@
-package br.com.hrs.api.v1.country.docs;
+package br.com.hrs.api.v1.docs;
 
-import br.com.hrs.api.v1.country.resource.CountryResource;
+import br.com.hrs.api.v1.resource.CountryResource;
 import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;

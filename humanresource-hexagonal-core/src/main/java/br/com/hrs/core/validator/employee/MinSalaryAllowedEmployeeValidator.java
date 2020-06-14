@@ -5,7 +5,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.JobRepository;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
 
@@ -17,10 +17,10 @@ import java.util.Optional;
 @Named
 public class MinSalaryAllowedEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
 
-	private Repository<Job, String> jobRepository;
+	private JobRepository jobRepository;
 
 	@Inject
-	public MinSalaryAllowedEmployeeValidator(Repository<Job, String> jobRepository) {
+	public MinSalaryAllowedEmployeeValidator(JobRepository jobRepository) {
 		this.jobRepository = jobRepository;
 	}
 

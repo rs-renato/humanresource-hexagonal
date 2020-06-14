@@ -31,8 +31,9 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
         if (Objects.isNull(id)) {
             Error.of(String.format("%s ID", ENTITY_NAME)).when(FIELD.MANDATORY).trows();
         }
-        
-        return Optional.ofNullable(this.database.get(id));
+
+        E entity = this.database.get(id);
+        return entity != null ? Optional.of(entity) : Optional.empty();
     }
 
     public E save(E entity) {

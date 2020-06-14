@@ -4,7 +4,7 @@ import br.com.hrs.core.exception.HrsBusinessException;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
-import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.CountryRepository;
 import br.com.hrs.core.validator.SaveValidator;
 
 import javax.inject.Inject;
@@ -14,10 +14,10 @@ import java.util.Objects;
 @Named
 public class UniqueIdCountryValidator implements SaveValidator<Country> {
 
-	private Repository<Country, String> countryRepository;
+	private CountryRepository countryRepository;
 
 	@Inject
-	public UniqueIdCountryValidator(Repository<Country, String> countryRepository) {
+	public UniqueIdCountryValidator(CountryRepository countryRepository) {
 		this.countryRepository = countryRepository;
 	}
 	

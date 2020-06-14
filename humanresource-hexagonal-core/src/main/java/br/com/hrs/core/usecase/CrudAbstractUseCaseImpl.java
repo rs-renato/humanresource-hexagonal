@@ -54,7 +54,7 @@ public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> imple
        Optional<E> entity = getRepository().findById(id);
        getValidators().stream()
                 .filter(validator -> validator instanceof DeleteValidator)
-                .forEach(validator -> validator.validate(entity.get()));
+                .forEach(validator -> validator.validate(entity));
         logger.debug("Calling delete on repository");
         getRepository().deleteById(id);
     }

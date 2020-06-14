@@ -10,7 +10,7 @@ import springfox.documentation.swagger2.mappers.ModelMapper;
 import springfox.documentation.swagger2.mappers.ModelMapperImpl;
 
 @Configuration
-@EnableHrsCore(mockRepository = true)
+@EnableHrsCore(loadMockRepository = true)
 @ComponentScan(basePackages ={HrsApiConfigurationParameters.PACKAGE_SUPPORT})
 public class HrsApiInfraConfiguration {
 

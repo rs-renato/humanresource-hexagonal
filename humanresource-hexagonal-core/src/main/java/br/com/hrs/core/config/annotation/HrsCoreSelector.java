@@ -18,15 +18,20 @@ public class HrsCoreSelector implements ImportSelector {
         AnnotationAttributes attributes = AnnotationAttributes
                 .fromMap(annotationMetadata.getAnnotationAttributes(EnableHrsCore.class.getName(), false));
 
-        boolean mockRepository = attributes.getBoolean("mockRepository");
-
+        boolean loadMockRepository = attributes.getBoolean("loadMockRepository");
+        boolean loadValidators = attributes.getBoolean("loadValidators");
 
         // create scanner and disable default filters (that is the 'false' argument)
         final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
-        // add include filters which matches all the classes
-        provider.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*Validator|.*UseCase")));
 
-        if (mockRepository){
+        // add include filters which matches all the classes
+        provider.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*UseCase")));
+
+        if (loadValidators){
+            provider.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*Validator")));
+        }
+
+        if (loadMockRepository){
             provider.addIncludeFilter(new RegexPatternTypeFilter(Pattern.compile(".*Repository")));
         }
 

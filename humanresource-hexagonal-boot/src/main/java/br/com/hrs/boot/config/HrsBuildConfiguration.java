@@ -4,7 +4,7 @@ import br.com.hrs.core.config.annotation.EnableHrsCore;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableHrsCore(mockRepository = true)
+@EnableHrsCore(loadMockRepository = true)
 //@EnableHrsPersistence(type = PersistenceType.JDBC)
 public class HrsBuildConfiguration {
 

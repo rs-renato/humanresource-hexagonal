@@ -1,9 +1,9 @@
-package br.com.hrs.api.v1.country.controller;
+package br.com.hrs.api.v1.controller;
 
-import br.com.hrs.api.mapper.CountryMapper;
 import br.com.hrs.api.support.MensagemRetornoResponseEntitySupport;
-import br.com.hrs.api.v1.country.docs.CountryOperationsDocumentable;
-import br.com.hrs.api.v1.country.resource.CountryResource;
+import br.com.hrs.api.v1.docs.CountryOperationsDocumentable;
+import br.com.hrs.api.v1.mapper.CountryMapper;
+import br.com.hrs.api.v1.resource.CountryResource;
 import br.com.hrs.api.validation.FieldValidationStrategy;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.usecase.country.CountryUseCase;

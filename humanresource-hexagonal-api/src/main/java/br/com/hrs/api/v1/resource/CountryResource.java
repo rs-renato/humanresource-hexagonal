@@ -1,4 +1,4 @@
-package br.com.hrs.api.v1.country.resource;
+package br.com.hrs.api.v1.resource;
 
 import br.com.hrs.api.validation.FieldValidationStrategy;
 

@@ -1,13 +1,11 @@
 package br.com.hrs.core.validator.employee;
 
-import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Employee;
-import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.Repository;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import br.com.hrs.core.validator.job.ExistentJobValidator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,11 +14,11 @@ import java.util.Objects;
 @Named
 public class ExistentJobEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
 
-	private Repository<Job, String> jobRepository;
+	private ExistentJobValidator existentJobValidator;
 
 	@Inject
-	public ExistentJobEmployeeValidator(Repository<Job, String> jobRepository) {
-		this.jobRepository = jobRepository;
+	public ExistentJobEmployeeValidator(ExistentJobValidator existentJobValidator) {
+		this.existentJobValidator = existentJobValidator;
 	}
 
 	@Override
@@ -31,8 +29,6 @@ public class ExistentJobEmployeeValidator implements SaveValidator<Employee>, Up
 			Error.of("Employee").when(FIELD.MANDATORY).trows();
 		}
 
-		if (!this.jobRepository.existsById(employee.getJob().getId())) {
-			throw new HrsNotFoundException("Job does not exist");
-		}
+		this.existentJobValidator.validate(employee.getJob());
 	}
 }

@@ -4,20 +4,21 @@ import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Job;
-import br.com.hrs.core.repository.Repository;
-import br.com.hrs.core.validator.Validator;
+import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.core.validator.DeleteValidator;
+import br.com.hrs.core.validator.UpdateValidator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Objects;
 
 @Named
-public class ExistentJobValidator implements Validator<Job> {
+public class ExistentJobValidator implements UpdateValidator<Job>, DeleteValidator<Job> {
 
-    private Repository<Job, String> jobRepository;
+    private JobRepository jobRepository;
 
     @Inject
-    public ExistentJobValidator(Repository<Job, String> jobRepository) {
+    public ExistentJobValidator(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }
 

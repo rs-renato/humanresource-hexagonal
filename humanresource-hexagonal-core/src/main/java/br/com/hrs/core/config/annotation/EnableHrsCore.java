@@ -9,5 +9,6 @@ import java.lang.annotation.*;
 @Inherited
 @Import({HrsCoreSelector.class})
 public @interface EnableHrsCore {
-    boolean mockRepository() default false;
+    boolean loadValidators() default true;
+    boolean loadMockRepository() default false;
 }

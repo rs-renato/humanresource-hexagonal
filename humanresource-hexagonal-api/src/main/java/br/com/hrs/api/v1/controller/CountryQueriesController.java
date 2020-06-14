@@ -1,8 +1,10 @@
-package br.com.hrs.api.v1.country.controller;
+package br.com.hrs.api.v1.controller;
 
-import br.com.hrs.api.mapper.CountryMapper;
-import br.com.hrs.api.v1.country.docs.CountryQueriesDocumentable;
-import br.com.hrs.api.v1.country.resource.CountryResource;
+import br.com.hrs.api.support.AssertionSupport;
+import br.com.hrs.api.v1.docs.CountryQueriesDocumentable;
+import br.com.hrs.api.v1.mapper.CountryMapper;
+import br.com.hrs.api.v1.resource.CountryResource;
+import br.com.hrs.core.model.Country;
 import br.com.hrs.core.usecase.country.CountryUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/countries")
@@ -33,16 +36,20 @@ public class CountryQueriesController implements CountryQueriesDocumentable{
 	@GetMapping
 	public ResponseEntity<List<CountryResource>> listAll() {
 		logger.info("Performing 'List All Countries'..");
-		List<CountryResource> countriesFound = countryMapper.toResourceList(this.countryUseCase.findAll());
-		logger.info("Found {} countries on 'List All Countries'..", countriesFound.size());
-		return ResponseEntity.ok(countriesFound);
+		List<Country> countries = this.countryUseCase.findAll();
+		AssertionSupport.assertResourceFound(countries, "Countries not found!");
+		List<CountryResource> countryResources = countryMapper.toResourceList(countries);
+		logger.info("Found {} countries on 'List All Countries'..", countryResources.size());
+		return ResponseEntity.ok(countryResources);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<CountryResource> find(@PathVariable String id) {
 		logger.info("Performing 'Find Country' Id:{}", id);
-		CountryResource countryFound = countryMapper.toResource(countryMapper.unwrap(this.countryUseCase.findById(id)));
-		logger.info("Country {} found on 'Find Country'", countryFound);
-		return ResponseEntity.ok(countryFound);
+		Optional<Country> country = this.countryUseCase.findById(id);
+		AssertionSupport.assertResourceFound(country, "Country not found!");
+		CountryResource countryResource = countryMapper.toResource(countryMapper.unwrap(country));
+		logger.info("Country {} found on 'Find Country'", countryResource);
+		return ResponseEntity.ok(countryResource);
 	}
 }

@@ -4,20 +4,21 @@ import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
-import br.com.hrs.core.repository.Repository;
-import br.com.hrs.core.validator.Validator;
+import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.validator.DeleteValidator;
+import br.com.hrs.core.validator.UpdateValidator;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Objects;
 
 @Named
-public class ExistentDemartmentValidator implements Validator<Department> {
+public class ExistentDemartmentValidator implements UpdateValidator<Department>, DeleteValidator<Department> {
 
-    private Repository<Department, Integer> departmentRepository;
+    private DepartmentRepository departmentRepository;
 
     @Inject
-    public ExistentDemartmentValidator(Repository<Department, Integer> departmentRepository) {
+    public ExistentDemartmentValidator(DepartmentRepository departmentRepository) {
         this.departmentRepository = departmentRepository;
     }
 

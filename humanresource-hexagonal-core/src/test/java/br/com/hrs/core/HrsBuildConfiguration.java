@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
         "br.com.hrs.core.usecase",
         "br.com.hrs.core.validator",
 })*/
-@EnableHrsCore(mockRepository = true)
+@EnableHrsCore(loadMockRepository = true)
 public class HrsBuildConfiguration {
     // Development Build : Unit Test  -> Core <-  Mocks
 }

@@ -6,8 +6,8 @@ public class HrsApiConfigurationParameters {
 
 	}
 	
-	public static final String PACKAGE_CONTROLLER							= "br.com.hrs.api.**.controller";
-	public static final String PACKAGE_MAPPER								= "br.com.hrs.api.**.mapper";
+	public static final String PACKAGE_CONTROLLER							= "br.com.hrs.api.v**.controller";
+	public static final String PACKAGE_MAPPER								= "br.com.hrs.api.v**.mapper";
 	public static final String PACKAGE_ERROR_HANDLER	 					= "br.com.hrs.api.error";
 	public static final String PACKAGE_SUPPORT 								= "br.com.hrs.api.support";
 
