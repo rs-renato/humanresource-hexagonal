@@ -8,8 +8,8 @@ import java.lang.reflect.InvocationTargetException;
 
 public enum FIELD {
 
-    MANDATORY("is mandatory!", HrsMandatoryException.class),
-    NOT_FOUND("not found!", HrsNotFoundException.class);
+    MANDATORY("is mandatory", HrsMandatoryException.class),
+    NOT_FOUND("not found", HrsNotFoundException.class);
 
     private String desc;
     private Class<? extends HrsBusinessException> clazz;
