@@ -43,8 +43,7 @@ public class HrsApiSwaggerConfiguration implements WebMvcConfigurer {
 	
 	public static final String  SWAGGER_WEBJARS_RESOURCE_HANDLER 	= "/webjars/**";
 	public static final String  SWAGGER_WEBJARS_RESOURCE_LOCATION 	= "classpath:/META-INF/resources/webjars/";
-			
-	
+
 	private HrsApiPropertiesSupport hrsApiPropertiesSupport;
 	
 	public HrsApiSwaggerConfiguration(HrsApiPropertiesSupport hrsApiPropertiesSupport) {
