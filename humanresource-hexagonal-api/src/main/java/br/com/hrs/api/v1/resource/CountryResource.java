@@ -5,8 +5,10 @@ import br.com.hrs.api.validation.FieldValidationStrategy;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
+@XmlRootElement(name = "country")
 public class CountryResource implements Serializable {
 
 	private static final long serialVersionUID = 7728812557431552908L;
