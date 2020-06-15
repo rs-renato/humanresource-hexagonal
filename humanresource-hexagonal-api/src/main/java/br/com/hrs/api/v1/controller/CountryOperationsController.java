@@ -33,7 +33,8 @@ public class CountryOperationsController implements CountryOperationsDocumentabl
 		this.countryMapper = countryMapper;
 	}
 
-	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE},
+				 produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<CountryResource> create(@Validated(FieldValidationStrategy.Create.class) @RequestBody CountryResource countryResource) {
 		logger.info("Performing 'Create Country' Body:{}", countryResource);
 		Country countryCreated = this.countryUseCase.save(countryMapper.toModel(countryResource));
@@ -42,15 +43,18 @@ public class CountryOperationsController implements CountryOperationsDocumentabl
 				.body(countryMapper.toResource(countryCreated));
 	}
 	
-	@PutMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(value="/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE},
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<CountryResource> update(@PathVariable String id, @Validated(FieldValidationStrategy.Update.class)  @RequestBody CountryResource countryResource) {
 		logger.info("Performing 'Update Country' Id:{}, Body:{}", id, countryResource);
+		countryResource.setId(id);
 		this.countryUseCase.update(countryMapper.toModel(countryResource));
 		logger.info("Country {} updated on 'Update Country'", countryResource);
 		return ResponseEntity.ok(countryResource);
 	}
 	
-	@PatchMapping(value="/{id}/region", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PatchMapping(value="/{id}/region", consumes = {MediaType.APPLICATION_JSON_VALUE},
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<CountryResource> patch(@PathVariable String id, @Validated(FieldValidationStrategy.Patch.class) @RequestBody CountryResource countryResource) {
 		logger.info("Performing 'Update (Patch) Country' Id:{}, Body:{}", id, countryResource);
 		countryResource.setId(id);
@@ -59,7 +63,8 @@ public class CountryOperationsController implements CountryOperationsDocumentabl
 		return ResponseEntity.ok(countryResource);
 	}
 	
-	@DeleteMapping(value="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value="/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE},
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<MensagemRetorno> delete(@PathVariable String id) {
 		logger.info("Performing 'Delete Country' Id:{}", id);
 		this.countryUseCase.deleteById(id);

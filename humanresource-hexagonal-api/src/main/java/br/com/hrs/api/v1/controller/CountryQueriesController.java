@@ -9,6 +9,7 @@ import br.com.hrs.core.usecase.country.CountryUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,7 @@ public class CountryQueriesController implements CountryQueriesDocumentable{
 		this.countryMapper = countryMapper;
 	}
 
-	@GetMapping
+	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<List<CountryResource>> listAll() {
 		logger.info("Performing 'List All Countries'..");
 		List<Country> countries = this.countryUseCase.findAll();
@@ -43,7 +44,7 @@ public class CountryQueriesController implements CountryQueriesDocumentable{
 		return ResponseEntity.ok(countryResources);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<CountryResource> find(@PathVariable String id) {
 		logger.info("Performing 'Find Country' Id:{}", id);
 		Optional<Country> country = this.countryUseCase.findById(id);

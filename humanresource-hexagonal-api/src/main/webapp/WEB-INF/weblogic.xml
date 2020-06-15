@@ -14,5 +14,5 @@
 			<wls:package-name>org.jboss.logging</wls:package-name>
 		</wls:prefer-application-packages>
 	</wls:container-descriptor>
-    <wls:context-root>humanresource-springmvc-angular-api</wls:context-root>
+    <wls:context-root>hrs</wls:context-root>
 </wls:weblogic-web-app>

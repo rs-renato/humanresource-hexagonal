@@ -22,6 +22,11 @@ public class HrsApiErrorResource {
 	public ResponseEntity<MensagemRetorno> notSupported(){
 		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ERRO,HttpStatus.METHOD_NOT_ALLOWED);
 	}
+
+	@GetMapping("/406")
+	public ResponseEntity<MensagemRetorno> notAcceptable(){
+		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ERRO,HttpStatus.NOT_ACCEPTABLE);
+	}
 	
 	@GetMapping("/500")
 	public ResponseEntity<MensagemRetorno> internalError() {
