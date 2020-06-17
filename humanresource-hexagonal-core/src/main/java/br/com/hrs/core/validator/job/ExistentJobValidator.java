@@ -7,6 +7,9 @@ import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.JobRepository;
 import br.com.hrs.core.validator.DeleteValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import br.com.hrs.core.validator.employee.MaxCommissionPercentAllowedEmployeeValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,6 +17,8 @@ import java.util.Objects;
 
 @Named
 public class ExistentJobValidator implements UpdateValidator<Job>, DeleteValidator<Job> {
+
+    private static final Logger logger = LogManager.getLogger(MaxCommissionPercentAllowedEmployeeValidator.class);
 
     private JobRepository jobRepository;
 

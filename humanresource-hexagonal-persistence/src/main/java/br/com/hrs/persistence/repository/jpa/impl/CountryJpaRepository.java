@@ -26,7 +26,7 @@ public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, Str
 	}
 
 	public Optional<List<Country>> findByRegionId(Integer regionId) {
-		logger.debug("{} -> findByRegionId({}})", REPOSITORY_NAME,regionId);
+		logger.debug("findByRegionId({}})",regionId);
 
 		if (Objects.isNull(regionId)) {
 			Error.of("Region ID").when(FIELD.MANDATORY).trows();

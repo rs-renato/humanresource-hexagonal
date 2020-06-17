@@ -6,12 +6,16 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Named;
 import java.util.Objects;
 
 @Named
 public class MaxCommissionPercentAllowedEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
+
+	private static final Logger logger = LogManager.getLogger(MaxCommissionPercentAllowedEmployeeValidator.class);
 
 	public static final Float MAX_COMMISSION_PERCENT = 0.99f;
 

@@ -5,6 +5,8 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.repository.EmployeeRepository;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.EmployeeRowMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -21,8 +23,9 @@ import java.util.Optional;
 @Named
 public class EmployeeJdbcRepository implements EmployeeRepository {
 
+    private static Logger logger = LogManager.getLogger(EmployeeJdbcRepository.class);
+
     private JdbcTemplate jdbcTemplate;
-    private final String REPOSITORY_NAME = getClass().getSimpleName();
 
     public EmployeeJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -31,7 +34,7 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
     @Override
     public Optional<Employee> findById(Integer id) {
 
-        logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
+        logger.debug("find({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Employee ID").when(FIELD.MANDATORY).trows();
@@ -52,7 +55,7 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
     @Transactional(rollbackFor = Exception.class)
     public Employee save(Employee employee) {
 
-        logger.debug("{} ->  save({}})", REPOSITORY_NAME, employee);
+        logger.debug("save({}})", employee);
 
         if (Objects.isNull(employee)) {
             Error.of("Employee").when(FIELD.MANDATORY).trows();
@@ -92,7 +95,7 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
     @Transactional(rollbackFor = Exception.class)
     public void update(Employee employee) {
 
-        logger.debug("{} ->  update({}})", REPOSITORY_NAME, employee);
+        logger.debug("update({}})", employee);
 
         if (Objects.isNull(employee)) {
             Error.of("Employee").when(FIELD.MANDATORY).trows();
@@ -107,7 +110,7 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
 
     @Override
     public List<Employee> findAll() {
-        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        logger.debug("findAll()");
         String sql = "SELECT * FROM EMPLOYEES";
         return jdbcTemplate.query(sql, new EmployeeRowMapper());
     }
@@ -115,7 +118,7 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+        logger.debug("delete({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Employee ID").when(FIELD.MANDATORY).trows();
@@ -129,7 +132,7 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
 
     @Override
     public boolean existsById(Integer id) {
-        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+        logger.debug("exists({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Employee ID").when(FIELD.MANDATORY).trows();

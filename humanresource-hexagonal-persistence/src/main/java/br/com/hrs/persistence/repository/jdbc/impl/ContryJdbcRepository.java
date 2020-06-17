@@ -5,6 +5,8 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.CountryRepository;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.CountryRowMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +19,9 @@ import java.util.Optional;
 @Named
 public class ContryJdbcRepository implements CountryRepository {
 
+    private static Logger logger = LogManager.getLogger(ContryJdbcRepository.class);
+
     private JdbcTemplate jdbcTemplate;
-    private final String REPOSITORY_NAME = getClass().getSimpleName();
 
     public ContryJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -27,7 +30,7 @@ public class ContryJdbcRepository implements CountryRepository {
     @Override
     public Optional<Country> findById(String id) {
 
-        logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
+        logger.debug("find({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Country ID").when(FIELD.MANDATORY).trows();
@@ -48,7 +51,7 @@ public class ContryJdbcRepository implements CountryRepository {
     @Transactional(rollbackFor = Exception.class)
     public Country save(Country country) {
 
-        logger.debug("{} ->  save({}})", REPOSITORY_NAME, country);
+        logger.debug("save({}})", country);
 
         if (Objects.isNull(country)) {
             Error.of("Country").when(FIELD.MANDATORY).trows();
@@ -71,7 +74,7 @@ public class ContryJdbcRepository implements CountryRepository {
     @Transactional(rollbackFor = Exception.class)
     public void update(Country country) {
 
-        logger.debug("{} ->  update({}})", REPOSITORY_NAME, country);
+        logger.debug("update({}})", country);
 
         if (Objects.isNull(country)) {
             Error.of("Country").when(FIELD.MANDATORY).trows();
@@ -85,7 +88,7 @@ public class ContryJdbcRepository implements CountryRepository {
 
     @Override
     public List<Country> findAll() {
-        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        logger.debug("findAll()");
 
         String sql = "SELECT * FROM COUNTRIES";
         return jdbcTemplate.query(sql, new CountryRowMapper());
@@ -94,7 +97,7 @@ public class ContryJdbcRepository implements CountryRepository {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(String id) {
-        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+        logger.debug("delete({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Country ID").when(FIELD.MANDATORY).trows();
@@ -109,7 +112,7 @@ public class ContryJdbcRepository implements CountryRepository {
     @Override
     public boolean existsById(String id) {
 
-        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+        logger.debug(" exists({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Country ID").when(FIELD.MANDATORY).trows();
@@ -121,7 +124,7 @@ public class ContryJdbcRepository implements CountryRepository {
     @Override
     public Optional<List<Country>> findByRegionId(Integer regionId) {
 
-        logger.debug("{} ->  findByRegionId({}})", REPOSITORY_NAME, regionId);
+        logger.debug("findByRegionId({}})", regionId);
 
         if (Objects.isNull(regionId)) {
             Error.of("Region ID").when(FIELD.MANDATORY).trows();

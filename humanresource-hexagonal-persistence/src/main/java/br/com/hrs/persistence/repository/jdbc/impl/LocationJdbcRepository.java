@@ -5,6 +5,8 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.LocationRepository;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.LocationRowMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -20,8 +22,8 @@ import java.util.Optional;
 @Named
 public class LocationJdbcRepository implements LocationRepository {
 
+    private static Logger logger = LogManager.getLogger(LocationJdbcRepository.class);
     private JdbcTemplate jdbcTemplate;
-    private final String REPOSITORY_NAME = getClass().getSimpleName();
 
     public LocationJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -30,7 +32,7 @@ public class LocationJdbcRepository implements LocationRepository {
     @Override
     public Optional<Location> findById(Integer id) {
 
-        logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
+        logger.debug("find({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Location ID").when(FIELD.MANDATORY).trows();
@@ -51,7 +53,7 @@ public class LocationJdbcRepository implements LocationRepository {
     @Transactional(rollbackFor = Exception.class)
     public Location save(Location location) {
         
-        logger.debug("{} ->  save({}})", REPOSITORY_NAME, location);
+        logger.debug("save({}})", location);
 
         if (Objects.isNull(location)) {
             Error.of("Location").when(FIELD.MANDATORY).trows();
@@ -86,7 +88,7 @@ public class LocationJdbcRepository implements LocationRepository {
     @Transactional(rollbackFor = Exception.class)
     public void update(Location location) {
 
-        logger.debug("{} ->  update({}})", REPOSITORY_NAME, location);
+        logger.debug("update({}})", location);
 
         if (Objects.isNull(location)) {
             Error.of("Location").when(FIELD.MANDATORY).trows();
@@ -101,7 +103,7 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public List<Location> findAll() {
-        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        logger.debug("findAll()");
 
         String sql = "SELECT * FROM LOCATIONS";
         return jdbcTemplate.query(sql, new LocationRowMapper());
@@ -110,7 +112,7 @@ public class LocationJdbcRepository implements LocationRepository {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+        logger.debug("delete({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Location").when(FIELD.MANDATORY).trows();
@@ -124,7 +126,7 @@ public class LocationJdbcRepository implements LocationRepository {
 
     @Override
     public boolean existsById(Integer id) {
-        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+        logger.debug("exists({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Location ID").when(FIELD.MANDATORY).trows();

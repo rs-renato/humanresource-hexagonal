@@ -7,6 +7,8 @@ import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.repository.EmployeeRepository;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,6 +16,8 @@ import java.util.Objects;
 
 @Named
 public class ExistentManagerEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
+
+	private static final Logger logger = LogManager.getLogger(ExistentManagerEmployeeValidator.class);
 
 	private EmployeeRepository employeeRepository;
 

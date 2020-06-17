@@ -4,6 +4,8 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,9 +16,10 @@ import java.util.Optional;
 
 public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> implements Repository<E, ID> {
 
+    protected static Logger logger = LogManager.getLogger(JpaRepositoryAbstractImpl.class);
+
     protected JpaRepository<E, ID> jpaRepository;
     
-    protected final String REPOSITORY_NAME = this.getClass().getSimpleName();
     protected final String ENTITY_NAME  = getGenericName();
 
     protected JpaRepositoryAbstractImpl(JpaRepository<E, ID> jpaRepository) {
@@ -25,7 +28,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
 
     @Override
     public Optional<E> findById(ID id) {
-        logger.debug("{} -> find({}})", REPOSITORY_NAME,id);
+        logger.debug("find({}})",id);
 
         if (Objects.isNull(id)) {
             Error.of(String.format("%s ID", ENTITY_NAME)).when(FIELD.MANDATORY).trows();
@@ -40,7 +43,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
     @Override
     @Transactional(rollbackFor=Exception.class)
     public E save(E entity) {
-        logger.debug("{} ->  save({}})", REPOSITORY_NAME, entity);
+        logger.debug("save({}})", entity);
 
         if (Objects.isNull(entity)) {
             Error.of(ENTITY_NAME).when(FIELD.MANDATORY).trows();
@@ -54,7 +57,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
     @Override
     @Transactional(rollbackFor=Exception.class)
     public void update(E entity) {
-        logger.debug("{} ->  update({}})", REPOSITORY_NAME, entity);
+        logger.debug("update({}})", entity);
 
         if (Objects.isNull(entity)) {
             Error.of(ENTITY_NAME).when(FIELD.MANDATORY).trows();
@@ -64,7 +67,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
     
     @Override
     public List<E> findAll() {
-        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        logger.debug("findAll()");
         List<E> entities = this.jpaRepository.findAll();
         logger.debug("Finding all entities. Found: {}", entities != null ? entities.size() : 0);
         return entities;
@@ -73,7 +76,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
     @Override
     @Transactional(rollbackFor=Exception.class)
     public void deleteById(ID id) {
-        logger.debug("{} ->  deleteById({}})", REPOSITORY_NAME, id);
+        logger.debug("deleteById({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of(String.format("%s ID", ENTITY_NAME)).when(FIELD.MANDATORY).trows();
@@ -86,7 +89,7 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
 
     @Override
     public boolean existsById(ID id) {
-        logger.debug("{} ->  existsById({}})", REPOSITORY_NAME, id);
+        logger.debug("existsById({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of(String.format("%s ID", ENTITY_NAME)).when(FIELD.MANDATORY).trows();

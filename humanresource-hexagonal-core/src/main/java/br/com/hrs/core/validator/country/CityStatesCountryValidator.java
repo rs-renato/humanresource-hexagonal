@@ -6,6 +6,8 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Named;
 import java.util.Arrays;
@@ -14,6 +16,8 @@ import java.util.Objects;
 
 @Named
 public class CityStatesCountryValidator implements SaveValidator<Country>, UpdateValidator<Country> {
+
+	private static final Logger logger = LogManager.getLogger(CityStatesCountryValidator.class);
 
 	private static final List<String> CITY_STATES =  Arrays.asList("MONACO", "VATICAN", "SINGAPORE");
 	

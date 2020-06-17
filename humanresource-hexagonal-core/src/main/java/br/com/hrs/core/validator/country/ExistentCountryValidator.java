@@ -7,11 +7,15 @@ import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.CountryRepository;
 import br.com.hrs.core.validator.DeleteValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import java.util.Objects;
 
 public class ExistentCountryValidator implements UpdateValidator<Country>, DeleteValidator<Country> {
+
+    private static final Logger logger = LogManager.getLogger(ExistentCountryValidator.class);
 
     private CountryRepository countryRepository;
 

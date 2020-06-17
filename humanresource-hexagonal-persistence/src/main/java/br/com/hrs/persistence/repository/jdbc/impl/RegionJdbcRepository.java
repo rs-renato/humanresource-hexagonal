@@ -5,6 +5,8 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.RegionRepository;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.RegionRowMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -20,8 +22,8 @@ import java.util.Optional;
 @Named
 public class RegionJdbcRepository implements RegionRepository {
 
+    private static Logger logger = LogManager.getLogger(RegionJdbcRepository.class);
     private JdbcTemplate jdbcTemplate;
-    private final String REPOSITORY_NAME = getClass().getSimpleName();
 
     public RegionJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -29,7 +31,7 @@ public class RegionJdbcRepository implements RegionRepository {
 
     @Override
     public Optional<Region> findById(Integer id) {
-        logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
+        logger.debug("find({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Region ID").when(FIELD.MANDATORY).trows();
@@ -49,7 +51,7 @@ public class RegionJdbcRepository implements RegionRepository {
     @Transactional(rollbackFor = Exception.class)
     public Region save(Region region) {
 
-        logger.debug("{} ->  save({}})", REPOSITORY_NAME, region);
+        logger.debug("save({}})", region);
 
         if (Objects.isNull(region)) {
             Error.of("Region").when(FIELD.MANDATORY).trows();
@@ -79,7 +81,7 @@ public class RegionJdbcRepository implements RegionRepository {
     @Transactional(rollbackFor = Exception.class)
     public void update(Region region) {
 
-        logger.debug("{} ->  update({}})", REPOSITORY_NAME, region);
+        logger.debug("update({}})", region);
 
         if (Objects.isNull(region)) {
             Error.of("Region").when(FIELD.MANDATORY).trows();
@@ -93,7 +95,7 @@ public class RegionJdbcRepository implements RegionRepository {
 
     @Override
     public List<Region> findAll() {
-        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        logger.debug("findAll()");
 
         String sql = "SELECT * FROM REGIONS";
         return jdbcTemplate.query(sql, new RegionRowMapper());
@@ -102,7 +104,7 @@ public class RegionJdbcRepository implements RegionRepository {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+        logger.debug("delete({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Region").when(FIELD.MANDATORY).trows();
@@ -115,7 +117,7 @@ public class RegionJdbcRepository implements RegionRepository {
 
     @Override
     public boolean existsById(Integer id) {
-        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+        logger.debug("exists({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Region ID").when(FIELD.MANDATORY).trows();
@@ -126,7 +128,7 @@ public class RegionJdbcRepository implements RegionRepository {
     @Override
     public Optional<Region> findByName(String name) {
 
-        logger.debug("{} ->  findByName({}})", REPOSITORY_NAME, name);
+        logger.debug("findByName({}})", name);
 
         if (Objects.isNull(name)) {
             Error.of("Region Name").when(FIELD.MANDATORY).trows();

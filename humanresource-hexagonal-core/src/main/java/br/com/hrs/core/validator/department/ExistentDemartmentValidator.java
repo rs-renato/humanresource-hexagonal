@@ -7,6 +7,8 @@ import br.com.hrs.core.model.Department;
 import br.com.hrs.core.repository.DepartmentRepository;
 import br.com.hrs.core.validator.DeleteValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -14,6 +16,8 @@ import java.util.Objects;
 
 @Named
 public class ExistentDemartmentValidator implements UpdateValidator<Department>, DeleteValidator<Department> {
+
+    private static final Logger logger = LogManager.getLogger(ExistentDemartmentValidator.class);
 
     private DepartmentRepository departmentRepository;
 

@@ -26,7 +26,7 @@ public class RegionJpaRepository extends JpaRepositoryAbstractImpl<Region, Integ
 
 	@Override
 	public Optional<Region> findByName(String name) {
-		logger.debug("{} -> findByName({}})", REPOSITORY_NAME,name);
+		logger.debug("findByName({}})",name);
 
 		if (Objects.isNull(name)) {
 			Error.of("Region Name").when(FIELD.MANDATORY).trows();

@@ -8,6 +8,8 @@ import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.JobRepository;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,6 +18,8 @@ import java.util.Optional;
 
 @Named
 public class MinSalaryAllowedEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
+
+	private static final Logger logger = LogManager.getLogger(MinSalaryAllowedEmployeeValidator.class);
 
 	private JobRepository jobRepository;
 

@@ -5,6 +5,8 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.repository.DepartmentRepository;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.DepartmentRowMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -20,8 +22,9 @@ import java.util.Optional;
 @Named
 public class DepartmentJdbcRepository implements DepartmentRepository {
 
+    private static Logger logger = LogManager.getLogger(DepartmentJdbcRepository.class);
+
     private JdbcTemplate jdbcTemplate;
-    private final String REPOSITORY_NAME = getClass().getSimpleName();
 
     public DepartmentJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -30,7 +33,7 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
     @Override
     public Optional<Department> findById(Integer id) {
 
-        logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
+        logger.debug("find({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Department ID").when(FIELD.MANDATORY).trows();
@@ -51,7 +54,7 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
     @Transactional(rollbackFor = Exception.class)
     public Department save(Department department) {
 
-        logger.debug("{} ->  save({}})", REPOSITORY_NAME, department);
+        logger.debug("save({}})", department);
 
         if (Objects.isNull(department)) {
             Error.of("Department").when(FIELD.MANDATORY).trows();
@@ -84,7 +87,7 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
     @Transactional(rollbackFor = Exception.class)
     public void update(Department department) {
 
-        logger.debug("{} ->  update({}})", REPOSITORY_NAME, department);
+        logger.debug("update({}})", department);
 
         if (Objects.isNull(department)) {
             Error.of("Department").when(FIELD.MANDATORY).trows();
@@ -98,7 +101,7 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
 
     @Override
     public List<Department> findAll() {
-        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        logger.debug("findAll()");
         String sql = "SELECT * FROM DEPARTMENTS";
         return jdbcTemplate.query(sql, new DepartmentRowMapper());
     }
@@ -106,7 +109,7 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Integer id) {
-        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+        logger.debug("delete({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Department ID").when(FIELD.MANDATORY).trows();
@@ -120,7 +123,7 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
 
     @Override
     public boolean existsById(Integer id) {
-        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+        logger.debug("exists({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Department ID").when(FIELD.MANDATORY).trows();

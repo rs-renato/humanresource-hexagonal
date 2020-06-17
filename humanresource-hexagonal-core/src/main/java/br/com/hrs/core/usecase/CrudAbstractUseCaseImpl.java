@@ -6,11 +6,15 @@ import br.com.hrs.core.validator.DeleteValidator;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
 import br.com.hrs.core.validator.Validator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 import java.util.Optional;
 
 public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> implements CrudUseCase<E, ID>{
+
+    protected static final Logger logger = LogManager.getLogger(CrudAbstractUseCaseImpl.class);
 
     protected abstract List<Validator<E>> getValidators();
     protected abstract Repository<E, ID> getRepository();

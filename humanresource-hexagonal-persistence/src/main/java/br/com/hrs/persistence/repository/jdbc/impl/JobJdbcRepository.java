@@ -5,6 +5,8 @@ import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.JobRepository;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.JobRowMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,8 +19,8 @@ import java.util.Optional;
 @Named
 public class JobJdbcRepository implements JobRepository {
 
+    private static Logger logger = LogManager.getLogger(JobJdbcRepository.class);
     private JdbcTemplate jdbcTemplate;
-    private final String REPOSITORY_NAME = getClass().getSimpleName();
 
     public JobJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -27,7 +29,7 @@ public class JobJdbcRepository implements JobRepository {
     @Override
     public Optional<Job> findById(String id) {
 
-        logger.debug("{} ->  find({}})", REPOSITORY_NAME, id);
+        logger.debug("find({}})", id);
 
         if (Objects.isNull(id)) {
             Error.of("Job ID").when(FIELD.MANDATORY).trows();
@@ -48,7 +50,7 @@ public class JobJdbcRepository implements JobRepository {
     @Transactional(rollbackFor = Exception.class)
     public Job save(Job job) {
         
-        logger.debug("{} ->  save({}})", REPOSITORY_NAME, job);
+        logger.debug("save({}})", job);
 
         if (Objects.isNull(job)) {
             Error.of("Job").when(FIELD.MANDATORY).trows();
@@ -66,7 +68,7 @@ public class JobJdbcRepository implements JobRepository {
     @Transactional(rollbackFor = Exception.class)
     public void update(Job job) {
 
-        logger.debug("{} ->  update({}})", REPOSITORY_NAME, job);
+        logger.debug("update({}})", job);
 
         if (Objects.isNull(job)) {
              Error.of("Job").when(FIELD.MANDATORY).trows();
@@ -80,7 +82,7 @@ public class JobJdbcRepository implements JobRepository {
 
     @Override
     public List<Job> findAll() {
-        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        logger.debug("findAll()");
 
         String sql = "SELECT * FROM JOBS";
         return jdbcTemplate.query(sql, new JobRowMapper());
@@ -89,7 +91,7 @@ public class JobJdbcRepository implements JobRepository {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(String id) {
-        logger.debug("{} ->  delete({}})", REPOSITORY_NAME, id);
+        logger.debug("delete({}})", id);
 
         if (Objects.isNull(id)) {
              Error.of("Job").when(FIELD.MANDATORY).trows();
@@ -102,7 +104,7 @@ public class JobJdbcRepository implements JobRepository {
 
     @Override
     public boolean existsById(String id) {
-        logger.debug("{} ->  exists({}})", REPOSITORY_NAME, id);
+        logger.debug("exists({}})", id);
 
         if (Objects.isNull(id)) {
              Error.of("Job ID").when(FIELD.MANDATORY).trows();
