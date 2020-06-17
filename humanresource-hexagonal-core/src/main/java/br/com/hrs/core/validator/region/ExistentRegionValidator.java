@@ -7,8 +7,6 @@ import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.RegionRepository;
 import br.com.hrs.core.validator.DeleteValidator;
 import br.com.hrs.core.validator.UpdateValidator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,8 +14,6 @@ import java.util.Objects;
 
 @Named
 public class ExistentRegionValidator implements UpdateValidator<Region>, DeleteValidator<Region> {
-
-	private static Logger logger = LogManager.getLogger(ExistentRegionValidator.class);
 
 	private RegionRepository regionRepository;
 

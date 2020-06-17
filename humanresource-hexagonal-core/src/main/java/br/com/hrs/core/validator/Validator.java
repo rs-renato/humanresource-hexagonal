@@ -9,7 +9,8 @@ import org.springframework.core.GenericTypeResolver;
 import java.util.Optional;
 
 public interface Validator<E> {
-    Logger logger = LogManager.getLogger(Validator.class);
+
+    Logger logger = LogManager.getLogger();
 
     default void validate(Optional<E> optional){
 

@@ -1,5 +1,6 @@
 package br.com.hrs.api.error;
 
+import br.com.hrs.api.exception.PatchException;
 import br.com.hrs.api.exception.ResourceNotFoundException;
 import br.com.hrs.api.support.MensagemRetornoResponseEntitySupport;
 import br.com.hrs.core.exception.HrsBusinessException;
@@ -19,7 +20,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import java.text.MessageFormat;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice(annotations=RestController.class)
@@ -45,7 +50,10 @@ public class HrsApiErrorHandler{
 		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ALERTA, HttpStatus.BAD_REQUEST, ex.getMessage());
 	}
 	
-	@ExceptionHandler({IllegalArgumentException.class, HttpMessageNotReadableException.class, HttpRequestMethodNotSupportedException.class})
+	@ExceptionHandler({IllegalArgumentException.class,
+						HttpMessageNotReadableException.class,
+						HttpRequestMethodNotSupportedException.class,
+						PatchException.class})
 	public ResponseEntity<MensagemRetorno> handleBadRequest(Exception ex){
 		logger.error("An error has ocurred on request processs: {}", ex);
 		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ALERTA, HttpStatus.BAD_REQUEST, ex.getMessage());
@@ -58,6 +66,16 @@ public class HrsApiErrorHandler{
 		List<String> errorMessages = bindingResult.getFieldErrors().stream()
 			.map(fieldError -> messageSource.getMessage(fieldError, LocaleContextHolder.getLocale()))
 			.collect(Collectors.toList());	
+		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ALERTA, HttpStatus.BAD_REQUEST, errorMessages);
+	}
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<MensagemRetorno> handleBadRequest(ConstraintViolationException ex){
+		logger.error("An error has occurred on validation proccess (bean validation): {}", ex.getMessage());
+		Set<ConstraintViolation<?>> violations = ex.getConstraintViolations();
+		List<String> errorMessages = violations.stream()
+				.map(violation -> MessageFormat.format(violation.getMessage(), violation.getPropertyPath()))
+				.collect(Collectors.toList());
 		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ALERTA, HttpStatus.BAD_REQUEST, errorMessages);
 	}
 	

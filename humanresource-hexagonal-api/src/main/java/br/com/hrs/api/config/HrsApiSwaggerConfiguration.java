@@ -1,6 +1,7 @@
 package br.com.hrs.api.config;
 
 import br.com.hrs.api.support.HrsApiPropertiesSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -23,6 +24,8 @@ import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.mappers.ModelMapper;
+import springfox.documentation.swagger2.mappers.ModelMapperImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,11 +48,17 @@ public class HrsApiSwaggerConfiguration implements WebMvcConfigurer {
 	public static final String  SWAGGER_WEBJARS_RESOURCE_LOCATION 	= "classpath:/META-INF/resources/webjars/";
 
 	private HrsApiPropertiesSupport hrsApiPropertiesSupport;
-	
+
+	@Autowired
 	public HrsApiSwaggerConfiguration(HrsApiPropertiesSupport hrsApiPropertiesSupport) {
 		this.hrsApiPropertiesSupport = hrsApiPropertiesSupport;
 	}
-	
+
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapperImpl();
+	}
+
 	@Bean
 	public Docket api(List<ResponseMessage> responsesGobal, ApiInfo apiInfo) {
 		

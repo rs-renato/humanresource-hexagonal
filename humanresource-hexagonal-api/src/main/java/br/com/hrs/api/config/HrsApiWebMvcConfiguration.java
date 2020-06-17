@@ -1,5 +1,7 @@
 package br.com.hrs.api.config;
 
+import br.com.hrs.api.support.HrsApiPropertiesSupport;
+import br.com.hrs.api.support.PatchSupport;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -26,6 +29,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.validation.Validator;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.TimeZone;
@@ -59,6 +63,11 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 	}
 
 	@Bean
+	public HrsApiPropertiesSupport hrsApiPropertiesSupport(Environment environment) {
+		return new HrsApiPropertiesSupport(environment);
+	}
+
+	@Bean
 	public MappingJackson2XmlHttpMessageConverter mappingJackson2XmlHttpMessageConverter() {
 		Jackson2ObjectMapperBuilder builder = Jackson2ObjectMapperBuilder.xml();
 		builder.indentOutput(true);
@@ -67,6 +76,11 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 
 	@Bean
 	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+		return new MappingJackson2HttpMessageConverter(objectMapper());
+	}
+
+	@Bean
+	public ObjectMapper objectMapper() {
 		// creating a new objectMapper instance that has common configuration
 
 		ObjectMapper mapper = new ObjectMapper();
@@ -82,8 +96,7 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 		mapper.setTimeZone(TimeZone.getDefault());
 		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
-
-		return new MappingJackson2HttpMessageConverter(mapper);
+		return mapper;
 	}
 
 	@Override
@@ -95,7 +108,7 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 	@Bean
 	public MessageSource messageSource() {
 		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-		messageSource.setBasename("classpath:/br/com/hrs/hrs-api-rest-messages");
+		messageSource.setBasename("classpath:/ValidationMessages");
 		messageSource.setDefaultEncoding("UTF-8");
 		return messageSource;
 	}
@@ -105,5 +118,10 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 	    LocalValidatorFactoryBean validatorFactoryBean = new LocalValidatorFactoryBean();
 	    validatorFactoryBean.setValidationMessageSource(messageSource());
 	    return validatorFactoryBean;
+	}
+
+	@Bean
+	public PatchSupport patchSupport(ObjectMapper objectMapper, Validator validator){
+		return new PatchSupport(objectMapper, validator);
 	}
 }

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface Repository<E extends EntityKey<ID>, ID> {
 
-    Logger logger = LogManager.getLogger(Repository.class);
+    Logger logger = LogManager.getLogger();
  
     Optional<E> findById(ID id);
     

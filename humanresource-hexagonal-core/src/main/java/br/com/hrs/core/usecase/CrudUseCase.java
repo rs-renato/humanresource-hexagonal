@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface CrudUseCase<E extends EntityKey<ID>, ID> {
 
-    Logger logger = LogManager.getLogger(CrudUseCase.class);
+    Logger logger = LogManager.getLogger();
 
     Optional<E> findById(ID id);
 
