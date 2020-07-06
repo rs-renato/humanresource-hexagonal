@@ -59,35 +59,6 @@ public class CountryOperationsController implements CountryOperationsDocumentabl
 		logger.info("Country {} updated on 'Update Country'", countryResource);
 		return ResponseEntity.ok(countryResource);
 	}
-	
-	/*@PatchMapping(value="/{id}/region", consumes = {MediaType.APPLICATION_JSON_VALUE},
-			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<CountryResource> patch(@PathVariable String id, @Validated(FieldValidationStrategy.Patch.class) @RequestBody CountryResource countryResource) {
-		logger.info("Performing 'Update (Patch) Country' Id:{}, Body:{}", id, countryResource);
-		Optional<Country> country = this.countryUseCase.findById(id);
-		AssertionSupport.assertResourceFound(country, "Country not found!");
-
-		CountryResource countryResourceFound = countryMapper.toResource(countryMapper.unwrap(country));
-		countryResource.setRegionId(countryResource.getRegionId());
-
-		this.countryUseCase.update(countryMapper.toModel(countryResourceFound));
-		logger.info("Country {} updated on 'Update (Patch) Country'", countryResourceFound);
-		return ResponseEntity.ok(countryResourceFound);
-	}
-
-	@PatchMapping(value="/{id}", consumes = "application/json-patch+json",
-			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<CountryResource> patch(@PathVariable String id, @RequestBody JsonPatch jsonPatch) {
-		logger.info("Performing 'Update (Patch) Country' Id:{}, Patch:{}", id, jsonPatch);
-		Optional<Country> country = this.countryUseCase.findById(id);
-		AssertionSupport.assertResourceFound(country, "Country not found!");
-
-		CountryResource countryPatched = patchSupport.apply(jsonPatch, countryMapper.toResource(countryMapper.unwrap(country)));
-
-		this.countryUseCase.update(countryMapper.toModel(countryPatched));
-		logger.info("Country {} updated on 'Update (Patch) Country'", countryPatched);
-		return ResponseEntity.ok(countryPatched);
-	}*/
 
 	@PatchMapping(value="/{id}", consumes = "application/merge-patch+json",
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})

@@ -174,18 +174,6 @@
             <version>1.2.7</version>
         </dependency>
 
-        <!-- Validator -->
-       <!-- <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate.validator.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>${hibernate.validator.version}</version>
-        </dependency>-->
-
         <!-- Map Construct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
@@ -227,7 +215,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <useIncrementalCompilation>false</useIncrementalCompilation>
-<!--                    <generatedSourcesDirectory>${project.basedir}/src/main/java</generatedSourcesDirectory>-->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
