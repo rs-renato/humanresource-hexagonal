@@ -2,14 +2,12 @@ package br.com.hrs.api.support;
 
 import br.com.hrs.api.exception.PatchException;
 import br.com.hrs.api.validation.FieldValidationStrategy;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.fge.jsonpatch.JsonPatch;
-import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.json.JsonMergePatch;
+import javax.json.JsonValue;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
@@ -27,18 +25,30 @@ public class PatchSupport {
         this.validator = validator;
     }
 
-    public <T> T apply(JsonPatch patch, T type){
-        try {
-            JsonNode patched = patch.apply(objectMapper.convertValue(type, JsonNode.class));
+    public <T> T apply(JsonMergePatch mergePatch, T type){
 
-            Set<ConstraintViolation<T>> violations = validator.validate(type, FieldValidationStrategy.Patch.class);
+        try {
+
+            JsonValue requestTarget = objectMapper.convertValue(type.getClass().newInstance(), JsonValue.class);
+
+            JsonValue requestPatched = mergePatch.apply(requestTarget);
+
+            T requestBean = objectMapper.convertValue(requestPatched, (Class<T>) type.getClass());
+
+            Set<ConstraintViolation<T>> violations = validator.validate(requestBean, FieldValidationStrategy.Patch.class);
 
             if (!violations.isEmpty()){
                 throw new ConstraintViolationException(violations);
             }
 
-            return objectMapper.treeToValue(patched, (Class<T>) type.getClass());
-        } catch (JsonPatchException | JsonProcessingException e) {
+            JsonValue target = objectMapper.convertValue(type, JsonValue.class);
+
+            JsonValue patched = mergePatch.apply(target);
+
+            T bean = objectMapper.convertValue(patched, (Class<T>) type.getClass());
+
+            return bean;
+        } catch (InstantiationException | IllegalAccessException e){
             throw new PatchException(e);
         }
     }

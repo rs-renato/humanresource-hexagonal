@@ -8,10 +8,14 @@
 			<!-- Jackson -->
 			<wls:package-name>com.fasterxml.jackson.core.*</wls:package-name>
 			<wls:package-name>com.fasterxml.jackson.databind.*</wls:package-name>
+			<wls:package-name>com.fasterxml.jackson.datatype.*</wls:package-name>
 			<wls:package-name>com.fasterxml.jackson.annotation.*</wls:package-name>
 			<!-- Logging -->
 			<wls:package-name>org.slf4j.*</wls:package-name>
 			<wls:package-name>org.jboss.logging</wls:package-name>
+			<!-- JSR 353 -->
+			<wls:package-name>javax.json.*</wls:package-name>
+
 		</wls:prefer-application-packages>
 	</wls:container-descriptor>
     <wls:context-root>hrs</wls:context-root>

@@ -1,6 +1,5 @@
 package br.com.hrs.api.error;
 
-import br.com.hrs.api.exception.PatchException;
 import br.com.hrs.api.exception.ResourceNotFoundException;
 import br.com.hrs.api.support.MensagemRetornoResponseEntitySupport;
 import br.com.hrs.core.exception.HrsBusinessException;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.json.JsonException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.text.MessageFormat;
@@ -53,7 +53,7 @@ public class HrsApiErrorHandler{
 	@ExceptionHandler({IllegalArgumentException.class,
 						HttpMessageNotReadableException.class,
 						HttpRequestMethodNotSupportedException.class,
-						PatchException.class})
+						JsonException.class})
 	public ResponseEntity<MensagemRetorno> handleBadRequest(Exception ex){
 		logger.error("An error has ocurred on request processs: {}", ex);
 		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ALERTA, HttpStatus.BAD_REQUEST, ex.getMessage());

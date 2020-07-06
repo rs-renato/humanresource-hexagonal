@@ -11,7 +11,6 @@ import br.com.hrs.core.model.Country;
 import br.com.hrs.core.usecase.country.CountryUseCase;
 import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
 import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoCategoria;
-import com.github.fge.jsonpatch.JsonPatch;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.json.JsonMergePatch;
 import java.util.Optional;
 
 @RestController
@@ -60,7 +60,7 @@ public class CountryOperationsController implements CountryOperationsDocumentabl
 		return ResponseEntity.ok(countryResource);
 	}
 	
-	@PatchMapping(value="/{id}/region", consumes = {MediaType.APPLICATION_JSON_VALUE},
+	/*@PatchMapping(value="/{id}/region", consumes = {MediaType.APPLICATION_JSON_VALUE},
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<CountryResource> patch(@PathVariable String id, @Validated(FieldValidationStrategy.Patch.class) @RequestBody CountryResource countryResource) {
 		logger.info("Performing 'Update (Patch) Country' Id:{}, Body:{}", id, countryResource);
@@ -77,7 +77,7 @@ public class CountryOperationsController implements CountryOperationsDocumentabl
 
 	@PatchMapping(value="/{id}", consumes = "application/json-patch+json",
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<CountryResource> patch(@PathVariable String id, @RequestBody  JsonPatch jsonPatch) {
+	public ResponseEntity<CountryResource> patch(@PathVariable String id, @RequestBody JsonPatch jsonPatch) {
 		logger.info("Performing 'Update (Patch) Country' Id:{}, Patch:{}", id, jsonPatch);
 		Optional<Country> country = this.countryUseCase.findById(id);
 		AssertionSupport.assertResourceFound(country, "Country not found!");
@@ -87,8 +87,22 @@ public class CountryOperationsController implements CountryOperationsDocumentabl
 		this.countryUseCase.update(countryMapper.toModel(countryPatched));
 		logger.info("Country {} updated on 'Update (Patch) Country'", countryPatched);
 		return ResponseEntity.ok(countryPatched);
+	}*/
+
+	@PatchMapping(value="/{id}", consumes = "application/merge-patch+json",
+			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<CountryResource> patch(@PathVariable String id, @RequestBody JsonMergePatch jsonMergePatch) {
+		logger.info("Performing 'Update (Patch) Country' Id:{}, MergePatch:{}", id, jsonMergePatch);
+		Optional<Country> country = this.countryUseCase.findById(id);
+		AssertionSupport.assertResourceFound(country, "Country not found!");
+
+		CountryResource countryPatched = patchSupport.apply(jsonMergePatch, countryMapper.toResource(countryMapper.unwrap(country)));
+
+		this.countryUseCase.update(countryMapper.toModel(countryPatched));
+		logger.info("Country {} updated on 'Update (Patch) Country'", countryPatched);
+		return ResponseEntity.ok(countryPatched);
 	}
-	
+
 	@DeleteMapping(value="/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE},
 			produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	public ResponseEntity<MensagemRetorno> delete(@PathVariable String id) {

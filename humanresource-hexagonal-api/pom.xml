@@ -37,6 +37,8 @@
         <!-- Javax Servlet API-->
         <javax.servlet.version>3.1.0</javax.servlet.version>
 
+        <javax-json.version>1.1.4</javax-json.version>
+
         <failOnMissingWebXml>false</failOnMissingWebXml>
 
     </properties>
@@ -112,10 +114,20 @@
             <artifactId>spring-security-web</artifactId>
             <version>${org.springframework.security.version}</version>
         </dependency>
+
+        <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>8.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Apache Commons -->
@@ -141,9 +153,29 @@
             <artifactId>jackson-dataformat-xml</artifactId>
             <version>${com.fasterxml.jackson.core.version}</version>
         </dependency>
+        <!-- Jackson module for the JSR-353 (JSON Processing) -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr353</artifactId>
+            <version>${com.fasterxml.jackson.core.version}</version>
+        </dependency>
+
+        <!-- JSR-353 (JSON Processing): API -->
+        <dependency>
+            <groupId>javax.json</groupId>
+            <artifactId>javax.json-api</artifactId>
+            <version>${javax-json.version}</version>
+        </dependency>
+
+        <!-- JSR-353 (JSON Processing): Johnzon implementation -->
+        <dependency>
+            <groupId>org.apache.johnzon</groupId>
+            <artifactId>johnzon-core</artifactId>
+            <version>1.2.7</version>
+        </dependency>
 
         <!-- Validator -->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.validator.version}</version>
@@ -152,7 +184,7 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <version>${hibernate.validator.version}</version>
-        </dependency>
+        </dependency>-->
 
         <!-- Map Construct -->
         <dependency>
@@ -160,14 +192,6 @@
             <artifactId>mapstruct</artifactId>
             <version>${org.mapstruct.version}</version>
         </dependency>
-
-        <!-- Json Patch JSR 353-->
-        <dependency>
-            <groupId>com.github.java-json-tools</groupId>
-            <artifactId>json-patch</artifactId>
-            <version>1.13</version>
-        </dependency>
-
 
     </dependencies>
 

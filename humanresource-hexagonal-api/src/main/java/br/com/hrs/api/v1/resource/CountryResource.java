@@ -21,7 +21,7 @@ public class CountryResource implements Serializable {
 	@NotNull(groups= {FieldValidationStrategy.Create.class, FieldValidationStrategy.Update.class})
 	private String name;
 
-	@NotNull
+	@NotNull(groups= {FieldValidationStrategy.Create.class, FieldValidationStrategy.Update.class})
 	private Integer regionId;
 	
 	public CountryResource() {

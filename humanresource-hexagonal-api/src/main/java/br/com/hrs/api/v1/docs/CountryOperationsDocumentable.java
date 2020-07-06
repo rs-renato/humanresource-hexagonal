@@ -34,20 +34,20 @@ public interface CountryOperationsDocumentable {
 				@ApiResponse(code = 404, message = "Country not found.", response = MensagemRetorno.class)})
 	public ResponseEntity<CountryResource> update(@ApiParam(value="Country Identifier", required=true) String id, @ApiParam(value="Country Representation", required=true) CountryResource countryResource);
 	
-	
-	/**
-	 * Patches (update partially) an Country
-	 * @param id country identifier
-	 * @param countryResource resource of country to be updated
-	 * @return respose entity of {@link CountryResource} updated
-	 */
-	@ApiOperation(value = "Patches an Country", nickname="patch", notes = "Patches (updates partially) an Country returning itself updated", response = CountryResource.class)
-	@ApiResponses(value = {
-				@ApiResponse(code = 200, message = "Country successfully updated.", response = CountryResource.class),
-				@ApiResponse(code = 400, message = "General request restrictions and/or Bussiness rules validations.", response = MensagemRetorno.class),
-				@ApiResponse(code = 404, message = "Country not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<CountryResource> patch(@ApiParam(value="Country Identifier", required=true) String id, @ApiParam(value="Country Representation", required=true) CountryResource countryResource);
-	
+
+//	/**
+//	 * Patches (update partially) an Country
+//	 * @param id country identifier
+//	 * @param countryResource resource of country to be updated
+//	 * @return respose entity of {@link CountryResource} updated
+//	 */
+//	@ApiOperation(value = "Patches an Country", nickname="patch", notes = "Patches (updates partially) an Country returning itself updated", response = CountryResource.class)
+//	@ApiResponses(value = {
+//				@ApiResponse(code = 200, message = "Country successfully updated.", response = CountryResource.class),
+//				@ApiResponse(code = 400, message = "General request restrictions and/or Bussiness rules validations.", response = MensagemRetorno.class),
+//				@ApiResponse(code = 404, message = "Country not found.", response = MensagemRetorno.class)})
+//	public ResponseEntity<CountryResource> patch(@ApiParam(value="Country Identifier", required=true) String id, @ApiParam(value="Country Representation", required=true) CountryResource countryResource);
+//
 	/**
 	 * Deletes an Country by its Id
 	 * @param id country identifier

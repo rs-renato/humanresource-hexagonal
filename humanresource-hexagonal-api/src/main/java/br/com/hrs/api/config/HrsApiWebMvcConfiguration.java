@@ -2,11 +2,14 @@ package br.com.hrs.api.config;
 
 import br.com.hrs.api.support.HrsApiPropertiesSupport;
 import br.com.hrs.api.support.PatchSupport;
+import br.com.hrs.api.support.patch.JsonMergePatchHttpMessagemConverter;
+import br.com.hrs.api.support.patch.JsonPatchHttpMessagemConverter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr353.JSR353Module;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -74,10 +77,6 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 		return new MappingJackson2XmlHttpMessageConverter(builder.build());
 	}
 
-	@Bean
-	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-		return new MappingJackson2HttpMessageConverter(objectMapper());
-	}
 
 	@Bean
 	public ObjectMapper objectMapper() {
@@ -96,12 +95,16 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 		mapper.setTimeZone(TimeZone.getDefault());
 		mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd"));
+
+		mapper.registerModule(new JSR353Module());
 		return mapper;
 	}
 
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(mappingJackson2HttpMessageConverter());
+		converters.add(new JsonMergePatchHttpMessagemConverter());
+		converters.add(new JsonPatchHttpMessagemConverter());
+		converters.add(new MappingJackson2HttpMessageConverter(objectMapper()));
 		converters.add(mappingJackson2XmlHttpMessageConverter());
 	}
 
