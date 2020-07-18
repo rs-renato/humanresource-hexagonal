@@ -4,4 +4,5 @@ import br.com.hrs.core.model.Department;
 
 public interface DepartmentRepository extends Repository<Department, Integer> {
 
+    boolean existsByName(String name);
 }

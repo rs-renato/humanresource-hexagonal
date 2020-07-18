@@ -51,6 +51,7 @@ public class HrsApiErrorHandler{
 	}
 	
 	@ExceptionHandler({IllegalArgumentException.class,
+						NumberFormatException.class,
 						HttpMessageNotReadableException.class,
 						HttpRequestMethodNotSupportedException.class,
 						JsonException.class})

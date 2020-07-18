@@ -5,20 +5,19 @@ import br.com.hrs.api.validation.FieldValidationStrategy;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
-@XmlRootElement(name = "country")
 public class CountryResource implements Serializable {
 
 	private static final long serialVersionUID = 7728812557431552908L;
 
 	@Null(groups= {FieldValidationStrategy.Update.class, FieldValidationStrategy.Patch.class})
 	@NotNull(groups=FieldValidationStrategy.Create.class)
-	@Size(min=1, max=2, groups=FieldValidationStrategy.Create.class)
+	@Size(min=2, max=2, groups=FieldValidationStrategy.Create.class)
 	private String id;
 	
 	@NotNull(groups= {FieldValidationStrategy.Create.class, FieldValidationStrategy.Update.class})
+	@Size(max = 40)
 	private String name;
 
 	@NotNull(groups= {FieldValidationStrategy.Create.class, FieldValidationStrategy.Update.class})
@@ -83,6 +82,10 @@ public class CountryResource implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CountryResource [id=" + id + ", name=" + name + ", regionId=" + regionId + "]";
+		return "CountryResource{" +
+				"id='" + id + '\'' +
+				", name='" + name + '\'' +
+				", regionId=" + regionId +
+				'}';
 	}
 }

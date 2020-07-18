@@ -131,4 +131,15 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
         
         return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM DEPARTMENTS WHERE DEPARTMENT_ID = ?", new Object[]{id}, Integer.class) > 0;
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        logger.debug("existsByName({}})", name);
+
+        if (Objects.isNull(name)) {
+            Error.of("Department Name").when(FIELD.MANDATORY).trows();
+        }
+
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM DEPARTMENTS WHERE DEPARTMENT_NAME = ?", new Object[]{name}, Integer.class) > 0;
+    }
 }

@@ -19,4 +19,9 @@ public class DepartmentJpaRepository extends JpaRepositoryAbstractImpl<Departmen
 		super(jpaRepository);
 		this.jpaRepository = jpaRepository;
 	}
+
+	@Override
+	public boolean existsByName(String name) {
+		return this.jpaRepository.existsDepartmentByName(name);
+	}
 }

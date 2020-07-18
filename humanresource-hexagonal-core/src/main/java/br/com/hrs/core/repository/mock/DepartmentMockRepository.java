@@ -31,4 +31,10 @@ public class DepartmentMockRepository extends MockRepository<Department, Integer
 
         return Arrays.asList(dep01, dep02);
     }
+
+    @Override
+    public boolean existsByName(String name) {
+        return findAll().stream()
+                .anyMatch(department -> department.getName().equals(name));
+    }
 }

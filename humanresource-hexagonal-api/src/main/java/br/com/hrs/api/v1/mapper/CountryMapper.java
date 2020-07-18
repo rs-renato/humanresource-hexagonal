@@ -20,10 +20,12 @@ public interface CountryMapper {
             @Mapping(target="region.id", source="countryResource.regionId")
     })
     Country toModel(CountryResource countryResource);
+
     List<Country> toModelList(List<CountryResource> countryResource);
 
     @InheritInverseConfiguration
     CountryResource toResource(Country country);
+
     List<CountryResource> toResourceList(List<Country> country);
 
     default <T> T unwrap(Optional<T> optional) {

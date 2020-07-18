@@ -15,7 +15,9 @@ public class JpaRepositoryContainer {
     }
 
     @Named
-    public interface DepartmentSpringDataJpaRepositoryImpl extends JpaRepository<Department, Integer>{ }
+    public interface DepartmentSpringDataJpaRepositoryImpl extends JpaRepository<Department, Integer>{
+       boolean existsDepartmentByName(String name);
+    }
 
     @Named
     public interface EmployeeSpringDataJpaRepositoryImpl extends JpaRepository<Employee, Integer>{ }

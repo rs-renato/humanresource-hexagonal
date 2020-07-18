@@ -21,7 +21,7 @@ public interface CountryQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Countries found.", response = CountryResource[].class),
 			@ApiResponse(code = 404, message = "Countries not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<List<CountryResource>> listAll();
+	ResponseEntity<List<CountryResource>> listAll();
 	
 	/**
 	 * Find an Country by Id
@@ -32,5 +32,5 @@ public interface CountryQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Country found.", response = CountryResource.class),
 			@ApiResponse(code = 404, message = "Country not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<CountryResource> find(@ApiParam(value="Country Identifier", required=true) @PathVariable String id);
+	ResponseEntity<CountryResource> find(@ApiParam(value="Country Identifier", required=true) @PathVariable String id);
 }
