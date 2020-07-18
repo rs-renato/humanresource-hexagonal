@@ -1,12 +1,10 @@
 package br.com.hrs.core.validator.department;
 
 import br.com.hrs.core.exception.HrsBusinessException;
-import br.com.hrs.core.exception.HrsNotFoundException;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.repository.DepartmentRepository;
-import br.com.hrs.core.validator.DeleteValidator;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +13,6 @@ import org.apache.logging.log4j.Logger;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Objects;
-import java.util.Optional;
 
 @Named
 public class ExistentDemartmentNameValidator implements SaveValidator<Department>, UpdateValidator<Department> {
