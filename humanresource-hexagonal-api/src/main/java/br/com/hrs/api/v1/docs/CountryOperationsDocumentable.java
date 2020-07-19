@@ -40,7 +40,7 @@ public interface CountryOperationsDocumentable {
 	/**
 	 * Patches (update partially) an Country
 	 * @param id country identifier
-	 * @param countryResource resource of country to be updated
+	 * @param jsonMergePatch resource of country to be updated
 	 * @return respose entity of {@link CountryResource} updated
 	 */
 	@ApiOperation(value = "Patches an Country", nickname="patch", notes = "Patches (updates partially) an Country returning itself updated", response = CountryResource.class)

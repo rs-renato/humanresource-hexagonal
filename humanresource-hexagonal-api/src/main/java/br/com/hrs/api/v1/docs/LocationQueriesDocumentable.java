@@ -21,7 +21,7 @@ public interface LocationQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Locations found.", response = LocationResource[].class),
 			@ApiResponse(code = 404, message = "Locations not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<List<LocationResource>> listAll();
+	ResponseEntity<List<LocationResource>> listAll();
 	
 	/**
 	 * Find an Location by Id
@@ -32,5 +32,5 @@ public interface LocationQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Location found.", response = LocationResource.class),
 			@ApiResponse(code = 404, message = "Location not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<LocationResource> find(@ApiParam(value = "Location Identifier", required = true) @PathVariable Integer id);
+	ResponseEntity<LocationResource> find(@ApiParam(value = "Location Identifier", required = true) @PathVariable Integer id);
 }

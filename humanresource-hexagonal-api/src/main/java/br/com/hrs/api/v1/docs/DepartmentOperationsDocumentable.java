@@ -5,6 +5,8 @@ import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 
+import javax.json.JsonMergePatch;
+
 @Api(value ="/v1/departments", tags={"Department - Operations"})
 @ApiImplicitParams(
 		{@ApiImplicitParam(name="Authorization", dataType = "String", paramType = "header")})
@@ -34,6 +36,19 @@ public interface DepartmentOperationsDocumentable {
 				@ApiResponse(code = 404, message = "Department not found.", response = MensagemRetorno.class)})
 	ResponseEntity<DepartmentResource> update(@ApiParam(value = "Department Identifier", required = true) Integer id, @ApiParam(value = "Department Representation", required = true) DepartmentResource departmentResource);
 
+	/**
+	 * Patches (update partially) an Department
+	 * @param id department identifier
+	 * @param jsonMergePatch resource of department to be updated
+	 * @return respose entity of {@link DepartmentResource} updated
+	 */
+	@ApiOperation(value = "Patches an Department", nickname="patch", notes = "Patches (updates partially) an Department returning itself updated", response = DepartmentResource.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Department successfully updated.", response = DepartmentResource.class),
+			@ApiResponse(code = 400, message = "General request restrictions and/or Bussiness rules validations.", response = MensagemRetorno.class),
+			@ApiResponse(code = 404, message = "Department not found.", response = MensagemRetorno.class)})
+	ResponseEntity<DepartmentResource> patch(@ApiParam(value="Department Identifier", required=true) Integer id, @ApiParam(value="Department Representation", required=true) JsonMergePatch jsonMergePatch);
+	
 	/**
 	 * Deletes an Department by its Id
 	 * @param id department identifier

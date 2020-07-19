@@ -5,6 +5,8 @@ import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 
+import javax.json.JsonMergePatch;
+
 @Api(value ="/v1/locations", tags={"Location - Operations"})
 @ApiImplicitParams(
 		{@ApiImplicitParam(name="Authorization", dataType = "String", paramType = "header")})
@@ -19,7 +21,7 @@ public interface LocationOperationsDocumentable {
 	@ApiResponses(value = {
 				@ApiResponse(code = 201, message = "Location successfully created.", response = LocationResource.class),
 				@ApiResponse(code = 400, message = "General request restrictions and/or Bussiness rules validations.", response = MensagemRetorno.class)})
-	public ResponseEntity<LocationResource> create(@ApiParam(value = "Location Representation", required = true) LocationResource locationResource);
+	ResponseEntity<LocationResource> create(@ApiParam(value = "Location Representation", required = true) LocationResource locationResource);
 
 	/**
 	 * Updates an Location
@@ -32,8 +34,21 @@ public interface LocationOperationsDocumentable {
 				@ApiResponse(code = 200, message = "Location successfully updated.", response = LocationResource.class),
 				@ApiResponse(code = 400, message = "General request restrictions and/or Bussiness rules validations.", response = MensagemRetorno.class),
 				@ApiResponse(code = 404, message = "Location not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<LocationResource> update(@ApiParam(value = "Location Identifier", required = true) Integer id, @ApiParam(value = "Location Representation", required = true) LocationResource locationResource);
-	
+	ResponseEntity<LocationResource> update(@ApiParam(value = "Location Identifier", required = true) Integer id, @ApiParam(value = "Location Representation", required = true) LocationResource locationResource);
+
+	/**
+	 * Patches (update partially) an Location
+	 * @param id location identifier
+	 * @param jsonMergePatch resource of location to be updated
+	 * @return respose entity of {@link LocationResource} updated
+	 */
+	@ApiOperation(value = "Patches an Location", nickname="patch", notes = "Patches (updates partially) an Location returning itself updated", response = LocationResource.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Location successfully updated.", response = LocationResource.class),
+			@ApiResponse(code = 400, message = "General request restrictions and/or Bussiness rules validations.", response = MensagemRetorno.class),
+			@ApiResponse(code = 404, message = "Location not found.", response = MensagemRetorno.class)})
+	ResponseEntity<LocationResource> patch(@ApiParam(value="Location Identifier", required=true) Integer id, @ApiParam(value="Location Representation", required=true) JsonMergePatch jsonMergePatch);
+
 	/**
 	 * Deletes an Location by its Id
 	 * @param id location identifier
@@ -44,5 +59,5 @@ public interface LocationOperationsDocumentable {
 				@ApiResponse(code = 200, message = "Location successfully deleted."),
 				@ApiResponse(code = 400, message = "General request restrictions and/or Bussiness rules validations.", response = MensagemRetorno.class),
 				@ApiResponse(code = 404, message = "Location not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<MensagemRetorno> delete(@ApiParam(value = "Location Identifier", required = true) Integer id);
+	ResponseEntity<MensagemRetorno> delete(@ApiParam(value = "Location Identifier", required = true) Integer id);
 }

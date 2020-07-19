@@ -61,25 +61,6 @@ public class CountryResource implements Serializable {
 		this.regionId = regionId;
 	}
 
-	public static CountryResource build(){
-		return new CountryResource();
-	}
-
-	public CountryResource id(String id){
-		this.id = id;
-		return this;
-	}
-	
-	public CountryResource name(String name){
-		this.name = name;
-		return this;
-	}
-	
-	public CountryResource regionId(Integer regionId){
-		this.regionId = regionId;
-		return this;
-	}
-
 	@Override
 	public String toString() {
 		return "CountryResource{" +

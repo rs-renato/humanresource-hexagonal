@@ -21,7 +21,7 @@ public interface JobQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Jobs found.", response = JobResource[].class),
 			@ApiResponse(code = 404, message = "Jobs not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<List<JobResource>> listAll();
+	ResponseEntity<List<JobResource>> listAll();
 	
 	/**
 	 * Find an Job by Id
@@ -32,5 +32,5 @@ public interface JobQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Job found.", response = JobResource.class),
 			@ApiResponse(code = 404, message = "Job not found.", response = MensagemRetorno.class)})
-	public ResponseEntity<JobResource> find(@ApiParam(value = "Job Identifier", required = true) @PathVariable String id);
+	ResponseEntity<JobResource> find(@ApiParam(value = "Job Identifier", required = true) @PathVariable String id);
 }
