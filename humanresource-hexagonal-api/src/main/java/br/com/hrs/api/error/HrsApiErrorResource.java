@@ -1,8 +1,8 @@
 package br.com.hrs.api.error;
 
-import br.com.hrs.api.support.MensagemRetornoResponseEntitySupport;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoCategoria;
+import br.com.hrs.api.support.message.MensagemRetorno;
+import br.com.hrs.api.support.message.MensagemRetornoCategoria;
+import br.com.hrs.api.support.message.MensagemRetornoResponseEntitySupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

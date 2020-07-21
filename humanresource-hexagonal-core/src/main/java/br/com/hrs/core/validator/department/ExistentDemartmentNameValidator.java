@@ -36,7 +36,8 @@ public class ExistentDemartmentNameValidator implements SaveValidator<Department
         }
 
         if(departmentRepository.existsByName(department.getName())
-            && !departmentRepository.findById(department.getId()).get().getName().equals(department.getName())) {
+            && (department.getId() != null
+            && !departmentRepository.findById(department.getId()).get().getName().equals(department.getName()))) {
             throw new HrsBusinessException("Department name exists");
         }
     }

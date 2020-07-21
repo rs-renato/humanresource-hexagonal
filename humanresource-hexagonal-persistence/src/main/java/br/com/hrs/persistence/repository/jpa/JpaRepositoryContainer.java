@@ -20,7 +20,9 @@ public class JpaRepositoryContainer {
     }
 
     @Named
-    public interface EmployeeSpringDataJpaRepositoryImpl extends JpaRepository<Employee, Integer>{ }
+    public interface EmployeeSpringDataJpaRepositoryImpl extends JpaRepository<Employee, Integer>{
+        boolean existsByEmail(String email);
+    }
 
     @Named
     public interface JobSpringDataJpaRepositoryImpl extends JpaRepository<Job, String> { }

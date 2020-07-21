@@ -19,11 +19,11 @@ public class JobResource implements Serializable {
 	@NotNull
 	@Size(min=3, max=35)
 	private String title;
-	
-	@NotNull
+
+	@NotNull(groups= {FieldValidationStrategy.Create.class, FieldValidationStrategy.Update.class})
 	private Integer minSalary;
-	
-	@NotNull
+
+	@NotNull(groups= {FieldValidationStrategy.Create.class, FieldValidationStrategy.Update.class})
 	private Integer maxSalary;
 	
 	public JobResource() {

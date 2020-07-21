@@ -2,7 +2,6 @@ package br.com.hrs.api.v1.mapper;
 
 import br.com.hrs.api.v1.resource.RegionResource;
 import br.com.hrs.core.model.Region;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -18,7 +17,6 @@ public interface RegionMapper {
 
     List<Region> toModelList(List<RegionResource> regionResource);
 
-    @InheritInverseConfiguration
     RegionResource toResource(Region region);
 
     List<RegionResource> toResourceList(List<Region> region);

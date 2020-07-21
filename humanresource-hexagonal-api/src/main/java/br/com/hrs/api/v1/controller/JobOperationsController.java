@@ -1,16 +1,17 @@
 package br.com.hrs.api.v1.controller;
 
+
 import br.com.hrs.api.support.AssertionSupport;
-import br.com.hrs.api.support.MensagemRetornoResponseEntitySupport;
 import br.com.hrs.api.support.PatchSupport;
+import br.com.hrs.api.support.message.MensagemRetorno;
+import br.com.hrs.api.support.message.MensagemRetornoCategoria;
+import br.com.hrs.api.support.message.MensagemRetornoResponseEntitySupport;
 import br.com.hrs.api.v1.docs.JobOperationsDocumentable;
 import br.com.hrs.api.v1.mapper.JobMapper;
 import br.com.hrs.api.v1.resource.JobResource;
 import br.com.hrs.api.validation.FieldValidationStrategy;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.usecase.job.JobUseCase;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoCategoria;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

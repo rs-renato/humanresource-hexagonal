@@ -3,6 +3,7 @@ package br.com.hrs.core.validator.department;
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
+import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.validator.SaveValidator;
 import br.com.hrs.core.validator.UpdateValidator;
 import br.com.hrs.core.validator.employee.ExistentManagerEmployeeValidator;
@@ -34,6 +35,6 @@ public class ExistentManagerDepartmentValidator implements SaveValidator<Departm
 			Error.of("Department").when(FIELD.MANDATORY).trows();
 		}
 
-		this.existentManagerValidator.validate(department.getManager());
+		this.existentManagerValidator.validate(new Employee.Builder().manager(department.getManager()).build());
 	}
 }

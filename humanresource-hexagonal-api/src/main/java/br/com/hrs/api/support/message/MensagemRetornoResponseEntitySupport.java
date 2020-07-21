@@ -1,8 +1,5 @@
-package br.com.hrs.api.support;
+package br.com.hrs.api.support.message;
 
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoBuilder;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoCategoria;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;

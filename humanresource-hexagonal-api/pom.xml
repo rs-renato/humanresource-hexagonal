@@ -45,13 +45,6 @@
 
     <dependencies>
 
-        <!-- SEFAZ-GO JavaEE Commons -->
-        <dependency>
-            <groupId>br.gov.go.sefaz</groupId>
-            <artifactId>sefazgo-javaee-commons-resource</artifactId>
-            <version>${br.gov.go.sefaz.javaee.version}</version>
-        </dependency>
-
         <!-- Core -->
         <dependency>
             <groupId>br.com.hrs</groupId>

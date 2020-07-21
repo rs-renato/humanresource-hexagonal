@@ -1,4 +1,4 @@
-package br.com.hrs.api.support;
+package br.com.hrs.api.support.message;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -15,27 +15,30 @@ import javax.inject.Named;
 import java.util.Objects;
 
 @Named
-public class ExistentManagerEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
+public class UniqueEmailEmployeeValidator implements SaveValidator<Employee>, UpdateValidator<Employee> {
 
-	private static final Logger logger = LogManager.getLogger(ExistentManagerEmployeeValidator.class);
+	private static final Logger logger = LogManager.getLogger(UniqueEmailEmployeeValidator.class);
 
 	private EmployeeRepository employeeRepository;
 
 	@Inject
-	public ExistentManagerEmployeeValidator(EmployeeRepository employeeRepository) {
+	public UniqueEmailEmployeeValidator(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;
 	}
 
 	@Override
 	public void validate(Employee employee) {
-		logger.debug("Validating if employee's manager is existent");
+		logger.debug("Validating if employee's email is unique");
 
 		if (Objects.isNull(employee)) {
 			Error.of("Employee").when(FIELD.MANDATORY).trows();
 		}
 
-		if(!this.employeeRepository.existsById(employee.getManager().getId())){
-			throw new HrsNotFoundException("Manager does not exist");
+		boolean exists = this.employeeRepository.existsByEmail(employee.getEmail());
+
+		if(employee.getId() == null && exists
+			|| (exists && !this.employeeRepository.findById(employee.getId()).get().getEmail().equals(employee.getEmail()))){
+			throw new HrsNotFoundException("Email should be unique");
 		}
 	}
 }

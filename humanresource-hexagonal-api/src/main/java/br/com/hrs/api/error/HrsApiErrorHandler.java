@@ -1,10 +1,10 @@
 package br.com.hrs.api.error;
 
 import br.com.hrs.api.exception.ResourceNotFoundException;
-import br.com.hrs.api.support.MensagemRetornoResponseEntitySupport;
+import br.com.hrs.api.support.message.MensagemRetorno;
+import br.com.hrs.api.support.message.MensagemRetornoCategoria;
+import br.com.hrs.api.support.message.MensagemRetornoResponseEntitySupport;
 import br.com.hrs.core.exception.HrsBusinessException;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetornoCategoria;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.MessageSource;
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.json.JsonException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.sql.SQLSyntaxErrorException;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Set;
@@ -78,6 +79,12 @@ public class HrsApiErrorHandler{
 				.map(violation -> MessageFormat.format(violation.getMessage(), violation.getPropertyPath()))
 				.collect(Collectors.toList());
 		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ALERTA, HttpStatus.BAD_REQUEST, errorMessages);
+	}
+
+	@ExceptionHandler(SQLSyntaxErrorException.class)
+	public ResponseEntity<MensagemRetorno> handleInternalServerError(SQLSyntaxErrorException ex){
+		logger.error("An internal error has occurred to query some data", ex);
+		return MensagemRetornoResponseEntitySupport.createResponseEntity(MensagemRetornoCategoria.ERRO, HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
 	}
 	
 	@ExceptionHandler(Throwable.class)

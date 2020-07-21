@@ -116,6 +116,16 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
     }
 
     @Override
+    public boolean existsByEmail(String email) {
+        logger.debug("existsByEmail({}})", email);
+
+        if (Objects.isNull(email)) {
+            Error.of("Employee Email").when(FIELD.MANDATORY).trows();
+        }
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM EMPLOYEES WHERE EMAIL = ?", new Object[]{email}, Integer.class) > 0;
+    }
+
+    @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteById(Integer id) {
         logger.debug("delete({}})", id);

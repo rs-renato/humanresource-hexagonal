@@ -34,7 +34,7 @@ public class EmployeeCrudUseCaseTest {
                 .id(100)
                 .firstName("Steven")
                 .lastName("King")
-                .email("SKING")
+                .email("email@email.com")
                 .phone("515.123.4567")
                 .hireDate(new SimpleDateFormat("dd.MM.yyyy").parse("17.06.2003"))
                 .job(new Job.Builder().id("AD_VP").build())
@@ -82,6 +82,8 @@ public class EmployeeCrudUseCaseTest {
 
         employee.setLastName(employee.getLastName() + "updated");
         employee.setFirstName(employee.getFirstName() + " updated");
+
+        employeeCrudUseCase.update(employee);
 
         Optional<Employee> employeeOpt = employeeCrudUseCase.findById(employee.getId());
 

@@ -55,4 +55,10 @@ public class EmployeeMockRepository extends MockRepository<Employee, Integer> im
 
         return null;
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return findAll().stream()
+                .anyMatch(employee -> employee.getEmail().equals(email));
+    }
 }

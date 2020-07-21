@@ -1,7 +1,7 @@
 package br.com.hrs.api.v1.docs;
 
+import br.com.hrs.api.support.message.MensagemRetorno;
 import br.com.hrs.api.v1.resource.LocationResource;
-import br.gov.go.sefaz.javaee.commons.resource.v1.MensagemRetorno;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 

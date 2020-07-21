@@ -19,4 +19,9 @@ public class EmployeeJpaRepository extends JpaRepositoryAbstractImpl<Employee, I
 		super(jpaRepository);
 		this.jpaRepository = jpaRepository;
 	}
+
+	@Override
+	public boolean existsByEmail(String email) {
+		return this.jpaRepository.existsByEmail(email);
+	}
 }
