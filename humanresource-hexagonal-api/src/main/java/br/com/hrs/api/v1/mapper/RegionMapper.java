@@ -2,7 +2,7 @@ package br.com.hrs.api.v1.mapper;
 
 import br.com.hrs.api.v1.resource.RegionResource;
 import br.com.hrs.core.model.Region;
-import org.mapstruct.Mapper;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -13,6 +13,9 @@ public interface RegionMapper {
 
     RegionMapper INSTANCE = Mappers.getMapper( RegionMapper.class );
 
+    @Mappings({
+            @Mapping(expression = "java(new ArrayList<>())", target="countries"),
+    })
     Region toModel(RegionResource regionResource);
 
     List<Region> toModelList(List<RegionResource> regionResource);
