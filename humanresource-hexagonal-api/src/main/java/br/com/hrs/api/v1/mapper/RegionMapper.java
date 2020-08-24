@@ -2,7 +2,9 @@ package br.com.hrs.api.v1.mapper;
 
 import br.com.hrs.api.v1.resource.RegionResource;
 import br.com.hrs.core.model.Region;
-import org.mapstruct.*;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;

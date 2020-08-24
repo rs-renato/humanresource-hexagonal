@@ -77,6 +77,10 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 		return new MappingJackson2XmlHttpMessageConverter(builder.build());
 	}
 
+	@Bean
+	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
+		return new MappingJackson2HttpMessageConverter(objectMapper());
+	}
 
 	@Bean
 	public ObjectMapper objectMapper() {
@@ -104,7 +108,7 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		converters.add(new JsonMergePatchHttpMessagemConverter());
 		converters.add(new JsonPatchHttpMessagemConverter());
-		converters.add(new MappingJackson2HttpMessageConverter(objectMapper()));
+		converters.add(mappingJackson2HttpMessageConverter());
 		converters.add(mappingJackson2XmlHttpMessageConverter());
 	}
 

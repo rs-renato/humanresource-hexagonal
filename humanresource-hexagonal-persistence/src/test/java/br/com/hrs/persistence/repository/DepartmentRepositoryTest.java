@@ -5,11 +5,13 @@ import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 public abstract class DepartmentRepositoryTest {
@@ -96,5 +98,29 @@ public abstract class DepartmentRepositoryTest {
         getDepartmentRepository().deleteById(DEPARTMENT_ID);
         Optional<Department> departmentOpt = getDepartmentRepository().findById(DEPARTMENT_ID);
         Assertions.assertFalse(departmentOpt.isPresent(), "Department still existing");
+    }
+
+    @Test
+    @DisplayName("Finds all Departments Paginated")
+    public void test10() {
+
+        long count = getDepartmentRepository().count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Department> departments = getDepartmentRepository().findAll(pagination);
+            Assertions.assertNotNull(departments, "Departments should be listed");
+            Assertions.assertTrue(departments.size() <= pageSize, "Departments should be listed at all");
+
+            new LinkedList<Department>(getDepartmentRepository().findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(departments.iterator().next()));
+        }
     }
 }

@@ -3,6 +3,7 @@ package br.com.hrs.persistence.repository;
 import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.RegionRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 public abstract class RegionRepositoryTest {
@@ -103,5 +105,29 @@ public abstract class RegionRepositoryTest {
     public void test09() {
         boolean exists = getRegionRepository().existsById(-1);
         Assertions.assertFalse(exists, "Region should not be existent");
+    }
+
+    @Test
+    @DisplayName("Finds all Regions Paginated")
+    public void test10() {
+
+        long count = getRegionRepository().count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Region> regions = getRegionRepository().findAll(pagination);
+            Assertions.assertNotNull(regions, "Regions should be listed");
+            Assertions.assertTrue(regions.size() <= pageSize, "Regions should be listed at all");
+
+            new LinkedList<Region>(getRegionRepository().findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(regions.iterator().next()));
+        }
     }
 }

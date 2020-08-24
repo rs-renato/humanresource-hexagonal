@@ -4,6 +4,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.LocationRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.LocationRowMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,12 @@ public class LocationJdbcRepository implements LocationRepository {
 
     public LocationJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public long count() {
+        String sql = "SELECT COUNT(*) FROM LOCATIONS";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     @Override
@@ -107,6 +114,15 @@ public class LocationJdbcRepository implements LocationRepository {
 
         String sql = "SELECT * FROM LOCATIONS";
         return jdbcTemplate.query(sql, new LocationRowMapper());
+    }
+
+    @Override
+    public List<Location> findAll(Pagination pagination) {
+        logger.debug("paginated findAll()");
+
+        String sql = "SELECT * FROM LOCATIONS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
+
+        return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new LocationRowMapper());
     }
 
     @Override

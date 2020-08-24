@@ -4,6 +4,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.DepartmentRowMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +29,12 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
 
     public DepartmentJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public long count() {
+        String sql = "SELECT COUNT(*) FROM DEPARTMENTS";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     @Override
@@ -104,6 +111,15 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
         logger.debug("findAll()");
         String sql = "SELECT * FROM DEPARTMENTS";
         return jdbcTemplate.query(sql, new DepartmentRowMapper());
+    }
+
+    @Override
+    public List<Department> findAll(Pagination pagination) {
+        logger.debug("paginated findAll()");
+
+        String sql = "SELECT * FROM DEPARTMENTS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
+
+        return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new DepartmentRowMapper());
     }
 
     @Override

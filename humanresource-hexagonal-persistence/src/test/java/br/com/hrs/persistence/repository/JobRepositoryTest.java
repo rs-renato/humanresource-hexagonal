@@ -3,11 +3,13 @@ package br.com.hrs.persistence.repository;
 import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 public abstract class JobRepositoryTest {
@@ -101,5 +103,29 @@ public abstract class JobRepositoryTest {
     public void test09() {
         boolean exists = getJobRepository().existsById("NO_EXISTENT_JOB");
         Assertions.assertFalse(exists, "Job should not be existent");
+    }
+
+    @Test
+    @DisplayName("Finds all Jobs Paginated")
+    public void test10() {
+
+        long count = getJobRepository().count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Job> jobs = getJobRepository().findAll(pagination);
+            Assertions.assertNotNull(jobs, "Jobs should be listed");
+            Assertions.assertTrue(jobs.size() <= pageSize, "Jobs should be listed at all");
+
+            new LinkedList<Job>(getJobRepository().findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(jobs.iterator().next()));
+        }
     }
 }

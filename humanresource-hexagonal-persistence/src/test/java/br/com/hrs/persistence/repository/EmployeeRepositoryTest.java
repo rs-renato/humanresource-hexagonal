@@ -5,6 +5,7 @@ import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.EmployeeRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Optional;
 
 public abstract class EmployeeRepositoryTest {
@@ -122,5 +124,29 @@ public abstract class EmployeeRepositoryTest {
     public void test09() {
         boolean exists = getEmployeeRepository().existsById(-1);
         Assertions.assertFalse(exists, "Employee should not be existent");
+    }
+
+    @Test
+    @DisplayName("Finds all Employees Paginated")
+    public void test10() {
+
+        long count = getEmployeeRepository().count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Employee> employees = getEmployeeRepository().findAll(pagination);
+            Assertions.assertNotNull(employees, "Employees should be listed");
+            Assertions.assertTrue(employees.size() <= pageSize, "Employees should be listed at all");
+
+            new LinkedList<Employee>(getEmployeeRepository().findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(employees.iterator().next()));
+        }
     }
 }

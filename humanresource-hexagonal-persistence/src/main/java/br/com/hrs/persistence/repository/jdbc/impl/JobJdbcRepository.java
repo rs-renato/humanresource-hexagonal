@@ -4,6 +4,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.JobRowMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,6 +25,12 @@ public class JobJdbcRepository implements JobRepository {
 
     public JobJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public long count() {
+        String sql = "SELECT COUNT(*) FROM JOBS";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     @Override
@@ -86,6 +93,15 @@ public class JobJdbcRepository implements JobRepository {
 
         String sql = "SELECT * FROM JOBS";
         return jdbcTemplate.query(sql, new JobRowMapper());
+    }
+
+    @Override
+    public List<Job> findAll(Pagination pagination) {
+        logger.debug("paginated findAll()");
+
+        String sql = "SELECT * FROM JOBS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
+
+        return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new JobRowMapper());
     }
 
     @Override

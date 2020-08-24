@@ -4,6 +4,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,6 +28,12 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
 
     private void loadMockDatabase(Collection<E> collection){
         collection.forEach(entity -> database.put(entity.getId(), entity));
+    }
+
+    @Override
+    public long count() {
+        logger.debug("{} -> count()", REPOSITORY_NAME);
+        return this.database.size();
     }
 
     public Optional<E> findById(ID id) {
@@ -64,6 +71,11 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
     public List<E> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
         return new ArrayList(this.database.values());
+    }
+
+    public List<E> findAll(Pagination pagination) {
+        logger.debug("{} -> findAll()", REPOSITORY_NAME);
+        return new PageableArrayList<E>(findAll(), pagination.getPage(), pagination.getSize()).getListForPage();
     }
 
     public void deleteById(ID id) {

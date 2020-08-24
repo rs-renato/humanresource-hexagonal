@@ -4,8 +4,11 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,12 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
 
     protected JpaRepositoryAbstractImpl(JpaRepository<E, ID> jpaRepository) {
         this.jpaRepository = jpaRepository;
+    }
+
+    @Override
+    public long count() {
+        logger.debug("count(})");
+        return this.jpaRepository.count();
     }
 
     @Override
@@ -71,6 +80,14 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
         List<E> entities = this.jpaRepository.findAll();
         logger.debug("Finding all entities. Found: {}", entities != null ? entities.size() : 0);
         return entities;
+    }
+
+    @Override
+    public List<E> findAll(Pagination pagination) {
+        logger.debug("paginated findAll()");
+        Page<E> page = this.jpaRepository.findAll(PageRequest.of(pagination.getPage(), pagination.getSize()));
+        logger.debug("Finding all entities. Found: {}", page != null ? page.getNumberOfElements() : 0);
+        return page.getContent();
     }
 
     @Override

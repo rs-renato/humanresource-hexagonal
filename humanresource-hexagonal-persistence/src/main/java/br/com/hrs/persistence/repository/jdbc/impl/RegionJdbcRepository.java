@@ -4,6 +4,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.RegionRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.RegionRowMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,6 +28,12 @@ public class RegionJdbcRepository implements RegionRepository {
 
     public RegionJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public long count() {
+        String sql = "SELECT COUNT(*) FROM REGIONS";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     @Override
@@ -99,6 +106,15 @@ public class RegionJdbcRepository implements RegionRepository {
 
         String sql = "SELECT * FROM REGIONS";
         return jdbcTemplate.query(sql, new RegionRowMapper());
+    }
+
+    @Override
+    public List<Region> findAll(Pagination pagination) {
+        logger.debug("paginated findAll()");
+
+        String sql = "SELECT * FROM REGIONS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
+
+        return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new RegionRowMapper());
     }
 
     @Override

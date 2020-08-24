@@ -4,6 +4,7 @@ import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.LocationRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Assertions;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 public abstract class LocationRepositoryTest {
@@ -115,5 +117,29 @@ public abstract class LocationRepositoryTest {
     public void test09() {
         boolean exists = getLocationRepository().existsById(-1);
         Assertions.assertFalse(exists, "Location should not be existent");
+    }
+
+    @Test
+    @DisplayName("Finds all Locations Paginated")
+    public void test10() {
+
+        long count = getLocationRepository().count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Location> locations = getLocationRepository().findAll(pagination);
+            Assertions.assertNotNull(locations, "Locations should be listed");
+            Assertions.assertTrue(locations.size() <= pageSize, "Locations should be listed at all");
+
+            new LinkedList<Location>(getLocationRepository().findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(locations.iterator().next()));
+        }
     }
 }

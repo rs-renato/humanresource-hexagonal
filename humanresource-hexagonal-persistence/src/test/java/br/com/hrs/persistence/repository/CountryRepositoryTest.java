@@ -4,11 +4,13 @@ import br.com.hrs.core.exception.HrsMandatoryException;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.CountryRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -111,5 +113,29 @@ public abstract class CountryRepositoryTest {
         Optional<List<Country>> countriesOpt = getCountryRepository().findByRegionId(REGION_ID);
         Assertions.assertTrue(countriesOpt.isPresent(), "Countries should be listed");
         Assertions.assertTrue(countriesOpt.get().size() == 7, "Countries should be listed at all");
+    }
+
+    @Test
+    @DisplayName("Finds all Countries Paginated")
+    public void test11() {
+
+        long count = getCountryRepository().count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Country> countries = getCountryRepository().findAll(pagination);
+            Assertions.assertNotNull(countries, "Countries should be listed");
+            Assertions.assertTrue(countries.size() <= pageSize, "Countries should be listed at all");
+
+            new LinkedList<Country>(getCountryRepository().findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(countries.iterator().next()));
+        }
     }
 }

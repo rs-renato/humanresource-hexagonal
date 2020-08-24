@@ -3,6 +3,7 @@ package br.com.hrs.core.usecase.country;
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
@@ -35,7 +38,7 @@ public class CountryCrudUseCaseTest {
     }
 
     @Test
-    @DisplayName("Exists an Countrys")
+    @DisplayName("Exists an Countries")
     public void test01() {
         boolean exists = countryCrudUseCase.existsById(country.getId());
         Assertions.assertTrue(exists, String.format("Country should exist"));
@@ -58,11 +61,11 @@ public class CountryCrudUseCaseTest {
     }
 
     @Test
-    @DisplayName("Finds all Countrys")
+    @DisplayName("Finds all Countries")
     public void test04() {
         Collection<Country> countries = countryCrudUseCase.findAll();
-        Assertions.assertNotNull(countries, String.format("Countrys should not be null"));
-        Assertions.assertEquals(4, countries.size(), String.format("Countrys size doesn't match"));
+        Assertions.assertNotNull(countries, String.format("Countries should not be null"));
+        Assertions.assertEquals(4, countries.size(), String.format("Countries size doesn't match"));
     }
 
     @Test
@@ -88,5 +91,23 @@ public class CountryCrudUseCaseTest {
         Optional<Country> countryOpt = countryCrudUseCase.findById(country.getId());
 
         Assertions.assertFalse(countryOpt.isPresent(), String.format("Country should be null"));
+    }
+
+    @Test
+    @DisplayName("Finds all Countries Paginated")
+    public void test07() {
+
+        int page = 1;
+        int pageSize = 3;
+        Pagination pagination = new  Pagination(page, pageSize);
+
+        Collection<Country> countries = countryCrudUseCase.findAll(pagination);
+        Assertions.assertNotNull(countries, String.format("Countries should not be null"));
+        Assertions.assertEquals(pageSize, countries.size(), String.format("Countries size doesn't match"));
+
+        List<Country> orderedCountry = new LinkedList<>(countryCrudUseCase.findAll());
+
+        orderedCountry.forEach(c -> c.equals(countries.iterator().next()));
+
     }
 }

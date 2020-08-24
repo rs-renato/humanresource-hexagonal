@@ -4,6 +4,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.CountryRepository;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.CountryRowMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,6 +26,12 @@ public class ContryJdbcRepository implements CountryRepository {
 
     public ContryJdbcRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public long count() {
+        String sql = "SELECT COUNT(*) FROM COUNTRIES";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
     }
 
     @Override
@@ -92,6 +99,15 @@ public class ContryJdbcRepository implements CountryRepository {
 
         String sql = "SELECT * FROM COUNTRIES";
         return jdbcTemplate.query(sql, new CountryRowMapper());
+    }
+
+    @Override
+    public List<Country> findAll(Pagination pagination) {
+        logger.debug("paginated findAll()");
+
+        String sql = "SELECT * FROM COUNTRIES OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
+
+        return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new CountryRowMapper());
     }
 
     @Override
