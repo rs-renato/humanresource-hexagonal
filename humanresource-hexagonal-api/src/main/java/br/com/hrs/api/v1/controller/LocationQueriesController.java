@@ -5,10 +5,12 @@ import br.com.hrs.api.v1.docs.LocationQueriesDocumentable;
 import br.com.hrs.api.v1.mapper.LocationMapper;
 import br.com.hrs.api.v1.resource.LocationResource;
 import br.com.hrs.core.model.Location;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.core.usecase.location.LocationUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +37,9 @@ public class LocationQueriesController implements LocationQueriesDocumentable{
 	}
 
 	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<LocationResource>> listAll() {
+	public ResponseEntity<List<LocationResource>> listAll(Pageable pageable) {
 		logger.info("Performing 'List All Locations'..");
-		List<Location> locations = this.locationUseCase.findAll();
+		List<Location> locations = this.locationUseCase.findAll(new Pagination(pageable.getPageNumber(), pageable.getPageSize()));
 		AssertionSupport.assertResourceFound(locations, "Locations not found!");
 		List<LocationResource> locationResources = locationMapper.toResourceList(locations);
 		logger.info("Found {} locations on 'List All Locations'..", locationResources.size());

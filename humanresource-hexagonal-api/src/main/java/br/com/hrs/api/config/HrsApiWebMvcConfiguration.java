@@ -18,6 +18,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -47,6 +48,13 @@ import java.util.TimeZone;
 		HrsApiConfigurationParameters.PACKAGE_MAPPER,
 		HrsApiConfigurationParameters.PACKAGE_ERROR_HANDLER})
 public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
+
+//	@Override
+//	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+//		PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+//		resolver.setOneIndexedParameters(true);
+//		resolvers.add(resolver);
+//	}
 
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
@@ -80,6 +88,11 @@ public class HrsApiWebMvcConfiguration implements WebMvcConfigurer {
 	@Bean
 	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
 		return new MappingJackson2HttpMessageConverter(objectMapper());
+	}
+
+	@Bean
+	public PageableHandlerMethodArgumentResolverCustomizer customize() {
+		return p -> p.setOneIndexedParameters(true);
 	}
 
 	@Bean

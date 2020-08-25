@@ -3,6 +3,7 @@ package br.com.hrs.api.v1.docs;
 import br.com.hrs.api.support.message.MensagemRetorno;
 import br.com.hrs.api.v1.resource.JobResource;
 import io.swagger.annotations.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,7 +22,7 @@ public interface JobQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Jobs found.", response = JobResource[].class),
 			@ApiResponse(code = 404, message = "Jobs not found.", response = MensagemRetorno.class)})
-	ResponseEntity<List<JobResource>> listAll();
+	ResponseEntity<List<JobResource>> listAll(Pageable pageable);
 	
 	/**
 	 * Find an Job by Id

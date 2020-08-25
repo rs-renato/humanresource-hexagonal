@@ -3,6 +3,7 @@ package br.com.hrs.api.v1.docs;
 import br.com.hrs.api.support.message.MensagemRetorno;
 import br.com.hrs.api.v1.resource.RegionResource;
 import io.swagger.annotations.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,7 +22,7 @@ public interface RegionQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Regions found.", response = RegionResource[].class),
 			@ApiResponse(code = 404, message = "Regions not found.", response = MensagemRetorno.class)})
-	ResponseEntity<List<RegionResource>> listAll();
+	ResponseEntity<List<RegionResource>> listAll(Pageable pageable);
 	
 	/**
 	 * Find an Region by Id

@@ -6,10 +6,12 @@ import br.com.hrs.api.v1.docs.DepartmentQueriesDocumentable;
 import br.com.hrs.api.v1.mapper.DepartmentMapper;
 import br.com.hrs.api.v1.resource.DepartmentResource;
 import br.com.hrs.core.model.Department;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.core.usecase.department.DepartmentUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,9 +38,9 @@ public class DepartmentQueriesController implements DepartmentQueriesDocumentabl
 	}
 
 	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<DepartmentResource>> listAll() {
+	public ResponseEntity<List<DepartmentResource>> listAll(Pageable pageable) {
 		logger.info("Performing 'List All departments'..");
-		List<Department> departments = this.departmentUseCase.findAll();
+		List<Department> departments = this.departmentUseCase.findAll(new Pagination(pageable.getPageNumber(), pageable.getPageSize()));
 		AssertionSupport.assertResourceFound(departments, "departments not found!");
 		List<DepartmentResource> departmentResources = departmentMapper.toResourceList(departments);
 		logger.info("Found {} departments on 'List All departments'..", departmentResources.size());

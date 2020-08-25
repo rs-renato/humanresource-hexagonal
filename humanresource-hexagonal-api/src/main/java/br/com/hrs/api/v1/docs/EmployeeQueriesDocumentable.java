@@ -3,6 +3,7 @@ package br.com.hrs.api.v1.docs;
 import br.com.hrs.api.support.message.MensagemRetorno;
 import br.com.hrs.api.v1.resource.EmployeeResource;
 import io.swagger.annotations.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,7 +22,7 @@ public interface EmployeeQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Employees found.", response = EmployeeResource[].class),
 			@ApiResponse(code = 404, message = "Employees not found.", response = MensagemRetorno.class)})
-	ResponseEntity<List<EmployeeResource>> listAll();
+	ResponseEntity<List<EmployeeResource>> listAll(Pageable pageable);
 	
 	/**
 	 * Find an Employee by Id

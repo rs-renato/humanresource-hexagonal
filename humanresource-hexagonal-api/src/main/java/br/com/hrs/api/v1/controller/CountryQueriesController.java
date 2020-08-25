@@ -5,10 +5,12 @@ import br.com.hrs.api.v1.docs.CountryQueriesDocumentable;
 import br.com.hrs.api.v1.mapper.CountryMapper;
 import br.com.hrs.api.v1.resource.CountryResource;
 import br.com.hrs.core.model.Country;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.core.usecase.country.CountryUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +37,9 @@ public class CountryQueriesController implements CountryQueriesDocumentable{
 	}
 
 	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<CountryResource>> listAll() {
+	public ResponseEntity<List<CountryResource>> listAll(Pageable pageable) {
 		logger.info("Performing 'List All Countries'..");
-		List<Country> countries = this.countryUseCase.findAll();
+		List<Country> countries = this.countryUseCase.findAll(new Pagination(pageable.getPageNumber(), pageable.getPageSize()));
 		AssertionSupport.assertResourceFound(countries, "Countries not found!");
 		List<CountryResource> countryResources = countryMapper.toResourceList(countries);
 		logger.info("Found {} countries on 'List All Countries'..", countryResources.size());

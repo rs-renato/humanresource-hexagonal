@@ -5,10 +5,12 @@ import br.com.hrs.api.v1.docs.RegionQueriesDocumentable;
 import br.com.hrs.api.v1.mapper.RegionMapper;
 import br.com.hrs.api.v1.resource.RegionResource;
 import br.com.hrs.core.model.Region;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.core.usecase.region.RegionUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +37,9 @@ public class RegionQueriesController implements RegionQueriesDocumentable{
 	}
 
 	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<RegionResource>> listAll() {
+	public ResponseEntity<List<RegionResource>> listAll(Pageable pageable) {
 		logger.info("Performing 'List All Region'..");
-		List<Region> region = this.regionUseCase.findAll();
+		List<Region> region = this.regionUseCase.findAll(new Pagination(pageable.getPageNumber(), pageable.getPageSize()));
 		AssertionSupport.assertResourceFound(region, "Region not found!");
 		List<RegionResource> regionResources = regionMapper.toResourceList(region);
 		logger.info("Found {} region on 'List All Region'..", regionResources.size());

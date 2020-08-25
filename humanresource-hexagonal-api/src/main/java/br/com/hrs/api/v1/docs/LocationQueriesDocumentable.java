@@ -3,6 +3,7 @@ package br.com.hrs.api.v1.docs;
 import br.com.hrs.api.support.message.MensagemRetorno;
 import br.com.hrs.api.v1.resource.LocationResource;
 import io.swagger.annotations.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,7 +22,7 @@ public interface LocationQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Locations found.", response = LocationResource[].class),
 			@ApiResponse(code = 404, message = "Locations not found.", response = MensagemRetorno.class)})
-	ResponseEntity<List<LocationResource>> listAll();
+	ResponseEntity<List<LocationResource>> listAll(Pageable pageable);
 	
 	/**
 	 * Find an Location by Id

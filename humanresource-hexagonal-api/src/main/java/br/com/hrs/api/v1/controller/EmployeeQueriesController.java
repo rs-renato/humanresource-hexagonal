@@ -5,10 +5,12 @@ import br.com.hrs.api.v1.docs.EmployeeQueriesDocumentable;
 import br.com.hrs.api.v1.mapper.EmployeeMapper;
 import br.com.hrs.api.v1.resource.EmployeeResource;
 import br.com.hrs.core.model.Employee;
+import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.core.usecase.employee.EmployeeUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,9 +37,9 @@ public class EmployeeQueriesController implements EmployeeQueriesDocumentable{
 	}
 
 	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-	public ResponseEntity<List<EmployeeResource>> listAll() {
+	public ResponseEntity<List<EmployeeResource>> listAll(Pageable pageable) {
 		logger.info("Performing 'List All Employees'..");
-		List<Employee> employees = this.employeeUseCase.findAll();
+		List<Employee> employees = this.employeeUseCase.findAll(new Pagination(pageable.getPageNumber(), pageable.getPageSize()));
 		AssertionSupport.assertResourceFound(employees, "Employees not found!");
 		List<EmployeeResource> employeeResources = employeeMapper.toResourceList(employees);
 		logger.info("Found {} employees on 'List All Employees'..", employeeResources.size());

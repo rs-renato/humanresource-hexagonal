@@ -3,6 +3,7 @@ package br.com.hrs.api.v1.docs;
 import br.com.hrs.api.support.message.MensagemRetorno;
 import br.com.hrs.api.v1.resource.CountryResource;
 import io.swagger.annotations.*;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -21,7 +22,7 @@ public interface CountryQueriesDocumentable {
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Countries found.", response = CountryResource[].class),
 			@ApiResponse(code = 404, message = "Countries not found.", response = MensagemRetorno.class)})
-	ResponseEntity<List<CountryResource>> listAll();
+	ResponseEntity<List<CountryResource>> listAll(Pageable pageable);
 	
 	/**
 	 * Find an Country by Id
