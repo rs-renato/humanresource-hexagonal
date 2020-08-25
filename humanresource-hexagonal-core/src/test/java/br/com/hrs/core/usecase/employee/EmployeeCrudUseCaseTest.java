@@ -4,6 +4,7 @@ import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.model.Job;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
@@ -101,5 +103,29 @@ public class EmployeeCrudUseCaseTest {
         Optional<Employee> employeeOpt = employeeCrudUseCase.findById(employee.getId());
 
         Assertions.assertFalse(employeeOpt.isPresent(), String.format("Employee should be null"));
+    }
+
+    @Test
+    @DisplayName("Finds all Employees Paginated")
+    public void test07() {
+
+        long count = employeeCrudUseCase.count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Employee> employees = employeeCrudUseCase.findAll(pagination);
+            Assertions.assertNotNull(employees, "Employees should be listed");
+            Assertions.assertTrue(employees.size() <= pageSize, "Employees should be listed at all");
+
+            new LinkedList<Employee>(employeeCrudUseCase.findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(employees.iterator().next()));
+        }
     }
 }

@@ -3,6 +3,7 @@ package br.com.hrs.core.usecase.location;
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Location;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -14,6 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.text.ParseException;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
@@ -92,5 +94,29 @@ public class LocationCrudUseCaseTest {
         Optional<Location> locationOpt = locationCrudUseCase.findById(location.getId());
 
         Assertions.assertFalse(locationOpt.isPresent(), String.format("Location should be null"));
+    }
+
+    @Test
+    @DisplayName("Finds all Locations Paginated")
+    public void test07() {
+
+        long count = locationCrudUseCase.count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Location> locations = locationCrudUseCase.findAll(pagination);
+            Assertions.assertNotNull(locations, "Locations should be listed");
+            Assertions.assertTrue(locations.size() <= pageSize, "Locations should be listed at all");
+
+            new LinkedList<Location>(locationCrudUseCase.findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(locations.iterator().next()));
+        }
     }
 }

@@ -2,6 +2,7 @@ package br.com.hrs.core.usecase.job;
 
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Job;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
@@ -96,5 +98,29 @@ public class JobCrudUseCaseTest {
         Optional<Job> jobOpt = jobCrudUseCase.findById(job.getId());
 
         Assertions.assertFalse(jobOpt.isPresent(), String.format("Job should be null"));
+    }
+
+    @Test
+    @DisplayName("Finds all Jobs Paginated")
+    public void test07() {
+
+        long count = jobCrudUseCase.count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Job> jobs = jobCrudUseCase.findAll(pagination);
+            Assertions.assertNotNull(jobs, "Jobs should be listed");
+            Assertions.assertTrue(jobs.size() <= pageSize, "Jobs should be listed at all");
+
+            new LinkedList<Job>(jobCrudUseCase.findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(jobs.iterator().next()));
+        }
     }
 }

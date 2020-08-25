@@ -15,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
@@ -97,17 +96,23 @@ public class CountryCrudUseCaseTest {
     @DisplayName("Finds all Countries Paginated")
     public void test07() {
 
-        int page = 1;
-        int pageSize = 3;
-        Pagination pagination = new  Pagination(page, pageSize);
+        long count = countryCrudUseCase.count();
 
-        Collection<Country> countries = countryCrudUseCase.findAll(pagination);
-        Assertions.assertNotNull(countries, String.format("Countries should not be null"));
-        Assertions.assertEquals(pageSize, countries.size(), String.format("Countries size doesn't match"));
+        int pageSize = 1;
 
-        List<Country> orderedCountry = new LinkedList<>(countryCrudUseCase.findAll());
+        for (int i = 1; i < count; i++) {
 
-        orderedCountry.forEach(c -> c.equals(countries.iterator().next()));
+            int page = i * pageSize;
 
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Country> countries = countryCrudUseCase.findAll(pagination);
+            Assertions.assertNotNull(countries, "Countries should be listed");
+            Assertions.assertTrue(countries.size() <= pageSize, "Countries should be listed at all");
+
+            new LinkedList<Country>(countryCrudUseCase.findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(countries.iterator().next()));
+        }
     }
 }

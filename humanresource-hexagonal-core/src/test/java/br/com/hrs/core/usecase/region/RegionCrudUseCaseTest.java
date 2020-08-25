@@ -2,6 +2,7 @@ package br.com.hrs.core.usecase.region;
 
 import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Region;
+import br.com.hrs.core.repository.pagination.Pagination;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Optional;
 
 @ContextConfiguration(classes = HrsBuildConfiguration.class)
@@ -89,5 +91,29 @@ public class RegionCrudUseCaseTest {
         Optional<Region> regionOpt = regionCrudUseCase.findById(region.getId());
 
         Assertions.assertFalse(regionOpt.isPresent(), String.format("Region should be null"));
+    }
+
+    @Test
+    @DisplayName("Finds all Regions Paginated")
+    public void test07() {
+
+        long count = regionCrudUseCase.count();
+
+        int pageSize = 1;
+
+        for (int i = 1; i < count; i++) {
+
+            int page = i * pageSize;
+
+            Pagination pagination = new  Pagination(page, pageSize);
+
+            Collection<Region> regions = regionCrudUseCase.findAll(pagination);
+            Assertions.assertNotNull(regions, "Regions should be listed");
+            Assertions.assertTrue(regions.size() <= pageSize, "Regions should be listed at all");
+
+            new LinkedList<Region>(regionCrudUseCase.findAll())
+                    .subList(page, page + pageSize)
+                    .forEach(c -> c.equals(regions.iterator().next()));
+        }
     }
 }

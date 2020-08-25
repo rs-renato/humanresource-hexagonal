@@ -20,6 +20,12 @@ public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> imple
     protected abstract List<Validator<E>> getValidators();
     protected abstract Repository<E, ID> getRepository();
 
+    @Override
+    public long count() {
+        logger.debug("Calling count in repository");
+        return getRepository().count();
+    }
+
     public boolean existsById(ID id) {
         logger.debug("Calling exists in repository");
         return getRepository().existsById(id);

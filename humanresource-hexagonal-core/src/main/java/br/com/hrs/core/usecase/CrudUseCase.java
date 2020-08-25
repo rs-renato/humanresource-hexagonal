@@ -21,4 +21,6 @@ public interface CrudUseCase<E extends EntityKey<ID>, ID> {
     void deleteById(ID id);
 
     boolean existsById(ID id);
+
+    long count();
 }
