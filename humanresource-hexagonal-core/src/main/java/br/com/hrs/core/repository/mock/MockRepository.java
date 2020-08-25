@@ -4,12 +4,14 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.filter.Filter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Repository<E, ID>{
 
@@ -76,6 +78,13 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
     public List<E> findAll(Pagination pagination) {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
         return new PageableArrayList<E>(findAll(), pagination.getPage(), pagination.getSize()).getListForPage();
+    }
+
+    @Override
+    public List<E> findAll(Filter<E> filter) {
+        return findAll().stream()
+                .filter(filter.filterToPredicate())
+                .collect(Collectors.toList());
     }
 
     public void deleteById(ID id) {

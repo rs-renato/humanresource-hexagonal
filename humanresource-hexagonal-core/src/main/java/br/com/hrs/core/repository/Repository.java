@@ -1,6 +1,7 @@
 package br.com.hrs.core.repository;
 
 import br.com.hrs.core.model.EntityKey;
+import br.com.hrs.core.repository.filter.Filter;
 import br.com.hrs.core.repository.pagination.Pagination;
 
 import java.util.List;
@@ -17,6 +18,8 @@ public interface Repository<E extends EntityKey<ID>, ID> {
     List<E> findAll();
 
     List<E> findAll(Pagination pagination);
+
+    List<E> findAll(Filter<E> filter);
 
     void deleteById(ID id);
     

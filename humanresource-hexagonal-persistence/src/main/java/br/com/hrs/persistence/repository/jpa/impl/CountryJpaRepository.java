@@ -5,6 +5,7 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.CountryRepository;
+import br.com.hrs.core.repository.filter.Filter;
 import br.com.hrs.persistence.repository.jpa.JpaRepositoryAbstractImpl;
 import br.com.hrs.persistence.repository.jpa.JpaRepositoryContainer;
 
@@ -33,5 +34,12 @@ public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, Str
 		}
 
 		return this.jpaRepository.findByRegionId(regionId);
+	}
+
+	@Override
+	public List<Country> findAll(Filter<Country> filter) {
+
+		//TODO build specifications.
+		return null;
 	}
 }

@@ -2,8 +2,10 @@ package br.com.hrs.persistence.repository.jpa;
 
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
+import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.filter.Filter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

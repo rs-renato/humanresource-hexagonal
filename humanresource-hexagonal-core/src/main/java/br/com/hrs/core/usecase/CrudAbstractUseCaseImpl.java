@@ -2,6 +2,7 @@ package br.com.hrs.core.usecase;
 
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
+import br.com.hrs.core.repository.filter.Filter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.core.validator.DeleteValidator;
 import br.com.hrs.core.validator.SaveValidator;
@@ -45,6 +46,12 @@ public abstract class CrudAbstractUseCaseImpl<E extends EntityKey<ID>, ID> imple
     public List<E> findAll(Pagination pagination) {
         logger.debug("Calling findAll paginated in repository");
         return getRepository().findAll(pagination);
+    }
+
+    @Override
+    public List<E> findAll(Filter<E> filter) {
+        logger.debug("Calling findAll filtered in repository");
+        return getRepository().findAll(filter);
     }
 
     public E save(E entity) {

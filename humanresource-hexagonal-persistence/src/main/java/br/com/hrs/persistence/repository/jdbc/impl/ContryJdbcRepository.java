@@ -4,6 +4,8 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.CountryRepository;
+import br.com.hrs.core.repository.filter.Filter;
+import br.com.hrs.core.repository.filter.QueryFilter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.CountryRowMapper;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
+import javax.management.Query;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -108,6 +111,21 @@ public class ContryJdbcRepository implements CountryRepository {
         String sql = "SELECT * FROM COUNTRIES OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
 
         return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new CountryRowMapper());
+    }
+
+    @Override
+    public List<Country> findAll(Filter<Country> filter) {
+        logger.debug("filtered findAll()");
+
+        String sql = "SELECT * FROM COUNTRIES OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
+
+        QueryFilter<Country> queryFilter = filter.filterToQuery();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM COUNTRIES")
+                .append(" WHERE ")
+                .append(queryFilter.getSql());
+
+        return jdbcTemplate.query(sql, queryFilter.getValues(), new CountryRowMapper());
     }
 
     @Override
