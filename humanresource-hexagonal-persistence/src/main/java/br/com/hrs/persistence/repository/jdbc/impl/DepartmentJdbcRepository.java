@@ -4,6 +4,8 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Department;
 import br.com.hrs.core.repository.DepartmentRepository;
+import br.com.hrs.core.repository.filter.Filter;
+import br.com.hrs.core.repository.filter.QueryFilter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.DepartmentRowMapper;
 import org.apache.logging.log4j.LogManager;
@@ -120,6 +122,19 @@ public class DepartmentJdbcRepository implements DepartmentRepository {
         String sql = "SELECT * FROM DEPARTMENTS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
 
         return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new DepartmentRowMapper());
+    }
+
+    @Override
+    public List<Department> findAll(Filter<Department> filter) {
+        logger.debug("filtered findAll()");
+
+        QueryFilter<Department> queryFilter = filter.filterToQuery();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM DEPARTMENTS")
+                .append(" WHERE ")
+                .append(queryFilter.getSql());
+
+        return jdbcTemplate.query(query.toString(), queryFilter.getValues(), new DepartmentRowMapper());
     }
 
     @Override

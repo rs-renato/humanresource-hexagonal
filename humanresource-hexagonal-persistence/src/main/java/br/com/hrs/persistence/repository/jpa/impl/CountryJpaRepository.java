@@ -5,7 +5,6 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.CountryRepository;
-import br.com.hrs.core.repository.filter.Filter;
 import br.com.hrs.persistence.repository.jpa.JpaRepositoryAbstractImpl;
 import br.com.hrs.persistence.repository.jpa.JpaRepositoryContainer;
 
@@ -14,6 +13,7 @@ import javax.inject.Named;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 @Named
 public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, String> implements CountryRepository {
@@ -26,20 +26,14 @@ public class CountryJpaRepository extends JpaRepositoryAbstractImpl<Country, Str
 		this.jpaRepository = jpaRepository;
 	}
 
-	public Optional<List<Country>> findByRegionId(Integer regionId) {
-		logger.debug("findByRegionId({}})",regionId);
+	@Override
+	public Optional<List<Country>> findAllByRegionIdIn(Set<Integer> regionIds) {
+		logger.debug("findByRegionId({}})",regionIds);
 
-		if (Objects.isNull(regionId)) {
+		if (Objects.isNull(regionIds)) {
 			Error.of("Region ID").when(FIELD.MANDATORY).trows();
 		}
 
-		return this.jpaRepository.findByRegionId(regionId);
-	}
-
-	@Override
-	public List<Country> findAll(Filter<Country> filter) {
-
-		//TODO build specifications.
-		return null;
+		return this.jpaRepository.findAllByRegionIdIn(regionIds);
 	}
 }

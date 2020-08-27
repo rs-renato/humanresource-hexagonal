@@ -4,6 +4,7 @@ import br.com.hrs.core.HrsBuildConfiguration;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.pagination.Pagination;
+import br.com.hrs.core.usecase.filter.CountriesFromAmericaOrEuropeStreamingFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -114,5 +115,14 @@ public class CountryCrudUseCaseTest {
                     .subList(page, page + pageSize)
                     .forEach(c -> c.equals(countries.iterator().next()));
         }
+    }
+
+    @Test
+    @DisplayName("Finds all Countries by Filter")
+    public void test08() {
+
+        Collection<Country> countries =  countryCrudUseCase.findAll(new CountriesFromAmericaOrEuropeStreamingFilter());
+        Assertions.assertNotNull(countries, "Countries should be listed");
+        Assertions.assertEquals(countries.size(),2, "Countries should be listed at all");
     }
 }

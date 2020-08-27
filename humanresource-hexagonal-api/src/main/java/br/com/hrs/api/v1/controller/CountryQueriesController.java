@@ -7,16 +7,14 @@ import br.com.hrs.api.v1.resource.CountryResource;
 import br.com.hrs.core.model.Country;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.core.usecase.country.CountryUseCase;
+import br.com.hrs.persistence.repository.filter.SpecificationFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,5 +52,17 @@ public class CountryQueriesController implements CountryQueriesDocumentable{
 		CountryResource countryResource = countryMapper.toResource(countryMapper.unwrap(country));
 		logger.info("Country {} found on 'Find Country'", countryResource);
 		return ResponseEntity.ok(countryResource);
+	}
+
+	@GetMapping(params = {"search"}, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public  ResponseEntity<List<CountryResource>> search(@RequestParam String search) {
+		logger.info("Performing 'Search Countries'  Search:{}", search);
+
+		List<Country> countries = this.countryUseCase.findAll(new SpecificationFilter(search));
+
+		AssertionSupport.assertResourceFound(countries, "Countries not found!");
+		List<CountryResource> countryResources = countryMapper.toResourceList(countries);
+		logger.info("Found {} countries on 'List All Countries'..", countryResources.size());
+		return ResponseEntity.ok(countryResources);
 	}
 }

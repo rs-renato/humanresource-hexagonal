@@ -32,7 +32,7 @@ class CountryCrudUseCase extends CrudAbstractUseCaseImpl<Country, String> implem
 	}
 
 	@Override
-	public Optional<List<Country>> findByRegionId(Integer regionId){
-		return getRepository().findByRegionId(regionId);
+	public Optional<List<Country>> findAllByRegionIdIn(Set<Integer> regionIds){
+		return getRepository().findAllByRegionIdIn(regionIds);
 	}
 }

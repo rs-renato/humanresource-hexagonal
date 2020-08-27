@@ -4,6 +4,8 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.RegionRepository;
+import br.com.hrs.core.repository.filter.Filter;
+import br.com.hrs.core.repository.filter.QueryFilter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.RegionRowMapper;
 import org.apache.logging.log4j.LogManager;
@@ -115,6 +117,19 @@ public class RegionJdbcRepository implements RegionRepository {
         String sql = "SELECT * FROM REGIONS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
 
         return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new RegionRowMapper());
+    }
+
+    @Override
+    public List<Region> findAll(Filter<Region> filter) {
+        logger.debug("filtered findAll()");
+
+        QueryFilter<Region> queryFilter = filter.filterToQuery();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM REGIONS")
+                .append(" WHERE ")
+                .append(queryFilter.getSql());
+
+        return jdbcTemplate.query(query.toString(), queryFilter.getValues(), new RegionRowMapper());
     }
 
     @Override

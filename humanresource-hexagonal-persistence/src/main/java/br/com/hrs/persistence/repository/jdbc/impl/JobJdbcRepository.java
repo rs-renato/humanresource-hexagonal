@@ -4,6 +4,8 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Job;
 import br.com.hrs.core.repository.JobRepository;
+import br.com.hrs.core.repository.filter.Filter;
+import br.com.hrs.core.repository.filter.QueryFilter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.JobRowMapper;
 import org.apache.logging.log4j.LogManager;
@@ -102,6 +104,19 @@ public class JobJdbcRepository implements JobRepository {
         String sql = "SELECT * FROM JOBS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
 
         return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new JobRowMapper());
+    }
+
+    @Override
+    public List<Job> findAll(Filter<Job> filter) {
+        logger.debug("filtered findAll()");
+
+        QueryFilter<Job> queryFilter = filter.filterToQuery();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM JOBS")
+                .append(" WHERE ")
+                .append(queryFilter.getSql());
+
+        return jdbcTemplate.query(query.toString(), queryFilter.getValues(), new JobRowMapper());
     }
 
     @Override

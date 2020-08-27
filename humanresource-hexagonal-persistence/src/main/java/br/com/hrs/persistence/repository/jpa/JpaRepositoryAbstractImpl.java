@@ -2,16 +2,18 @@ package br.com.hrs.persistence.repository.jpa;
 
 import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
-import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.EntityKey;
 import br.com.hrs.core.repository.Repository;
 import br.com.hrs.core.repository.filter.Filter;
 import br.com.hrs.core.repository.pagination.Pagination;
+import br.com.hrs.core.repository.specification.SpecSearchCriteria;
+import br.com.hrs.persistence.repository.jpa.specification.GenericSpecificationBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.ParameterizedType;
@@ -23,11 +25,11 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
 
     protected static Logger logger = LogManager.getLogger(JpaRepositoryAbstractImpl.class);
 
-    protected JpaRepository<E, ID> jpaRepository;
+    protected JpaRepositoryImplementation<E, ID> jpaRepository;
     
     protected final String ENTITY_NAME  = getGenericName();
 
-    protected JpaRepositoryAbstractImpl(JpaRepository<E, ID> jpaRepository) {
+    protected JpaRepositoryAbstractImpl(JpaRepositoryImplementation<E, ID> jpaRepository) {
         this.jpaRepository = jpaRepository;
     }
 
@@ -90,6 +92,19 @@ public abstract class JpaRepositoryAbstractImpl<E extends EntityKey<ID>, ID> imp
         Page<E> page = this.jpaRepository.findAll(PageRequest.of(pagination.getPage(), pagination.getSize()));
         logger.debug("Finding all entities. Found: {}", page != null ? page.getNumberOfElements() : 0);
         return page.getContent();
+    }
+
+    @Override
+    public List<E> findAll(Filter<E> filter) {
+
+        GenericSpecificationBuilder<E> builder = new GenericSpecificationBuilder<>();
+        for (SpecSearchCriteria ctr:  filter.filterToCriteria()){
+            builder.with(ctr);
+        }
+
+        Specification<E> specification = Specification.where(builder.build());
+
+        return this.jpaRepository.findAll(specification);
     }
 
     @Override

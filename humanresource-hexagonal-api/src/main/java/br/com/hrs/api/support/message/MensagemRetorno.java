@@ -12,7 +12,7 @@ public class MensagemRetorno {
     private List<String> detalhes;
 
     public MensagemRetorno() {
-        // TODO Auto-generated constructor stub
+
     }
 
     public MensagemRetorno(int code, String ...detalhes) {

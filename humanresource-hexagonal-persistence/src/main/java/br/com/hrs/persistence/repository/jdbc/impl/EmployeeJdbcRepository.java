@@ -4,6 +4,8 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Employee;
 import br.com.hrs.core.repository.EmployeeRepository;
+import br.com.hrs.core.repository.filter.Filter;
+import br.com.hrs.core.repository.filter.QueryFilter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.EmployeeRowMapper;
 import org.apache.logging.log4j.LogManager;
@@ -129,6 +131,19 @@ public class EmployeeJdbcRepository implements EmployeeRepository {
         String sql = "SELECT * FROM EMPLOYEES OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
 
         return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new EmployeeRowMapper());
+    }
+
+    @Override
+    public List<Employee> findAll(Filter<Employee> filter) {
+        logger.debug("filtered findAll()");
+
+        QueryFilter<Employee> queryFilter = filter.filterToQuery();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM EMPLOYEES")
+                .append(" WHERE ")
+                .append(queryFilter.getSql());
+
+        return jdbcTemplate.query(query.toString(), queryFilter.getValues(), new EmployeeRowMapper());
     }
 
     @Override

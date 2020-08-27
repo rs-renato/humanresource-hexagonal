@@ -5,6 +5,7 @@ import br.com.hrs.core.model.Country;
 import br.com.hrs.core.model.Region;
 import br.com.hrs.core.repository.CountryRepository;
 import br.com.hrs.core.repository.pagination.Pagination;
+import br.com.hrs.persistence.repository.filter.CountriesFromAmericaOrEuropeSpecificationFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,8 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public abstract class CountryRepositoryTest {
 
@@ -110,7 +113,7 @@ public abstract class CountryRepositoryTest {
     @Test
     @DisplayName("Finds Countries by Region ID")
     public void test10(){
-        Optional<List<Country>> countriesOpt = getCountryRepository().findByRegionId(REGION_ID);
+        Optional<List<Country>> countriesOpt = getCountryRepository().findAllByRegionIdIn(Stream.of(REGION_ID).collect(Collectors.toSet()));
         Assertions.assertTrue(countriesOpt.isPresent(), "Countries should be listed");
         Assertions.assertTrue(countriesOpt.get().size() == 7, "Countries should be listed at all");
     }
@@ -135,7 +138,16 @@ public abstract class CountryRepositoryTest {
 
             new LinkedList<Country>(getCountryRepository().findAll())
                     .subList(page, page + pageSize)
-                    .forEach(c -> c.equals(countries.iterator().next()));
+                    .forEach(c ->  Assertions.assertEquals(c, countries.iterator().next(), "Countries should match"));
         }
+    }
+
+
+    @Test
+    @DisplayName("Finds all Countries Filtered")
+    public void test12() {
+        List<Country> countries = getCountryRepository().findAll(new CountriesFromAmericaOrEuropeSpecificationFilter());
+
+        Assertions.assertEquals(countries.size(), getCountryRepository().findAllByRegionIdIn(Stream.of(1,4).collect(Collectors.toSet())).get().size());
     }
 }

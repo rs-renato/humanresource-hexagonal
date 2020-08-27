@@ -12,12 +12,12 @@ public abstract class QueryFilter<T>{
 
     private List<Object[]> filters =  new ArrayList<>();
 
-    protected QueryFilter(T type) {
-        applyFilter(type);
+    protected QueryFilter() {
+        applyFilter();
         buildFilter();
     }
 
-    protected abstract void applyFilter(T type);
+    protected abstract void applyFilter();
 
     public String getSql() {
         return sql.toString();

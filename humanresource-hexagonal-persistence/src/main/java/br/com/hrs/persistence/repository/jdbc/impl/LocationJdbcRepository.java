@@ -4,6 +4,8 @@ import br.com.hrs.core.exception.error.Error;
 import br.com.hrs.core.exception.error.FIELD;
 import br.com.hrs.core.model.Location;
 import br.com.hrs.core.repository.LocationRepository;
+import br.com.hrs.core.repository.filter.Filter;
+import br.com.hrs.core.repository.filter.QueryFilter;
 import br.com.hrs.core.repository.pagination.Pagination;
 import br.com.hrs.persistence.repository.jdbc.rowmapper.LocationRowMapper;
 import org.apache.logging.log4j.LogManager;
@@ -123,6 +125,19 @@ public class LocationJdbcRepository implements LocationRepository {
         String sql = "SELECT * FROM LOCATIONS OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
 
         return jdbcTemplate.query(sql, new Object[]{pagination.getPage() * pagination.getSize(), pagination.getSize()}, new LocationRowMapper());
+    }
+
+    @Override
+    public List<Location> findAll(Filter<Location> filter) {
+        logger.debug("filtered findAll()");
+
+        QueryFilter<Location> queryFilter = filter.filterToQuery();
+
+        StringBuilder query = new StringBuilder("SELECT * FROM LOCATIONS")
+                .append(" WHERE ")
+                .append(queryFilter.getSql());
+
+        return jdbcTemplate.query(query.toString(), queryFilter.getValues(), new LocationRowMapper());
     }
 
     @Override

@@ -15,10 +15,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Named;
-import javax.management.Query;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Named
 public class ContryJdbcRepository implements CountryRepository {
@@ -117,15 +114,13 @@ public class ContryJdbcRepository implements CountryRepository {
     public List<Country> findAll(Filter<Country> filter) {
         logger.debug("filtered findAll()");
 
-        String sql = "SELECT * FROM COUNTRIES OFFSET ? ROWS FETCH FIRST ? ROWS ONLY";
-
         QueryFilter<Country> queryFilter = filter.filterToQuery();
 
-        StringBuilder query = new StringBuilder("SELECT * FROM COUNTRIES")
-                .append(" WHERE ")
+        StringBuilder query = new StringBuilder("SELECT * FROM COUNTRIES ")
+                .append("WHERE ")
                 .append(queryFilter.getSql());
 
-        return jdbcTemplate.query(sql, queryFilter.getValues(), new CountryRowMapper());
+        return jdbcTemplate.query(query.toString(), queryFilter.getValues(), new CountryRowMapper());
     }
 
     @Override
@@ -156,15 +151,18 @@ public class ContryJdbcRepository implements CountryRepository {
     }
 
     @Override
-    public Optional<List<Country>> findByRegionId(Integer regionId) {
+    public Optional<List<Country>> findAllByRegionIdIn(Set<Integer> regionIds) {
 
-        logger.debug("findByRegionId({}})", regionId);
+        logger.debug("findByRegionId({})", regionIds);
 
-        if (Objects.isNull(regionId)) {
+        if (Objects.isNull(regionIds)) {
             Error.of("Region ID").when(FIELD.MANDATORY).trows();
         }
 
-        String sql = "SELECT * FROM COUNTRIES WHERE REGION_ID = ?";
-        return Optional.of(jdbcTemplate.query(sql, new Object[]{regionId}, new CountryRowMapper()));
+        String inSql = String.join(",", Collections.nCopies(regionIds.size(), "?"));
+
+        String sql = String.format("SELECT * FROM COUNTRIES WHERE REGION_ID IN (%s)", inSql);
+
+        return Optional.of(jdbcTemplate.query(sql, regionIds.toArray(), new CountryRowMapper()));
     }
 }

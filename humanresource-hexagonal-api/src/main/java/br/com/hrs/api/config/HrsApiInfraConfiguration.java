@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableHrsCore
-@EnableHrsPersistence(type = PersistenceType.JDBC)
+@EnableHrsPersistence(type = PersistenceType.JPA)
 public class HrsApiInfraConfiguration {
 
 }

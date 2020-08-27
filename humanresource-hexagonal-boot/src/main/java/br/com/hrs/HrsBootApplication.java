@@ -6,9 +6,9 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
 @ComponentScan("br.com.hrs.boot")
-public class HrsRestApplication {
+public class HrsBootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(HrsRestApplication.class, args);
+        SpringApplication.run(HrsBootApplication.class, args);
     }
 }

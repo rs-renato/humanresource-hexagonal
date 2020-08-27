@@ -9,10 +9,7 @@ import br.com.hrs.core.repository.RegionRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Named
 public class CountryMockRepository extends MockRepository<Country, String> implements CountryRepository {
@@ -25,15 +22,20 @@ public class CountryMockRepository extends MockRepository<Country, String> imple
     }
 
     @Override
-    public Optional<List<Country>> findByRegionId(Integer regionId) {
-        logger.debug("{}: Fake repository -> findByRegionId({}})", REPOSITORY_NAME,regionId);
+    public Optional<List<Country>> findAllByRegionIdIn(Set<Integer> regionIds) {
+        logger.debug("{}: Fake repository -> findByRegionId({}})", REPOSITORY_NAME,regionIds);
 
-        if (Objects.isNull(regionId)) {
+        if (Objects.isNull(regionIds)) {
             Error.of("ID").when(FIELD.MANDATORY).trows();
         }
 
-        Optional<Region> region = this.regionRepository.findById(regionId);
-        return region.isPresent() ? Optional.of(region.get().getCountries()) : Optional.empty();
+        List<Country> results = new ArrayList<>();
+
+        for (Integer id : regionIds) {
+            this.regionRepository.findById(id).ifPresent(region -> results.addAll(region.getCountries()));
+        }
+
+        return results.isEmpty() ? Optional.empty() :  Optional.of(results);
     }
 
     @Override
