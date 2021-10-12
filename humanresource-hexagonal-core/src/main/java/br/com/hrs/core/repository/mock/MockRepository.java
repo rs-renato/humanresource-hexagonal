@@ -72,7 +72,7 @@ public abstract class MockRepository <E extends EntityKey<ID>, ID> implements Re
 
     public List<E> findAll() {
         logger.debug("{} -> findAll()", REPOSITORY_NAME);
-        return new ArrayList(this.database.values());
+        return new ArrayList<E>(this.database.values());
     }
 
     public List<E> findAll(Pagination pagination) {

@@ -31,16 +31,20 @@ public class GenericSpecification<T> implements Specification<T> {
                 return builder.notEqual(path, value);
             case GREATER_THAN:
                 return builder.greaterThan(path, value.toString());
+            case GREATER_THAN_EQUALS:
+                return builder.greaterThanOrEqualTo(path, value.toString());
             case LESS_THAN:
                 return builder.lessThan(path, value.toString());
+            case LESS_THAN_EQUALS:
+                return builder.lessThanOrEqualTo(path, value.toString());
             case LIKE:
-                return builder.like(path, value.toString());
+                return builder.like(builder.upper(path), value.toString().toUpperCase());
             case STARTS_WITH:
                 return builder.like(path, value + "%");
             case ENDS_WITH:
                 return builder.like(path, "%" + value);
             case CONTAINS:
-                return builder.like(path, "%" + value + "%");
+                return builder.like(builder.upper(path), "%" + value.toString().toUpperCase() + "%");
             default:
                 return null;
         }

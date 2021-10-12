@@ -58,11 +58,11 @@ public class CountryQueriesController implements CountryQueriesDocumentable{
 	public  ResponseEntity<List<CountryResource>> search(@RequestParam String search) {
 		logger.info("Performing 'Search Countries'  Search:{}", search);
 
-		List<Country> countries = this.countryUseCase.findAll(new SpecificationFilter(search));
+		List<Country> countries = this.countryUseCase.findAll(new SpecificationFilter<Country>(search));
 
 		AssertionSupport.assertResourceFound(countries, "Countries not found!");
 		List<CountryResource> countryResources = countryMapper.toResourceList(countries);
-		logger.info("Found {} countries on 'List All Countries'..", countryResources.size());
+		logger.info("Found {} countries on 'Search Countries'..", countryResources.size());
 		return ResponseEntity.ok(countryResources);
 	}
 }

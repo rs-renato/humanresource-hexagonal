@@ -22,22 +22,7 @@ public class GenericSpecificationBuilder<T> {
     }
 
     public final GenericSpecificationBuilder<T> with(final String orPredicate, final String key, final String operation, final Object value, final String prefix, final String suffix) {
-        SearchOperation op = SearchOperation.getSimpleOperation(operation.charAt(0));
-        if (op != null) {
-            if (op == SearchOperation.EQUALITY) { // the operation may be complex operation
-                final boolean startWithAsterisk = prefix != null && prefix.contains(SearchOperation.ZERO_OR_MORE_REGEX);
-                final boolean endWithAsterisk = suffix != null && suffix.contains(SearchOperation.ZERO_OR_MORE_REGEX);
-
-                if (startWithAsterisk && endWithAsterisk) {
-                    op = SearchOperation.CONTAINS;
-                } else if (startWithAsterisk) {
-                    op = SearchOperation.ENDS_WITH;
-                } else if (endWithAsterisk) {
-                    op = SearchOperation.STARTS_WITH;
-                }
-            }
-            params.add(new SpecSearchCriteria(orPredicate, key, op, value));
-        }
+        params.add(new SpecSearchCriteria(orPredicate, key, operation, prefix, value, suffix));
         return this;
     }
 
